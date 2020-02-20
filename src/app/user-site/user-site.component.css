@@ -1,0 +1,44 @@
+#table-wrapper {
+  position: relative;
+}
+#table-scroll {
+  height: 50rem;
+  overflow: auto;
+  margin-top: 6rem;
+}
+#table-wrapper table {
+  width: 100%;
+}
+#table-wrapper table * {
+  color: black;
+  left: 50px;
+}
+
+table {
+  border-collapse: separate;
+  border-spacing: 0 15px;
+}
+.search {
+  width: 100;
+  display: inline-flex;
+  position: relative;
+  margin: auto;
+}
+.star-container {
+  justify-content: space-between;
+  display: inline-flex;
+  font-size: 35px;
+  width: 100%;
+}
+.star-status {
+  display: inline-flex;
+  justify-content: space-evenly;
+}
+.star {
+  width: 80px;
+  height: 50px;
+}
+.img-star {
+  height: 20px;
+  width: 20px;
+}
