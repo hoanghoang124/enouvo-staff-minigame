@@ -2,6 +2,9 @@ body {
   padding-top: 4.2rem;
   padding-bottom: 4.2rem;
   background-image: url(https://images.wallpaperscraft.com/image/girl_anime_books_library_104833_1600x900.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 a {
   text-decoration: none !important;
