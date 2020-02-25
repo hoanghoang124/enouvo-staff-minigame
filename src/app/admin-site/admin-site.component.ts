@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataTablesModule } from 'angular-datatables';
 import {BrowserModule} from '@angular/platform-browser';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import 'rxjs';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
@@ -12,13 +12,15 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./admin-site.component.css']
 })
 export class AdminSiteComponent implements OnInit {
-  public empData: Object;
-  public temp: Object = false;
+  url = 'http://5e44b0ece85a4e001492c1b1.mockapi.io/Staff';
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  };
+
   constructor(private http: HttpClient) {}
-  ngOnInit(): void {
-  this.http.get('https://jsonplaceholder.typicode.com/posts').subscribe((resp: Response) => {
-    this.empData = resp;
-    this.temp = true;
-    });
+  ngOnInit() {
+    this.http.get(this.url);
   }
 }

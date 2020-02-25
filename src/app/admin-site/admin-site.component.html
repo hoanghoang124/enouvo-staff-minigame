@@ -1,16 +1,16 @@
-<table datatable class="table row-border hover" *ngIf="this.temp">
+<table datatable class="table row-border hover" *ngIf="staffArr">
   <thead>
     <tr>
-      <th>UserId</th>
-      <th>Subject</th>
-      <th>Message</th>
+      <th>Name</th>
+      <th>Information</th>
+      <th>Star</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let emp of this.empData">
-      <td>{{emp.userId}}</td>
-      <td>{{emp.title}}</td>
-      <td>{{emp.body}}</td>
+    <tr *ngFor="let staff of staffArr">
+      <td>{{staff.name}}</td>
+      <td>{{staff.information}}</td>
+      <td>{{staff.star}}</td>
     </tr>
   </tbody>
 </table>
