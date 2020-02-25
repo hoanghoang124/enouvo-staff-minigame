@@ -1,27 +1,46 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { DataTablesModule } from 'angular-datatables';
-import {HttpClientModule} from '@angular/common/http';
-import { CommonModule } from '@angular/common';
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule } from "@angular/core";
+import { ReactiveFormsModule } from "@angular/forms";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-import { UserSiteComponent } from './user-site/user-site.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AdminSiteComponent } from './admin-site/admin-site.component';
+import { fakeBackendProvider } from "./login/helpers/fake-backend";
+
+import { appRoutingModule } from "./app-routing.module";
+import { AppComponent } from "./app.component";
+
+import { DataTablesModule } from "angular-datatables";
+import { CommonModule } from "@angular/common";
+
+import { HomeComponent } from "./login/home/home.component";
+import { BasicAuthInterceptor } from "./login/helpers/basic-auth.interceptor";
+import { ErrorInterceptor } from "./login/helpers/error.interceptor";
+import { LoginComponent } from "./login/login.component";
+import { UserSiteComponent } from "./user-site/user-site.component";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { AdminSiteComponent } from "./admin-site/admin-site.component";
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, UserSiteComponent, AdminSiteComponent],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    UserSiteComponent,
+    AdminSiteComponent,
+    HomeComponent
+  ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+    appRoutingModule,
     DataTablesModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    fakeBackendProvider
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
