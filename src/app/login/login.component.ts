@@ -16,7 +16,10 @@ import { AuthenticationService } from "./_services/authentication.service";
   declarations: [],
   exports: [FormsModule, ReactiveFormsModule]
 })
-@Component({ templateUrl: "login.component.html" })
+@Component({
+  templateUrl: "login.component.html",
+  styleUrls: ["./login.component.css"]
+})
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   loading = false;
