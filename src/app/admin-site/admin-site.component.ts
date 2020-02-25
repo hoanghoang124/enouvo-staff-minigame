@@ -5,6 +5,9 @@ import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import 'rxjs';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { StaffService } from './staff.service';
+import { Staff } from './staff.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-site',
@@ -12,15 +15,20 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./admin-site.component.css']
 })
 export class AdminSiteComponent implements OnInit {
-  url = 'http://5e44b0ece85a4e001492c1b1.mockapi.io/Staff';
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json'
-    })
-  };
+  displayedColumns: string[] = ['name', 'information', 'star'];
+  data: Staff[] = [];
+  isLoadingResults = true;
 
-  constructor(private http: HttpClient) {}
+  constructor(private staffService: StaffService) { }
+
   ngOnInit() {
-    this.http.get(this.url);
+    this.staffService.getStaffs()
+      .subscribe(res => {
+        this.data = res;
+        this.isLoadingResults = false;
+      }, err => {
+        console.log(err);
+        this.isLoadingResults = false;
+      });
   }
 }
