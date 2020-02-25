@@ -1,0 +1,25 @@
+<div class="example-container mat-elevation-z8">
+  <div class="example-loading-shade"
+       *ngIf="isLoadingResults">
+    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+  </div>
+  <div class="button-row">
+    <a mat-flat-button color="primary" [routerLink]="['/admin']"><mat-icon>list</mat-icon></a>
+  </div>
+  <mat-card class="example-card">
+    <mat-card-header>
+      <mat-card-title><h2>{{staff.name}}</h2></mat-card-title>
+      <mat-card-subtitle>{{staff.information}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <dl>
+        <dt>Star:</dt>
+        <dd>{{staff.star}}</dd>
+      </dl>
+    </mat-card-content>
+    <mat-card-actions>
+      <a mat-flat-button color="primary" [routerLink]="['/admin/'+staff.id+'/edit']"><mat-icon>edit</mat-icon></a>
+      <a mat-flat-button color="warn" (click)="deletestaff(staff.id)"><mat-icon>delete</mat-icon></a>
+    </mat-card-actions>
+  </mat-card>
+</div>

@@ -1,0 +1,34 @@
+<div class="example-container mat-elevation-z8">
+  <div class="example-loading-shade"
+       *ngIf="isLoadingResults">
+    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+  </div>
+  <div class="button-row">
+    <a mat-flat-button color="primary" [routerLink]="['/admin']"><mat-icon>list</mat-icon></a>
+  </div>
+  <mat-card class="example-card">
+    <form [formGroup]="staffForm" (ngSubmit)="onFormSubmit(staffForm.value)">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Name" formControlName="name">
+        <mat-error>
+          <span *ngIf="!staffForm.get('name').valid && staffForm.get('name').touched">Please enter Name</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Information" formControlName="information">
+        <mat-error>
+          <span *ngIf="!staffForm.get('information').valid && staffForm.get('information').touched">Please enter Infromation</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Star" formControlName="star">
+        <mat-error>
+          <span *ngIf="!staffForm.get('star').valid && staffForm.get('star').touched">Please enter Star</span>
+        </mat-error>
+      </mat-form-field>
+      <div class="button-row">
+        <button type="submit" [disabled]="!staffForm.valid" mat-flat-button color="primary"><mat-icon>save</mat-icon></button>
+      </div>
+    </form>
+  </mat-card>
+</div>
