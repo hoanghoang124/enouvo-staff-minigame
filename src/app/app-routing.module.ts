@@ -1,6 +1,6 @@
 import { UserSiteComponent } from "./user-site/user-site.component";
 import { Routes, RouterModule } from "@angular/router";
-import { AuthGuard } from "./login/helpers/auth.guard";
+import { AuthGuard } from "./login/_helpers/auth.guard";
 import { LoginComponent } from "./login/login.component";
 
 const routes: Routes = [
