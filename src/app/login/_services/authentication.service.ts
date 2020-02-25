@@ -1,9 +1,9 @@
-import { environment } from "../../../environments/environment.prod";
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { BehaviorSubject, Observable } from "rxjs";
 import { map } from "rxjs/operators";
 
+import { environment } from "../../../environments/environment.prod";
 import { User } from "../_models/user";
 
 @Injectable({ providedIn: "root" })
@@ -31,9 +31,11 @@ export class AuthenticationService {
       .pipe(
         map(user => {
           // store user details and basic auth credentials in local storage to keep user logged in between page refreshes
-          user.authdata = window.btoa(username + ":" + password);
-          localStorage.setItem("currentUser", JSON.stringify(user));
-          this.currentUserSubject.next(user);
+          if (user && user.token) {
+            localStorage.setItem("currentUser", JSON.stringify(user));
+            this.currentUserSubject.next(user);
+          }
+
           return user;
         })
       );

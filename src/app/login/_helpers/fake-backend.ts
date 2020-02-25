@@ -11,16 +11,7 @@ import { Observable, of, throwError } from "rxjs";
 import { delay, mergeMap, materialize, dematerialize } from "rxjs/operators";
 
 import { User } from "../_models/user";
-
-const users: User[] = [
-  {
-    id: 1,
-    username: "test",
-    password: "test",
-    firstName: "Test",
-    lastName: "User"
-  }
-];
+import { Role } from "../_models/role";
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -28,66 +19,105 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    const { url, method, headers, body } = request;
+    const users: User[] = [
+      {
+        id: 1,
+        username: "admin",
+        password: "admin",
+        firstName: "Admin",
+        lastName: "User",
+        role: Role.Admin
+      },
+      {
+        id: 2,
+        username: "user",
+        password: "user",
+        firstName: "Normal",
+        lastName: "User",
+        role: Role.User
+      }
+    ];
+
+    const authHeader = request.headers.get("Authorization");
+    const isLoggedIn =
+      authHeader && authHeader.startsWith("Bearer fake-jwt-token");
+    const roleString = isLoggedIn && authHeader.split(".")[1];
+    const role = roleString ? Role[roleString] : null;
 
     // wrap in delayed observable to simulate server api call
-    return of(null)
-      .pipe(mergeMap(handleRoute))
-      .pipe(materialize())
-      .pipe(delay(500))
-      .pipe(dematerialize());
+    return (
+      of(null)
+        .pipe(
+          mergeMap(() => {
+            // authenticate - public
+            if (
+              request.url.endsWith("/users/authenticate") &&
+              request.method === "POST"
+            ) {
+              const user = users.find(
+                x =>
+                  x.username === request.body.username &&
+                  x.password === request.body.password
+              );
+              if (!user) return error("Username or password is incorrect");
+              return ok({
+                id: user.id,
+                username: user.username,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                role: user.role,
+                token: `fake-jwt-token.${user.role}`
+              });
+            }
 
-    function handleRoute() {
-      switch (true) {
-        case url.endsWith("/users/authenticate") && method === "POST":
-          return authenticate();
-        case url.endsWith("/users") && method === "GET":
-          return getUsers();
-        default:
-          // pass through any requests not handled above
-          return next.handle(request);
-      }
-    }
+            // get user by id - admin or user (user can only access their own record)
+            if (
+              request.url.match(/\/users\/\d+$/) &&
+              request.method === "GET"
+            ) {
+              if (!isLoggedIn) return unauthorised();
 
-    // route functions
+              // get id from request url
+              let urlParts = request.url.split("/");
+              let id = parseInt(urlParts[urlParts.length - 1]);
 
-    function authenticate() {
-      const { username, password } = body;
-      const user = users.find(
-        x => x.username === username && x.password === password
-      );
-      if (!user) return error("Username or password is incorrect");
-      return ok({
-        id: user.id,
-        username: user.username,
-        firstName: user.firstName,
-        lastName: user.lastName
-      });
-    }
+              // only allow normal users access to their own record
+              const currentUser = users.find(x => x.role === role);
+              if (id !== currentUser.id && role !== Role.Admin)
+                return unauthorised();
 
-    function getUsers() {
-      if (!isLoggedIn()) return unauthorized();
-      return ok(users);
-    }
+              const user = users.find(x => x.id === id);
+              return ok(user);
+            }
 
-    // helper functions
+            // get all users (admin only)
+            if (request.url.endsWith("/users") && request.method === "GET") {
+              if (role !== Role.Admin) return unauthorised();
+              return ok(users);
+            }
 
-    function ok(body?) {
+            // pass through any requests not handled above
+            return next.handle(request);
+          })
+        )
+        // call materialize and dematerialize to ensure delay even if an error is thrown (https://github.com/Reactive-Extensions/RxJS/issues/648)
+        .pipe(materialize())
+        .pipe(delay(500))
+        .pipe(dematerialize())
+    );
+
+    // private helper functions
+
+    function ok(body) {
       return of(new HttpResponse({ status: 200, body }));
     }
 
-    function error(message) {
-      return throwError({ error: { message } });
-    }
-
-    function unauthorized() {
+    function unauthorised() {
       return throwError({ status: 401, error: { message: "Unauthorised" } });
     }
 
-    function isLoggedIn() {
-      return (
-        headers.get("Authorization") === `Basic ${window.btoa("test:test")}`
-      );
+    function error(message) {
+      return throwError({ status: 400, error: { message } });
     }
   }
 }

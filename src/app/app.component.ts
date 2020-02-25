@@ -3,14 +3,14 @@ import { Router } from "@angular/router";
 
 import { AuthenticationService } from "./login/_services/authentication.service";
 import { User } from "./login/_models/user";
+import { Role } from "./login/_models/role";
 
 @Component({
-  selector: "app-root",
-  templateUrl: "./app.component.html",
+  selector: "app",
+  templateUrl: "app.component.html",
   styleUrls: ["./app.component.css"]
 })
 export class AppComponent {
-  title = "enouvo-staff-minigame";
   currentUser: User;
 
   constructor(
@@ -20,6 +20,10 @@ export class AppComponent {
     this.authenticationService.currentUser.subscribe(
       x => (this.currentUser = x)
     );
+  }
+  //admin
+  get isAdmin() {
+    return this.currentUser && this.currentUser.role === Role.Admin;
   }
 
   logout() {

@@ -1,25 +1,11 @@
-import { Component, OnInit, NgModule } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
-import {
-  FormBuilder,
-  FormGroup,
-  Validators,
-  ReactiveFormsModule,
-  FormsModule
-} from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { first } from "rxjs/operators";
 
 import { AuthenticationService } from "./_services/authentication.service";
 
-@NgModule({
-  imports: [ReactiveFormsModule, FormsModule],
-  declarations: [],
-  exports: [FormsModule, ReactiveFormsModule]
-})
-@Component({
-  templateUrl: "login.component.html",
-  styleUrls: ["./login.component.css"]
-})
+@Component({ templateUrl: "login.component.html" })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   loading = false;
@@ -35,7 +21,7 @@ export class LoginComponent implements OnInit {
   ) {
     // redirect to home if already logged in
     if (this.authenticationService.currentUserValue) {
-      this.router.navigate(["/"]);
+      this.router.navigate(["/"]); //should be navigate to admin dashboard if user is admin and to homepage if user is normal user
     }
   }
 
@@ -59,7 +45,7 @@ export class LoginComponent implements OnInit {
 
     // stop here if form is invalid
     if (this.loginForm.invalid) {
-      return;
+      return this.error;
     }
 
     this.loading = true;
