@@ -1,8 +1,8 @@
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
 
-import { AuthenticationService } from "./login/services/authentication.service";
-import { User } from "./login/models/user";
+import { AuthenticationService } from "./login/_services/authentication.service";
+import { User } from "./login/_models/user";
 
 @Component({
   selector: "app-root",

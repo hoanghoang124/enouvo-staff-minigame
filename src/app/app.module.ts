@@ -3,7 +3,7 @@ import { NgModule } from "@angular/core";
 import { ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 
-import { fakeBackendProvider } from "./login/helpers/fake-backend";
+import { fakeBackendProvider } from "./login/_helpers/fake-backend";
 
 import { appRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -11,8 +11,8 @@ import { AppComponent } from "./app.component";
 import { DataTablesModule } from "angular-datatables";
 import { CommonModule } from "@angular/common";
 
-import { BasicAuthInterceptor } from "./login/helpers/basic-auth.interceptor";
-import { ErrorInterceptor } from "./login/helpers/error.interceptor";
+import { BasicAuthInterceptor } from "./login/_helpers/basic-auth.interceptor";
+import { ErrorInterceptor } from "./login/_helpers/error.interceptor";
 import { LoginComponent } from "./login/login.component";
 import { UserSiteComponent } from "./user-site/user-site.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";

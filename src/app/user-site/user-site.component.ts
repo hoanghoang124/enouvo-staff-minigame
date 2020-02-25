@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { first } from "rxjs/operators";
 
-import { User } from "../login/models/user";
-import { UserService } from "./../login/services/user.service";
+import { User } from "../login/_models/user";
+import { UserService } from "../login/_services/user.service";
 
 @Component({
   selector: "app-user-site",
