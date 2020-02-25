@@ -12,9 +12,9 @@ const routes: Routes = [
   { path: '', component: UserSiteComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'admin', component: AdminSiteComponent },
+  { path: 'admin/new', component: StaffAddComponent },
   { path: 'admin/:id', component: StaffDetailComponent },
-  { path: 'new', component: StaffAddComponent },
-  { path: 'admin/edit/:id', component: StaffEditComponent },
+  { path: 'admin/:id/edit', component: StaffEditComponent },
   { path: '*', redirectTo: '' }
 ];
 
