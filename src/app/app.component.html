@@ -1,9 +1,32 @@
-<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="currentUser">
-  <div class="navbar-nav">
-    <a class="nav-item nav-link" routerLink="/">Home</a>
-    <a class="nav-item nav-link" (click)="logout()">Logout</a>
-  </div>
-</nav>
+<header>
+  <nav class="navbar navbar-expand navbar-light bg-light" *ngIf="currentUser">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" routerLink="/"
+        ><img
+          src="https://enouvo.com/wp-content/uploads/2019/10/LOGO-EIS-1.png"
+          height="40px"
+          class="d-inline-block align-top"
+          alt="Enouvo Logo"
+      /></a>
+      <a class="navbar-brand">Xin chào tất cả các dân chơi!</a>
+      <div class="btn-group dropleft">
+        <button
+          type="button"
+          class="btn btn-info dropdown-toggle"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          Your Name
+        </button>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="#">Your stars</a>
+          <a class="dropdown-item" (click)="logout()">Logout</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
 
 <div class="container">
   <router-outlet></router-outlet>

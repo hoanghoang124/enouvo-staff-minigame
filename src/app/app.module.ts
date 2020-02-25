@@ -11,7 +11,6 @@ import { AppComponent } from "./app.component";
 import { DataTablesModule } from "angular-datatables";
 import { CommonModule } from "@angular/common";
 
-import { HomeComponent } from "./login/home/home.component";
 import { BasicAuthInterceptor } from "./login/helpers/basic-auth.interceptor";
 import { ErrorInterceptor } from "./login/helpers/error.interceptor";
 import { LoginComponent } from "./login/login.component";
@@ -24,8 +23,7 @@ import { AdminSiteComponent } from "./admin-site/admin-site.component";
     AppComponent,
     LoginComponent,
     UserSiteComponent,
-    AdminSiteComponent,
-    HomeComponent
+    AdminSiteComponent
   ],
   imports: [
     BrowserModule,
