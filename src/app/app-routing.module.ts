@@ -1,4 +1,3 @@
-import { AdminComponent } from "./admin/admin.component";
 import { Role } from "./login/_models/role";
 import { UserSiteComponent } from "./user-site/user-site.component";
 import { Routes, RouterModule } from "@angular/router";
@@ -13,16 +12,15 @@ const routes: Routes = [
   { path: "", component: UserSiteComponent, canActivate: [AuthGuard] },
   {
     path: "admin",
-    component: AdminComponent,
+    component: AdminSiteComponent,
     canActivate: [AuthGuard],
     data: { roles: [Role.Admin] }
   },
   { path: "login", component: LoginComponent },
-  { path: "admin", component: AdminSiteComponent },
   { path: "admin/new", component: StaffAddComponent },
   { path: "admin/:id", component: StaffDetailComponent },
   { path: "admin/:id/edit", component: StaffEditComponent },
-  { path: "*", redirectTo: "" }
+  { path: "**", redirectTo: "" }
 ];
 
 export const appRoutingModule = RouterModule.forRoot(routes);
