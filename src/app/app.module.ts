@@ -56,7 +56,8 @@ import { StaffEditComponent } from "./admin-site/staff-edit/staff-edit.component
     MatButtonModule,
     MatCardModule,
     MatFormFieldModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

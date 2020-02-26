@@ -1,5 +1,5 @@
 export class Staff {
-  id: number;
+  id: string;
   name: string;
   information: string;
   star: number;

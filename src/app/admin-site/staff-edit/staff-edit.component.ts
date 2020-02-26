@@ -31,7 +31,7 @@ export class StaffEditComponent implements OnInit {
 
   getstaff(id) {
     this.staffService.getStaff(id).subscribe(data => {
-      this.id = data.id;
+      this.id = Number(data.id);
       this.staffForm.setValue({
         name: data.name,
         information: data.information,
