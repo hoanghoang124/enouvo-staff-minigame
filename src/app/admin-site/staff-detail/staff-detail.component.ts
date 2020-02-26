@@ -12,7 +12,7 @@ export class StaffDetailComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private staffService: StaffService, private router: Router) { }
 
-  staff: Staff = { id: 0, name: '', information: '', star: 0 };
+  staff: Staff = { id: '0', name: '', information: '', star: 0 };
   isLoadingResults = true;
 
   getstaff(id) {
