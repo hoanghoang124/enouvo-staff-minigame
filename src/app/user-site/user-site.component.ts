@@ -3,6 +3,7 @@ import { first } from "rxjs/operators";
 
 import { User } from "../login/_models/user";
 import { UserService } from "../login/_services/user.service";
+import { AuthenticationService } from "../login/_services/authentication.service";
 
 @Component({
   selector: "app-user-site",
@@ -10,19 +11,22 @@ import { UserService } from "../login/_services/user.service";
   styleUrls: ["./user-site.component.css"]
 })
 export class UserSiteComponent implements OnInit {
-  loading = false;
-  users: User[];
+  currentUser: User;
+  userFromApi: User;
 
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private authenticationService: AuthenticationService
+  ) {
+    this.currentUser = this.authenticationService.currentUserValue;
+  }
 
   ngOnInit() {
-    this.loading = true;
     this.userService
-      .getAll()
+      .getById(this.currentUser.id)
       .pipe(first())
-      .subscribe(users => {
-        this.loading = false;
-        this.users = users;
+      .subscribe(user => {
+        this.userFromApi = user;
       });
   }
 }
