@@ -1,3 +1,4 @@
+import { ResetPasswordComponent } from "./reset-password/reset-password.component";
 import { Role } from "./login/_models/role";
 import { UserSiteComponent } from "./user-site/user-site.component";
 import { Routes, RouterModule } from "@angular/router";
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: "admin/new", component: StaffAddComponent },
   { path: "admin/:id", component: StaffDetailComponent },
   { path: "admin/:id/edit", component: StaffEditComponent },
+  { path: "reset-password", component: ResetPasswordComponent },
   { path: "**", redirectTo: "" }
 ];
 

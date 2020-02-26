@@ -30,6 +30,7 @@ import {
 import { StaffDetailComponent } from "./admin-site/staff-detail/staff-detail.component";
 import { StaffAddComponent } from "./admin-site/staff-add/staff-add.component";
 import { StaffEditComponent } from "./admin-site/staff-edit/staff-edit.component";
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { StaffEditComponent } from "./admin-site/staff-edit/staff-edit.component
     AdminSiteComponent,
     StaffDetailComponent,
     StaffAddComponent,
-    StaffEditComponent
+    StaffEditComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,
