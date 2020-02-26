@@ -6,24 +6,17 @@
   overflow: auto;
   margin-top: 6rem;
 }
-#table-wrapper table {
-  width: 100%;
-}
-#table-wrapper table * {
-  color: black;
-  left: 50px;
-}
-
-table {
-  border-collapse: separate;
-  border-spacing: 0 15px;
-}
-.search {
-  width: 100;
-  display: inline-flex;
-  position: relative;
+.active-cyan-4 {
+  width: 60%;
+  display: flex;
   margin: auto;
 }
+table {
+  border-collapse: separate;
+  border-spacing: 15px 50px;
+  width: 100%;
+}
+
 .star-container {
   justify-content: space-between;
   display: inline-flex;
