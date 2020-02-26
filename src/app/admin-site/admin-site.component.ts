@@ -5,8 +5,8 @@ import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import 'rxjs';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
-import { StaffService } from './staff.service';
-import { Staff } from './staff.model';
+import { StaffService } from '../shared/staff.service';
+import { Staff } from '../shared/staff.model';
 import { Router } from '@angular/router';
 import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 @Component({

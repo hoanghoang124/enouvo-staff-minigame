@@ -40,3 +40,19 @@ table {
 button {
   border-style: none;
 }
+
+
+
+.button-row {
+  padding: 1%;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 90%;
+  margin-left: 5%;
+}

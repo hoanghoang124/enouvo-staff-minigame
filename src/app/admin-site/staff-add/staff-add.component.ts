@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { StaffService } from '../staff.service';
+import { StaffService } from '../../shared/staff.service';
 import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material';
 
@@ -29,7 +29,7 @@ export class StaffAddComponent implements OnInit {
 
   onFormSubmit(form: NgForm) {
     this.isLoadingResults = true;
-    this.staffService.addStaff(form)
+    this.staffService.createStaff(form)
       .subscribe(res => {
           const Id = res.id;
           this.isLoadingResults = false;

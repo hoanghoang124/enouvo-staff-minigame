@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { StaffService } from '../staff.service';
-import { Staff } from '../staff.model';
+import { StaffService } from '../../shared/staff.service';
+import { Staff } from '../../shared/staff.model';
 
 @Component({
   selector: 'app-staff-detail',

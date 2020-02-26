@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { StaffService } from '../staff.service';
+import { StaffService } from '../../shared/staff.service';
 import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 
 @Component({
@@ -42,7 +42,7 @@ export class StaffEditComponent implements OnInit {
 
   onFormSubmit(form: NgForm) {
     this.isLoadingResults = true;
-    this.staffService.updateStaff(this.id, form)
+    this.staffService.updateStaff(form)
       .subscribe(res => {
           const id = res.id;
           this.isLoadingResults = false;
