@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Effect, ofType, Actions } from '@ngrx/effects';
 import { StaffService } from 'src/app/shared/staff.service';
 import { Store, Action } from '@ngrx/store';
-import { StaffState } from '../reducers';
+import { AppState } from '../reducers';
 import * as StaffActions from '../actions';
 import { map, catchError, switchMap } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
@@ -15,7 +15,8 @@ const { StaffActionsType } = StaffActions;
 @Injectable()
 export class StaffEffects {
   constructor(private actions$: Actions,
-              private staffservice: StaffService) {
+              private staffservice: StaffService,
+              private store: Store<AppState>) {
   }
 
   @Effect()

@@ -1,11 +1,7 @@
 import * as staffActions from '../actions/staff.action';
-import { AppAction } from '../actions/app.action';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { Staff } from 'src/app/shared/staff.model';
-import { StaffState } from '../reducers';
-/*************************
- * SELECTORS
- ************************/
+import { StaffState } from '../reducers/staff.reducer';
+
 export const getStaffsState = createFeatureSelector < StaffState > ('staffs');
 export const getAllStaffs = createSelector(getStaffsState, (state: StaffState) => state.data);
 export const getStaff = createSelector(getStaffsState, (state: StaffState) => {
@@ -14,7 +10,6 @@ export const getStaff = createSelector(getStaffsState, (state: StaffState) => {
   } else {
     return null;
   }
-
 });
 export const isDeleted = createSelector(getStaffsState, (state: StaffState) =>
   state.action === staffActions.StaffActionsType.DELETE_STAFF && state.done && !state.error);

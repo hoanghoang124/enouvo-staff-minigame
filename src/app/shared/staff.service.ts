@@ -39,4 +39,5 @@ export class StaffService {
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
-const Url = 'http://5e55e20836450d001428865d.mockapi.io/staff';
+// const Url = 'http://5e55e20836450d001428865d.mockapi.io/staff';
+const Url = 'https://jsonplaceholder.typicode.com/posts';
