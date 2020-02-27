@@ -47,9 +47,8 @@ export class StaffDetailComponent implements OnInit {
   ngOnInit() {
     // this.getstaff(this.route.snapshot.params.id);
     this.route.params.subscribe(params => {
-      this.store.dispatch(new GetStaff(+params.id));
+      this.store.dispatch(new GetStaff(params.id));
     });
     this.staff = this.store.select(getStaff);
   }
-
 }

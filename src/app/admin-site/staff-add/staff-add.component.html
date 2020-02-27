@@ -9,21 +9,21 @@
   <mat-card class="example-card">
     <form [formGroup]="staffForm" (ngSubmit)="onFormSubmit(staffForm.value)">
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Name" formControlName="name">
+        <input matInput placeholder="title" formControlName="title">
         <mat-error>
-          <span *ngIf="!staffForm.get('name').valid && staffForm.get('name').touched">Please enter Name</span>
+          <span *ngIf="!staffForm.get('title').valid && staffForm.get('title').touched">Please enter title</span>
         </mat-error>
       </mat-form-field>
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Information" formControlName="information">
+        <input matInput placeholder="body" formControlName="body">
         <mat-error>
-          <span *ngIf="!staffForm.get('information').valid && staffForm.get('information').touched">Please enter Infromation</span>
+          <span *ngIf="!staffForm.get('body').valid && staffForm.get('body').touched">Please enter body</span>
         </mat-error>
       </mat-form-field>
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Star" formControlName="star">
+        <input matInput placeholder="userId" formControlName="userId">
         <mat-error>
-          <span *ngIf="!staffForm.get('star').valid && staffForm.get('star').touched">Please enter Star</span>
+          <span *ngIf="!staffForm.get('userId').valid && staffForm.get('userId').touched">Please enter userId</span>
         </mat-error>
       </mat-form-field>
       <div class="button-row">

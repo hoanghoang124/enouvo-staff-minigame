@@ -52,7 +52,7 @@ export class GetStaffFail implements Action {
 
 export class DeleteStaff implements Action {
   public readonly type = StaffActionsType.DELETE_STAFF;
-  constructor(public payload: string) {}
+  constructor(public payload: number) {}
 }
 
 export class DeleteStaffSuccess implements Action {
@@ -73,7 +73,7 @@ export class CreateStaff implements Action {
 
 export class CreateStaffSuccess implements Action {
   public readonly type = StaffActionsType.CREATE_STAFF_SUCCESS;
-  constructor(public payload: string) {}
+  constructor(public payload: number) {}
 }
 
 export class CreateStaffFail implements Action {

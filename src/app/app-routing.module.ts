@@ -16,13 +16,11 @@ const routes: Routes = [
     path: 'admin',
     component: AdminSiteComponent,
     canActivate: [AuthGuard],
-    data: { roles: [Role.Admin] },
-    children: [
-      { path: 'new', component: StaffAddComponent },
-      { path: ':id/detail', component: StaffDetailComponent },
-      { path: ':id/edit', component: StaffEditComponent },
-  ]
+    data: { roles: [Role.Admin] }
   },
+  { path: 'admin/new', component: StaffAddComponent },
+  { path: 'admin/:id/detail', component: StaffDetailComponent },
+  { path: 'admin/:id/edit', component: StaffEditComponent },
   { path: 'login', component: LoginComponent },
   { path: '**', redirectTo: '' }
 
