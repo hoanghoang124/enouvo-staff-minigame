@@ -1,29 +1,41 @@
-import { Injectable } from '@angular/core';
-import { Effect, ofType, Actions } from '@ngrx/effects';
-import { StaffService } from 'src/app/shared/staff.service';
-import { Store, Action } from '@ngrx/store';
-import { StaffState } from '../reducers';
-import * as StaffActions from '../actions';
-import { map, catchError, switchMap } from 'rxjs/operators';
-import { Observable, of } from 'rxjs';
-import { GetStaff, GetStaffSuccess, GetStaffsSuccess, GetStaffsFail, GetStaffFail, UpdateStaff, UpdateStaffSuccess, UpdateStaffFail,
-          CreateStaff, DeleteStaff, CreateStaffSuccess, CreateStaffFail, DeleteStaffSuccess, DeleteStaffFail } from '../actions';
-import { Staff } from 'src/app/shared/staff.model';
+import { Injectable } from "@angular/core";
+import { Effect, ofType, Actions } from "@ngrx/effects";
+import { StaffService } from "src/app/shared/staff.service";
+import { Store, Action } from "@ngrx/store";
+import { StaffState } from "../reducers";
+import * as StaffActions from "../actions";
+import { map, catchError, switchMap } from "rxjs/operators";
+import { Observable, of } from "rxjs";
+import {
+  GetStaff,
+  GetStaffSuccess,
+  GetStaffsSuccess,
+  GetStaffsFail,
+  GetStaffFail,
+  UpdateStaff,
+  UpdateStaffSuccess,
+  UpdateStaffFail,
+  CreateStaff,
+  DeleteStaff,
+  CreateStaffSuccess,
+  CreateStaffFail,
+  DeleteStaffSuccess,
+  DeleteStaffFail
+} from "../actions";
+import { Staff } from "src/app/shared/staff.model";
 
 const { StaffActionsType } = StaffActions;
 
 @Injectable()
 export class StaffEffects {
-  constructor(private actions$: Actions,
-              private staffservice: StaffService) {
-  }
+  constructor(private actions$: Actions, private staffservice: StaffService) {}
 
   @Effect()
   getAllStaffs$: Observable<Action> = this.actions$.pipe(
     ofType(StaffActions.StaffActionsType.GET_STAFFS),
     switchMap(() => this.staffservice.getStaffs()),
     map(staffs => new GetStaffsSuccess(staffs)),
-    catchError((err) => [new GetStaffsFail(err)])
+    catchError(err => [new GetStaffsFail(err)])
   );
 
   @Effect()
@@ -32,9 +44,8 @@ export class StaffEffects {
     map((action: GetStaff) => action.payload),
     switchMap(id => this.staffservice.getStaff(id)),
     map(staff => new GetStaffSuccess(staff)),
-    catchError((err) => [new GetStaffFail(err)])
+    catchError(err => [new GetStaffFail(err)])
   );
-
 
   @Effect()
   updateStaff$ = this.actions$.pipe(
@@ -42,7 +53,7 @@ export class StaffEffects {
     map((action: UpdateStaff) => action.payload),
     switchMap(staff => this.staffservice.updateStaff(staff)),
     map(() => new UpdateStaffSuccess()),
-    catchError((err) => [new UpdateStaffFail(err)])
+    catchError(err => [new UpdateStaffFail(err)])
   );
 
   @Effect()
@@ -50,8 +61,8 @@ export class StaffEffects {
     ofType(StaffActions.StaffActionsType.CREATE_STAFF),
     map((action: CreateStaff) => action.payload),
     switchMap(newStaff => this.staffservice.createStaff(newStaff)),
-    map((response) => new CreateStaffSuccess(response.id)),
-    catchError((err) => [new CreateStaffFail(err)])
+    map(response => new CreateStaffSuccess(response.id)),
+    catchError(err => [new CreateStaffFail(err)])
   );
 
   @Effect()
@@ -60,6 +71,6 @@ export class StaffEffects {
     map((action: DeleteStaff) => action.payload),
     switchMap(id => this.staffservice.deleteStaff(id)),
     map((staff: Staff) => new DeleteStaffSuccess(staff)),
-    catchError((err) => [new DeleteStaffFail(err)])
+    catchError(err => [new DeleteStaffFail(err)])
   );
 }

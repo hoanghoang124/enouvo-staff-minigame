@@ -25,16 +25,15 @@ import {
   MatIconModule,
   MatButtonModule,
   MatCardModule,
-  MatFormFieldModule
-} from '@angular/material';
+  MatFormFieldModule,
+  MatGridListModule
+} from "@angular/material";
 
-import { StoreModule } from '@ngrx/store';
+import { StoreModule } from "@ngrx/store";
 
 import { StaffDetailComponent } from "./admin-site/staff-detail/staff-detail.component";
 import { StaffAddComponent } from "./admin-site/staff-add/staff-add.component";
 import { StaffEditComponent } from "./admin-site/staff-edit/staff-edit.component";
-import { ResetPasswordComponent } from './reset-password/reset-password.component';
-
 
 @NgModule({
   declarations: [
@@ -44,8 +43,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     AdminSiteComponent,
     StaffDetailComponent,
     StaffAddComponent,
-    StaffEditComponent,
-    ResetPasswordComponent
+    StaffEditComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +63,8 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     MatFormFieldModule,
     FormsModule,
     BrowserAnimationsModule,
-    StoreModule
+    StoreModule,
+    MatGridListModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
