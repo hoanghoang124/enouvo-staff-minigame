@@ -1,18 +1,18 @@
-import { JwtInterceptor } from './login/_helpers/jwt.interceptor';
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { fakeBackendProvider } from './login/_helpers/fake-backend';
-import { AppComponent } from './app.component';
+import { JwtInterceptor } from "./login/_helpers/jwt.interceptor";
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule } from "@angular/core";
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { fakeBackendProvider } from "./login/_helpers/fake-backend";
+import { AppComponent } from "./app.component";
 
-import { CommonModule } from '@angular/common';
-import { BasicAuthInterceptor } from './login/_helpers/basic-auth.interceptor';
-import { ErrorInterceptor } from './login/_helpers/error.interceptor';
-import { LoginComponent } from './login/login.component';
-import { UserSiteComponent } from './user-site/user-site.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AdminSiteComponent } from './admin-site/admin-site.component';
+import { CommonModule } from "@angular/common";
+import { BasicAuthInterceptor } from "./login/_helpers/basic-auth.interceptor";
+import { ErrorInterceptor } from "./login/_helpers/error.interceptor";
+import { LoginComponent } from "./login/login.component";
+import { UserSiteComponent } from "./user-site/user-site.component";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { AdminSiteComponent } from "./admin-site/admin-site.component";
 
 import {
   MatInputModule,
@@ -23,20 +23,19 @@ import {
   MatIconModule,
   MatButtonModule,
   MatCardModule,
-  MatFormFieldModule
-} from '@angular/material';
+  MatFormFieldModule,
+  MatGridListModule
+} from "@angular/material";
 
-import { StoreModule } from '@ngrx/store';
+import { StoreModule } from "@ngrx/store";
 
-import { StaffDetailComponent } from './admin-site/staff-detail/staff-detail.component';
-import { StaffAddComponent } from './admin-site/staff-add/staff-add.component';
-import { StaffEditComponent } from './admin-site/staff-edit/staff-edit.component';
-import { ResetPasswordComponent } from './reset-password/reset-password.component';
-import { StaffService } from './shared/staff.service';
-import { AppRoutingModule } from './app-routing.module';
-import { EffectsModule } from '@ngrx/effects';
-import { appReducers } from './store/reducers';
-
+import { StaffDetailComponent } from "./admin-site/staff-detail/staff-detail.component";
+import { StaffAddComponent } from "./admin-site/staff-add/staff-add.component";
+import { StaffEditComponent } from "./admin-site/staff-edit/staff-edit.component";
+import { ResetPasswordComponent } from "./reset-password/reset-password.component";
+import { StaffService } from "./shared/staff.service";
+import { AppRoutingModule } from "./app-routing.module";
+import { EffectsModule } from "@ngrx/effects";
 
 @NgModule({
   declarations: [
@@ -46,8 +45,7 @@ import { appReducers } from './store/reducers';
     AdminSiteComponent,
     StaffDetailComponent,
     StaffAddComponent,
-    StaffEditComponent,
-    ResetPasswordComponent
+    StaffEditComponent
   ],
   imports: [
     BrowserModule,
@@ -66,7 +64,7 @@ import { appReducers } from './store/reducers';
     MatFormFieldModule,
     FormsModule,
     BrowserAnimationsModule,
-    StoreModule.forRoot(appReducers),
+
     AppRoutingModule,
     EffectsModule
   ],

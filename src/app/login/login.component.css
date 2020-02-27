@@ -10,6 +10,8 @@ a {
 button {
   margin-left: 0;
   border-style: none;
+  width: 100%;
+  padding: auto;
 }
 h3 {
   color: #4285f4;
