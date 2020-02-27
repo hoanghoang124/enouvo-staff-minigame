@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Effect, ofType, Actions } from '@ngrx/effects';
-import { StaffService } from 'src/app/Shared/Services/staff.service';
+import { StaffService } from 'src/app/Core/Services/staff.service';
 import { Store, Action } from '@ngrx/store';
 
 import * as StaffActions from '../actions';
@@ -22,7 +22,7 @@ import {
   DeleteStaffSuccess,
   DeleteStaffFail
 } from '../actions';
-import { Staff } from 'src/app/Shared/Models/staff.model';
+import { Staff } from 'src/app/Core/Models/staff.model';
 import { AppState } from '../reducers';
 
 const { StaffActionsType } = StaffActions;

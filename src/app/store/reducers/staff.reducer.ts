@@ -1,4 +1,4 @@
-import { Staff } from 'src/app/Shared/Models/staff.model';
+import { Staff } from 'src/app/Core/Models/staff.model';
 import * as staffActions from '../actions/staff.action';
 import * as _ from 'lodash';
 

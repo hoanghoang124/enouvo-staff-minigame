@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import {
   HttpRequest,
   HttpResponse,
@@ -6,12 +6,12 @@ import {
   HttpEvent,
   HttpInterceptor,
   HTTP_INTERCEPTORS
-} from "@angular/common/http";
-import { Observable, of, throwError } from "rxjs";
-import { delay, mergeMap, materialize, dematerialize } from "rxjs/operators";
+} from '@angular/common/http';
+import { Observable, of, throwError } from 'rxjs';
+import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
 
-import { User } from "../Models/user";
-import { Role } from "../Models/role";
+import { User } from '../../Core/Models/user';
+import { Role } from '../../Core/Models/role';
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -22,29 +22,29 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     const users: User[] = [
       {
         id: 1,
-        username: "admin",
-        password: "admin",
-        firstName: "Admin",
-        lastName: "User",
+        username: 'admin',
+        password: 'admin',
+        firstName: 'Admin',
+        lastName: 'User',
         role: Role.Admin
       },
       {
         id: 2,
-        username: "user",
-        password: "user",
-        firstName: "Normal",
-        lastName: "User",
+        username: 'user',
+        password: 'user',
+        firstName: 'Normal',
+        lastName: 'User',
         role: Role.User
       }
     ];
 
-    const authHeader = request.headers.get("Authorization");
+    const authHeader = request.headers.get('Authorization');
     const isLoggedIn =
       authHeader &&
       authHeader.startsWith(
-        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwic…5NzZ9.wHPNudo4VIoLW2aG4nKSuoCnhub_vA2QO58NrR-zvkU"
+        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwic…5NzZ9.wHPNudo4VIoLW2aG4nKSuoCnhub_vA2QO58NrR-zvkU'
       );
-    const roleString = isLoggedIn && authHeader.split(".")[1];
+    const roleString = isLoggedIn && authHeader.split('.')[1];
     const role = roleString ? Role[roleString] : null;
 
     // wrap in delayed observable to simulate server api call
@@ -54,15 +54,15 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           mergeMap(() => {
             // authenticate - public
             if (
-              request.url.endsWith("/users/authenticate") &&
-              request.method === "POST"
+              request.url.endsWith('/users/authenticate') &&
+              request.method === 'POST'
             ) {
               const user = users.find(
                 x =>
                   x.username === request.body.username &&
                   x.password === request.body.password
               );
-              if (!user) return error("Username or password is incorrect");
+              if (!user) { return error('Username or password is incorrect'); }
               return ok({
                 id: user.id,
                 username: user.username,
@@ -76,26 +76,27 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             // get user by id - admin or user (user can only access their own record)
             if (
               request.url.match(/\/users\/\d+$/) &&
-              request.method === "GET"
+              request.method === 'GET'
             ) {
-              if (!isLoggedIn) return unauthorised();
+              if (!isLoggedIn) { return unauthorised(); }
 
               // get id from request url
-              let urlParts = request.url.split("/");
-              let id = parseInt(urlParts[urlParts.length - 1]);
+              const urlParts = request.url.split('/');
+              const id = parseInt(urlParts[urlParts.length - 1]);
 
               // only allow normal users access to their own record
               const currentUser = users.find(x => x.role === role);
-              if (id !== currentUser.id && role !== Role.Admin)
+              if (id !== currentUser.id && role !== Role.Admin) {
                 return unauthorised();
+              }
 
               const user = users.find(x => x.id === id);
               return ok(user);
             }
 
             // get all users (admin only)
-            if (request.url.endsWith("/users") && request.method === "GET") {
-              if (role !== Role.Admin) return unauthorised();
+            if (request.url.endsWith('/users') && request.method === 'GET') {
+              if (role !== Role.Admin) { return unauthorised(); }
               return ok(users);
             }
 
@@ -116,7 +117,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     }
 
     function unauthorised() {
-      return throwError({ status: 401, error: { message: "Unauthorised" } });
+      return throwError({ status: 401, error: { message: 'Unauthorised' } });
     }
 
     function error(message) {

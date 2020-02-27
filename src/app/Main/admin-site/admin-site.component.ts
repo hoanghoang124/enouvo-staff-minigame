@@ -6,7 +6,7 @@ import 'rxjs';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { Store, select } from '@ngrx/store';
-import { StaffService } from 'src/app/Shared/Services/staff.service';
+import { StaffService } from 'src/app/Core/Services/staff.service';
 import { AppState } from 'src/app/store/reducers';
 import { GetStaffs } from 'src/app/store/actions';
 import { getAllStaffs } from 'src/app/store/selectors/staff.selector';

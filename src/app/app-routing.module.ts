@@ -1,21 +1,18 @@
+import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { UserSiteComponent } from './Main/user-site/user-site.component';
 import { AuthGuard } from './Shared/Helpers/auth.guard';
-import { AdminSiteComponent } from './Main/admin-site/admin-site.component';
-import { Role } from './Shared/Models/role';
+import { Role } from './Core/Models/role';
+
 import { StaffAddComponent } from './Main/staff-add/staff-add.component';
 import { StaffDetailComponent } from './Main/staff-detail/staff-detail.component';
 import { StaffEditComponent } from './Main/staff-edit/staff-edit.component';
 import { LoginComponent } from './Auth/login/login.component';
-import { NgModule } from '@angular/core';
-
+import { AdminSiteComponent } from './Main/admin-site/admin-site.component';
+import { UserSiteComponent } from './Main/user-site/user-site.component';
 
 const routes: Routes = [
   { path: '', component: UserSiteComponent, canActivate: [AuthGuard] },
-  {
-    path: 'admin',
-    component: AdminSiteComponent,
-    canActivate: [AuthGuard],
+  { path: 'admin', component: AdminSiteComponent, canActivate: [AuthGuard],
     data: { roles: [Role.Admin] },
     children: [
       { path: 'new', component: StaffAddComponent },
