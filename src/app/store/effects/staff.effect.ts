@@ -1,11 +1,11 @@
-import { Injectable } from "@angular/core";
-import { Effect, ofType, Actions } from "@ngrx/effects";
-import { StaffService } from "src/app/shared/staff.service";
-import { Store, Action } from "@ngrx/store";
+import { Injectable } from '@angular/core';
+import { Effect, ofType, Actions } from '@ngrx/effects';
+import { StaffService } from 'src/app/Shared/Services/staff.service';
+import { Store, Action } from '@ngrx/store';
 
-import * as StaffActions from "../actions";
-import { map, catchError, switchMap } from "rxjs/operators";
-import { Observable, of } from "rxjs";
+import * as StaffActions from '../actions';
+import { map, catchError, switchMap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
 import {
   GetStaff,
   GetStaffSuccess,
@@ -21,8 +21,9 @@ import {
   CreateStaffFail,
   DeleteStaffSuccess,
   DeleteStaffFail
-} from "../actions";
-import { Staff } from "src/app/shared/staff.model";
+} from '../actions';
+import { Staff } from 'src/app/Shared/Models/staff.model';
+import { AppState } from '../reducers';
 
 const { StaffActionsType } = StaffActions;
 

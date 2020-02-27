@@ -1,19 +1,3 @@
-import { JwtInterceptor } from "./login/_helpers/jwt.interceptor";
-import { BrowserModule } from "@angular/platform-browser";
-import { NgModule } from "@angular/core";
-import { ReactiveFormsModule, FormsModule } from "@angular/forms";
-import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
-import { fakeBackendProvider } from "./login/_helpers/fake-backend";
-import { AppComponent } from "./app.component";
-
-import { CommonModule } from "@angular/common";
-import { BasicAuthInterceptor } from "./login/_helpers/basic-auth.interceptor";
-import { ErrorInterceptor } from "./login/_helpers/error.interceptor";
-import { LoginComponent } from "./login/login.component";
-import { UserSiteComponent } from "./user-site/user-site.component";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { AdminSiteComponent } from "./admin-site/admin-site.component";
-
 import {
   MatInputModule,
   MatPaginatorModule,
@@ -25,17 +9,27 @@ import {
   MatCardModule,
   MatFormFieldModule,
   MatGridListModule
-} from "@angular/material";
+} from '@angular/material';
 
-import { StoreModule } from "@ngrx/store";
-
-import { StaffDetailComponent } from "./admin-site/staff-detail/staff-detail.component";
-import { StaffAddComponent } from "./admin-site/staff-add/staff-add.component";
-import { StaffEditComponent } from "./admin-site/staff-edit/staff-edit.component";
-import { ResetPasswordComponent } from "./reset-password/reset-password.component";
-import { StaffService } from "./shared/staff.service";
-import { AppRoutingModule } from "./app-routing.module";
-import { EffectsModule } from "@ngrx/effects";
+import { StoreModule } from '@ngrx/store';
+import { AppRoutingModule } from './app-routing.module';
+import { EffectsModule } from '@ngrx/effects';
+import { StaffDetailComponent } from './Main/staff-detail/staff-detail.component';
+import { StaffAddComponent } from './Main/staff-add/staff-add.component';
+import { StaffEditComponent } from './Main/staff-edit/staff-edit.component';
+import { StaffService } from './Shared/Services/staff.service';
+import { NgModule } from '@angular/core';
+import { AppComponent } from './app.component';
+import { UserSiteComponent } from './Main/user-site/user-site.component';
+import { LoginComponent } from './Auth/login/login.component';
+import { AdminSiteComponent } from './Main/admin-site/admin-site.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { JwtInterceptor } from './Shared/Helpers/jwt.interceptor';
+import { ErrorInterceptor } from './Shared/Helpers/error.interceptor';
+import { fakeBackendProvider } from './Shared/Helpers/fake-backend';
 
 @NgModule({
   declarations: [
@@ -62,9 +56,8 @@ import { EffectsModule } from "@ngrx/effects";
     MatButtonModule,
     MatCardModule,
     MatFormFieldModule,
+    MatGridListModule,
     FormsModule,
-    BrowserAnimationsModule,
-
     AppRoutingModule,
     EffectsModule
   ],

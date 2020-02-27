@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { Staff } from 'src/app/shared/staff.model';
+import { Staff } from 'src/app/Shared/Models/staff.model';
 
 export enum StaffActionsType {
   GET_STAFFS = '[Staff] Get Staffs',
