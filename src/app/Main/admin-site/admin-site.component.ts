@@ -5,12 +5,12 @@ import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import 'rxjs';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
-import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 import { Store, select } from '@ngrx/store';
 import { StaffService } from 'src/app/Shared/Services/staff.service';
 import { AppState } from 'src/app/store/reducers';
 import { GetStaffs } from 'src/app/store/actions';
 import { getAllStaffs } from 'src/app/store/selectors/staff.selector';
+import { MatPaginator, MatSort } from '@angular/material';
 
 @Component({
   selector: 'app-admin-site',

@@ -1,16 +1,5 @@
-import {
-  MatInputModule,
-  MatPaginatorModule,
-  MatProgressSpinnerModule,
-  MatSortModule,
-  MatTableModule,
-  MatIconModule,
-  MatButtonModule,
-  MatCardModule,
-  MatFormFieldModule,
-  MatGridListModule
-} from '@angular/material';
 
+import { AngularMaterialModule } from './Shared/Angular-Material/Angular-Material.module';
 import { StoreModule } from '@ngrx/store';
 import { AppRoutingModule } from './app-routing.module';
 import { EffectsModule } from '@ngrx/effects';
@@ -47,19 +36,11 @@ import { fakeBackendProvider } from './Shared/Helpers/fake-backend';
     HttpClientModule,
     CommonModule,
     ReactiveFormsModule,
-    MatInputModule,
-    MatPaginatorModule,
-    MatProgressSpinnerModule,
-    MatSortModule,
-    MatTableModule,
-    MatIconModule,
-    MatButtonModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatGridListModule,
     FormsModule,
     AppRoutingModule,
-    EffectsModule
+    EffectsModule,
+    StoreModule,
+    AngularMaterialModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
