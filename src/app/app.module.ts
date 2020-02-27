@@ -5,9 +5,7 @@ import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { fakeBackendProvider } from "./login/_helpers/fake-backend";
 import { AppComponent } from "./app.component";
-import { appRoutingModule } from "./app-routing.module";
 
-import { DataTablesModule } from "angular-datatables";
 import { CommonModule } from "@angular/common";
 import { BasicAuthInterceptor } from "./login/_helpers/basic-auth.interceptor";
 import { ErrorInterceptor } from "./login/_helpers/error.interceptor";
@@ -34,6 +32,10 @@ import { StoreModule } from "@ngrx/store";
 import { StaffDetailComponent } from "./admin-site/staff-detail/staff-detail.component";
 import { StaffAddComponent } from "./admin-site/staff-add/staff-add.component";
 import { StaffEditComponent } from "./admin-site/staff-edit/staff-edit.component";
+import { ResetPasswordComponent } from "./reset-password/reset-password.component";
+import { StaffService } from "./shared/staff.service";
+import { AppRoutingModule } from "./app-routing.module";
+import { EffectsModule } from "@ngrx/effects";
 
 @NgModule({
   declarations: [
@@ -49,7 +51,6 @@ import { StaffEditComponent } from "./admin-site/staff-edit/staff-edit.component
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
-    appRoutingModule,
     CommonModule,
     ReactiveFormsModule,
     MatInputModule,
@@ -63,12 +64,14 @@ import { StaffEditComponent } from "./admin-site/staff-edit/staff-edit.component
     MatFormFieldModule,
     FormsModule,
     BrowserAnimationsModule,
-    StoreModule,
-    MatGridListModule
+
+    AppRoutingModule,
+    EffectsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    StaffService,
 
     // fake back-end
     fakeBackendProvider

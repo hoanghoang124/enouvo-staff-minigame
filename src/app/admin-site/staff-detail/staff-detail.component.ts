@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StaffService } from '../../shared/staff.service';
 import { Staff } from '../../shared/staff.model';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/app.state';
+import { Observable } from 'rxjs';
+import { GetStaff } from 'src/app/store/actions';
+import { getStaff } from 'src/app/store/selectors/staff.selector';
 
 @Component({
   selector: 'app-staff-detail',
@@ -10,18 +15,21 @@ import { Staff } from '../../shared/staff.model';
 })
 export class StaffDetailComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private staffService: StaffService, private router: Router) { }
+  constructor(private route: ActivatedRoute,
+              private staffService: StaffService,
+              private router: Router,
+              private store: Store<AppState>) { }
 
-  staff: Staff = { id: '0', name: '', information: '', star: 0 };
+  staff: Observable<Staff>;
   isLoadingResults = true;
 
-  getstaff(id) {
-    this.staffService.getStaff(id)
-      .subscribe(data => {
-        this.staff = data;
-        this.isLoadingResults = false;
-      });
-  }
+  // getstaff(id) {
+  //   this.staffService.getStaff(id)
+  //     .subscribe(data => {
+  //       this.staff = data;
+  //       this.isLoadingResults = false;
+  //     });
+  // }
 
   deletestaff(id) {
     this.isLoadingResults = true;
@@ -37,7 +45,11 @@ export class StaffDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getstaff(this.route.snapshot.params.id);
+    // this.getstaff(this.route.snapshot.params.id);
+    this.route.params.subscribe(params => {
+      this.store.dispatch(new GetStaff(+params.id));
+    });
+    this.staff = this.store.select(getStaff);
   }
 
 }

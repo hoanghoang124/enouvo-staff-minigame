@@ -18,7 +18,7 @@
       </dl>
     </mat-card-content>
     <mat-card-actions>
-      <a mat-flat-button color="primary" [routerLink]="['/admin/'+staff.id+'/edit']"><mat-icon>edit</mat-icon></a>
+      <a mat-flat-button color="primary" [routerLink]="[staff.id+'/edit']"><mat-icon>edit</mat-icon></a>
       <a mat-flat-button color="warn" (click)="deletestaff(staff.id)"><mat-icon>delete</mat-icon></a>
     </mat-card-actions>
   </mat-card>

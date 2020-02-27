@@ -1,6 +1,8 @@
+import { ResetPasswordComponent } from "./reset-password/reset-password.component";
 import { Role } from "./login/_models/role";
 import { UserSiteComponent } from "./user-site/user-site.component";
 import { Routes, RouterModule } from "@angular/router";
+import { NgModule } from "@angular/core";
 import { AuthGuard } from "./login/_helpers/auth.guard";
 import { LoginComponent } from "./login/login.component";
 import { AdminSiteComponent } from "./admin-site/admin-site.component";
@@ -25,4 +27,8 @@ const routes: Routes = [
   { path: "**", redirectTo: "" }
 ];
 
-export const appRoutingModule = RouterModule.forRoot(routes);
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule {}
