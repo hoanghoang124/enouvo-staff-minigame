@@ -9,9 +9,9 @@ import {
 } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
+import { User } from 'src/app/Auth/Models/user';
+import { Role } from 'src/app/Auth/Models/role';
 
-import { User } from '../Models/user';
-import { Role } from '../Models/role';
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -83,6 +83,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
               // get id from request url
               const urlParts = request.url.split('/');
+              // tslint:disable-next-line:radix
               const id = parseInt(urlParts[urlParts.length - 1]);
 
               // only allow normal users access to their own record

@@ -5,11 +5,11 @@ import { ActionReducerMap } from '@ngrx/store';
 
 export interface AppState {
   router?: RouterReducerState;
-  book: StaffState;
+  staff: StaffState;
 }
 
 export const initialAppState: AppState = {
-  book: initialState,
+  staff: initialState,
 };
 
 export function getInitialState(): AppState {
@@ -18,5 +18,5 @@ export function getInitialState(): AppState {
 
 export const appReducers: ActionReducerMap<AppState, any> = {
   router: routerReducer,
-  book: staffReducer
+  staff: staffReducer
 };

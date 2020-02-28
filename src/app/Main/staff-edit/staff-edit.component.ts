@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
-import { StaffService } from 'src/app/Core/Services/staff.service';
+import { StaffService } from '../Services/staff.service';
 
 @Component({
   selector: 'app-staff-edit',

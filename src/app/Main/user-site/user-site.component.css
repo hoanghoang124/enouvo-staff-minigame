@@ -1,95 +1,10 @@
-#table-wrapper {
-  position: relative;
+mat-card-actions {
+  text-align: right;
 }
-#table-scroll {
-  height: 50rem;
-  overflow: auto;
-  margin-top: 6rem;
-}
-.active-cyan-4 {
-  width: 60%;
-  display: flex;
-  margin: auto;
-}
-table {
-  border-collapse: separate;
-  border-spacing: 15px 50px;
-  width: 100%;
+.mat-icon-button {
+  border-radius: 50%;
 }
 
-.star-container {
-  justify-content: space-between;
-  display: inline-flex;
-  font-size: 35px;
-  width: 100%;
-}
-.star-status {
-  display: inline-flex;
-  justify-content: space-evenly;
-}
-.star {
-  width: 80px;
-  height: 50px;
-  border-style: none;
-  font-weight: 600;
-}
-.img-star {
-  height: 20px;
-  width: 20px;
-}
 button {
-  border-style: none;
-}
-
-
-
-.button-row {
-  padding: 1%;
-}
-
-th.mat-sort-header-sorted {
-  color: black;
-}
-
-.mat-form-field {
-  font-size: 14px;
-  width: 90%;
-  margin-left: 5%;
-}
-
-.container-image {
-  position: relative;
-}
-.image {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-.overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: #008cba;
-  overflow: hidden;
-  width: 100%;
-  height: 0;
-  transition: 0.5s ease;
-}
-
-.container:hover .overlay {
-  height: 100%;
-}
-
-.text {
-  white-space: nowrap;
-  color: white;
-  font-size: 20px;
-  position: absolute;
-  overflow: hidden;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
+  border-radius: 50%;
 }

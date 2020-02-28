@@ -4,9 +4,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { EffectsModule } from '@ngrx/effects';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
 
 import { StaffDetailComponent } from './Main/staff-detail/staff-detail.component';
 import { StaffAddComponent } from './Main/staff-add/staff-add.component';
@@ -15,11 +14,13 @@ import { AppComponent } from './app.component';
 import { UserSiteComponent } from './Main/user-site/user-site.component';
 import { LoginComponent } from './Auth/login/login.component';
 import { AdminSiteComponent } from './Main/admin-site/admin-site.component';
+import { HeaderComponent } from './Shared/Components/header/header.component';
+import { FooterComponent } from './Shared/Components/footer/footer.component';
 
-import { JwtInterceptor } from './Auth/Helpers/jwt.interceptor';
-import { ErrorInterceptor } from './Auth/Helpers/error.interceptor';
-import { fakeBackendProvider } from './Auth/Helpers/fake-backend';
-import { StaffService } from './Main/Services/staff.service';
+import { appReducers } from './Main/Store/reducers';
+import { appEffect } from './Main/Store/effects';
+import { CoreModule } from './Core/core.module';
+import { SharedModule } from './Shared/shared.module';
 
 
 @NgModule({
@@ -30,27 +31,20 @@ import { StaffService } from './Main/Services/staff.service';
     AdminSiteComponent,
     StaffDetailComponent,
     StaffAddComponent,
-    StaffEditComponent
+    StaffEditComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
-    ReactiveFormsModule,
-    HttpClientModule,
     CommonModule,
-    ReactiveFormsModule,
-    FormsModule,
     AppRoutingModule,
-    EffectsModule,
-    StoreModule,
-    AngularMaterialModule
-  ],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    StaffService,
-
-    // fake back-end
-    fakeBackendProvider
+    EffectsModule.forRoot(appEffect),
+    StoreModule.forRoot(appReducers),
+    StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
+    AngularMaterialModule,
+    CoreModule,
+    SharedModule
   ],
   bootstrap: [AppComponent]
 })

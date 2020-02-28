@@ -1,1 +1,3 @@
-export * from './staff.effect';
+import {StaffEffects} from './staff.effect';
+
+export const appEffect = [StaffEffects];

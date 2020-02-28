@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AuthGuard } from './Auth/Helpers/auth.guard';
 import { Role } from './Auth/Models/role';
 
 import { StaffAddComponent } from './Main/staff-add/staff-add.component';
@@ -9,6 +8,7 @@ import { StaffEditComponent } from './Main/staff-edit/staff-edit.component';
 import { LoginComponent } from './Auth/login/login.component';
 import { AdminSiteComponent } from './Main/admin-site/admin-site.component';
 import { UserSiteComponent } from './Main/user-site/user-site.component';
+import { AuthGuard } from './Core/Helpers/auth.guard';
 
 const routes: Routes = [
   { path: '', component: UserSiteComponent, canActivate: [AuthGuard] },
