@@ -22,6 +22,7 @@ export class JwtInterceptor implements HttpInterceptor {
     if (currentUser && currentUser.token) {
       request = request.clone({
         setHeaders: {
+          // tslint:disable-next-line:max-line-length
           Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwic…5NzZ9.wHPNudo4VIoLW2aG4nKSuoCnhub_vA2QO58NrR-zvkU-token${currentUser.token}`
         }
       });

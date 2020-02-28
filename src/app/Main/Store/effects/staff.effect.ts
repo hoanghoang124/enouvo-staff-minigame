@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Effect, ofType, Actions } from '@ngrx/effects';
-import { StaffService } from 'src/app/Core/Services/staff.service';
 import { Store, Action } from '@ngrx/store';
 
 import * as StaffActions from '../actions';
@@ -24,6 +23,7 @@ import {
 } from '../actions';
 import { Staff } from 'src/app/Main/Models/staff.model';
 import { AppState } from '../reducers';
+import { StaffService } from '../../Services/staff.service';
 
 const { StaffActionsType } = StaffActions;
 

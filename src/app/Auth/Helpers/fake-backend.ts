@@ -69,6 +69,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 firstName: user.firstName,
                 lastName: user.lastName,
                 role: user.role,
+                // tslint:disable-next-line:max-line-length
                 token: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwic…5NzZ9.wHPNudo4VIoLW2aG4nKSuoCnhub_vA2QO58NrR-zvkU-token.${user.role}`
               });
             }

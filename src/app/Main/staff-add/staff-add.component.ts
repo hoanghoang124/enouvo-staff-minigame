@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/Main/Store/reducers';
-import { StaffService } from 'src/app/Core/Services/staff.service';
+import { StaffService } from '../Services/staff.service';
 
 @Component({
   selector: 'app-staff-add',

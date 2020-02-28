@@ -4,9 +4,9 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { GetStaff } from 'src/app/Main/Store/actions';
 import { getStaff } from 'src/app/Main/Store/selectors/staff.selector';
-import { StaffService } from 'src/app/Core/Services/staff.service';
 import { AppState } from 'src/app/Main/Store/reducers';
 import { Staff } from 'src/app/Main/Models/staff.model';
+import { StaffService } from '../Services/staff.service';
 
 @Component({
   selector: 'app-staff-detail',
