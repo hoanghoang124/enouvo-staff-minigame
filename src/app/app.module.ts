@@ -16,11 +16,11 @@ import { UserSiteComponent } from './Main/user-site/user-site.component';
 import { LoginComponent } from './Auth/login/login.component';
 import { AdminSiteComponent } from './Main/admin-site/admin-site.component';
 
-import { JwtInterceptor } from './Shared/Helpers/jwt.interceptor';
-import { ErrorInterceptor } from './Shared/Helpers/error.interceptor';
-import { fakeBackendProvider } from './Shared/Helpers/fake-backend';
+import { JwtInterceptor } from './Auth/Helpers/jwt.interceptor';
+import { ErrorInterceptor } from './Auth/Helpers/error.interceptor';
+import { fakeBackendProvider } from './Auth/Helpers/fake-backend';
+import { StaffService } from './Main/Services/staff.service';
 
-import { StaffService } from './Core/Services/staff.service';
 
 @NgModule({
   declarations: [

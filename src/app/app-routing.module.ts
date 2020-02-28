@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AuthGuard } from './Shared/Helpers/auth.guard';
-import { Role } from './Core/Models/role';
+import { AuthGuard } from './Auth/Helpers/auth.guard';
+import { Role } from './Auth/Models/role';
 
 import { StaffAddComponent } from './Main/staff-add/staff-add.component';
 import { StaffDetailComponent } from './Main/staff-detail/staff-detail.component';

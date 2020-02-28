@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/Core/Models/user';
+import { User } from 'src/app/Auth/Models/user';
 import { StaffService } from 'src/app/Core/Services/staff.service';
-import { UserService } from 'src/app/Core/Services/user.service';
-import { AuthenticationService } from 'src/app/Core/Services/authentication.service';
+import { UserService } from 'src/app/Auth/Services/user.service';
+import { AuthenticationService } from 'src/app/Auth/Services/authentication.service';
 import { first } from 'rxjs/operators';
 import { PageEvent } from '@angular/material';
 

@@ -7,9 +7,9 @@ import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { Store, select } from '@ngrx/store';
 import { StaffService } from 'src/app/Core/Services/staff.service';
-import { AppState } from 'src/app/store/reducers';
-import { GetStaffs } from 'src/app/store/actions';
-import { getAllStaffs } from 'src/app/store/selectors/staff.selector';
+import { AppState } from 'src/app/Main/Store/reducers';
+import { GetStaffs } from 'src/app/Main/Store/actions';
+import { getAllStaffs } from 'src/app/Main/Store/selectors/staff.selector';
 import { MatPaginator, MatSort } from '@angular/material';
 
 @Component({
