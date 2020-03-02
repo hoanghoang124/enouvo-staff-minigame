@@ -1,4 +1,3 @@
-
 <div class="col-md-6 offset-md-3 mt-5" style="top:100px">
   <div class="card">
     <h3 class="card-header">Login with your account!</h3>
@@ -7,9 +6,12 @@
         <div class="form-group">
           <label for="username">Username</label>
           <input
-            type="email"
+            [(ngModel)]="user.username"
+            name="username"
+            id="username"
             formControlName="username"
             class="form-control"
+            placeholder="enter your username"
             [ngClass]="{ 'is-invalid': submitted && f.username.errors }"
           />
           <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
@@ -19,9 +21,12 @@
         <div class="form-group">
           <label for="password">Password</label>
           <input
+            name="password"
             type="password"
+            id="password"
             formControlName="password"
             class="form-control"
+            placeholder="enter password"
             [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
           />
           <div *ngIf="submitted && f.password.errors" class="invalid-feedback">

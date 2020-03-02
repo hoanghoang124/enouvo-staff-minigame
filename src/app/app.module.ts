@@ -1,3 +1,6 @@
+import { reducers } from "./Store/router.reducer";
+import { reducersLogin } from "./Auth/Store/app.state";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { AngularMaterialModule } from "./Shared/Angular-Material/Angular-Material.module";
 import { StoreModule } from "@ngrx/store";
 import { AppRoutingModule } from "./app-routing.module";
@@ -20,8 +23,11 @@ import { FooterComponent } from "./Shared/Components/footer/footer.component";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { appReducers } from "./Main/Store/reducers";
 import { appEffect } from "./Main/Store/effects";
-import { CoreModule } from "./Core/core.module";
 import { SharedModule } from "./Shared/shared.module";
+import { AuthEffects } from "./Auth/Store/effects/auth.effect";
+import { AuthService } from "./Auth/Services/auth.service";
+import { TokenInterceptor } from "./Auth/Services/token.service";
+import { AuthGuardService as AuthGuard } from "./Auth/Services/auth-guard.service";
 
 @NgModule({
   declarations: [
@@ -41,12 +47,28 @@ import { SharedModule } from "./Shared/shared.module";
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
+    HttpClientModule,
     EffectsModule.forRoot(appEffect),
+    EffectsModule.forRoot([AuthEffects]),
     StoreModule.forRoot(appReducers),
+    StoreModule.forRoot(reducersLogin, {}),
     StoreRouterConnectingModule.forRoot({ stateKey: "router" }),
     AngularMaterialModule,
-    CoreModule,
     SharedModule
+  ],
+  providers: [
+    AuthService,
+    AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

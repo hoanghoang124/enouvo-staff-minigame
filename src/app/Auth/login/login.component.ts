@@ -1,41 +1,41 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { first } from 'rxjs/operators';
+import { Observable } from "rxjs";
+import { Component, OnInit } from "@angular/core";
+import { Store } from "@ngrx/store";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
-import { AuthenticationService } from '../Services/authentication.service';
-
+import { User } from "../Models/user";
+import { AppState, selectAuthState } from "../Store/app.state";
+import { LogIn } from "../Store/actions/auth.action";
 @Component({
-  templateUrl: 'login.component.html',
-  styleUrls: ['./login.component.css']
+  templateUrl: "login.component.html",
+  styleUrls: ["./login.component.css"]
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   loading = false;
   submitted = false;
-  returnUrl: string;
-  error = '';
+  error = "";
+  user: User = new User();
+  getState: Observable<any>;
+  errorMessage: string | null;
+  formBuilder: any;
+  route: any;
+  authenticationService: any;
+  router: any;
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
-    private router: Router,
-    private authenticationService: AuthenticationService
-  ) {
+  constructor(private store: Store<AppState>) {
     // redirect to home if already logged in
-    if (this.authenticationService.currentUserValue) {
-      this.router.navigate(['/']); // should be navigate to admin dashboard if user is admin and to homepage if user is normal user
-    }
+    this.getState = this.store.select(selectAuthState);
   }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required]
+      username: ["", Validators.required],
+      password: ["", Validators.required]
     });
-
-    // get return url from route parameters or default to '/'
-    this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
+    this.getState.subscribe(state => {
+      this.errorMessage = state.errorMessage;
+    });
   }
 
   // convenience getter for easy access to form fields
@@ -52,18 +52,11 @@ export class LoginComponent implements OnInit {
     }
 
     this.loading = true;
-    this.authenticationService
-      .login(this.f.username.value, this.f.password.value)
-      .pipe(first())
-      .subscribe(
-        data => {
-          this.router.navigate([this.returnUrl]);
-          console.log(data);
-        },
-        error => {
-          this.error = error;
-          this.loading = false;
-        }
-      );
+    const payload = {
+      username: this.user.username,
+      password: this.user.password
+    };
+    // console.log("vaoday");
+    this.store.dispatch(new LogIn(payload));
   }
 }
