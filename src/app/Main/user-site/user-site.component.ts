@@ -5,6 +5,7 @@ import { AuthenticationService } from 'src/app/Auth/Services/authentication.serv
 import { first } from 'rxjs/operators';
 import { PageEvent } from '@angular/material';
 import { StaffService } from '../Services/staff.service';
+import { JsonpClientBackend } from '@angular/common/http';
 
 
 export interface Tile {
@@ -22,6 +23,7 @@ export interface Tile {
 export class UserSiteComponent implements OnInit {
   currentUser: User;
   userFromApi: User;
+  clicked = false;
   staffs: any[] = [
     {
       id: '1',
@@ -93,7 +95,12 @@ export class UserSiteComponent implements OnInit {
     this.currentUser = this.authenticationService.currentUserValue;
   }
 
+  showDetail() {
+    this.clicked = !this.clicked;
+  }
+
   ngOnInit() {
+    this.clicked = false;
     this.userService
       .getById(this.currentUser.id)
       .pipe(first())

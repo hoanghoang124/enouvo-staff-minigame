@@ -21,6 +21,7 @@ import { appReducers } from './Main/Store/reducers';
 import { appEffect } from './Main/Store/effects';
 import { CoreModule } from './Core/core.module';
 import { SharedModule } from './Shared/shared.module';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -33,7 +34,7 @@ import { SharedModule } from './Shared/shared.module';
     StaffAddComponent,
     StaffEditComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,7 +45,8 @@ import { SharedModule } from './Shared/shared.module';
     StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
     AngularMaterialModule,
     CoreModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule, FormsModule
   ],
   bootstrap: [AppComponent]
 })

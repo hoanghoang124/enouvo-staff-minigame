@@ -1,15 +1,20 @@
 <mat-grid-list cols="3" rowHeight="3:3">
   <mat-grid-tile *ngFor="let staff of staffs">
     <mat-card>
-      <mat-card-title>{{staff.name}} || {{staff.star}}</mat-card-title>
+      <mat-card-header>
+        <mat-card-title>{{staff.name}}</mat-card-title>
+      </mat-card-header>
       <mat-card-content>
+        <img src="https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584_960_720.png" style="width:75%;">
         <p>{{staff.information}}</p>
-        <a>Detail</a>
+        <a (click)="showDetail()">Detail</a>
+        <p *ngIf="clicked">{{staff.information}}</p>
       </mat-card-content>
-      <mat-card-actions>
-        <button mat-icon-button><img src="https://img.icons8.com/nolan/40/plus.png"></button>
-        <button mat-icon-button><img src="https://img.icons8.com/nolan/40/minus.png"></button>
-      </mat-card-actions>
+      <mat-card-footer>
+        <button disabled="true" style="font-size:x-large;">{{staff.star}} <img src="https://img.icons8.com/doodle/64/000000/star--v1.png"></button>
+        <button><img src="https://img.icons8.com/nolan/64/plus.png"></button>
+        <button><img src="https://img.icons8.com/nolan/64/minus.png"></button>
+      </mat-card-footer>
     </mat-card>
   </mat-grid-tile>
 </mat-grid-list>
