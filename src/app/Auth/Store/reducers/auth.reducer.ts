@@ -5,9 +5,9 @@ export interface State {
   // is a user authenticated?
   isAuthenticated: boolean;
   // if authenticated, there should be a user object
-  user: User | null;
+  user: User;
   // error message
-  errorMessage: string | null;
+  errorMessage: string;
 }
 export const initialState: State = {
   isAuthenticated: false,
@@ -21,15 +21,7 @@ export function reducer(state = initialState, action: All): State {
       return {
         ...state,
         isAuthenticated: true,
-        user: {
-          token: action.payload.token,
-          id: action.payload.id,
-          username: action.payload.username,
-          password: action.payload.password,
-          firstName: action.payload.firstName,
-          lastName: action.payload.lastName,
-          role: action.payload.role
-        },
+        user: action.payload,
         errorMessage: null
       };
     }

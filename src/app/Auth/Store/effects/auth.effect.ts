@@ -7,7 +7,6 @@ import "rxjs/add/operator/map";
 import "rxjs/add/operator/switchMap";
 import "rxjs/add/operator/catch";
 import { tap, map, switchMap } from "rxjs/operators";
-import { AuthService } from "../../services/auth.service";
 import {
   AuthActionTypes,
   LogInSuccess,
@@ -16,6 +15,7 @@ import {
   GetStatus
 } from "../actions/auth.action";
 import { LogIn } from "../actions/user.action";
+import { AuthService } from "../../Services/auth.service";
 
 @Injectable()
 export class AuthEffects {
