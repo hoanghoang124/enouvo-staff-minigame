@@ -5,10 +5,6 @@ export interface AppState {
   authState: auth.State;
 }
 
-export interface AppState {
-  authState: auth.State;
-}
-
 export const reducersLogin = {
   auth: auth.reducer
 };

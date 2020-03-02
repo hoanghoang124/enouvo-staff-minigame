@@ -1,11 +1,10 @@
-import { AuthGuardService } from "../../Auth/Services/auth-guard.service";
+import { AuthService } from "../../Auth/Services/auth.service";
+import { selectAuthState, AppState } from "./../../Auth/Store/app.state";
 import { Component, OnInit } from "@angular/core";
 import { User } from "src/app/Auth/Models/user";
-import { UserService } from "src/app/Auth/Services/user.service";
-
-import { first } from "rxjs/operators";
-import { PageEvent } from "@angular/material";
 import { StaffService } from "../Services/staff.service";
+import { Observable } from "rxjs";
+import { Store } from "@ngrx/store";
 
 export interface Tile {
   color: string;
@@ -20,6 +19,11 @@ export interface Tile {
   styleUrls: ["./user-site.component.css"]
 })
 export class UserSiteComponent implements OnInit {
+  getState: Observable<any>;
+  isAuthenticated: false;
+  user = null;
+  errorMessage = null;
+
   currentUser: User;
   userFromApi: User;
   staffs: any[] = [
@@ -87,48 +91,28 @@ export class UserSiteComponent implements OnInit {
 
   constructor(
     private staffService: StaffService,
-    private userService: UserService,
-    private authGuardService: AuthGuardService
+    private authService: AuthService,
+    private store: Store<AppState>
   ) {
-    this.currentUser = this.authGuardService.currentUserValue;
+    // this.currentUser = this.authGuardService.currentUserValue;
+    this.getState = this.store.select(selectAuthState);
   }
 
   ngOnInit() {
-    this.userService
-      .getById(this.currentUser.id)
-      .pipe(first())
-      .subscribe(user => {
-        this.userFromApi = user;
-      });
-    //   this.data.data = source;
-    //   this.data.paginator = this.paginator;
-    //   this.data.sort = this.sort;
-    // }
+    this.authService;
+    // .getById(this.currentUser.id)
+    // .pipe(first())
+    // .subscribe(user => {
+    //   this.userFromApi = user;
+    // });
+    // this.data.data = source;
+    // this.data.paginator = this.paginator;
+    // this.data.sort = this.sort;
+
+    this.getState.subscribe(state => {
+      this.isAuthenticated = state.isAuthenticated;
+      this.user = state.user;
+      this.errorMessage = state.errorMessage;
+    });
   }
-}
-export class PaginatorConfigurableExample {
-  // MatPaginator Inputs
-  length = 100;
-  pageSize = 10;
-  pageSizeOptions: number[] = [5, 10, 25, 100];
-
-  // MatPaginator Output
-  pageEvent: PageEvent;
-
-  setPageSizeOptions(setPageSizeOptionsInput: string) {
-    if (setPageSizeOptionsInput) {
-      this.pageSizeOptions = setPageSizeOptionsInput
-        .split(",")
-        .map(str => +str);
-    }
-  }
-}
-
-export class GridListDynamicExample {
-  tiles: Tile[] = [
-    { text: "One", cols: 3, rows: 1, color: "lightblue" },
-    { text: "Two", cols: 1, rows: 2, color: "lightgreen" },
-    { text: "Three", cols: 1, rows: 1, color: "lightpink" },
-    { text: "Four", cols: 2, rows: 1, color: "#DDBDF1" }
-  ];
 }

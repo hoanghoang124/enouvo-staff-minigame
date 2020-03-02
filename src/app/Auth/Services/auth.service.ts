@@ -4,7 +4,7 @@ import { Observable } from "rxjs";
 
 import { User } from "../models/user";
 
-@Injectable()
+@Injectable({ providedIn: "root" })
 export class AuthService {
   private BASE_URL = "http://training-management-dev.herokuapp.com/api";
 
@@ -19,8 +19,13 @@ export class AuthService {
     return this.http.post<User>(url, params);
   }
 
-  getStatus(): Observable<User> {
-    const url = `${this.BASE_URL}/status`;
+  getAll() {
+    const url = `${this.BASE_URL}/users`;
+    return this.http.get<User[]>(url);
+  }
+
+  getById(id: number) {
+    const url = `${this.BASE_URL}/users/${id}`;
     return this.http.get<User>(url);
   }
 }

@@ -11,7 +11,7 @@ import { UserSiteComponent } from "./Main/user-site/user-site.component";
 import { AuthGuardService as AuthGuard } from "./Auth/Services/auth-guard.service";
 
 const routes: Routes = [
-  { path: "", component: UserSiteComponent, canActivate: [AuthGuard] },
+  { path: "", component: LoginComponent, canActivate: [AuthGuard] },
   {
     path: "admin",
     component: AdminSiteComponent,
@@ -23,6 +23,7 @@ const routes: Routes = [
       { path: ":id/edit", component: StaffEditComponent }
     ]
   },
+  { path: "user", component: UserSiteComponent, canActivate: [AuthGuard] },
   { path: "login", component: LoginComponent },
   { path: "**", redirectTo: "" }
 ];
