@@ -1,6 +1,6 @@
 export interface Staff {
   id: number;
-  name: string;
-  information: string;
-  star: number;
+  title: string;
+  body: string;
+  userId: number;
 }

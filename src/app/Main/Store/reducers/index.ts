@@ -1,7 +1,7 @@
-import { RouterReducerState, routerReducer } from '@ngrx/router-store';
-
-import { StaffState, initialState, staffReducer } from './staff.reducer';
-import { ActionReducerMap } from '@ngrx/store';
+import { RouterReducerState, routerReducer } from "@ngrx/router-store";
+import * as auth from "../../../Auth/Store/reducers/auth.reducer";
+import { StaffState, initialState, staffReducer } from "./staff.reducer";
+import { ActionReducerMap } from "@ngrx/store";
 
 export interface AppState {
   router?: RouterReducerState;
@@ -9,7 +9,7 @@ export interface AppState {
 }
 
 export const initialAppState: AppState = {
-  staff: initialState,
+  staff: initialState
 };
 
 export function getInitialState(): AppState {

@@ -1,5 +1,5 @@
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 // import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
@@ -7,7 +7,7 @@ import { NgModule } from '@angular/core';
   imports: [
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
     // StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
     // !environment.production ? StoreDevtoolsModule.instrument() : [],
   ]
