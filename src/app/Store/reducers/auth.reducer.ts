@@ -1,10 +1,9 @@
-import { Role } from "src/app/Auth/Models/role";
-import { User } from "../../../Auth/Models/user";
-import { AuthActionTypes, All } from "../actions/auth.action";
+import * as AuthActions from '../actions/auth.action';
+import { Role } from 'src/app/Auth/models/enum-type';
+
+const { AuthActionTypes } = AuthActions;
 
 export interface AuthState {
-  // user: User;
-  // error message
   role: Role;
   errorMessage: string;
 }
@@ -13,7 +12,10 @@ export const initialState: AuthState = {
   errorMessage: null
 };
 
-export function reducer(state = initialState, action: All): AuthState {
+export function reducer(
+  state = initialState,
+  action: AuthActions.AuthActions
+): AuthState {
   switch (action.type) {
     case AuthActionTypes.LOGIN_SUCCESS: {
       return {
@@ -25,7 +27,7 @@ export function reducer(state = initialState, action: All): AuthState {
     case AuthActionTypes.LOGIN_FAILURE: {
       return {
         ...state,
-        errorMessage: "Incorrect username and/or password."
+        errorMessage: 'Incorrect username and/or password.'
       };
     }
     case AuthActionTypes.LOGOUT: {

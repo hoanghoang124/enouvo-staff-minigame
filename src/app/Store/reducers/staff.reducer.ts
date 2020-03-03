@@ -11,17 +11,20 @@ export interface StaffState {
 }
 
 export const initialState: StaffState = {
-  data: [] ,
+  data: [],
   selected: null,
   action: null,
   done: false,
   error: null
 };
 
-export function staffReducer(state = initialState, action: staffActions.StaffActions): StaffState {
+export function staffReducer(
+  state = initialState,
+  action: staffActions.StaffActions
+): StaffState {
   // ...state create immutable state object
   switch (action.type) {
-      /*************************
+    /*************************
      * GET all Staffs actions
      ************************/
     case staffActions.StaffActionsType.GET_STAFFS:
@@ -48,7 +51,7 @@ export function staffReducer(state = initialState, action: staffActions.StaffAct
         error: action.payload
       };
 
-      /*************************
+    /*************************
      * GET Staff by id actions
      ************************/
     case staffActions.StaffActionsType.GET_STAFF:
@@ -74,7 +77,7 @@ export function staffReducer(state = initialState, action: staffActions.StaffAct
         error: action.payload
       };
 
-      /*************************
+    /*************************
      * CREATE Staff actions
      ************************/
     case staffActions.StaffActionsType.CREATE_STAFF:
@@ -86,22 +89,19 @@ export function staffReducer(state = initialState, action: staffActions.StaffAct
         error: null
       };
     case staffActions.StaffActionsType.CREATE_STAFF_SUCCESS: {
-        const newStaff = {
-          ...state.selected,
-          id: action.payload
-        };
-        const data = [
-          ...state.data,
-          newStaff
-        ];
-        return {
-          ...state,
-          data,
-          selected: null,
-          error: null,
-          done: true
-        };
-      }
+      const newStaff = {
+        ...state.selected,
+        id: action.payload
+      };
+      const data = [...state.data, newStaff];
+      return {
+        ...state,
+        data,
+        selected: null,
+        error: null,
+        done: true
+      };
+    }
     case staffActions.StaffActionsType.CREATE_STAFF_FAILURE:
       return {
         ...state,
@@ -110,7 +110,7 @@ export function staffReducer(state = initialState, action: staffActions.StaffAct
         error: action.payload
       };
 
-      /*************************
+    /*************************
      * UPDATE Staff actions
      ************************/
     case staffActions.StaffActionsType.UPDATE_STAFF:
@@ -122,25 +122,23 @@ export function staffReducer(state = initialState, action: staffActions.StaffAct
         error: null
       };
     case staffActions.StaffActionsType.UPDATE_STAFF_SUCCESS: {
-        const index = state
-          .data
-          .findIndex(h => h.id === state.selected.id);
-        if (index >= 0) {
-          const data = [
-            ...state.data.slice(0, index),
-            state.selected,
-            ...state.data.slice(index + 1)
-          ];
-          return {
-            ...state,
-            data,
-            done: true,
-            selected: null,
-            error: null
-          };
-        }
-        return state;
+      const index = state.data.findIndex(h => h.id === state.selected.id);
+      if (index >= 0) {
+        const data = [
+          ...state.data.slice(0, index),
+          state.selected,
+          ...state.data.slice(index + 1)
+        ];
+        return {
+          ...state,
+          data,
+          done: true,
+          selected: null,
+          error: null
+        };
       }
+      return state;
+    }
     case staffActions.StaffActionsType.UPDATE_STAFF_FAILURE:
       return {
         ...state,
@@ -149,29 +147,29 @@ export function staffReducer(state = initialState, action: staffActions.StaffAct
         error: action.payload
       };
 
-      /*************************
+    /*************************
      * DELETE Staff actions
      ************************/
     case staffActions.StaffActionsType.DELETE_STAFF: {
-        const selected = state.data.find(h => h.id === action.payload);
-        return {
-          ...state,
-          selected,
-          action: staffActions.StaffActionsType.DELETE_STAFF,
-          done: false,
-          error: null
-        };
-      }
+      const selected = state.data.find(h => h.id === action.payload);
+      return {
+        ...state,
+        selected,
+        action: staffActions.StaffActionsType.DELETE_STAFF,
+        done: false,
+        error: null
+      };
+    }
     case staffActions.StaffActionsType.DELETE_STAFF_SUCCESS: {
-        const data = state.data.filter(h => h.id !== state.selected.id);
-        return {
-          ...state,
-          data,
-          selected: null,
-          error: null,
-          done: true
-        };
-      }
+      const data = state.data.filter(h => h.id !== state.selected.id);
+      return {
+        ...state,
+        data,
+        selected: null,
+        error: null,
+        done: true
+      };
+    }
     case staffActions.StaffActionsType.DELETE_STAFF_FAILURE:
       return {
         ...state,
@@ -179,7 +177,7 @@ export function staffReducer(state = initialState, action: staffActions.StaffAct
         done: true,
         error: action.payload
       };
-      default:
-        return state;
+    default:
+      return state;
   }
 }

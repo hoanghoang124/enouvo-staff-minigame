@@ -29,7 +29,7 @@
         </div>
         <div *ngIf="errorMessage">
           <div class="alert alert-danger" role="alert">
-            {{ errorMessage }}
+            {{ errorMessage$ | async }}
           </div>
         </div>
         <hr />

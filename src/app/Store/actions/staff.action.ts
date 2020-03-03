@@ -5,18 +5,22 @@ export enum StaffActionsType {
   GET_STAFFS = '[Staff] Get Staffs',
   GET_STAFFS_SUCCESS = '[Staff] Get Staffs Success',
   GET_STAFFS_FAILURE = '[Staff] Get Staffs Fail',
+
   GET_STAFF = '[Staff] Get Staff',
   GET_STAFF_SUCCESS = '[Staff] Get Staff Success',
   GET_STAFF_FAILURE = '[Staff] Get Staff Fail',
+
   DELETE_STAFF = '[Staff] Deletes Staff',
   DELETE_STAFF_SUCCESS = '[Staff] Deletes Staff Success',
   DELETE_STAFF_FAILURE = '[Staff] Deletes Staff Failure',
+
   CREATE_STAFF = '[Staff] Create Staff',
   CREATE_STAFF_SUCCESS = '[Staff] Creates Staff Success',
   CREATE_STAFF_FAILURE = '[Staff] Create Staff Failure',
+
   UPDATE_STAFF = '[Staff] Updates Staff',
   UPDATE_STAFF_SUCCESS = '[Staff] Updates Staff Success',
-  UPDATE_STAFF_FAILURE = '[Staff] Updates Staff Failure',
+  UPDATE_STAFF_FAILURE = '[Staff] Updates Staff Failure'
 }
 
 export class GetStaffs implements Action {
@@ -30,8 +34,7 @@ export class GetStaffsSuccess implements Action {
 
 export class GetStaffsFail implements Action {
   public readonly type = StaffActionsType.GET_STAFFS_FAILURE;
-  constructor(public payload: Error) {
-  }
+  constructor(public payload: Error) {}
 }
 
 export class GetStaff implements Action {
@@ -46,8 +49,7 @@ export class GetStaffSuccess implements Action {
 
 export class GetStaffFail implements Action {
   public readonly type = StaffActionsType.GET_STAFF_FAILURE;
-  constructor(public payload: Error) {
-  }
+  constructor(public payload: Error) {}
 }
 
 export class DeleteStaff implements Action {
@@ -57,13 +59,12 @@ export class DeleteStaff implements Action {
 
 export class DeleteStaffSuccess implements Action {
   public readonly type = StaffActionsType.DELETE_STAFF_SUCCESS;
-  constructor(public payload: Staff ) {}
+  constructor(public payload: Staff) {}
 }
 
 export class DeleteStaffFail implements Action {
   public readonly type = StaffActionsType.DELETE_STAFF_FAILURE;
-  constructor(public payload: Error) {
-  }
+  constructor(public payload: Error) {}
 }
 
 export class CreateStaff implements Action {
@@ -78,8 +79,7 @@ export class CreateStaffSuccess implements Action {
 
 export class CreateStaffFail implements Action {
   public readonly type = StaffActionsType.CREATE_STAFF_FAILURE;
-  constructor(public payload: Error) {
-  }
+  constructor(public payload: Error) {}
 }
 
 export class UpdateStaff implements Action {
@@ -93,12 +93,22 @@ export class UpdateStaffSuccess implements Action {
 
 export class UpdateStaffFail implements Action {
   public readonly type = StaffActionsType.UPDATE_STAFF_FAILURE;
-  constructor(public payload: Error) {
-  }
+  constructor(public payload: Error) {}
 }
 
-export type StaffActions =  GetStaffs | GetStaffsSuccess | GetStaffsFail |
-                            DeleteStaff | DeleteStaffSuccess | DeleteStaffFail |
-                            CreateStaff | CreateStaffSuccess | CreateStaffFail |
-                            GetStaff | GetStaffSuccess | GetStaffFail |
-                            UpdateStaff | UpdateStaffSuccess | UpdateStaffFail;
+export type StaffActions =
+  | GetStaffs
+  | GetStaffsSuccess
+  | GetStaffsFail
+  | DeleteStaff
+  | DeleteStaffSuccess
+  | DeleteStaffFail
+  | CreateStaff
+  | CreateStaffSuccess
+  | CreateStaffFail
+  | GetStaff
+  | GetStaffSuccess
+  | GetStaffFail
+  | UpdateStaff
+  | UpdateStaffSuccess
+  | UpdateStaffFail;

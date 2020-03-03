@@ -1,15 +1,10 @@
-import { Injectable } from "@angular/core";
-import { Observable, of, throwError } from "rxjs";
-import {
-  HttpClient,
-  HttpHeaders,
-  HttpErrorResponse
-} from "@angular/common/http";
-import { catchError, tap, map } from "rxjs/operators";
-import { Staff } from "../Models/staff.model";
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Staff } from '../Models/staff.model';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class StaffService {
   constructor(private http: HttpClient) {}
@@ -39,7 +34,7 @@ export class StaffService {
 }
 
 const httpOptions = {
-  headers: new HttpHeaders({ "Content-Type": "application/json" })
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 // const Url = 'http://5e55e20836450d001428865d.mockapi.io/staff';
-const Url = "https://jsonplaceholder.typicode.com/posts";
+const Url = 'https://jsonplaceholder.typicode.com/posts';

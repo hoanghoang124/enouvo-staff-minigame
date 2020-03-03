@@ -39,4 +39,4 @@ import {
     MatGridListModule
   ]
 })
-export class AngularMaterialModule { }
+export class AngularMaterialModule {}

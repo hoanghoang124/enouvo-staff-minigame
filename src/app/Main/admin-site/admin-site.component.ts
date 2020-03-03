@@ -1,33 +1,27 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
-import { DataTablesModule } from "angular-datatables";
-import { BrowserModule } from "@angular/platform-browser";
-import {
-  HttpClient,
-  HttpErrorResponse,
-  HttpHeaders
-} from "@angular/common/http";
-import "rxjs";
-import { Observable } from "rxjs";
-import { CommonModule } from "@angular/common";
-import { Store, select } from "@ngrx/store";
-import { AppState } from "src/app/Main/Store/reducers";
-import { GetStaffs } from "src/app/Main/Store/actions";
-import { getAllStaffs } from "src/app/Main/Store/selectors/staff.selector";
-import { MatPaginator, MatSort } from "@angular/material";
-import { StaffService } from "../Services/staff.service";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import 'rxjs';
+import { Observable } from 'rxjs';
+import { Store, select } from '@ngrx/store';
+// import { GetStaffs } from 'src/app/Main/Store/actions';
+// import { getAllStaffs } from 'src/app/Store/selectors/staff.selector';
+import { MatPaginator, MatSort } from '@angular/material';
+import { StaffService } from '../Services/staff.service';
+import { State } from 'src/app/Store/reducers';
+import * as fromStaff from '../../Store';
 
 @Component({
-  selector: "app-admin-site",
-  templateUrl: "./admin-site.component.html",
-  styleUrls: ["./admin-site.component.css"]
+  selector: 'app-admin-site',
+  templateUrl: './admin-site.component.html',
+  styleUrls: ['./admin-site.component.css']
 })
 export class AdminSiteComponent implements OnInit {
-  displayedColumns: string[] = ["name", "information", "star"];
+  displayedColumns: string[] = ['name', 'information', 'star'];
   data: any = [];
   stafflist$: Observable<any>;
   isLoadingResults = true;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.data.filter = filterValue.trim().toLowerCase();
@@ -43,7 +37,7 @@ export class AdminSiteComponent implements OnInit {
 
   constructor(
     private staffService: StaffService,
-    private store: Store<AppState>
+    private store: Store<State>
   ) {}
 
   ngOnInit() {
@@ -56,8 +50,8 @@ export class AdminSiteComponent implements OnInit {
     //     this.isLoadingResults = false;
     //   });
     this.getStaffs();
-    this.store.dispatch(new GetStaffs());
-    this.stafflist$ = this.store.pipe(select(getAllStaffs));
+    this.store.dispatch(new fromStaff.GetStaffs());
+    this.stafflist$ = this.store.pipe(select(fromStaff.getAllStaffs));
     // this.data.paginator = this.paginator;
     // this.data.sort = this.sort;
     // this.store

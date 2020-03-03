@@ -1,9 +1,7 @@
-import { AppRoutingModule } from "./../app-routing.module";
-import { ReactiveFormsModule, FormsModule } from "@angular/forms";
-import { NgModule } from "@angular/core";
-import { AngularMaterialModule } from "./Angular-Material/Angular-Material.module";
-import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
-// import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { NgModule } from '@angular/core';
+import { AngularMaterialModule } from './Angular-Material/Angular-Material.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [],
@@ -11,10 +9,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    AngularMaterialModule,
-    AppRoutingModule
-    // StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
-    // !environment.production ? StoreDevtoolsModule.instrument() : [],
+    AngularMaterialModule
   ]
 })
 export class SharedModule {}

@@ -1,4 +1,5 @@
-import { Role } from "./role";
+import { Role } from './enum-type';
+
 export class User {
   id: number;
   username: string;
@@ -6,5 +7,5 @@ export class User {
   firstName: string;
   lastName: string;
   role: Role;
-  token?: "token";
+  token?: 'token';
 }

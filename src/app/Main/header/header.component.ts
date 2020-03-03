@@ -1,15 +1,15 @@
-import { Component, OnInit } from "@angular/core";
-import { User } from "src/app/Auth/Models/user";
-import { Store } from "@ngrx/store";
-import { State } from "src/app/Auth/Store/reducers/app.state";
-import { LogOut } from "src/app/Auth/Store/actions/auth.action";
-import { Role } from "src/app/Auth/Models/role";
-import { Router } from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { LogOut } from 'src/app/Store/actions/auth.action';
+import { Router } from '@angular/router';
+import { State } from 'src/app/Store/reducers';
+import { User } from 'src/app/Auth/models/user';
+import { Role } from 'src/app/Auth/models/enum-type';
 
 @Component({
-  selector: "app-header",
-  templateUrl: "./header.component.html",
-  styleUrls: ["./header.component.css"]
+  selector: 'app-header',
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
   currentUser: User;
@@ -24,6 +24,6 @@ export class HeaderComponent implements OnInit {
 
   logOut(): void {
     this.store.dispatch(new LogOut());
-    this.router.navigate(["/login"]);
+    this.router.navigate(['/login']);
   }
 }
