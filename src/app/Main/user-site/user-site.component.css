@@ -1,5 +1,7 @@
 mat-grid-list {
   padding: 5%;
+  margin-left: 5%;
+  margin-right: 5%;
 }
 
 mat-grid-tile {
@@ -34,4 +36,16 @@ mat-card-footer {
 button {
    border: 0;
    background-color: aqua;
+}
+
+.scroll-to-top {
+  position: fixed;
+  bottom: 64px;
+  right: 15px;
+  opacity: 0;
+  transition: all .2s ease-in-out;
+}
+
+.show-scroll {
+  opacity: 1;
 }

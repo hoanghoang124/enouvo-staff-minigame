@@ -22,7 +22,7 @@ import { appEffect } from './Main/Store/effects';
 import { CoreModule } from './Core/core.module';
 import { SharedModule } from './Shared/shared.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -46,7 +46,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     AngularMaterialModule,
     CoreModule,
     SharedModule,
-    ReactiveFormsModule, FormsModule
+    ReactiveFormsModule, FormsModule,
+    BrowserAnimationsModule
   ],
   bootstrap: [AppComponent]
 })

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { User } from 'src/app/Auth/Models/user';
 import { UserService } from 'src/app/Auth/Services/user.service';
 import { AuthenticationService } from 'src/app/Auth/Services/authentication.service';
@@ -24,6 +24,9 @@ export class UserSiteComponent implements OnInit {
   currentUser: User;
   userFromApi: User;
   clicked = false;
+  showScroll: boolean;
+  showScrollHeight = 300;
+  hideScrollHeight = 10;
   staffs: any[] = [
     {
       id: '1',
@@ -99,6 +102,25 @@ export class UserSiteComponent implements OnInit {
     this.clicked = !this.clicked;
   }
 
+  scrollToTop() {
+      (function smoothscroll() { const currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
+                                 if (currentScroll > 0) {
+          window.requestAnimationFrame(smoothscroll);
+          window.scrollTo(0, currentScroll - (currentScroll / 5));
+        }
+      })();
+    }
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    if (( window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop) > this.showScrollHeight) {
+        this.showScroll = true;
+    } else if
+    ( this.showScroll && (window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop) < this.hideScrollHeight) {
+      this.showScroll = false;
+    }
+  }
+
   ngOnInit() {
     this.clicked = false;
     this.userService
@@ -107,35 +129,5 @@ export class UserSiteComponent implements OnInit {
       .subscribe(user => {
         this.userFromApi = user;
       });
-    //   this.data.data = source;
-    //   this.data.paginator = this.paginator;
-    //   this.data.sort = this.sort;
-    // }
   }
-}
-export class PaginatorConfigurableExample {
-  // MatPaginator Inputs
-  length = 100;
-  pageSize = 10;
-  pageSizeOptions: number[] = [5, 10, 25, 100];
-
-  // MatPaginator Output
-  pageEvent: PageEvent;
-
-  setPageSizeOptions(setPageSizeOptionsInput: string) {
-    if (setPageSizeOptionsInput) {
-      this.pageSizeOptions = setPageSizeOptionsInput
-        .split(',')
-        .map(str => +str);
-    }
-  }
-}
-
-export class GridListDynamicExample {
-  tiles: Tile[] = [
-    { text: 'One', cols: 3, rows: 1, color: 'lightblue' },
-    { text: 'Two', cols: 1, rows: 2, color: 'lightgreen' },
-    { text: 'Three', cols: 1, rows: 1, color: 'lightpink' },
-    { text: 'Four', cols: 2, rows: 1, color: '#DDBDF1' }
-  ];
 }

@@ -13,13 +13,10 @@ import { AuthGuard } from './Core/Helpers/auth.guard';
 const routes: Routes = [
   { path: '', component: UserSiteComponent, canActivate: [AuthGuard] },
   { path: 'admin', component: AdminSiteComponent, canActivate: [AuthGuard],
-    data: { roles: [Role.Admin] },
-    children: [
-      { path: 'new', component: StaffAddComponent },
-      { path: ':id/detail', component: StaffDetailComponent },
-      { path: ':id/edit', component: StaffEditComponent }
-    ]
   },
+  { path: 'new', component: StaffAddComponent },
+  { path: ':id/detail', component: StaffDetailComponent },
+  { path: ':id/edit', component: StaffEditComponent },
   { path: 'login', component: LoginComponent },
   { path: '**', redirectTo: '' }
 ];

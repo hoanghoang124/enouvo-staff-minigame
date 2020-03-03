@@ -1,7 +1,5 @@
-nav {
-  background-color: #79bac1;
-  color: white;
-}
-a {
-  color: #2a7886;
+.spacer {
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
 }
