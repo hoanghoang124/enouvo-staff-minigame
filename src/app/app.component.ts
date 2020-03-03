@@ -26,14 +26,4 @@ export class AppComponent {
     this.getState = this.store.select(selectAuthState);
     this.authGuardService.currentUser.subscribe(x => (this.currentUser = x));
   }
-  // admin
-  get isAdmin() {
-    return this.currentUser && this.currentUser.role === Role.Admin;
-    console.log("admin");
-  }
-
-  logOut(): void {
-    this.store.dispatch(new LogOut());
-    this.router.navigate(["/login"]);
-  }
 }

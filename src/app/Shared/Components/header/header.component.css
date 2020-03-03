@@ -8,3 +8,21 @@ nav {
   text-align: center;
   background-color: #79bac1;
 }
+.navbar-nav {
+  width: 100%;
+  justify-content: space-between;
+}
+img {
+  padding: 0;
+}
+button {
+  border-style: none;
+  height: 45px;
+  width: 150px;
+  padding: auto;
+  margin: auto;
+}
+.navbar-brand {
+  display: flex;
+  margin: auto;
+}

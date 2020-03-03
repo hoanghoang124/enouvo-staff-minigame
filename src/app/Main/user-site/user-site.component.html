@@ -1,14 +1,19 @@
+<app-header></app-header>
 <mat-grid-list cols="3" rowHeight="3:3">
   <mat-grid-tile *ngFor="let staff of staffs">
     <mat-card>
-      <mat-card-title>{{staff.name}} || {{staff.star}}</mat-card-title>
+      <mat-card-title>{{ staff.name }} || {{ staff.star }}</mat-card-title>
       <mat-card-content>
-        <p>{{staff.information}}</p>
+        <p>{{ staff.information }}</p>
         <a>Detail</a>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-icon-button><img src="https://img.icons8.com/nolan/40/plus.png"></button>
-        <button mat-icon-button><img src="https://img.icons8.com/nolan/40/minus.png"></button>
+        <button mat-icon-button>
+          <img src="https://img.icons8.com/nolan/40/plus.png" />
+        </button>
+        <button mat-icon-button>
+          <img src="https://img.icons8.com/nolan/40/minus.png" />
+        </button>
       </mat-card-actions>
     </mat-card>
   </mat-grid-tile>
