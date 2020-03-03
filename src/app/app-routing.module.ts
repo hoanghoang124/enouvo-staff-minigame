@@ -11,12 +11,11 @@ import { UserSiteComponent } from "./Main/user-site/user-site.component";
 import { AuthGuardService as AuthGuard } from "./Auth/Services/auth-guard.service";
 
 const routes: Routes = [
-  { path: "login", component: LoginComponent },
+
   {
     path: "admin",
     component: AdminSiteComponent,
     canActivate: [AuthGuard],
-    data: { roles: [Role.Admin] },
     children: [
       { path: "new", component: StaffAddComponent },
       { path: ":id/detail", component: StaffDetailComponent },

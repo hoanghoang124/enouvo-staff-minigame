@@ -1,6 +1,6 @@
 import { AuthService } from "../../Auth/Services/auth.service";
 import { selectAuthState, AppState } from "./../../Auth/Store/app.state";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, HostListener } from "@angular/core";
 import { User } from "src/app/Auth/Models/user";
 import { StaffService } from "../Services/staff.service";
 import { Observable } from "rxjs";
@@ -23,6 +23,10 @@ export class UserSiteComponent implements OnInit {
   isAuthenticated: false;
   user = null;
   errorMessage = null;
+  clicked = false;
+  showScroll: boolean;
+  showScrollHeight = 300;
+  hideScrollHeight = 10;
 
   currentUser: User;
   userFromApi: User;
@@ -96,6 +100,29 @@ export class UserSiteComponent implements OnInit {
   ) {
     // this.currentUser = this.authGuardService.currentUserValue;
     this.getState = this.store.select(selectAuthState);
+  }
+
+  showDetail() {
+    this.clicked = !this.clicked;
+  }
+
+  scrollToTop() {
+      (function smoothscroll() { const currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
+                                 if (currentScroll > 0) {
+          window.requestAnimationFrame(smoothscroll);
+          window.scrollTo(0, currentScroll - (currentScroll / 5));
+        }
+      })();
+    }
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    if (( window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop) > this.showScrollHeight) {
+        this.showScroll = true;
+    } else if
+    ( this.showScroll && (window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop) < this.hideScrollHeight) {
+      this.showScroll = false;
+    }
   }
 
   ngOnInit() {

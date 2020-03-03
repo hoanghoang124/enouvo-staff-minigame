@@ -28,7 +28,7 @@ import { AuthEffects } from "./Auth/Store/effects/auth.effect";
 import { AuthService } from "./Auth/Services/auth.service";
 import { TokenInterceptor } from "./Auth/Services/token.service";
 import { AuthGuardService as AuthGuard } from "./Auth/Services/auth-guard.service";
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,7 +54,8 @@ import { AuthGuardService as AuthGuard } from "./Auth/Services/auth-guard.servic
     StoreModule.forRoot(reducersLogin, {}),
     StoreRouterConnectingModule.forRoot({ stateKey: "router" }),
     AngularMaterialModule,
-    SharedModule
+    SharedModule,
+    BrowserAnimationsModule
   ],
   providers: [
     AuthService,
