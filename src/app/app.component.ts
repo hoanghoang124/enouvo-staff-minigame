@@ -29,6 +29,7 @@ export class AppComponent {
   // admin
   get isAdmin() {
     return this.currentUser && this.currentUser.role === Role.Admin;
+    console.log("admin");
   }
 
   logOut(): void {
