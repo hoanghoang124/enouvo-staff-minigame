@@ -21,7 +21,7 @@ import { HeaderComponent } from './Shared/Components/header/header.component';
 import { FooterComponent } from './Shared/Components/footer/footer.component';
 
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { appReducers } from './Main/Store/reducers';
+// import { appReducers } from './Main/Store/reducers';
 import { appEffect } from './Main/Store/effects';
 import { SharedModule } from './Shared/shared.module';
 import { AuthEffects } from './Auth/Store/effects/auth.effect';
@@ -50,7 +50,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     EffectsModule.forRoot(appEffect),
     EffectsModule.forRoot([AuthEffects]),
-    StoreModule.forRoot(appReducers),
+    StoreModule.forRoot(reducers),
     StoreModule.forRoot(reducersLogin, {}),
     StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
     AngularMaterialModule,

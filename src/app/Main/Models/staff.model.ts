@@ -1,6 +1,6 @@
-export interface Staff {
+export class Staff {
   id: number;
-  title: string;
-  body: string;
-  userId: number;
+  name: string;
+  information: string;
+  star: number;
 }
