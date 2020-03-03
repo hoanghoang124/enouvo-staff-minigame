@@ -8,17 +8,35 @@ a {
   border-width: 2px;
 }
 button {
-  margin-left: 0;
-  border-style: none;
+  height: 40px;
   width: 100%;
   padding: auto;
-  background-color: #4285f4;
+  background-color: #f2efb6;
+  color: #0ea5c6;
+  font-weight: bold;
+}
+.btn {
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+.btn-submit:hover {
+  color: #f2efb6;
+  background-color: #0ea5c6;
+  border: 3px solid #f2efb6;
 }
 h2 {
-  color: #4285f4;
+  color: #f5f5f5;
   padding: 20px 0x 20px 0px;
 }
 label {
   font-size: large;
-  color: darkslategrey;
+  color: #d6e6f2;
+}
+hr {
+  color: #074684;
+}
+.col-md-9 {
+  background-color: #0ea5c6;
+  padding: 40px;
+  border-radius: 25px;
 }

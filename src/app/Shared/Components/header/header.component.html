@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand navbar-light bg-light">
+<nav class="navbar navbar-expand">
   <div class="navbar-nav">
     <a class="nav-item nav-link" routerLink="#"
       ><img
@@ -11,7 +11,7 @@
     <div class="btn-group dropleft">
       <button
         type="button"
-        class="btn btn-info dropdown-toggle"
+        class="btn dropdown-toggle"
         data-toggle="dropdown"
         aria-haspopup="true"
         aria-expanded="false"
@@ -20,9 +20,9 @@
       </button>
       <div class="dropdown-menu">
         <a class="dropdown-item" href="#">Your stars</a>
-        <!-- <a class="nav-item nav-link" routerLink="/admin" *ngIf="isAdmin"
+        <a class="nav-item nav-link" routerLink="/admin" *ngIf="isAdmin"
           >Admin</a
-        > -->
+        >
         <a class="dropdown-item" (click)="logOut()">Logout</a>
       </div>
     </div>

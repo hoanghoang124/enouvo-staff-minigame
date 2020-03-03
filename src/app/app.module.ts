@@ -19,7 +19,7 @@ import { LoginComponent } from "./Auth/login/login.component";
 import { AdminSiteComponent } from "./Main/admin-site/admin-site.component";
 import { HeaderComponent } from "./Shared/Components/header/header.component";
 import { FooterComponent } from "./Shared/Components/footer/footer.component";
-
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { appReducers } from "./Main/Store/reducers";
 import { appEffect } from "./Main/Store/effects";
@@ -48,6 +48,7 @@ import { AuthGuardService as AuthGuard } from "./Auth/Services/auth-guard.servic
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
+    BrowserAnimationsModule,
     EffectsModule.forRoot(appEffect),
     EffectsModule.forRoot([AuthEffects]),
     StoreModule.forRoot(appReducers),

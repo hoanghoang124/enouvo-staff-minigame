@@ -1,12 +1,12 @@
 a {
   font-size: 25px;
   text-align: center;
-  color: whitesmoke;
 }
 nav {
   justify-content: center;
   text-align: center;
-  background-color: #79bac1;
+  background-color: #d6e6f2;
+  color: #303481;
 }
 .navbar-nav {
   width: 100%;
@@ -21,7 +21,20 @@ button {
   width: 150px;
   padding: auto;
   margin: auto;
+  background-color: #0ea5c6;
 }
+
+.dropdown-toggle {
+  background-color: #0ea5c6;
+  color: #d6e6f2;
+}
+
+.dropdown-toggle:hover {
+  color: #0ea5c6;
+  background-color: #d6e6f2;
+  border: 3px solid #0ea5c6;
+}
+
 .navbar-brand {
   display: flex;
   margin: auto;
