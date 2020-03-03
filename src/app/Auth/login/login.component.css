@@ -35,8 +35,16 @@ label {
 hr {
   color: #074684;
 }
-.col-md-9 {
+.row {
+  justify-content: center;
+}
+.login-form {
   background-color: #0ea5c6;
   padding: 40px;
   border-radius: 25px;
+  position: absolute;
+  top: 50%;
+
+  transform: translateY(-60%);
+  /* transform: translateX(-50%); */
 }

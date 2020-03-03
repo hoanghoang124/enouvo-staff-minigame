@@ -4,8 +4,7 @@ import { FormGroup } from "@angular/forms";
 import { Observable } from "rxjs";
 import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
-import { User } from "../Models/user";
-import { AppState, selectAuthState } from "../Store/app.state";
+import { State, selectAuthState } from "../Store/reducers/app.state";
 import { LogIn } from "../Store/actions/auth.action";
 
 @Component({
@@ -14,15 +13,11 @@ import { LogIn } from "../Store/actions/auth.action";
   styleUrls: ["./login.component.css"]
 })
 export class LoginComponent implements OnInit {
-  // user: User = new User();
   getState: Observable<any>;
   errorMessage: string | null;
   loginForm: FormGroup;
 
-  constructor(
-    private store: Store<AppState>,
-    private formBuilder: FormBuilder
-  ) {
+  constructor(private store: Store<State>, private formBuilder: FormBuilder) {
     this.getState = this.store.select(selectAuthState);
   }
 
@@ -41,10 +36,6 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     }
-    // const payload = {
-    //   username: this.user.username,
-    //   password: this.user.password
-    // };
     this.store.dispatch(new LogIn(this.loginForm.value));
   }
 }

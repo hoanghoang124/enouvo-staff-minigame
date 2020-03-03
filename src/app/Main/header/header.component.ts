@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { User } from "src/app/Auth/Models/user";
 import { Store } from "@ngrx/store";
-import { AppState } from "src/app/Auth/Store/app.state";
+import { State } from "src/app/Auth/Store/reducers/app.state";
 import { LogOut } from "src/app/Auth/Store/actions/auth.action";
 import { Role } from "src/app/Auth/Models/role";
 import { Router } from "@angular/router";
@@ -13,7 +13,7 @@ import { Router } from "@angular/router";
 })
 export class HeaderComponent implements OnInit {
   currentUser: User;
-  constructor(private store: Store<AppState>, private router: Router) {}
+  constructor(private store: Store<State>, private router: Router) {}
 
   ngOnInit() {}
 

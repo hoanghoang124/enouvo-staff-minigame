@@ -19,10 +19,8 @@
         Hi, !
       </button>
       <div class="dropdown-menu">
-        <a class="dropdown-item" href="#">Your stars</a>
-        <a class="nav-item nav-link" routerLink="/admin" *ngIf="isAdmin"
-          >Admin</a
-        >
+        <a class="dropdown-item" routerLink="/user">Your stars</a>
+        <a class="nav-item nav-link" routerLink="/admin">Admin</a>
         <a class="dropdown-item" (click)="logOut()">Logout</a>
       </div>
     </div>

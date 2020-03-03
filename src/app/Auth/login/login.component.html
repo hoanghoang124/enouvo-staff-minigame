@@ -1,6 +1,6 @@
-<div class="container">
-  <div class="col-md-6 offset-md-3 mt-5" style="top:100px">
-    <div class="col-md-9">
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-7 col-sm-6 col-md-3 login-form">
       <h2>Login with your account!</h2>
       <br />
       <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
@@ -33,7 +33,7 @@
           </div>
         </div>
         <hr />
-        <button type="submit" class="btn btn-submit" routerLink="/user">
+        <button type="submit" class="btn btn-submit">
           Submit
         </button>
       </form>

@@ -1,27 +1,24 @@
+import { Role } from "src/app/Auth/Models/role";
 import { User } from "../../../Auth/Models/user";
 import { AuthActionTypes, All } from "../actions/auth.action";
 
-export interface State {
-  // is a user authenticated?
-  isAuthenticated: boolean;
-  // if authenticated, there should be a user object
-  user: User;
+export interface AuthState {
+  // user: User;
   // error message
+  role: Role;
   errorMessage: string;
 }
-export const initialState: State = {
-  isAuthenticated: false,
-  user: null,
+export const initialState: AuthState = {
+  role: null,
   errorMessage: null
 };
 
-export function reducer(state = initialState, action: All): State {
+export function reducer(state = initialState, action: All): AuthState {
   switch (action.type) {
     case AuthActionTypes.LOGIN_SUCCESS: {
       return {
         ...state,
-        isAuthenticated: true,
-        user: action.payload,
+        role: action.payload.scope,
         errorMessage: null
       };
     }

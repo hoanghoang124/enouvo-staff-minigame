@@ -35,10 +35,7 @@ export class AuthEffects {
           .logIn(payload)
           .map(user => {
             console.log(user);
-            return new LogInSuccess({
-              token: user.token,
-              username: payload.username
-            });
+            return new LogInSuccess(user);
           })
           .catch(error => {
             console.log(error);
@@ -54,11 +51,6 @@ export class AuthEffects {
       localStorage.setItem("token", user.payload.token);
       this.router.navigateByUrl("/");
     })
-  );
-
-  @Effect({ dispatch: false })
-  LogInFailure: Observable<any> = this.actions.pipe(
-    ofType(AuthActionTypes.LOGIN_FAILURE)
   );
 
   @Effect({ dispatch: false })
