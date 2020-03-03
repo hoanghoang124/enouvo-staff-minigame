@@ -13,18 +13,19 @@ import { AuthGuardService as AuthGuard } from "./Auth/Services/auth-guard.servic
 const routes: Routes = [
 
   {
-    path: "admin",
+    path: "dashboard",
     component: AdminSiteComponent,
     canActivate: [AuthGuard],
     children: [
-      { path: "new", component: StaffAddComponent },
-      { path: ":id/detail", component: StaffDetailComponent },
-      { path: ":id/edit", component: StaffEditComponent }
+
     ]
   },
-  { path: "", component: UserSiteComponent, canActivate: [AuthGuard] },
+  { path: "new", component: StaffAddComponent },
+  { path: "dashboard/:id/detail", component: StaffDetailComponent },
+  { path: "dashboard/:id/edit", component: StaffEditComponent },
+  { path: "voting", component: UserSiteComponent, canActivate: [AuthGuard] },
   { path: "login", component: LoginComponent },
-  { path: "**", redirectTo: "" }
+  // { path: "**", redirectTo: "dashboard" }
 ];
 
 @NgModule({

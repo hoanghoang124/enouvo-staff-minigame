@@ -3,10 +3,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { GetStaff } from 'src/app/Main/Store/actions';
-import { getStaff } from 'src/app/Main/Store/selectors/staff.selector';
 import { AppState } from 'src/app/Main/Store/reducers';
 import { Staff } from 'src/app/Main/Models/staff.model';
 import { StaffService } from '../Services/staff.service';
+import * as staffActions from '../Store/actions';
+import { getStaff } from '../Store/reducers/staff.reducer';
 
 @Component({
   selector: 'app-staff-detail',
@@ -23,31 +24,15 @@ export class StaffDetailComponent implements OnInit {
   staff: Observable<Staff>;
   isLoadingResults = true;
 
-  // getstaff(id) {
-  //   this.staffService.getStaff(id)
-  //     .subscribe(data => {
-  //       this.staff = data;
-  //       this.isLoadingResults = false;
-  //     });
-  // }
-
   deletestaff(id) {
-    this.isLoadingResults = true;
-    this.staffService.deleteStaff(id)
-      .subscribe(res => {
-          this.isLoadingResults = false;
-          this.router.navigate(['/admin']);
-        }, (err) => {
-          console.log(err);
-          this.isLoadingResults = false;
-        }
-      );
+    if (confirm('Are you sure do you want to delete this Game?')) {
+      this.store.dispatch(new staffActions.DeleteStaff(id));
+    }
   }
 
   ngOnInit() {
-    // this.getstaff(this.route.snapshot.params.id);
     this.route.params.subscribe(params => {
-      this.store.dispatch(new GetStaff(params.id));
+      this.store.dispatch(new GetStaff(+params.id));
     });
     this.staff = this.store.select(getStaff);
   }

@@ -31,8 +31,7 @@ const { StaffActionsType } = StaffActions;
 export class StaffEffects {
   constructor(
     private actions$: Actions,
-    private staffservice: StaffService,
-    private store: Store<AppState>
+    private staffservice: StaffService
   ) {}
 
   @Effect()

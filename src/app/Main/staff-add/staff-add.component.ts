@@ -24,7 +24,7 @@ export class StaffAddComponent implements OnInit {
     this.staffForm = this.formBuilder.group({
       name : [null, Validators.required],
       information : [null, Validators.required],
-      star : [0, Validators.required],
+      star : [null, Validators.required],
     });
   }
 

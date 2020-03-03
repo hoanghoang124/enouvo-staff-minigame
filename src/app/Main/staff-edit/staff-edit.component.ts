@@ -33,9 +33,9 @@ export class StaffEditComponent implements OnInit {
     this.staffService.getStaff(id).subscribe(data => {
       this.id = Number(data.id);
       this.staffForm.setValue({
-        name: data.name,
-        information: data.information,
-        star: data.star
+        name: data.title,
+        information: data.body,
+        star: data.userId
       });
     });
   }
@@ -46,7 +46,7 @@ export class StaffEditComponent implements OnInit {
       .subscribe(res => {
           const id = res.id;
           this.isLoadingResults = false;
-          this.router.navigate(['/admin', id]);
+          this.router.navigate(['/dashboard' + id + '/detail']);
         }, (err) => {
           console.log(err);
           this.isLoadingResults = false;
@@ -55,6 +55,6 @@ export class StaffEditComponent implements OnInit {
   }
 
   productdetails() {
-    this.router.navigate(['/admin', this.id]);
+    this.router.navigate(['/dashboard/' + this.id + '/detail']);
   }
 }
