@@ -1,5 +1,5 @@
 import * as AuthActions from '../actions/auth.action';
-import { Role } from 'src/app/Auth/models/role.model';
+import { Role } from 'src/app/Auth/Models/role.model';
 
 const { AuthActionTypes } = AuthActions;
 
