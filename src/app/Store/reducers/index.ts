@@ -15,10 +15,12 @@ export const initialAppState: State = {
   staff: fromStaff.initialState
 };
 
-export const reducers: ActionReducerMap<State> = {
+export function getInitialState(): State {
+  return initialAppState;
+}
+
+export const reducers: ActionReducerMap<State, any> = {
   router: routerReducer,
   auth: fromAuth.reducer,
   staff: fromStaff.staffReducer
 };
-
-export const selectAppState = createFeatureSelector<State>('app');

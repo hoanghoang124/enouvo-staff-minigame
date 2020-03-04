@@ -99,7 +99,6 @@ export class UserSiteComponent implements OnInit {
     private store: Store<State>
   ) {
     // this.currentUser = this.authGuardService.currentUserValue;
-    this.getState = this.store.select(fromApp.selectAuthState);
   }
 
   showDetail() {
