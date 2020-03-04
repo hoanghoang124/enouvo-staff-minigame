@@ -9,6 +9,12 @@
   <mat-card class="example-card">
     <form [formGroup]="staffForm" (ngSubmit)="onFormSubmit(staffForm.value)">
       <mat-form-field class="example-full-width">
+        <input matInput placeholder="Id" formControlName="id">
+        <mat-error>
+          <span *ngIf="!staffForm.get('id').valid && staffForm.get('id').touched">Please enter id</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
         <input matInput placeholder="Name" formControlName="name">
         <mat-error>
           <span *ngIf="!staffForm.get('name').valid && staffForm.get('name').touched">Please enter Name</span>

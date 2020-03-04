@@ -136,15 +136,6 @@ export class UserSiteComponent implements OnInit {
 
   ngOnInit() {
     this.clicked = false;
-    // .getById(this.currentUser.id)
-    // .pipe(first())
-    // .subscribe(user => {
-    //   this.userFromApi = user;
-    // });
-    // this.data.data = source;
-    // this.data.paginator = this.paginator;
-    // this.data.sort = this.sort;
-
     this.getState.subscribe(state => {
       this.isAuthenticated = state.isAuthenticated;
       this.user = state.user;

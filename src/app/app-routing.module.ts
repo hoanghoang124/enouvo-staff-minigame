@@ -9,20 +9,26 @@ import { UserSiteComponent } from "./Main/user-site/user-site.component";
 import { AuthGuardService as AuthGuard } from "./Auth/Services/auth-guard.service";
 
 export const routes: Routes = [
+  { path: "", redirectTo: "dashboard", pathMatch: "full" },
   { path: "login", component: LoginComponent },
-  {
-    path: "staffs",
-    component: UserSiteComponent,
-    canActivate: [AuthGuard],
-    children: []
-  },
-  { path: "create", component: StaffAddComponent },
-  { path: ":id/detail", component: StaffDetailComponent },
-  { path: ":id/edit", component: StaffEditComponent },
-  { path: "user", component: UserSiteComponent },
+  { path: "dashboard", component: UserSiteComponent, canActivate: [AuthGuard] },
   { path: "admin", component: AdminSiteComponent, canActivate: [AuthGuard] },
-  { path: "", redirectTo: "staffs", pathMatch: "full" },
-  { path: "**", redirectTo: "staffs", pathMatch: "full" }
+  {
+    path: "admin/create",
+    component: StaffAddComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "admin/:id/detail",
+    component: StaffDetailComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "admin/:id/edit",
+    component: StaffEditComponent,
+    canActivate: [AuthGuard]
+  }
+  // { path: '**', redirectTo: 'dashboard', pathMatch: 'full' }
 ];
 
 @NgModule({

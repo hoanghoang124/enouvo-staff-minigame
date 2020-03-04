@@ -4,7 +4,7 @@ import { Store, Action } from '@ngrx/store';
 
 import * as StaffActions from '../actions';
 import { map, catchError, switchMap } from 'rxjs/operators';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Staff } from 'src/app/Main/Models/staff.model';
 import { StaffService } from '../../Main/Services/staff.service';
 import { State } from '../reducers';
