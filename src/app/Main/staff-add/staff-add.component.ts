@@ -23,9 +23,19 @@ export class StaffAddComponent implements OnInit {
 
   ngOnInit() {
     this.staffForm = this.formBuilder.group({
-      name: [null, Validators.required],
-      information: [null, Validators.required],
-      star: [0, Validators.required]
+      id: [null, Validators.required],
+      firstName: [null, Validators.required],
+      middleName: [null, Validators.required],
+      lastName: [null, Validators.required],
+      avatar: [null, Validators.required],
+      email: [null, Validators.required],
+      quote: [null, Validators.required],
+      birthday: [null, Validators.required],
+      phone: [null, Validators.required],
+      addressStreet: [null, Validators.required],
+      addressCity: [null, Validators.required],
+      position: [null, Validators.required],
+      star: [null, Validators.required]
     });
   }
 

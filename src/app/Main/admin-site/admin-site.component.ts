@@ -41,22 +41,8 @@ export class AdminSiteComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // this.staffService.getStaffs()
-    //   .subscribe(res => {
-    //     this.data = res;
-    //     this.isLoadingResults = false;
-    //   }, err => {
-    //     console.log(err);
-    //     this.isLoadingResults = false;
-    //   });
     this.getStaffs();
     this.store.dispatch(new fromStaff.GetStaffs());
     this.stafflist$ = this.store.pipe(select(fromStaff.getAllStaffs));
-    // this.data.paginator = this.paginator;
-    // this.data.sort = this.sort;
-    // this.store
-    //   .select(getRole)
-    //   .pipe()
-    //   .subscribe(val => console.log(val));
   }
 }

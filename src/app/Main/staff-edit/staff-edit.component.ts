@@ -12,9 +12,18 @@ import { Store } from '@ngrx/store';
 })
 export class StaffEditComponent implements OnInit {
   staffForm: FormGroup;
-  id = 0;
-  name = '';
-  information = '';
+  id = null;
+  firstName = null;
+  middleName = null;
+  lastName = null;
+  avatar = null;
+  email = null;
+  quote = null;
+  birthday = null;
+  phone = null;
+  addressStreet = null;
+  addressCity = null;
+  position = null;
   star = 0;
   isLoadingResults = false;
 
@@ -29,19 +38,37 @@ export class StaffEditComponent implements OnInit {
     this.getstaff(this.route.snapshot.params.id);
     this.staffForm = this.formBuilder.group({
       id: [null, Validators.required],
-      name: [null, Validators.required],
-      information: [null, Validators.required],
+      firstName: [null, Validators.required],
+      middleName: [null, Validators.required],
+      lastName: [null, Validators.required],
+      avatar: [null, Validators.required],
+      email: [null, Validators.required],
+      quote: [null, Validators.required],
+      birthday: [null, Validators.required],
+      phone: [null, Validators.required],
+      addressStreet: [null, Validators.required],
+      addressCity: [null, Validators.required],
+      position: [null, Validators.required],
       star: [null, Validators.required]
     });
   }
 
   getstaff(id) {
     this.staffService.getStaff(id).subscribe(data => {
-      this.id = Number(data.id);
+      this.id = data.id;
       this.staffForm.setValue({
         id: data.id,
-        name: data.name,
-        information: data.information,
+        firstName: data.firstName,
+        middleName: data.middleName,
+        lastName: data.lastName,
+        avatar: data.avatar,
+        email: data.email,
+        quote: data.quote,
+        birthday: data.birthday,
+        phone: data.phone,
+        addressStreet: data.addressStreet,
+        addressCity: data.addressCity,
+        position: data.position,
         star: data.star
       });
     });

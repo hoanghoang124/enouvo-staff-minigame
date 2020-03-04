@@ -15,15 +15,74 @@
         </mat-error>
       </mat-form-field>
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Name" formControlName="name">
+        <input matInput placeholder="firstName" formControlName="firstName">
         <mat-error>
-          <span *ngIf="!staffForm.get('name').valid && staffForm.get('name').touched">Please enter Name</span>
+          <span *ngIf="!staffForm.get('firstName').valid && staffForm.get('firstName').touched">Please enter firstName</span>
         </mat-error>
       </mat-form-field>
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Information" formControlName="information">
+        <input matInput placeholder="middleName" formControlName="middleName">
         <mat-error>
-          <span *ngIf="!staffForm.get('information').valid && staffForm.get('information').touched">Please enter Information</span>
+          <span *ngIf="!staffForm.get('middleName').valid && staffForm.get('middleName').touched">Please enter middleName</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="lastName" formControlName="lastName">
+        <mat-error>
+          <span *ngIf="!staffForm.get('lastName').valid && staffForm.get('lastName').touched">Please enter lastName</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="avatar" formControlName="avatar">
+        <img
+                src=""
+                class="img-responsive"
+                style="max-width: 500px;"
+        />
+        <mat-error>
+          <span *ngIf="!staffForm.get('avatar').valid && staffForm.get('avatar').touched">Please enter avatar</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="email" formControlName="email">
+        <mat-error>
+          <span *ngIf="!staffForm.get('email').valid && staffForm.get('email').touched">Please enter email</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="quote" formControlName="quote">
+        <mat-error>
+          <span *ngIf="!staffForm.get('quote').valid && staffForm.get('quote').touched">Please enter quote</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="birthday" formControlName="birthday">
+        <mat-error>
+          <span *ngIf="!staffForm.get('birthday').valid && staffForm.get('birthday').touched">Please enter birthday</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="phone" formControlName="phone">
+        <mat-error>
+          <span *ngIf="!staffForm.get('phone').valid && staffForm.get('phone').touched">Please enter phone</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="addressStreet" formControlName="addressStreet">
+        <mat-error>
+          <span *ngIf="!staffForm.get('addressStreet').valid && staffForm.get('addressStreet').touched">Please enter addressStreet</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="addressCity" formControlName="addressCity">
+        <mat-error>
+          <span *ngIf="!staffForm.get('addressCity').valid && staffForm.get('addressCity').touched">Please enter addressCity</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="position" formControlName="position">
+        <mat-error>
+          <span *ngIf="!staffForm.get('position').valid && staffForm.get('position').touched">Please enter position</span>
         </mat-error>
       </mat-form-field>
       <mat-form-field class="example-full-width">
