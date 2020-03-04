@@ -1,15 +1,15 @@
-import { Component, OnInit } from "@angular/core";
-import { Store } from "@ngrx/store";
-import { LogOut, ResetPassword } from "src/app/Store/actions/auth.action";
-import { Router } from "@angular/router";
-import { State } from "src/app/Store/reducers";
-import { User } from "src/app/Auth/models/user";
-import { Role } from "src/app/Auth/models/enum-type";
-import * as fromAuth from "../../Store";
+import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { LogOut, ResetPassword } from 'src/app/Store/actions/auth.action';
+import { Router } from '@angular/router';
+import { State } from 'src/app/Store/reducers';
+import { User } from 'src/app/Auth/Models/user.model';
+import { Role } from 'src/app/Auth/models/role.model';
+import * as fromAuth from '../../Store';
 @Component({
-  selector: "app-header",
-  templateUrl: "./header.component.html",
-  styleUrls: ["./header.component.css"]
+  selector: 'app-header',
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
   currentUser: User;
@@ -24,17 +24,17 @@ export class HeaderComponent implements OnInit {
       .subscribe(val => {
         this.role = val;
       });
-    this.role = localStorage.getItem("role");
+    this.role = localStorage.getItem('role');
   }
 
   // admin
 
   logOut(): void {
     this.store.dispatch(new LogOut());
-    this.router.navigate(["/login"]);
+    this.router.navigate(['/login']);
   }
 
   resetPassword(): void {
-    this.router.navigate(["reset-password"]);
+    this.router.navigate(['reset-password']);
   }
 }

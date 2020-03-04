@@ -1,11 +1,11 @@
-import { Role } from "src/app/Auth/models/enum-type";
+import { Role } from "src/app/Auth/models/role.model";
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { BehaviorSubject, Observable } from "rxjs";
 
 import { Router, CanActivate } from "@angular/router";
 import { AuthService } from "./auth.service";
-import { User } from "../models/user";
+import { User } from "../Models/user.model";
 
 @Injectable()
 export class AuthGuardService implements CanActivate {

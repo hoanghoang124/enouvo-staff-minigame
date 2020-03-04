@@ -1,5 +1,5 @@
-import * as AuthActions from "../actions/auth.action";
-import { Role } from "src/app/Auth/models/enum-type";
+import * as AuthActions from '../actions/auth.action';
+import { Role } from 'src/app/Auth/models/role.model';
 
 const { AuthActionTypes } = AuthActions;
 
@@ -27,7 +27,7 @@ export function reducer(
     case AuthActionTypes.LOGIN_FAILURE: {
       return {
         ...state,
-        errorMessage: "Incorrect username and/or password."
+        errorMessage: 'Incorrect username and/or password.'
       };
     }
     case AuthActionTypes.LOGOUT: {
