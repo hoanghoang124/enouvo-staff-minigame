@@ -1,10 +1,7 @@
 import { createSelector } from '@ngrx/store';
-import { selectAppState } from '../reducers';
+import { State } from '../reducers';
 
-export const selectAuthState = createSelector(
-  selectAppState,
-  state => state.auth
-);
+const selectAuthState = (state: State) => state.auth;
 
 export const getRole = createSelector(
   selectAuthState,

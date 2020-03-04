@@ -23,7 +23,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { reducers } from './Store/reducers';
 import { appEffect } from './Store/effects';
 import { AngularMaterialModule } from './Shared/Angular-Material/Angular-Material.module';
-
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +48,14 @@ import { AngularMaterialModule } from './Shared/Angular-Material/Angular-Materia
     FormsModule,
     AngularMaterialModule,
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot(appEffect)
+    EffectsModule.forRoot(appEffect),
+    StoreDevtoolsModule.instrument({
+      // commented out by default... import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+      maxAge: 25 //  Retains last 25 states
+    }),
+    StoreRouterConnectingModule.forRoot({
+      stateKey: 'router' // name of reducer key
+    })
   ],
   providers: [
     AuthService,

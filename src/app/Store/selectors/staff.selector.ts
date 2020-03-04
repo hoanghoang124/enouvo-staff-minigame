@@ -1,20 +1,16 @@
 import * as staffActions from '../actions/staff.action';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { StaffState } from '../reducers/staff.reducer';
-import { selectAppState } from '../reducers';
+import { State } from '../reducers';
 
-export const getStaffsState = createSelector(
-  selectAppState,
-  state => state.staff
-);
+const getStaffsState = (state: State) => state.staff;
 
 export const getAllStaffs = createSelector(
   getStaffsState,
-  (state: StaffState) => state.data
+  state => state.data
 );
 export const getStaff = createSelector(
   getStaffsState,
-  (state: StaffState) => {
+  state => {
     if (
       state.action === staffActions.StaffActionsType.GET_STAFF &&
       state.done
@@ -27,21 +23,21 @@ export const getStaff = createSelector(
 );
 export const isDeleted = createSelector(
   getStaffsState,
-  (state: StaffState) =>
+  state =>
     state.action === staffActions.StaffActionsType.DELETE_STAFF &&
     state.done &&
     !state.error
 );
 export const isCreated = createSelector(
   getStaffsState,
-  (state: StaffState) =>
+  state =>
     state.action === staffActions.StaffActionsType.CREATE_STAFF &&
     state.done &&
     !state.error
 );
 export const isUpdated = createSelector(
   getStaffsState,
-  (state: StaffState) =>
+  state =>
     state.action === staffActions.StaffActionsType.UPDATE_STAFF &&
     state.done &&
     !state.error
@@ -49,7 +45,7 @@ export const isUpdated = createSelector(
 
 export const getDeleteError = createSelector(
   getStaffsState,
-  (state: StaffState) => {
+  state => {
     return state.action === staffActions.StaffActionsType.DELETE_STAFF
       ? state.error
       : null;
@@ -57,7 +53,7 @@ export const getDeleteError = createSelector(
 );
 export const getCreateError = createSelector(
   getStaffsState,
-  (state: StaffState) => {
+  state => {
     return state.action === staffActions.StaffActionsType.CREATE_STAFF
       ? state.error
       : null;
@@ -65,7 +61,7 @@ export const getCreateError = createSelector(
 );
 export const getUpdateError = createSelector(
   getStaffsState,
-  (state: StaffState) => {
+  state => {
     return state.action === staffActions.StaffActionsType.UPDATE_STAFF
       ? state.error
       : null;
@@ -73,7 +69,7 @@ export const getUpdateError = createSelector(
 );
 export const getStaffsError = createSelector(
   getStaffsState,
-  (state: StaffState) => {
+  state => {
     return state.action === staffActions.StaffActionsType.GET_STAFFS
       ? state.error
       : null;
@@ -81,7 +77,7 @@ export const getStaffsError = createSelector(
 );
 export const getStaffError = createSelector(
   getStaffsState,
-  (state: StaffState) => {
+  state => {
     return state.action === staffActions.StaffActionsType.GET_STAFF
       ? state.error
       : null;

@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { State } from 'src/app/Store/reducers';
 import { User } from 'src/app/Auth/models/user';
 import { Role } from 'src/app/Auth/models/enum-type';
-
+import * as fromAuth from '../../Store';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -15,7 +15,14 @@ export class HeaderComponent implements OnInit {
   currentUser: User;
   constructor(private store: Store<State>, private router: Router) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.store
+      .select(fromAuth.getRole)
+      .pipe()
+      .subscribe(val => {
+        console.log(val);
+      });
+  }
 
   // admin
   get isAdmin() {
