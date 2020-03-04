@@ -13,6 +13,8 @@ import * as fromAuth from '../../Store';
 })
 export class HeaderComponent implements OnInit {
   currentUser: User;
+  role: Role;
+  roles = Role;
   constructor(private store: Store<State>, private router: Router) {}
 
   ngOnInit() {
@@ -20,14 +22,12 @@ export class HeaderComponent implements OnInit {
       .select(fromAuth.getRole)
       .pipe()
       .subscribe(val => {
+        this.role = val;
         console.log(val);
       });
   }
 
   // admin
-  get isAdmin() {
-    return this.currentUser && this.currentUser.role === Role.Admin;
-  }
 
   logOut(): void {
     this.store.dispatch(new LogOut());
