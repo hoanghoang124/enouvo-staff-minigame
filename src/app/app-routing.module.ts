@@ -15,11 +15,12 @@ export const routes: Routes = [
     component: AdminSiteComponent,
     canActivate: [AuthGuard],
     children: [
-      { path: 'create', component: StaffAddComponent },
-      { path: ':id/detail', component: StaffDetailComponent },
-      { path: ':id/edit', component: StaffEditComponent }
+
     ]
   },
+  { path: 'staffs/create', component: StaffAddComponent },
+  { path: 'staffs/:id/detail', component: StaffDetailComponent },
+  { path: 'staffs/:id/edit', component: StaffEditComponent },
   { path: 'user', component: UserSiteComponent },
   { path: 'admin', component: AdminSiteComponent },
   { path: '', redirectTo: 'staffs', pathMatch: 'full' },

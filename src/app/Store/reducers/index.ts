@@ -15,10 +15,6 @@ export const initialAppState: State = {
   staff: fromStaff.initialState
 };
 
-// export function getInitialState(): State {
-//   return initialAppState;
-// }
-
 export const reducers: ActionReducerMap<State> = {
   router: routerReducer,
   auth: fromAuth.reducer,
