@@ -3,10 +3,9 @@ import { Store } from "@ngrx/store";
 import { LogOut } from "src/app/Store/actions/auth.action";
 import { Router } from "@angular/router";
 import { State } from "src/app/Store/reducers";
-import { User } from "../../Auth/Models/user";
-import { Role } from "../../Auth/Models/enum-type";
+import { User } from "src/app/Auth/models/user";
+import { Role } from "src/app/Auth/models/enum-type";
 import * as fromAuth from "../../Store";
-
 @Component({
   selector: "app-header",
   templateUrl: "./header.component.html",
