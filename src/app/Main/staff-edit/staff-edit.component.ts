@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { StaffService } from '../Services/staff.service';
+import { State } from 'src/app/Store';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-staff-edit',
@@ -26,6 +28,7 @@ export class StaffEditComponent implements OnInit {
   ngOnInit() {
     this.getstaff(this.route.snapshot.params.id);
     this.staffForm = this.formBuilder.group({
+      id: [null, Validators.required],
       name: [null, Validators.required],
       information: [null, Validators.required],
       star: [null, Validators.required]
@@ -36,6 +39,7 @@ export class StaffEditComponent implements OnInit {
     this.staffService.getStaff(id).subscribe(data => {
       this.id = Number(data.id);
       this.staffForm.setValue({
+        id: data.id,
         name: data.name,
         information: data.information,
         star: data.star
@@ -47,9 +51,8 @@ export class StaffEditComponent implements OnInit {
     this.isLoadingResults = true;
     this.staffService.updateStaff(form).subscribe(
       res => {
-        const id = res.id;
         this.isLoadingResults = false;
-        this.router.navigate(['/admin', id]);
+        this.router.navigate(['/admin']);
       },
       err => {
         console.log(err);
@@ -59,6 +62,6 @@ export class StaffEditComponent implements OnInit {
   }
 
   productdetails() {
-    this.router.navigate(['/admin', this.id]);
+    this.router.navigate(['/admin/' + this.id + '/detail']);
   }
 }

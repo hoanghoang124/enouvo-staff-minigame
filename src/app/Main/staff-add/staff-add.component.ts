@@ -35,7 +35,7 @@ export class StaffAddComponent implements OnInit {
       res => {
         const Id = res.id;
         this.isLoadingResults = false;
-        this.router.navigate(['/admin/', Id]);
+        this.router.navigate(['/admin']);
       },
       err => {
         console.log(err);

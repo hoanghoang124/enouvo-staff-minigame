@@ -23,7 +23,6 @@ export class HeaderComponent implements OnInit {
       .pipe()
       .subscribe(val => {
         this.role = val;
-        console.log(val);
       });
   }
 
