@@ -4,7 +4,7 @@ import { LogOut, ResetPassword } from 'src/app/Store/actions/auth.action';
 import { Router } from '@angular/router';
 import { State } from 'src/app/Store/reducers';
 import { User } from 'src/app/Auth/Models/user.model';
-import { Role } from 'src/app/Auth/models/role.model';
+import { Role } from 'src/app/Auth/Models/role.model';
 import * as fromAuth from '../../Store';
 @Component({
   selector: 'app-header',

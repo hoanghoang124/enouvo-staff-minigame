@@ -5,7 +5,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Router, CanActivate } from '@angular/router';
 import { AuthService } from './auth.service';
 import { User } from '../Models/user.model';
-import { Role } from '../models/role.model';
+import { Role } from '../Models/role.model';
 
 @Injectable()
 export class AuthGuardService implements CanActivate {

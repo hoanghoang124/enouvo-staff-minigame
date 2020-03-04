@@ -1,34 +1,34 @@
-import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
-import { AppRoutingModule } from "./app-routing.module";
-import { NgModule } from "@angular/core";
-import { BrowserModule } from "@angular/platform-browser";
-import { CommonModule } from "@angular/common";
-import { AppComponent } from "./app.component";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { AuthService } from "./Auth/Services/auth.service";
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AppRoutingModule } from './app-routing.module';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
+import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AuthService } from './Auth/Services/auth.service';
 import {
   TokenInterceptor,
   ErrorInterceptor
-} from "./Auth/Services/token.service";
-import { AuthGuardService as AuthGuard } from "./Auth/Services/auth-guard.service";
-import { LoginComponent } from "./Auth/login/login.component";
-import { UserSiteComponent } from "./Main/user-site/user-site.component";
-import { AdminSiteComponent } from "./Main/admin-site/admin-site.component";
-import { StaffDetailComponent } from "./Main/staff-detail/staff-detail.component";
-import { StaffAddComponent } from "./Main/staff-add/staff-add.component";
-import { StaffEditComponent } from "./Main/staff-edit/staff-edit.component";
-import { HeaderComponent } from "./Main/header/header.component";
-import { FooterComponent } from "./Main/footer/footer.component";
-import { SharedModule } from "./Shared/shared.module";
-import { ReactiveFormsModule, FormsModule } from "@angular/forms";
-import { StoreModule } from "@ngrx/store";
-import { EffectsModule } from "@ngrx/effects";
-import { reducers } from "./Store/reducers";
-import { appEffect } from "./Store/effects";
-import { AngularMaterialModule } from "./Shared/Angular-Material/Angular-Material.module";
-import { StoreRouterConnectingModule } from "@ngrx/router-store";
-import { StoreDevtoolsModule } from "@ngrx/store-devtools";
-import { ResetPasswordComponent } from "./Auth/reset-password/reset-password.component";
+} from './Auth/Services/token.service';
+import { AuthGuardService as AuthGuard } from './Auth/Services/auth-guard.service';
+import { LoginComponent } from './Auth/login/login.component';
+import { UserSiteComponent } from './Main/user-site/user-site.component';
+import { AdminSiteComponent } from './Main/admin-site/admin-site.component';
+import { StaffDetailComponent } from './Main/staff-detail/staff-detail.component';
+import { StaffAddComponent } from './Main/staff-add/staff-add.component';
+import { StaffEditComponent } from './Main/staff-edit/staff-edit.component';
+import { HeaderComponent } from './Main/header/header.component';
+import { FooterComponent } from './Main/footer/footer.component';
+import { SharedModule } from './Shared/shared.module';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { reducers } from './Store/reducers';
+import { appEffect } from './Store/effects';
+import { AngularMaterialModule } from './Shared/Angular-Material/Angular-Material.module';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { ResetPasswordComponent } from './Auth/reset-password/reset-password.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,7 +59,7 @@ import { ResetPasswordComponent } from "./Auth/reset-password/reset-password.com
       maxAge: 25 //  Retains last 25 states
     }),
     StoreRouterConnectingModule.forRoot({
-      stateKey: "router" // name of reducer key
+      stateKey: 'router' // name of reducer key
     })
   ],
   providers: [
