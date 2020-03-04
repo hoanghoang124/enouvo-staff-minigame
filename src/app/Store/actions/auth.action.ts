@@ -1,11 +1,12 @@
-import { Action } from '@ngrx/store';
+import { Action } from "@ngrx/store";
 
 export enum AuthActionTypes {
-  LOGIN = '[Auth] Login',
-  LOGIN_SUCCESS = '[Auth] Login Success',
-  LOGIN_FAILURE = '[Auth] Login Failure',
-  LOGOUT = '[Auth] Logout',
-  GET_STATUS = '[Auth] GetStatus'
+  LOGIN = "[Auth] Login",
+  LOGIN_SUCCESS = "[Auth] Login Success",
+  LOGIN_FAILURE = "[Auth] Login Failure",
+  LOGOUT = "[Auth] Logout",
+  GET_STATUS = "[Auth] GetStatus",
+  RESET_PASSWORD = "[Auth] ResetPassword"
 }
 
 export class LogIn implements Action {
@@ -31,9 +32,15 @@ export class GetStatus implements Action {
   readonly type = AuthActionTypes.GET_STATUS;
 }
 
+export class ResetPassword implements Action {
+  readonly type = AuthActionTypes.RESET_PASSWORD;
+  constructor(public payload: any) {}
+}
+
 export type AuthActions =
   | LogIn
   | LogInSuccess
   | LogInFailure
   | LogOut
-  | GetStatus;
+  | GetStatus
+  | ResetPassword;

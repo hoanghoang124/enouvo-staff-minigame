@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Role } from "src/app/Auth/models/enum-type";
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { BehaviorSubject, Observable } from "rxjs";
 
-import { Router, CanActivate } from '@angular/router';
-import { AuthService } from './auth.service';
-import { User } from '../models/user';
+import { Router, CanActivate } from "@angular/router";
+import { AuthService } from "./auth.service";
+import { User } from "../models/user";
 
 @Injectable()
 export class AuthGuardService implements CanActivate {
@@ -17,14 +18,30 @@ export class AuthGuardService implements CanActivate {
     private http: HttpClient
   ) {
     this.currentUserSubject = new BehaviorSubject<User>(
-      JSON.parse(localStorage.getItem('currentUser'))
+      JSON.parse(localStorage.getItem("currentUser"))
     );
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
   canActivate(): boolean {
     if (!this.auth.getToken()) {
-      this.router.navigateByUrl('/login');
+      this.router.navigateByUrl("/login");
+      return false;
+    }
+    return true;
+  }
+
+  isAdmin(): boolean {
+    if (this.auth.isAdmin() === Role.Admin) {
+      this.router.navigateByUrl("/");
+      return false;
+    }
+    return true;
+  }
+
+  isStaff(): boolean {
+    if (this.auth.isStaff() === Role.User) {
+      this.router.navigateByUrl("/login");
       return false;
     }
     return true;

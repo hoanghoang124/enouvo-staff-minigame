@@ -35,7 +35,7 @@ export class AuthEffects {
     tap(user => {
       localStorage.setItem("token", user.payload.token);
       localStorage.setItem("role", user.payload.scope);
-      this.router.navigateByUrl("/");
+      this.router.navigateByUrl("/dashboard");
     })
   );
 
@@ -44,6 +44,17 @@ export class AuthEffects {
     ofType(AuthActionTypes.LOGOUT),
     tap(user => {
       localStorage.removeItem("token");
+      localStorage.removeItem("role");
+    })
+  );
+
+  @Effect({ dispatch: false })
+  ResetPassword: Observable<any> = this.actions.pipe(
+    ofType(AuthActionTypes.RESET_PASSWORD),
+    tap(user => {
+      localStorage.setItem("token", user.payload.token);
+      localStorage.setItem("role", user.payload.scope);
+      this.router.navigateByUrl("/login");
     })
   );
 }

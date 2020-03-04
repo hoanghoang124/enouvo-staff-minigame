@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
-import { LogOut } from "src/app/Store/actions/auth.action";
+import { LogOut, ResetPassword } from "src/app/Store/actions/auth.action";
 import { Router } from "@angular/router";
 import { State } from "src/app/Store/reducers";
 import { User } from "src/app/Auth/models/user";
@@ -32,5 +32,9 @@ export class HeaderComponent implements OnInit {
   logOut(): void {
     this.store.dispatch(new LogOut());
     this.router.navigate(["/login"]);
+  }
+
+  resetPassword(): void {
+    this.router.navigate(["reset-password"]);
   }
 }

@@ -9,8 +9,9 @@
     /></a>
     <a class="navbar-brand">Xin chào tất cả các dân chơi!</a>
 
-    <a routerLink="/user" class="link">Your stars</a>
+    <a class="link">Your stars</a>
     <a routerLink="/admin" class="link" *ngIf="role === roles.Admin">Admin</a>
+    <a class="link" (click)="resetPassword()">Reset Password</a>
     <a class="link" (click)="logOut()">Logout</a>
   </div>
 </nav>

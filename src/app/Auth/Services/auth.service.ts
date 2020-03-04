@@ -19,6 +19,19 @@ export class AuthService {
     return this.http.post<User>(url, params);
   }
 
+  resetPassword(param): Observable<any> {
+    const url = `${this.BASE_URL}/reset-password-on-api`;
+    return this.http.post<User>(url, param);
+  }
+
+  isAdmin(): string {
+    return localStorage.getItem("role");
+  }
+
+  isStaff(): string {
+    return localStorage.getItem("role");
+  }
+
   getAll() {
     const url = `${this.BASE_URL}/users`;
     return this.http.get<User[]>(url);
