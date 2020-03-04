@@ -12,16 +12,15 @@ export const routes: Routes = [
   { path: "login", component: LoginComponent },
   {
     path: "staffs",
-    component: AdminSiteComponent,
+    component: UserSiteComponent,
     canActivate: [AuthGuard],
-    children: [
-      { path: "create", component: StaffAddComponent },
-      { path: ":id/detail", component: StaffDetailComponent },
-      { path: ":id/edit", component: StaffEditComponent }
-    ]
+    children: []
   },
+  { path: "create", component: StaffAddComponent },
+  { path: ":id/detail", component: StaffDetailComponent },
+  { path: ":id/edit", component: StaffEditComponent },
   { path: "user", component: UserSiteComponent },
-  { path: "admin", component: AdminSiteComponent },
+  { path: "admin", component: AdminSiteComponent, canActivate: [AuthGuard] },
   { path: "", redirectTo: "staffs", pathMatch: "full" },
   { path: "**", redirectTo: "staffs", pathMatch: "full" }
 ];

@@ -8,26 +8,9 @@
         alt="Enouvo Logo"
     /></a>
     <a class="navbar-brand">Xin chào tất cả các dân chơi!</a>
-    <div class="btn-group dropleft">
-      <button
-        type="button"
-        class="btn dropdown-toggle"
-        data-toggle="dropdown"
-        aria-haspopup="true"
-        aria-expanded="false"
-      >
-        Hi, !
-      </button>
-      <div class="dropdown-menu">
-        <a class="dropdown-item" routerLink="/user">Your stars</a>
-        <a
-          class="nav-item nav-link"
-          routerLink="/admin"
-          *ngIf="role === roles.Admin"
-          >Admin</a
-        >
-        <a class="dropdown-item" (click)="logOut()">Logout</a>
-      </div>
-    </div>
+
+    <a routerLink="/user" class="link">Your stars</a>
+    <a routerLink="/admin" class="link" *ngIf="role === roles.Admin">Admin</a>
+    <a class="link" (click)="logOut()">Logout</a>
   </div>
 </nav>

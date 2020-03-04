@@ -13,7 +13,7 @@ import * as fromAuth from "../../Store";
 })
 export class HeaderComponent implements OnInit {
   currentUser: User;
-  role: Role;
+  role: string;
   roles = Role;
   constructor(private store: Store<State>, private router: Router) {}
 
@@ -25,6 +25,7 @@ export class HeaderComponent implements OnInit {
         this.role = val;
         console.log(val);
       });
+    this.role = localStorage.getItem("role");
   }
 
   // admin

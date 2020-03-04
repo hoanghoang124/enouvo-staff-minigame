@@ -11,8 +11,8 @@ button {
   height: 40px;
   width: 100%;
   padding: auto;
-  background-color: #f2efb6;
-  color: #0ea5c6;
+  background-color: #938ba1;
+  color: #d7fdec;
   font-weight: bold;
 }
 .btn {
@@ -20,28 +20,28 @@ button {
   cursor: pointer;
 }
 .btn-submit:hover {
-  color: #f2efb6;
-  background-color: #0ea5c6;
-  border: 3px solid #f2efb6;
+  color: #938ba1;
+  background-color: #d7fdec;
+  border: 3px solid #938ba1;
 }
 h2 {
-  color: #f5f5f5;
+  color: #938ba1;
   padding: 20px 0x 20px 0px;
 }
 label {
   font-size: large;
-  color: #d6e6f2;
+  color: #b0c6ce;
 }
 hr {
-  color: #074684;
+  color: #b0c6ce;
 }
 .row {
   justify-content: center;
 }
 .login-form {
-  background-color: #0ea5c6;
+  background-color: #d7fdec;
   padding: 40px;
-  border-radius: 25px;
+  border-radius: 15px;
   position: absolute;
   top: 50%;
 
