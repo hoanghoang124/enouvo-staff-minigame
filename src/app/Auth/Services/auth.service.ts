@@ -7,7 +7,7 @@ import { User } from '../Models/user.model';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private BASE_URL = 'http://training-management-dev.herokuapp.com/api';
+  private BASE_URL = 'https://training-management-dev.herokuapp.com/api';
 
   constructor(private http: HttpClient) {}
 

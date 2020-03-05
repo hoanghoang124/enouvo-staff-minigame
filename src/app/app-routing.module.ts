@@ -8,6 +8,7 @@ import { AdminSiteComponent } from './Main/admin-site/admin-site.component';
 import { UserSiteComponent } from './Main/user-site/user-site.component';
 import { AuthGuardService as AuthGuard } from './Auth/Services/auth-guard.service';
 import { ResetPasswordComponent } from './Auth/reset-password/reset-password.component';
+import { ErrorPageComponent } from './Main/error-page/error-page.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -37,9 +38,9 @@ export const routes: Routes = [
     path: 'admin/:id/edit',
     component: StaffEditComponent,
     canActivate: [AuthGuard]
-  }
-
-  // { path: '**', redirectTo: 'dashboard', pathMatch: 'full' }
+  },
+  { path: 'error-page', component: ErrorPageComponent },
+  { path: '**', redirectTo: 'error-page', pathMatch: 'full' }
 ];
 
 @NgModule({

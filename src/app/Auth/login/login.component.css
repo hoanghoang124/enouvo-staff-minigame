@@ -47,3 +47,8 @@ hr {
 
   transform: translateY(-60%);
 }
+span {
+  color: #f0544f;
+  font-style: initial;
+  padding: 5px;
+}

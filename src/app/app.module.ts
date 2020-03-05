@@ -29,6 +29,7 @@ import { AngularMaterialModule } from './Shared/Angular-Material/Angular-Materia
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { ResetPasswordComponent } from './Auth/reset-password/reset-password.component';
+import { ErrorPageComponent } from './Main/error-page/error-page.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +41,8 @@ import { ResetPasswordComponent } from './Auth/reset-password/reset-password.com
     StaffEditComponent,
     HeaderComponent,
     FooterComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    ErrorPageComponent
   ],
   imports: [
     BrowserModule,

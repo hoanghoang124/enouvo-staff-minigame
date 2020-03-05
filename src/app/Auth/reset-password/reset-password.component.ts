@@ -35,4 +35,7 @@ export class ResetPasswordComponent implements OnInit {
       new fromAuth.ResetPassword(this.resetPasswordForm.value)
     );
   }
+  back(): void {
+    this.router.navigate(['/login']);
+  }
 }
