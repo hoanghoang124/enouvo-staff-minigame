@@ -30,11 +30,11 @@ export class UserSiteComponent implements OnInit {
   hideScrollHeight = 10;
   currentUser: any;
   userFromApi: any;
-  staffs: any;
+  staffs: any = [];
   stafflist$: Observable<any>;
+
   constructor(
     private staffService: StaffService,
-
     private authService: AuthService,
     private store: Store<State>
   ) {}
@@ -74,10 +74,13 @@ export class UserSiteComponent implements OnInit {
 
   ngOnInit() {
     this.clicked = false;
-    this.getState.subscribe(state => {
-      this.isAuthenticated = state.isAuthenticated;
-      this.user = state.user;
-      this.errorMessage = state.errorMessage;
+    // this.getState.subscribe(state => {
+    //   this.isAuthenticated = state.isAuthenticated;
+    //   this.user = state.user;
+    //   this.errorMessage = state.errorMessage;
+    // });
+    this.staffService.getStaffs().subscribe((staffs: {}) => {
+      this.staffs = staffs;
     });
     this.store.dispatch(new fromStaff.GetStaffs());
     this.stafflist$ = this.store.pipe(select(fromStaff.getAllStaffs));
