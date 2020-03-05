@@ -1,22 +1,23 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import 'rxjs';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 // import { GetStaffs } from 'src/app/Main/Store/actions';
 // import { getAllStaffs } from 'src/app/Store/selectors/staff.selector';
-import { MatPaginator, MatSort } from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { StaffService } from '../Services/staff.service';
 import { State } from 'src/app/Store/reducers';
 import * as fromStaff from '../../Store';
+import { Staff } from '../Models/staff.model';
 
 @Component({
   selector: 'app-admin-site',
   templateUrl: './admin-site.component.html',
   styleUrls: ['./admin-site.component.css']
 })
-export class AdminSiteComponent implements OnInit {
+export class AdminSiteComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['name', 'information', 'star'];
-  data: any = [];
+  data = new MatTableDataSource<Staff>();
   stafflist$: Observable<any>;
   isLoadingResults = true;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -28,8 +29,8 @@ export class AdminSiteComponent implements OnInit {
   }
 
   getStaffs() {
-    return this.staffService.getStaffs().subscribe((staffs: {}) => {
-      this.data = staffs;
+    return this.staffService.getStaffs().subscribe(res => {
+      this.data.data = res as Staff[];
       this.data.paginator = this.paginator;
       this.data.sort = this.sort;
     });
@@ -44,5 +45,9 @@ export class AdminSiteComponent implements OnInit {
     this.getStaffs();
     this.store.dispatch(new fromStaff.GetStaffs());
     this.stafflist$ = this.store.pipe(select(fromStaff.getAllStaffs));
+  }
+
+  ngAfterViewInit(): void {
+    this.getStaffs();
   }
 }
