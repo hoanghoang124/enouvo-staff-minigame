@@ -3,17 +3,17 @@
   <mat-grid-tile *ngFor="let staff of staffs">
     <mat-card>
       <mat-card-header>
-        <mat-card-title>{{ staff.name }}</mat-card-title>
+        <mat-card-title>{{ staff.firstName }} {{ staff.middleName }} {{ staff.lastName }}</mat-card-title>
       </mat-card-header>
       <mat-card-content>
         <img
           mat-card-lg-image
-          src="https://i.imgur.com/2qEv18M.jpg"
+          src="{{ staff.avatar }}"
           style="width: auto; height: 250px;"
         />
-        <p>{{ staff.information }}</p>
+        <p>{{ staff.quote }}</p>
         <a (click)="showDetail()">Detail</a>
-        <p *ngIf="clicked">{{ staff.information }}</p>
+        <p *ngIf="clicked">{{ staff.quote }}</p>
       </mat-card-content>
       <mat-card-footer>
         <button disabled="true" style="font-size:x-large;" class="star">
