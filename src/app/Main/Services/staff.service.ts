@@ -1,3 +1,4 @@
+import { environment } from './../../../environments/environment.prod';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -36,4 +37,4 @@ export class StaffService {
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
-const Url = 'https://5e55e20836450d001428865d.mockapi.io/staff';
+const Url = environment.staffApiUrl;

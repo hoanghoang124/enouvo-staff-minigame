@@ -13,7 +13,7 @@ import * as fromAuth from '../../Store';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  errorMessage$: Observable<string>;
+  errorMessage$: Observable<string> = null;
   loginForm: FormGroup;
   public router: Router;
 

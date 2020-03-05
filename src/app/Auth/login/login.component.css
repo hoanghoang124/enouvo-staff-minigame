@@ -34,6 +34,7 @@ label {
 }
 hr {
   color: #bacba9;
+  margin-top: 7px;
 }
 .row {
   justify-content: center;
@@ -44,11 +45,20 @@ hr {
   border-radius: 15px;
   position: absolute;
   top: 50%;
-
   transform: translateY(-60%);
 }
-span {
+span,
+#error-message {
   color: #f0544f;
   font-style: initial;
-  padding: 5px;
+}
+#error-message {
+  color: #f0544f;
+  font-style: initial;
+  padding-bottom: 25px;
+  text-align: center;
+}
+
+.error {
+  height: 12px;
 }

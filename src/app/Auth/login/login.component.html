@@ -13,17 +13,20 @@
             class="form-control"
             formControlName="username"
             placeholder="enter your username"
+            required
           />
-          <mat-error>
-            <span
-              *ngIf="
-                !loginForm.get('username').valid &&
-                loginForm.get('username').touched &&
-                loginForm.get('username').dirty
-              "
-              >Username must be required!</span
-            >
-          </mat-error>
+          <div class="error">
+            <mat-error>
+              <span
+                *ngIf="
+                  !loginForm.get('username').valid &&
+                  loginForm.get('username').touched &&
+                  loginForm.get('username').dirty
+                "
+                >Username must be required!</span
+              >
+            </mat-error>
+          </div>
         </div>
         <div class="form-group">
           <label for="password">Password</label>
@@ -35,25 +38,26 @@
             id="password"
             formControlName="password"
             placeholder="enter a password"
+            required
           />
-          <mat-error>
-            <span
-              *ngIf="
-                !loginForm.get('password').valid &&
-                loginForm.get('password').touched &&
-                loginForm.get('password').dirty
-              "
-              >Password must be required!</span
-            ></mat-error
-          >
-        </div>
-        <div *ngIf="errorMessage">
-          <div class="alert alert-danger">
-            {{ errorMessage$ | async }}
+          <div class="error">
+            <mat-error>
+              <span
+                *ngIf="
+                  !loginForm.get('password').valid &&
+                  loginForm.get('password').touched &&
+                  loginForm.get('password').dirty
+                "
+                >Password must be required!</span
+              >
+            </mat-error>
           </div>
         </div>
-        <hr />
-        <button type="submit" class="btn btn-submit">
+
+        <div id="error-message" *ngIf="errorMessage$ != null">
+          {{ errorMessage$ | async }}
+        </div>
+        <button type="submit" class="btn btn-submit" id="btn-login">
           Submit
         </button>
       </form>

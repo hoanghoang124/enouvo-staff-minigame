@@ -74,7 +74,7 @@ import { ErrorPageComponent } from './Main/error-page/error-page.component';
     },
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptor,
+      useClass: ErrorInterceptor,
       multi: true
     }
   ],
