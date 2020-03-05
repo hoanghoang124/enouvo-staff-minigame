@@ -1,3 +1,4 @@
+import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../Auth/Services/auth.service';
 import { Component, OnInit, HostListener } from '@angular/core';
 import { StaffService } from '../Services/staff.service';
@@ -27,7 +28,6 @@ export class UserSiteComponent implements OnInit {
   showScroll: boolean;
   showScrollHeight = 300;
   hideScrollHeight = 10;
-
   currentUser: any;
   userFromApi: any;
   staffs: any[] = [
@@ -95,10 +95,11 @@ export class UserSiteComponent implements OnInit {
 
   constructor(
     private staffService: StaffService,
+
     private authService: AuthService,
     private store: Store<State>
   ) {
-    // this.currentUser = this.authGuardService.currentUserValue;
+    // this.currentUser = this.AuthGuardService.currentUserValue;
   }
 
   showDetail() {

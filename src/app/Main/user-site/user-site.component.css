@@ -5,17 +5,13 @@ mat-grid-list {
   width: 70%;
 }
 
-mat-grid-tile {
-  /* asdasdadas */
-}
-
 mat-card {
   width: 95%;
   height: 95%;
   padding: auto;
   margin: auto;
   box-sizing: border-box;
-  background-color: #d7fdec;
+  background-color: #efd6d2;
   display: flex;
   flex-direction: column;
   border-radius: 5px;
@@ -25,7 +21,7 @@ mat-card-header {
   display: flex;
   flex-direction: row;
   flex-shrink: 0;
-  color: #938ba1;
+  color: #594236;
 }
 
 mat-card-content {
@@ -40,8 +36,8 @@ mat-card-footer {
 }
 
 button {
-  background-color: #d7fdec;
-  color: #938ba1;
+  background-color: #efd6d2;
+  color: #594236;
   border: none;
   border-radius: 50%;
   margin-right: 10px;
@@ -58,23 +54,21 @@ button {
   right: 15px;
   opacity: 0;
   transition: all 0.2s ease-in-out;
+  border: none;
 }
 
 .show-scroll {
   opacity: 1;
+  border: none;
 }
 
 mat-card-content::-webkit-scrollbar {
   width: 1em;
 }
 
-mat-card-content::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(13, 71, 165, 0.3);
-}
-
 mat-card-content::-webkit-scrollbar-thumb {
-  background-color: #b0c6ce;
-  outline: 1px solid slategrey;
+  background-color: #9eadc8;
+  outline: 1px solid #555b6e;
 }
 
 p {

@@ -1,6 +1,6 @@
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-6 col-sm-6 col-md-3 login-form">
+  <div class="row ">
+    <div class="col-6 col-sm-6 col-md-3  login-form">
       <h2>Login with your account</h2>
       <br />
       <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
@@ -14,6 +14,16 @@
             formControlName="username"
             placeholder="enter your username"
           />
+          <mat-error>
+            <span
+              *ngIf="
+                !loginForm.get('username').valid &&
+                loginForm.get('username').touched &&
+                loginForm.get('username').dirty
+              "
+              >Username must be required!</span
+            >
+          </mat-error>
         </div>
         <div class="form-group">
           <label for="password">Password</label>
@@ -26,6 +36,16 @@
             formControlName="password"
             placeholder="enter a password"
           />
+          <mat-error>
+            <span
+              *ngIf="
+                !loginForm.get('password').valid &&
+                loginForm.get('password').touched &&
+                loginForm.get('password').dirty
+              "
+              >Password must be required!</span
+            ></mat-error
+          >
         </div>
         <div *ngIf="errorMessage">
           <div class="alert alert-danger">

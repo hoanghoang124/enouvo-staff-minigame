@@ -5,19 +5,20 @@
   margin: auto;
   margin-left: 5px;
   margin-right: 5px;
-  color: #938ba1;
+  color: #efe5dc;
   text-decoration: none;
   transition-duration: 0.4s;
 }
 .link:hover {
-  background-color: #a9fbd7;
+  background-color: #d0b8ac;
+  color: #555b6e;
   border-radius: 5px;
 }
 nav {
   justify-content: center;
   text-align: center;
-  background-color: #d7fdec;
-  color: #938ba1;
+  background-color: #555b6e;
+  color: #efe5dc;
 }
 .navbar-nav {
   width: 100%;

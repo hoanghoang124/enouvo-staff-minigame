@@ -1,17 +1,18 @@
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { getRole } from './../../Store/selectors/auth.selector';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
-import { User } from "../Models/user.model";
+import { User } from '../Models/user.model';
 
-@Injectable({ providedIn: "root" })
+@Injectable({ providedIn: 'root' })
 export class AuthService {
-  private BASE_URL = "http://training-management-dev.herokuapp.com/api";
+  private BASE_URL = 'http://training-management-dev.herokuapp.com/api';
 
   constructor(private http: HttpClient) {}
 
   getToken(): string {
-    return localStorage.getItem("token");
+    return localStorage.getItem('token');
   }
 
   logIn(params): Observable<any> {
@@ -25,11 +26,11 @@ export class AuthService {
   }
 
   isAdmin(): string {
-    return localStorage.getItem("role");
+    return localStorage.getItem('role');
   }
 
   isStaff(): string {
-    return localStorage.getItem("role");
+    return localStorage.getItem('role');
   }
 
   getAll() {
