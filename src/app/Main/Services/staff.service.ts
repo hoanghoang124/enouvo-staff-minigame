@@ -10,12 +10,12 @@ export class StaffService {
   constructor(private http: HttpClient) {}
 
   getStaffs(): Observable<any> {
-    return this.http.get<Staff>(Url);
+    return this.http.get<Staff>(Url, httpOptions);
   }
 
   getStaff(id: number): Observable<any> {
     const url = `${Url}/${id}`;
-    return this.http.get<Staff>(url);
+    return this.http.get<Staff>(url, httpOptions);
   }
 
   createStaff(staff): Observable<any> {
@@ -34,6 +34,7 @@ export class StaffService {
 }
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  mode: 'no-cors'
 };
 const Url = 'https://5e55e20836450d001428865d.mockapi.io/staff';
