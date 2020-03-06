@@ -6,7 +6,7 @@ import {
   HttpRequest,
   HttpErrorResponse
 } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
+import { Observable, throwError } from 'rxjs';
 
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
@@ -45,7 +45,7 @@ export class ErrorInterceptor implements HttpInterceptor {
           localStorage.removeItem('token');
           this.router.navigateByUrl('/login');
         }
-        return Observable.throw(response);
+        return throwError(response);
       })
     );
   }

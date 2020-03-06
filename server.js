@@ -4,7 +4,12 @@ const cors = require('cors');
 const path = require('path');
 const app = express();
 
-app.use(cors());
+var cor = {
+  origin: 'http://5e55e20836450d001428865d.mockapi.io/staff',
+  optionsSuccessStatus: 200
+}
+
+app.use(cors(cor));
 // Serve only the static files form the dist directory
 app.use(express.static(__dirname + '/dist/enouvo-staff-minigame'));
 
