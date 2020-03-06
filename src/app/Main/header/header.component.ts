@@ -41,4 +41,8 @@ export class HeaderComponent implements OnInit {
   staff(): void {
     this.router.navigate(['/dashboard']);
   }
+
+  changePassword(): void {
+    this.router.navigate(['/change-password']);
+  }
 }

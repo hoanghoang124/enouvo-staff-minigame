@@ -30,6 +30,7 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { ResetPasswordComponent } from './Auth/reset-password/reset-password.component';
 import { ErrorPageComponent } from './Main/error-page/error-page.component';
+import { ChangePasswordComponent } from './Auth/change-password/change-password.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +43,8 @@ import { ErrorPageComponent } from './Main/error-page/error-page.component';
     HeaderComponent,
     FooterComponent,
     ResetPasswordComponent,
-    ErrorPageComponent
+    ErrorPageComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,

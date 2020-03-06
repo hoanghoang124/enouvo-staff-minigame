@@ -1,3 +1,4 @@
+import { ChangePasswordComponent } from './Auth/change-password/change-password.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { StaffAddComponent } from './Main/staff-add/staff-add.component';
@@ -16,6 +17,11 @@ export const routes: Routes = [
   {
     path: 'reset-password',
     component: ResetPasswordComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'change-password',
+    component: ChangePasswordComponent,
     canActivate: [AuthGuard]
   },
   { path: 'dashboard', component: UserSiteComponent, canActivate: [AuthGuard] },

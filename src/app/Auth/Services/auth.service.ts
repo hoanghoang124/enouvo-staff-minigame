@@ -21,10 +21,14 @@ export class AuthService {
   }
 
   resetPassword(param): Observable<any> {
-    const url = `${this.BASE_URL}/reset-password-on-api`;
+    const url = `${this.BASE_URL}/v1/auth/reset-password`;
     return this.http.post<User>(url, param);
   }
 
+  changePassword(params): Observable<any> {
+    const url = `${this.BASE_URL}/v1/auth/change-password`;
+    return this.http.post<User>(url, params);
+  }
   isAdmin(): string {
     return localStorage.getItem('role');
   }

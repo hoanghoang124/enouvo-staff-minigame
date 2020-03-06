@@ -36,7 +36,7 @@ export function reducer(
     case AuthActionTypes.RESET_PASSWORD: {
       return {
         ...state,
-        role: action.payload.scope,
+        role: action.payload.id,
         errorMessage: null
       };
     }
