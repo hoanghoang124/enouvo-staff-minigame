@@ -6,7 +6,7 @@ const app = express();
 
 app.use(cors());
 // Serve only the static files form the dist directory
-// app.use(express.static(__dirname + '/dist/enouvo-staff-minigame'));
+app.use(express.static(__dirname + '/dist/enouvo-staff-minigame'));
 
 app.get('/*', function(req, res) {
   res.sendFile(path.join(__dirname + '/dist/enouvo-staff-minigame/index.html'));
