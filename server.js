@@ -5,7 +5,7 @@ const path = require('path');
 const app = express();
 
 var cor = {
-  origin: 'http://5e55e20836450d001428865d.mockapi.io/staff',
+  origin: 'https://5e55e20836450d001428865d.mockapi.io/staff',
   optionsSuccessStatus: 200
 }
 
