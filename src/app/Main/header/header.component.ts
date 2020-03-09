@@ -28,18 +28,23 @@ export class HeaderComponent implements OnInit {
   }
 
   // admin
+  admin() {
+    this.router.navigate(['/admin']);
+  }
+
+  // staff
+  staff(): void {
+    this.router.navigate(['/dashboard']);
+  }
 
   logOut(): void {
     this.store.dispatch(new LogOut());
     this.router.navigate(['/login']);
   }
 
+  // temporary to test reset password and change password component
   resetPassword(): void {
     this.router.navigate(['/reset-password']);
-  }
-
-  staff(): void {
-    this.router.navigate(['/dashboard']);
   }
 
   changePassword(): void {

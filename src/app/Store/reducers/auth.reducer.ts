@@ -27,7 +27,7 @@ export function reducer(
     case AuthActionTypes.LOGIN_FAILURE: {
       return {
         ...state,
-        errorMessage: 'Incorrect username and/or password.'
+        errorMessage: 'Invalid Credentials.'
       };
     }
     case AuthActionTypes.LOGOUT: {

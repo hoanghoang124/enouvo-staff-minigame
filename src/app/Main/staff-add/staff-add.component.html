@@ -4,11 +4,7 @@
     <div class="example-loading-shade" *ngIf="isLoadingResults">
       <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
     </div>
-    <div class="button-row">
-      <a mat-flat-button color="primary" [routerLink]="['/admin']"
-        ><mat-icon>list</mat-icon></a
-      >
-    </div>
+    <h3>Please fill in the form</h3>
     <mat-card class="example-card">
       <form [formGroup]="staffForm" (ngSubmit)="onFormSubmit(staffForm.value)">
         <mat-form-field class="example-full-width">
@@ -182,6 +178,9 @@
           >
             <mat-icon>save</mat-icon>
           </button>
+          <a mat-flat-button color="primary" [routerLink]="['/admin']">
+            <mat-icon>arrow_back</mat-icon>
+          </a>
         </div>
       </form>
     </mat-card>
