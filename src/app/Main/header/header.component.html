@@ -15,7 +15,11 @@
   </div>
 </nav> -->
 <a routerLink="/dashboard">
-  <img style="max-width: 300px;" src="https://enouvo.com/wp-content/uploads/2019/10/LOGO-EIS-1.png" alt="Enouvo Logo"/>
+  <img
+    style="max-width: 300px;"
+    src="https://enouvo.com/wp-content/uploads/2019/10/LOGO-EIS-1.png"
+    alt="Enouvo Logo"
+  />
 </a>
 <button mat-button [matMenuTriggerFor]="menu">Menu</button>
 <mat-menu #menu="matMenu">
@@ -25,4 +29,3 @@
   <a mat-menu-item (click)="changePassword()">Change Password</a>
   <a mat-menu-item (click)="logOut()">Logout</a>
 </mat-menu>
-
