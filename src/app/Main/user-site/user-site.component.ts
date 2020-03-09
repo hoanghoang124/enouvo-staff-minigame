@@ -21,7 +21,6 @@ export interface Tile {
 })
 export class UserSiteComponent implements OnInit {
   getState: Observable<any>;
-  isAuthenticated: false;
   user = null;
   errorMessage = null;
   clicked = false;

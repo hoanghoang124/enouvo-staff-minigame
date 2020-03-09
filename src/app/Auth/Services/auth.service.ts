@@ -1,9 +1,8 @@
-import { getRole } from './../../Store/selectors/auth.selector';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-
 import { User } from '../Models/user.model';
+import decode from 'jwt-decode';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -11,8 +10,16 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  getToken(): string {
-    return localStorage.getItem('token');
+  isAuthenticated(): boolean {
+    return localStorage.getItem('token') != null && !this.isTokenExpired();
+  }
+
+  isTokenExpired(): boolean {
+    return false;
+  }
+
+  decode() {
+    return decode(localStorage.getItem('token'));
   }
 
   logIn(params): Observable<any> {

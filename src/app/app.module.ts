@@ -11,6 +11,7 @@ import {
   ErrorInterceptor
 } from './Auth/Services/token.service';
 import { AuthGuardService as AuthGuard } from './Auth/Services/auth-guard.service';
+import { RoleGuardService as RoleGuard } from './Auth/Services/role-guard.service';
 import { LoginComponent } from './Auth/login/login.component';
 import { UserSiteComponent } from './Main/user-site/user-site.component';
 import { AdminSiteComponent } from './Main/admin-site/admin-site.component';
@@ -69,6 +70,7 @@ import { ChangePasswordComponent } from './Auth/change-password/change-password.
   providers: [
     AuthService,
     AuthGuard,
+    RoleGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

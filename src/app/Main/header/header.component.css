@@ -9,7 +9,7 @@
   text-decoration: none;
   transition-duration: 0.4s;
 }
-.link:hover {
+.link :hover {
   background-color: #d0b8ac;
   color: #555b6e;
   border-radius: 5px;

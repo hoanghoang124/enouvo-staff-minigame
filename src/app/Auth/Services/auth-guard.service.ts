@@ -24,30 +24,10 @@ export class AuthGuardService implements CanActivate {
   }
 
   canActivate(): boolean {
-    if (!this.auth.getToken()) {
+    if (!this.auth.isAuthenticated()) {
       this.router.navigateByUrl('/login');
       return false;
     }
     return true;
-  }
-
-  // isAdmin(): boolean {
-  //   if (this.auth.isAdmin() === Role.Admin) {
-  //     this.router.navigateByUrl('/');
-  //     return false;
-  //   }
-  //   return true;
-  // }
-
-  // isStaff(): boolean {
-  //   if (this.auth.isStaff() === Role.User) {
-  //     this.router.navigateByUrl('/login');
-  //     return false;
-  //   }
-  //   return true;
-  // }
-
-  public get currentUserValue(): User {
-    return this.currentUserSubject.value;
   }
 }

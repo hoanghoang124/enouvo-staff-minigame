@@ -20,7 +20,7 @@ export class TokenInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     this.authService = this.injector.get(AuthService);
-    const token: string = this.authService.getToken();
+    const token = this.authService.isAuthenticated();
     request = request.clone({
       setHeaders: {
         Authorization: `Bearer ${token}`,
@@ -41,7 +41,7 @@ export class ErrorInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       catchError((response: any) => {
         if (response instanceof HttpErrorResponse && response.status === 401) {
-          localStorage.removeItem('token');
+          localStorage.clear();
           this.router.navigateByUrl('/login');
         }
         return throwError(response);

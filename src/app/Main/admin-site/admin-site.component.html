@@ -23,7 +23,9 @@
       <!-- Product Name Column -->
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef>Name</th>
-        <td mat-cell *matCellDef="let row">{{ row.firstName }} {{ row.middleName }} {{ row.lastName }}</td>
+        <td mat-cell *matCellDef="let row">
+          {{ row.firstName }} {{ row.middleName }} {{ row.lastName }}
+        </td>
       </ng-container>
 
       <!-- Product Price Column -->
