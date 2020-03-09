@@ -9,13 +9,17 @@
     /></a>
     <a class="link" (click)="staff()">Your stars</a>
     <a class="link" (click)="admin()" *ngIf="role === roles.Admin">Admin</a>
-    <!-- <a class="link" (click)="resetPassword()">Reset Password</a> -->
+     <a class="link" (click)="resetPassword()">Reset Password</a> 
     <a class="link" (click)="changePassword()">Change Password</a>
     <a class="link" (click)="logOut()">Log Out</a>
   </div>
 </nav> -->
 <a routerLink="/dashboard">
-  <img style="max-width: 300px;" src="https://enouvo.com/wp-content/uploads/2019/10/LOGO-EIS-1.png" alt="Enouvo Logo"/>
+  <img
+    style="max-width: 300px;"
+    src="https://enouvo.com/wp-content/uploads/2019/10/LOGO-EIS-1.png"
+    alt="Enouvo Logo"
+  />
 </a>
 <button mat-button [matMenuTriggerFor]="menu">Menu</button>
 <mat-menu #menu="matMenu">
@@ -25,4 +29,3 @@
   <a mat-menu-item (click)="changePassword()">Change Password</a>
   <a mat-menu-item (click)="logOut()">Logout</a>
 </mat-menu>
-
