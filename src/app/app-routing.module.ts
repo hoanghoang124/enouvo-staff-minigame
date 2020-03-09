@@ -1,5 +1,5 @@
 import { ChangePasswordComponent } from './Auth/change-password/change-password.component';
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { StaffAddComponent } from './Main/staff-add/staff-add.component';
 import { StaffDetailComponent } from './Main/staff-detail/staff-detail.component';
@@ -25,6 +25,7 @@ export const routes: Routes = [
     canActivate: [AuthGuard]
   },
   { path: 'dashboard', component: UserSiteComponent, canActivate: [AuthGuard] },
+  { path: 'dashboard/:id/detail', component: StaffDetailComponent },
   {
     path: 'admin',
     component: AdminSiteComponent,
@@ -46,7 +47,7 @@ export const routes: Routes = [
     canActivate: [AuthGuard]
   },
   { path: 'error-page', component: ErrorPageComponent },
-  { path: '**', redirectTo: 'error-page', pathMatch: 'full' }
+  // { path: '**', redirectTo: 'error-page', pathMatch: 'full' }
 ];
 
 @NgModule({
