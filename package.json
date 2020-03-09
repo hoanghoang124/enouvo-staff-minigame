@@ -40,6 +40,7 @@
     "hammerjs": "^2.0.8",
     "install": "^0.13.0",
     "jquery": "^3.4.1",
+    "jwt-decode": "^2.2.0",
     "npm": "^6.14.1",
     "path": "^0.12.7",
     "please-wait": "0.0.5",

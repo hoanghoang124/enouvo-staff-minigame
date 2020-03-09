@@ -1,9 +1,8 @@
-import { getRole } from './../../Store/selectors/auth.selector';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-
 import { User } from '../Models/user.model';
+import decode from 'jwt-decode';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -11,8 +10,16 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  getToken(): string {
-    return localStorage.getItem('token');
+  isAuthenticated(): boolean {
+    return localStorage.getItem('token') != null && !this.isTokenExpired();
+  }
+
+  isTokenExpired(): boolean {
+    return false;
+  }
+
+  isAdmin(): string {
+    return localStorage.getItem('role');
   }
 
   logIn(params): Observable<any> {
@@ -28,22 +35,5 @@ export class AuthService {
   changePassword(params): Observable<any> {
     const url = `${this.BASE_URL}/v1/auth/change-password`;
     return this.http.post<User>(url, params);
-  }
-  isAdmin(): string {
-    return localStorage.getItem('role');
-  }
-
-  isStaff(): string {
-    return localStorage.getItem('role');
-  }
-
-  getAll() {
-    const url = `${this.BASE_URL}/users`;
-    return this.http.get<User[]>(url);
-  }
-
-  getById(id: number) {
-    const url = `${this.BASE_URL}/users/${id}`;
-    return this.http.get<User>(url);
   }
 }
