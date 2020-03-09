@@ -17,26 +17,22 @@ export class LoginComponent implements OnInit {
   errorMessage$: Observable<string> = null;
   loginForm: FormGroup;
   private router: Router;
-  isLoadingResults = false;
 
   constructor(private store: Store<State>, private formBuilder: FormBuilder) {}
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
-      password: ['', Validators.required]
+      password: ['', Validators.minLength(8)]
     });
 
     this.errorMessage$ = this.store.select(fromAuth.getErrorMessage);
   }
 
   onSubmit(): void {
-    this.isLoadingResults = true;
     if (this.loginForm.invalid) {
-      this.isLoadingResults = false;
       return;
     }
     this.store.dispatch(new fromAuth.LogIn(this.loginForm.value));
-    this.isLoadingResults = false;
   }
 }

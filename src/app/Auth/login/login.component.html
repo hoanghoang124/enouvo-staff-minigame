@@ -23,10 +23,11 @@
       <mat-error>
         <span
           *ngIf="
-            !loginForm.get('password').valid &&
-            loginForm.get('password').touched
+            (!loginForm.get('password').valid &&
+              loginForm.get('password').touched) ||
+            loginForm.get('password').hasError('minlength')
           "
-          >Please enter password</span
+          >Please enter password, with less than 8 characters.</span
         >
       </mat-error>
     </mat-form-field>
@@ -35,12 +36,9 @@
         {{ errorMessage$ | async }}
       </span>
     </mat-error>
-    <div class="example-loading-shade" *ngIf="isLoadingResults">
-      <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
-    </div>
     <div class="button-row">
       <button mat-raised-button color="primary" type="submit">
-        Primary
+        Login
       </button>
     </div>
   </form>

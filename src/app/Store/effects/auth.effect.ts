@@ -39,31 +39,56 @@ export class AuthEffects {
     })
   );
 
+  ChangePassword$ = this.actions.pipe(
+    ofType(AuthActionTypes.CHANGE_PASSWORD),
+    map((action: AuthActions.ChangePassword) => action.payload),
+    switchMap(payload => {
+      return this.authService.changePassword(payload).pipe(
+        map(user => {
+          return new AuthActions.ChangePasswordSuccess(user);
+        }),
+        catchError(error => of(new AuthActions.ChangePasswordFailure(error)))
+      );
+    })
+  );
+
+  @Effect({ dispatch: false })
+  ChangePasswordSuccess: Observable<any> = this.actions.pipe(
+    ofType(AuthActionTypes.CHANGE_PASSWORD_SUCCESS),
+    tap(user => {
+      localStorage.setItem('password', user.payload.password);
+      localStorage.setItem('newPassword', user.payload.newPassword);
+    })
+  );
+
+  @Effect()
+  ResetPassword$: Observable<any> = this.actions.pipe(
+    ofType(AuthActionTypes.RESET_PASSWORD),
+    map((action: AuthActions.ResetPassword) => action.payload),
+    switchMap(payload => {
+      return this.authService.changePassword(payload).pipe(
+        map(user => {
+          return new AuthActions.ResetPasswordSuccess(user);
+        }),
+        catchError(error => of(new AuthActions.ResetPasswordFailure(error)))
+      );
+    })
+  );
+
+  @Effect({ dispatch: false })
+  ResetPasswordSuccess: Observable<any> = this.actions.pipe(
+    ofType(AuthActionTypes.RESET_PASSWORD_SUCCESS),
+    tap(user => {
+      localStorage.setItem('id', user.payload.id);
+      this.router.navigateByUrl('/login');
+    })
+  );
+
   @Effect({ dispatch: false })
   public LogOut: Observable<any> = this.actions.pipe(
     ofType(AuthActionTypes.LOGOUT),
     tap(user => {
-      localStorage.removeItem('token');
-      localStorage.removeItem('role');
-    })
-  );
-
-  @Effect({ dispatch: false })
-  ResetPassword: Observable<any> = this.actions.pipe(
-    ofType(AuthActionTypes.RESET_PASSWORD),
-    tap(user => {
-      localStorage.setItem('token', user.payload.token);
-      localStorage.setItem('role', user.payload.scope);
-      this.router.navigateByUrl('/login');
-    })
-  );
-
-  @Effect({ dispatch: false })
-  ChangePassword: Observable<any> = this.actions.pipe(
-    ofType(AuthActionTypes.CHANGE_PASSWORD),
-    tap(user => {
-      localStorage.setItem('id', user.payload.id);
-      this.router.navigateByUrl('/login');
+      localStorage.clear();
     })
   );
 }

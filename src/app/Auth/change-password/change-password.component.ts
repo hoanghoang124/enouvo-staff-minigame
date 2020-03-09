@@ -15,27 +15,26 @@ import * as fromAuth from '../../Store';
 })
 export class ChangePasswordComponent implements OnInit {
   errorMessage$: Observable<string> = null;
-  changePasswordForm: FormGroup;
-  public router: Router;
+  changeForm: FormGroup;
+  private router: Router;
 
   constructor(private store: Store<State>, private formBuilder: FormBuilder) {}
 
   ngOnInit() {
-    this.changePasswordForm = this.formBuilder.group({
+    this.changeForm = this.formBuilder.group({
       password: ['', Validators.required],
-      newPassword: ['', Validators.required]
+      newPassword: ['', [Validators.required, Validators.minLength(8)]]
     });
-
     this.errorMessage$ = this.store.select(fromAuth.getErrorMessage);
   }
 
   onSubmit(): void {
-    if (this.changePasswordForm.invalid) {
+    if (this.changeForm.invalid) {
       return;
     }
-    this.store.dispatch(
-      new fromAuth.ChangePassword(this.changePasswordForm.value)
-    );
+    this.store.dispatch(new fromAuth.ChangePassword(this.changeForm.value));
+    // test submit form
+    console.log(this.changeForm.value);
     // this.router.navigate(['/login']);
   }
 }
