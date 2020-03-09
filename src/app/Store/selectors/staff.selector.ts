@@ -1,5 +1,5 @@
 import * as staffActions from '../actions/staff.action';
-import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { createSelector } from '@ngrx/store';
 import { State } from '../reducers';
 
 const getStaffsState = (state: State) => state.staff;
