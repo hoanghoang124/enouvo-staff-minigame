@@ -19,7 +19,6 @@ export class AdminSiteComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['name', 'information', 'star'];
   data = new MatTableDataSource<Staff>();
   stafflist$: Observable<any>;
-  isLoadingResults = true;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
@@ -42,7 +41,6 @@ export class AdminSiteComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit() {
-    this.getStaffs();
     this.store.dispatch(new fromStaff.GetStaffs());
     this.stafflist$ = this.store.pipe(select(fromStaff.getAllStaffs));
   }

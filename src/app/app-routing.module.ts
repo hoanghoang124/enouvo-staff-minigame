@@ -55,7 +55,7 @@ export const routes: Routes = [
     data: { expectedRole: 'admin' }
   },
   { path: 'error-page', component: ErrorPageComponent },
-  { path: '**', redirectTo: 'error-page', pathMatch: 'full' }
+  // { path: '**', redirectTo: 'error-page', pathMatch: 'full' }
 ];
 
 @NgModule({

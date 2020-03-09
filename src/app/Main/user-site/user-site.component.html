@@ -1,5 +1,5 @@
 <app-header></app-header>
-<mat-grid-list cols="3" rowHeight="3:3">
+<mat-grid-list [cols]="breakpoint" rowHeight="1:1.1" (window:resize)="onResize($event)">
   <mat-grid-tile *ngFor="let staff of staffs">
     <mat-card>
       <mat-card-header>
@@ -11,20 +11,13 @@
           src="{{ staff.avatar }}"
           style="width: auto; height: 250px;"
         />
-        <p>{{ staff.quote }}</p>
-        <a (click)="showDetail()">Detail</a>
-        <p *ngIf="clicked">{{ staff.quote }}</p>
+        <h2>{{ staff.quote }}</h2>
       </mat-card-content>
       <mat-card-footer>
-        <button disabled="true" style="font-size:x-large;" class="star">
-          {{ staff.star }}
-          <img
-            src="https://i.imgur.com/vcPrKtS.png"
-            style="width: 70px; height: auto;"
-          />
-        </button>
-        <button><img src="https://img.icons8.com/nolan/64/plus.png" /></button>
-        <button><img src="https://img.icons8.com/nolan/64/minus.png" /></button>
+        <button disabled="true" mat-icon-button>{{ staff.star }}</button>
+        <button disabled="true" mat-icon-button><mat-icon>star</mat-icon></button>
+        <button mat-icon-button color="accent"><mat-icon>add_circle</mat-icon></button>
+        <button mat-icon-button color="accent"><mat-icon>remove_circle</mat-icon></button>
       </mat-card-footer>
     </mat-card>
   </mat-grid-tile>

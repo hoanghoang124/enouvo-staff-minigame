@@ -25,9 +25,8 @@ mat-card-header {
 }
 
 mat-card-content {
-  flex-grow: 1; /** <-- Add this **/
-  overflow: auto; /** <-- Add this **/
-  /* outline: 1px solid red; */
+  flex-grow: 1;
+  overflow: auto;
   text-align: center;
 }
 

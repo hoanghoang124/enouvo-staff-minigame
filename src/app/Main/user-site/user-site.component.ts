@@ -1,11 +1,10 @@
-import { Router, ActivatedRoute } from '@angular/router';
-import { AuthService } from '../../Auth/Services/auth.service';
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, ViewChild, AfterContentInit } from '@angular/core';
 import { StaffService } from '../Services/staff.service';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import * as fromStaff from '../../Store';
 import { State } from '../../Store/reducers';
+import { MatGridList } from '@angular/material';
 
 export interface Tile {
   color: string;
@@ -31,10 +30,19 @@ export class UserSiteComponent implements OnInit {
   userFromApi: any;
   staffs: any = [];
   stafflist$: Observable<any>;
+  gridByBreakpoint = {
+    xl: 8,
+    lg: 6,
+    md: 4,
+    sm: 2,
+    xs: 1
+  };
+
+  @ViewChild(MatGridList, { static: true }) grid: MatGridList;
+  breakpoint: number;
 
   constructor(
     private staffService: StaffService,
-    private authService: AuthService,
     private store: Store<State>
   ) {}
 
@@ -71,17 +79,17 @@ export class UserSiteComponent implements OnInit {
     }
   }
 
+  onResize(event) {
+    this.breakpoint = (event.target.innerWidth <= 900) ? 2 : 3;
+  }
+
   ngOnInit() {
     this.clicked = false;
-    // this.getState.subscribe(state => {
-    //   this.isAuthenticated = state.isAuthenticated;
-    //   this.user = state.user;
-    //   this.errorMessage = state.errorMessage;
-    // });
     this.staffService.getStaffs().subscribe((staffs: {}) => {
       this.staffs = staffs;
     });
     this.store.dispatch(new fromStaff.GetStaffs());
     this.stafflist$ = this.store.pipe(select(fromStaff.getAllStaffs));
+    this.breakpoint = (window.innerWidth <= 900) ? 2 : 3;
   }
 }
