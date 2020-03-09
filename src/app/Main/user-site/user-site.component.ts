@@ -80,7 +80,7 @@ export class UserSiteComponent implements OnInit {
   }
 
   onResize(event) {
-    this.breakpoint = (event.target.innerWidth <= 900) ? 2 : 3;
+    this.breakpoint = (event.target.innerWidth >= 1330) ? 3 : ((event.target.innerWidth >= 900) ? 2 : 1);
   }
 
   ngOnInit() {
@@ -90,6 +90,6 @@ export class UserSiteComponent implements OnInit {
     });
     this.store.dispatch(new fromStaff.GetStaffs());
     this.stafflist$ = this.store.pipe(select(fromStaff.getAllStaffs));
-    this.breakpoint = (window.innerWidth <= 900) ? 2 : 3;
+    this.breakpoint = (window.innerWidth >= 1330) ? 3 : ((window.innerWidth >= 900) ? 2 : 1);
   }
 }

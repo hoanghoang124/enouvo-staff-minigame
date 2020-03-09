@@ -1,5 +1,5 @@
 <app-header></app-header>
-<mat-grid-list [cols]="breakpoint" rowHeight="1:1.1" (window:resize)="onResize($event)">
+<mat-grid-list [cols]="breakpoint" rowHeight="1:1" (window:resize)="onResize($event)">
   <mat-grid-tile *ngFor="let staff of staffs">
     <mat-card>
       <mat-card-header>
