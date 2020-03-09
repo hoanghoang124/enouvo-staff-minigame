@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { State } from 'src/app/Store/reducers';
 import * as fromAuth from '../../Store';
+
 @Component({
   selector: 'app-log-in',
   templateUrl: './login.component.html',
@@ -15,7 +16,8 @@ import * as fromAuth from '../../Store';
 export class LoginComponent implements OnInit {
   errorMessage$: Observable<string> = null;
   loginForm: FormGroup;
-  public router: Router;
+  private router: Router;
+  isLoadingResults = false;
 
   constructor(private store: Store<State>, private formBuilder: FormBuilder) {}
 
@@ -29,9 +31,12 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
+    this.isLoadingResults = true;
     if (this.loginForm.invalid) {
+      this.isLoadingResults = false;
       return;
     }
     this.store.dispatch(new fromAuth.LogIn(this.loginForm.value));
+    this.isLoadingResults = false;
   }
 }

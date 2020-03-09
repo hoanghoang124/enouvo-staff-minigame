@@ -1,65 +1,47 @@
-<div class="container-fluid">
-  <div class="row ">
-    <div class="col-8 col-sm-6 col-md-4 col-lg-4 col-xl-3 login-form">
-      <h2>Login with your account</h2>
-      <br />
-      <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
-        <div class="form-group">
-          <label for="username">Username</label>
-          <input
-            name="username"
-            id="username"
-            required
-            class="form-control"
-            formControlName="username"
-            placeholder="enter your username"
-            required
-          />
-          <div class="error">
-            <mat-error>
-              <span
-                *ngIf="
-                  !loginForm.get('username').valid &&
-                  loginForm.get('username').touched &&
-                  loginForm.get('username').dirty
-                "
-                >Username must be required!</span
-              >
-            </mat-error>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input
-            name="password"
-            type="password"
-            required
-            class="form-control"
-            id="password"
-            formControlName="password"
-            placeholder="enter a password"
-            required
-          />
-          <div class="error">
-            <mat-error>
-              <span
-                *ngIf="
-                  !loginForm.get('password').valid &&
-                  loginForm.get('password').touched &&
-                  loginForm.get('password').dirty
-                "
-                >Password must be required!</span
-              >
-            </mat-error>
-          </div>
-        </div>
-        <div id="error-message" *ngIf="errorMessage$ != null">
-          {{ errorMessage$ | async }}
-        </div>
-        <button type="submit" class="btn btn-submit" id="btn-login">
-          Submit
-        </button>
-      </form>
+<mat-card class="login-form">
+  <h2>Login with your account</h2>
+  <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Username" formControlName="username" />
+      <mat-error>
+        <span
+          *ngIf="
+            !loginForm.get('username').valid &&
+            loginForm.get('username').touched
+          "
+          >Please enter username</span
+        >
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input
+        matInput
+        placeholder="Password"
+        formControlName="password"
+        type="password"
+      />
+      <mat-error>
+        <span
+          *ngIf="
+            !loginForm.get('password').valid &&
+            loginForm.get('password').touched
+          "
+          >Please enter password</span
+        >
+      </mat-error>
+    </mat-form-field>
+    <mat-error>
+      <span id="error-message" *ngIf="errorMessage$ != null">
+        {{ errorMessage$ | async }}
+      </span>
+    </mat-error>
+    <div class="example-loading-shade" *ngIf="isLoadingResults">
+      <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
     </div>
-  </div>
-</div>
+    <div class="button-row">
+      <button mat-raised-button color="primary" type="submit">
+        Primary
+      </button>
+    </div>
+  </form>
+</mat-card>
