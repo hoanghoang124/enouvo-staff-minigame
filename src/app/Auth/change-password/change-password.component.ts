@@ -36,6 +36,6 @@ export class ChangePasswordComponent implements OnInit {
     this.store.dispatch(
       new fromAuth.ChangePassword(this.changePasswordForm.value)
     );
-    this.router.navigate(['/login']);
+    // this.router.navigate(['/login']);
   }
 }
