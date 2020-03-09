@@ -18,8 +18,8 @@ export class AuthService {
     return false;
   }
 
-  decode() {
-    return decode(localStorage.getItem('token'));
+  isAdmin(): string {
+    return localStorage.getItem('role');
   }
 
   logIn(params): Observable<any> {
@@ -35,22 +35,5 @@ export class AuthService {
   changePassword(params): Observable<any> {
     const url = `${this.BASE_URL}/v1/auth/change-password`;
     return this.http.post<User>(url, params);
-  }
-  isAdmin(): string {
-    return localStorage.getItem('role');
-  }
-
-  isStaff(): string {
-    return localStorage.getItem('role');
-  }
-
-  getAll() {
-    const url = `${this.BASE_URL}/users`;
-    return this.http.get<User[]>(url);
-  }
-
-  getById(id: number) {
-    const url = `${this.BASE_URL}/users/${id}`;
-    return this.http.get<User>(url);
   }
 }
