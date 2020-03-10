@@ -7,6 +7,9 @@
       >
     </div>
     <h3>List of employee</h3>
+    <div class="example-loading-shade" *ngIf="isLoadingResults">
+      <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+    </div>
     <mat-form-field>
       <mat-label>Search employee here</mat-label>
       <input matInput (keyup)="applyFilter($event)" placeholder="" />
@@ -20,25 +23,20 @@
       matSortDisableClear
       matSortDirection="desc"
     >
-      <!-- Product Name Column -->
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef>Name</th>
         <td mat-cell *matCellDef="let row">
           {{ row.firstName }} {{ row.middleName }} {{ row.lastName }}
         </td>
       </ng-container>
-
-      <!-- Product Price Column -->
       <ng-container matColumnDef="information">
         <th mat-header-cell *matHeaderCellDef>Information</th>
         <td mat-cell *matCellDef="let row">{{ row.position }}</td>
       </ng-container>
-
       <ng-container matColumnDef="star">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Star</th>
         <td mat-cell *matCellDef="let row">{{ row.star }}</td>
       </ng-container>
-
       <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
       <tr
         mat-row

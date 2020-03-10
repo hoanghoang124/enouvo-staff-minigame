@@ -14,9 +14,9 @@
         <mat-card-subtitle>{{ staff.quote }}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
-        <img mat-card-sm-image src="{{ staff.avatar }}" />
+        <img src="{{ staff.avatar }}" />
         <h3>Email: {{ staff.email }}</h3>
-        <h3>Birthday: {{ staff.birthday }}</h3>
+        <h3>Birthday: {{ staff.birthday | date:'longDate' }}</h3>
         <h3>Phone: {{ staff.phone }}</h3>
         <h3>Adress: {{ staff.addressStreet }}, {{ staff.addressCity }}</h3>
         <h3>Position: {{ staff.position }}</h3>

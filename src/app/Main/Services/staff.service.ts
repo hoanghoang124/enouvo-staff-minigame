@@ -36,6 +36,5 @@ export class StaffService {
 }
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-  mode: 'no-cors'
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
