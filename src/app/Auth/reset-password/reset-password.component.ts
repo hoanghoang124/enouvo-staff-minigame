@@ -17,7 +17,6 @@ import { User } from '../Models/user.model';
 export class ResetPasswordComponent implements OnInit {
   errorMessage$: Observable<string>;
   resetForm: FormGroup;
-  private router: Router;
 
   constructor(private store: Store<State>, private formBuilder: FormBuilder) {}
   id: User;

@@ -22,11 +22,7 @@ export function staffReducer(
   state = initialState,
   action: staffActions.StaffActions
 ): StaffState {
-  // ...state create immutable state object
   switch (action.type) {
-    /*************************
-     * GET all Staffs actions
-     ************************/
     case staffActions.StaffActionsType.GET_STAFFS:
       return {
         ...state,
@@ -50,10 +46,6 @@ export function staffReducer(
         selected: null,
         error: action.payload
       };
-
-    /*************************
-     * GET Staff by id actions
-     ************************/
     case staffActions.StaffActionsType.GET_STAFF:
       return {
         ...state,
@@ -76,10 +68,6 @@ export function staffReducer(
         done: true,
         error: action.payload
       };
-
-    /*************************
-     * CREATE Staff actions
-     ************************/
     case staffActions.StaffActionsType.CREATE_STAFF:
       return {
         ...state,
@@ -109,10 +97,6 @@ export function staffReducer(
         done: true,
         error: action.payload
       };
-
-    /*************************
-     * UPDATE Staff actions
-     ************************/
     case staffActions.StaffActionsType.UPDATE_STAFF:
       return {
         ...state,
@@ -146,10 +130,6 @@ export function staffReducer(
         selected: null,
         error: action.payload
       };
-
-    /*************************
-     * DELETE Staff actions
-     ************************/
     case staffActions.StaffActionsType.DELETE_STAFF: {
       const selected = state.data.find(h => h.id === action.payload);
       return {

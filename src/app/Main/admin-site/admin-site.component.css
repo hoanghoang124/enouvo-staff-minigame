@@ -20,3 +20,8 @@ h3 {
   text-align: center;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
+app-footer {
+  position: absolute;
+  overflow: hidden;
+}

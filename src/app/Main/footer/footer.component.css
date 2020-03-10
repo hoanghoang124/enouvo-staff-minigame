@@ -1,9 +1,9 @@
 nav {
+  position: fixed;
+  bottom: 0;
   background-color: #555b6e;
   color: #d0b8ac;
-  bottom: 0;
   width: 100%;
-  height: 2.5rem;
 }
 a {
   color: #efe5dc;

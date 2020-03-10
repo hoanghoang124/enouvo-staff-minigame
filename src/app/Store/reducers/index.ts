@@ -1,8 +1,7 @@
 import { RouterReducerState, routerReducer } from '@ngrx/router-store';
-import * as auth from './auth.reducer';
 import * as fromStaff from './staff.reducer';
 import * as fromAuth from './auth.reducer';
-import { ActionReducerMap, createFeatureSelector } from '@ngrx/store';
+import { ActionReducerMap } from '@ngrx/store';
 
 export interface State {
   router?: RouterReducerState;

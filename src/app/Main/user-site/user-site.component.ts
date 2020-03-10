@@ -1,10 +1,11 @@
-import { Component, OnInit, HostListener, ViewChild, AfterContentInit } from '@angular/core';
+import { Component, OnInit, HostListener, ViewChild } from '@angular/core';
 import { StaffService } from '../Services/staff.service';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import * as fromStaff from '../../Store';
 import { State } from '../../Store/reducers';
 import { MatGridList } from '@angular/material';
+import { Staff } from '../Models/staff.model';
 
 export interface Tile {
   color: string;
@@ -22,21 +23,13 @@ export class UserSiteComponent implements OnInit {
   getState: Observable<any>;
   user = null;
   errorMessage = null;
-  clicked = false;
   showScroll: boolean;
   showScrollHeight = 300;
   hideScrollHeight = 10;
   currentUser: any;
   userFromApi: any;
-  staffs: any = [];
+  staffs: any[];
   stafflist$: Observable<any>;
-  gridByBreakpoint = {
-    xl: 8,
-    lg: 6,
-    md: 4,
-    sm: 2,
-    xs: 1
-  };
 
   @ViewChild(MatGridList, { static: true }) grid: MatGridList;
   breakpoint: number;
@@ -45,10 +38,6 @@ export class UserSiteComponent implements OnInit {
     private staffService: StaffService,
     private store: Store<State>
   ) {}
-
-  showDetail() {
-    this.clicked = !this.clicked;
-  }
 
   scrollToTop() {
     (function smoothscroll() {
@@ -84,12 +73,11 @@ export class UserSiteComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.clicked = false;
-    this.staffService.getStaffs().subscribe((staffs: {}) => {
-      this.staffs = staffs;
-    });
     this.store.dispatch(new fromStaff.GetStaffs());
     this.stafflist$ = this.store.pipe(select(fromStaff.getAllStaffs));
+    this.stafflist$.subscribe(res => {
+      this.staffs = res as Staff[];
+    });
     this.breakpoint = (window.innerWidth >= 1330) ? 3 : ((window.innerWidth >= 900) ? 2 : 1);
   }
 }

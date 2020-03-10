@@ -1,4 +1,3 @@
-import { Router } from '@angular/router';
 import { Validators } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
@@ -16,7 +15,6 @@ import * as fromAuth from '../../Store';
 export class LoginComponent implements OnInit {
   errorMessage$: Observable<string> = null;
   loginForm: FormGroup;
-  private router: Router;
 
   constructor(private store: Store<State>, private formBuilder: FormBuilder) {}
 
