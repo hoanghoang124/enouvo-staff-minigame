@@ -1,0 +1,10 @@
+nav {
+  position: fixed;
+  bottom: 0;
+  background-color: #555b6e;
+  color: #d0b8ac;
+  width: 100%;
+}
+a {
+  color: #efe5dc;
+}
