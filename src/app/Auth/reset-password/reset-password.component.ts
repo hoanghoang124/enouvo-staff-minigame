@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Validators } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
@@ -15,22 +16,24 @@ import { User } from '../Models/user.model';
 })
 export class ResetPasswordComponent implements OnInit {
   errorMessage$: Observable<string>;
-  resetPasswordForm: FormGroup;
+  resetForm: FormGroup;
 
   constructor(private store: Store<State>, private formBuilder: FormBuilder) {}
   id: User;
   ngOnInit() {
-    this.resetPasswordForm = this.formBuilder.group({
+    this.resetForm = this.formBuilder.group({
       username: ['', Validators.required]
     });
-
     this.errorMessage$ = this.store.select(fromAuth.getErrorMessage);
   }
+
   onSubmit(): void {
-    if (this.resetPasswordForm.invalid) {
+    if (this.resetForm.invalid) {
       return;
     }
 
-    this.store.dispatch(new fromAuth.ResetPassword(this.resetPasswordForm.value));
+    this.store.dispatch(new fromAuth.ResetPassword(this.resetForm.value));
+    // test submit form
+    console.log(this.resetForm.value);
   }
 }

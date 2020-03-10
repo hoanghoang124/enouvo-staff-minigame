@@ -7,7 +7,11 @@ export enum AuthActionTypes {
   LOGOUT = '[Auth] Logout',
   GET_STATUS = '[Auth] GetStatus',
   RESET_PASSWORD = '[Auth] ResetPassword',
-  CHANGE_PASSWORD = '[Auth] ChangePassword'
+  RESET_PASSWORD_SUCCESS = '[Auth] ResetPasswordSuccess',
+  RESET_PASSWORD_FAILURE = '[Auth] ResetPasswordFailure',
+  CHANGE_PASSWORD = '[Auth] ChangePassword',
+  CHANGE_PASSWORD_SUCCESS = '[Auth] ChangePasswordSuccess',
+  CHANGE_PASSWORD_FAILURE = '[Auth] ChangePasswordFailure'
 }
 
 export class LogIn implements Action {
@@ -38,8 +42,25 @@ export class ResetPassword implements Action {
   constructor(public payload: any) {}
 }
 
+export class ResetPasswordSuccess implements Action {
+  readonly type = AuthActionTypes.RESET_PASSWORD_SUCCESS;
+  constructor(public payload: any) {}
+}
+export class ResetPasswordFailure implements Action {
+  readonly type = AuthActionTypes.RESET_PASSWORD_FAILURE;
+  constructor(public payload: any) {}
+}
 export class ChangePassword implements Action {
   readonly type = AuthActionTypes.CHANGE_PASSWORD;
+  constructor(public payload: any) {}
+}
+export class ChangePasswordSuccess implements Action {
+  readonly type = AuthActionTypes.CHANGE_PASSWORD_SUCCESS;
+  constructor(public payload: any) {}
+}
+
+export class ChangePasswordFailure implements Action {
+  readonly type = AuthActionTypes.CHANGE_PASSWORD_FAILURE;
   constructor(public payload: any) {}
 }
 export type AuthActions =
@@ -49,4 +70,8 @@ export type AuthActions =
   | LogOut
   | GetStatus
   | ResetPassword
-  | ChangePassword;
+  | ResetPasswordSuccess
+  | ResetPasswordFailure
+  | ChangePassword
+  | ChangePasswordSuccess
+  | ChangePasswordFailure;
