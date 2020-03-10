@@ -1,20 +1,20 @@
-import { Component, OnInit } from "@angular/core";
-import { Router, ActivatedRoute } from "@angular/router";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { first } from "rxjs/operators";
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { first } from 'rxjs/operators';
 
-import { AuthenticationService } from "../../Shared/Services/authentication.service";
+import { AuthenticationService } from '../../Shared/Services/authentication.service';
 
 @Component({
-  templateUrl: "login.component.html",
-  styleUrls: ["./login.component.css"]
+  templateUrl: 'login.component.html',
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   loading = false;
   submitted = false;
   returnUrl: string;
-  error = "";
+  error = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -24,18 +24,18 @@ export class LoginComponent implements OnInit {
   ) {
     // redirect to home if already logged in
     if (this.authenticationService.currentUserValue) {
-      this.router.navigate(["/"]); //should be navigate to admin dashboard if user is admin and to homepage if user is normal user
+      this.router.navigate(['/']); // should be navigate to admin dashboard if user is admin and to homepage if user is normal user
     }
   }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      username: ["", Validators.required],
-      password: ["", Validators.required]
+      username: ['', Validators.required],
+      password: ['', Validators.required]
     });
 
     // get return url from route parameters or default to '/'
-    this.returnUrl = this.route.snapshot.queryParams["returnUrl"] || "/";
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
   // convenience getter for easy access to form fields
