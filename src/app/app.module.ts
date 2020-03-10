@@ -60,7 +60,6 @@ import { ChangePasswordComponent } from './Auth/change-password/change-password.
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot(appEffect),
     StoreDevtoolsModule.instrument({
-      // commented out by default... import {StoreDevtoolsModule} from '@ngrx/store-devtools';
       maxAge: 25 //  Retains last 25 states
     }),
     StoreRouterConnectingModule.forRoot({

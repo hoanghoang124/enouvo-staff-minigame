@@ -1,4 +1,3 @@
-import { Router } from '@angular/router';
 import { Validators } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
@@ -16,7 +15,6 @@ import * as fromAuth from '../../Store';
 export class ChangePasswordComponent implements OnInit {
   errorMessage$: Observable<string> = null;
   changePasswordForm: FormGroup;
-  public router: Router;
 
   constructor(private store: Store<State>, private formBuilder: FormBuilder) {}
 
@@ -36,6 +34,5 @@ export class ChangePasswordComponent implements OnInit {
     this.store.dispatch(
       new fromAuth.ChangePassword(this.changePasswordForm.value)
     );
-    // this.router.navigate(['/login']);
   }
 }

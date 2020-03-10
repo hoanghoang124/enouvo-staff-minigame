@@ -6,7 +6,6 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { State } from 'src/app/Store/reducers';
 import * as fromAuth from '../../Store';
-import { Router } from '@angular/router';
 import { User } from '../Models/user.model';
 
 @Component({
@@ -17,7 +16,6 @@ import { User } from '../Models/user.model';
 export class ResetPasswordComponent implements OnInit {
   errorMessage$: Observable<string>;
   resetPasswordForm: FormGroup;
-  public router: Router;
 
   constructor(private store: Store<State>, private formBuilder: FormBuilder) {}
   id: User;
@@ -33,11 +31,6 @@ export class ResetPasswordComponent implements OnInit {
       return;
     }
 
-    this.store.dispatch(
-      new fromAuth.ResetPassword(
-        this.resetPasswordForm.value
-        // localStorage.getItem('id')
-      )
-    );
+    this.store.dispatch(new fromAuth.ResetPassword(this.resetPasswordForm.value));
   }
 }

@@ -1,14 +1,17 @@
+.grid {
+padding-top: 5%;
+padding-bottom: 5%;
+}
+
 mat-grid-list {
-  padding: 5%;
   position: relative;
   margin: auto;
-  width: 70%;
+  padding-bottom: 0 !important;
 }
 
 mat-card {
   width: 95%;
   height: 95%;
-  padding: auto;
   margin: auto;
   box-sizing: border-box;
   background-color: #efd6d2;
@@ -42,11 +45,6 @@ button {
   margin-right: 10px;
 }
 
-.star {
-  float: left;
-  margin-left: 20px;
-}
-
 .scroll-to-top {
   position: fixed;
   bottom: 64px;
@@ -61,19 +59,3 @@ button {
   border: none;
 }
 
-mat-card-content::-webkit-scrollbar {
-  width: 1em;
-}
-
-mat-card-content::-webkit-scrollbar-thumb {
-  background-color: #9eadc8;
-  outline: 1px solid #555b6e;
-}
-
-p {
-  padding: 10px;
-}
-
-a {
-  padding: 10px;
-}
