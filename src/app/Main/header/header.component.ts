@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularMaterialModule } from '../../Shared/Angular-Material/Angular-Material.module';
 import { Store } from '@ngrx/store';
 import { LogOut, ResetPassword } from 'src/app/Store/actions/auth.action';
 import { Router } from '@angular/router';

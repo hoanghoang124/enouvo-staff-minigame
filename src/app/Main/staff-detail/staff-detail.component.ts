@@ -22,14 +22,6 @@ export class StaffDetailComponent implements OnInit {
   staff: Observable<Staff>;
   isLoadingResults = true;
 
-  // getstaff(id) {
-  //   this.staffService.getStaff(id)
-  //     .subscribe(data => {
-  //       this.staff = data;
-  //       this.isLoadingResults = false;
-  //     });
-  // }
-
   deletestaff(id) {
     this.isLoadingResults = true;
     this.staffService.deleteStaff(id).subscribe(
@@ -45,7 +37,6 @@ export class StaffDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.getstaff(this.route.snapshot.params.id);
     this.route.params.subscribe(params => {
       this.store.dispatch(new fromStaff.GetStaff(params.id));
       this.isLoadingResults = false;

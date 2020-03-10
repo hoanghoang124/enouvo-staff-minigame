@@ -1,6 +1,6 @@
 import { ChangePasswordComponent } from './Auth/change-password/change-password.component';
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule, CanActivate } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 import { StaffAddComponent } from './Main/staff-add/staff-add.component';
 import { StaffDetailComponent } from './Main/staff-detail/staff-detail.component';
 import { StaffEditComponent } from './Main/staff-edit/staff-edit.component';

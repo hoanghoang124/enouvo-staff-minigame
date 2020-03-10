@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { StaffService } from '../Services/staff.service';
-import { State } from 'src/app/Store';
 import { Store } from '@ngrx/store';
+import * as fromStaff from '../../Store';
+import { State } from '../../Store';
 
 @Component({
   selector: 'app-staff-edit',
@@ -24,14 +25,15 @@ export class StaffEditComponent implements OnInit {
   addressStreet = null;
   addressCity = null;
   position = null;
-  star = 0;
+  star = null;
   isLoadingResults = false;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private staffService: StaffService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private store: Store<State>
   ) {}
 
   ngOnInit() {
@@ -42,14 +44,13 @@ export class StaffEditComponent implements OnInit {
       middleName: [null, Validators.required],
       lastName: [null, Validators.required],
       avatar: [null, Validators.required],
-      email: [null, Validators.required],
+      email: [null, [Validators.required, Validators.email]],
       quote: [null, Validators.required],
       birthday: [null, Validators.required],
       phone: [null, Validators.required],
       addressStreet: [null, Validators.required],
       addressCity: [null, Validators.required],
-      position: [null, Validators.required],
-      star: [null, Validators.required]
+      position: [null, Validators.required]
     });
   }
 
@@ -68,24 +69,15 @@ export class StaffEditComponent implements OnInit {
         phone: data.phone,
         addressStreet: data.addressStreet,
         addressCity: data.addressCity,
-        position: data.position,
-        star: data.star
+        position: data.position
       });
     });
   }
 
-  onFormSubmit(form: NgForm) {
+  onFormSubmit() {
     this.isLoadingResults = true;
-    this.staffService.updateStaff(form).subscribe(
-      res => {
-        this.isLoadingResults = false;
-        this.router.navigate(['/admin']);
-      },
-      err => {
-        console.log(err);
-        this.isLoadingResults = false;
-      }
-    );
+    this.store.dispatch(new fromStaff.UpdateStaff(this.staffForm.value));
+    this.router.navigate(['/admin/' + this.id + '/detail']);
   }
 
   productdetails() {
