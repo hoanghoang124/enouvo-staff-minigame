@@ -43,8 +43,7 @@ export class LoginComponent implements OnInit {
 
   changePWFirstTime() {
     const changePW = localStorage.getItem('shouldUserChangePassword');
-    if (changePW !== 'false') {
-      // goi mat dialog
+    if (changePW === 'true') {
       this.openDialog();
     }
     return;

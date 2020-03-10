@@ -1,3 +1,4 @@
+import { LogOut } from './../../Store/actions/auth.action';
 import { Injectable, Injector } from '@angular/core';
 import {
   HttpEvent,
@@ -13,8 +14,7 @@ import { catchError } from 'rxjs/operators';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
-  private authService: AuthService;
-  constructor(private injector: Injector) {}
+  constructor(private injector: Injector, private authService: AuthService) {}
   intercept(
     request: HttpRequest<any>,
     next: HttpHandler
@@ -33,7 +33,7 @@ export class TokenInterceptor implements HttpInterceptor {
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private authService: AuthService) {}
   intercept(
     request: HttpRequest<any>,
     next: HttpHandler
@@ -41,7 +41,6 @@ export class ErrorInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       catchError((response: any) => {
         if (response instanceof HttpErrorResponse && response.status === 401) {
-          localStorage.clear();
           this.router.navigateByUrl('/login');
         }
         return throwError(response);
