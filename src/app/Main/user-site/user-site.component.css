@@ -1,6 +1,6 @@
 .grid {
-padding-top: 5%;
-padding-bottom: 5%;
+  padding-top: 5%;
+  padding-bottom: 5%;
 }
 
 mat-grid-list {
@@ -41,7 +41,6 @@ button {
   background-color: #efd6d2;
   color: #594236;
   border: none;
-  border-radius: 50%;
   margin-right: 10px;
 }
 
@@ -58,4 +57,3 @@ button {
   opacity: 1;
   border: none;
 }
-

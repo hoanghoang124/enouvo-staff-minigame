@@ -6,12 +6,12 @@ const { AuthActionTypes } = AuthActions;
 
 export interface AuthState {
   role: Role;
-  id: User;
+  userId: User;
   errorMessage: string;
 }
 export const initialState: AuthState = {
   role: null,
-  id: null,
+  userId: null,
   errorMessage: null
 };
 
@@ -48,7 +48,7 @@ export function reducer(
     case AuthActionTypes.RESET_PASSWORD_SUCCESS: {
       return {
         ...state,
-        id: action.payload.id,
+        userId: action.payload.userId,
         errorMessage: null
       };
     }

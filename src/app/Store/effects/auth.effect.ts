@@ -36,6 +36,10 @@ export class AuthEffects {
       localStorage.setItem('token', user.payload.token);
       localStorage.setItem('role', user.payload.scope);
       localStorage.setItem('id', user.payload.id);
+      localStorage.setItem(
+        'shouldUserChangePassword',
+        user.payload.shouldUserChangePassword
+      );
       this.router.navigateByUrl('/dashboard');
     })
   );

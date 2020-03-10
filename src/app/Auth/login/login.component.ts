@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { State } from 'src/app/Store/reducers';
 import * as fromAuth from '../../Store';
+import { ChangePasswordComponent } from '../change-password/change-password.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-log-in',
@@ -16,7 +18,11 @@ export class LoginComponent implements OnInit {
   errorMessage$: Observable<string> = null;
   loginForm: FormGroup;
 
-  constructor(private store: Store<State>, private formBuilder: FormBuilder) {}
+  constructor(
+    private store: Store<State>,
+    private formBuilder: FormBuilder,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -32,5 +38,21 @@ export class LoginComponent implements OnInit {
       return;
     }
     this.store.dispatch(new fromAuth.LogIn(this.loginForm.value));
+    this.changePWFirstTime();
+  }
+
+  changePWFirstTime() {
+    const changePW = localStorage.getItem('shouldUserChangePassword');
+    if (changePW !== 'false') {
+      // goi mat dialog
+      this.openDialog();
+    }
+    return;
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(ChangePasswordComponent, {
+      disableClose: true
+    });
   }
 }
