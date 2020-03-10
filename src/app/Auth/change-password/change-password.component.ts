@@ -32,9 +32,8 @@ export class ChangePasswordComponent implements OnInit {
     if (this.changeForm.invalid) {
       return;
     }
-    this.store.dispatch(new fromAuth.ChangePassword(this.changeForm.value));
-    // test submit form
-    console.log(this.changeForm.value);
-    // this.router.navigate(['/login']);
+    this.store.dispatch(
+      new fromAuth.ChangePasswordSuccess(this.changeForm.value)
+    );
   }
 }

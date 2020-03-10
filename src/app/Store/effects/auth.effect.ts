@@ -35,10 +35,12 @@ export class AuthEffects {
     tap(user => {
       localStorage.setItem('token', user.payload.token);
       localStorage.setItem('role', user.payload.scope);
+      localStorage.setItem('id', user.payload.id);
       this.router.navigateByUrl('/dashboard');
     })
   );
 
+  @Effect()
   ChangePassword$ = this.actions.pipe(
     ofType(AuthActionTypes.CHANGE_PASSWORD),
     map((action: AuthActions.ChangePassword) => action.payload),
@@ -56,6 +58,7 @@ export class AuthEffects {
   ChangePasswordSuccess: Observable<any> = this.actions.pipe(
     ofType(AuthActionTypes.CHANGE_PASSWORD_SUCCESS),
     tap(user => {
+      localStorage.setItem('token', user.payload.token);
       localStorage.setItem('password', user.payload.password);
       localStorage.setItem('newPassword', user.payload.newPassword);
     })
@@ -66,7 +69,7 @@ export class AuthEffects {
     ofType(AuthActionTypes.RESET_PASSWORD),
     map((action: AuthActions.ResetPassword) => action.payload),
     switchMap(payload => {
-      return this.authService.changePassword(payload).pipe(
+      return this.authService.resetPassword(payload).pipe(
         map(user => {
           return new AuthActions.ResetPasswordSuccess(user);
         }),
@@ -79,6 +82,7 @@ export class AuthEffects {
   ResetPasswordSuccess: Observable<any> = this.actions.pipe(
     ofType(AuthActionTypes.RESET_PASSWORD_SUCCESS),
     tap(user => {
+      localStorage.setItem('token', user.payload.token);
       localStorage.setItem('id', user.payload.id);
       this.router.navigateByUrl('/login');
     })

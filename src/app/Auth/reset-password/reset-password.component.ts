@@ -32,9 +32,7 @@ export class ResetPasswordComponent implements OnInit {
     if (this.resetForm.invalid) {
       return;
     }
-
-    this.store.dispatch(new fromAuth.ResetPassword(this.resetForm.value));
-    // test submit form
-    console.log(this.resetForm.value);
+    const id = localStorage.getItem('id');
+    this.store.dispatch(new fromAuth.ResetPassword(id));
   }
 }

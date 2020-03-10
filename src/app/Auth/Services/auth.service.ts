@@ -26,9 +26,9 @@ export class AuthService {
     return this.http.post<User>(url, params);
   }
 
-  resetPassword(param): Observable<any> {
+  resetPassword(params): Observable<any> {
     const url = `${this.BASE_URL}/v1/auth/reset-password`;
-    return this.http.post<User>(url, param);
+    return this.http.post<User>(url, params);
   }
 
   changePassword(params): Observable<any> {
