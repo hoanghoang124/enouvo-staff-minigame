@@ -1,61 +1,95 @@
-.grid {
-padding-top: 5%;
-padding-bottom: 5%;
-}
-
-mat-grid-list {
+#table-wrapper {
   position: relative;
-  margin: auto;
-  padding-bottom: 0 !important;
 }
-
-mat-card {
-  width: 95%;
-  height: 95%;
-  margin: auto;
-  box-sizing: border-box;
-  background-color: #efd6d2;
-  display: flex;
-  flex-direction: column;
-  border-radius: 5px;
-}
-
-mat-card-header {
-  display: flex;
-  flex-direction: row;
-  flex-shrink: 0;
-  color: #594236;
-}
-
-mat-card-content {
-  flex-grow: 1;
+#table-scroll {
+  height: 50rem;
   overflow: auto;
-  text-align: center;
+  margin-top: 6rem;
+}
+.active-cyan-4 {
+  width: 60%;
+  display: flex;
+  margin: auto;
+}
+table {
+  border-collapse: separate;
+  border-spacing: 15px 50px;
+  width: 100%;
 }
 
-mat-card-footer {
-  text-align: right;
+.star-container {
+  justify-content: space-between;
+  display: inline-flex;
+  font-size: 35px;
+  width: 100%;
 }
-
+.star-status {
+  display: inline-flex;
+  justify-content: space-evenly;
+}
+.star {
+  width: 80px;
+  height: 50px;
+  border-style: none;
+  font-weight: 600;
+}
+.img-star {
+  height: 20px;
+  width: 20px;
+}
 button {
-  background-color: #efd6d2;
-  color: #594236;
-  border: none;
-  border-radius: 50%;
-  margin-right: 10px;
+  border-style: none;
 }
 
-.scroll-to-top {
-  position: fixed;
-  bottom: 64px;
-  right: 15px;
-  opacity: 0;
-  transition: all 0.2s ease-in-out;
-  border: none;
+
+
+.button-row {
+  padding: 1%;
 }
 
-.show-scroll {
-  opacity: 1;
-  border: none;
+th.mat-sort-header-sorted {
+  color: black;
 }
 
+.mat-form-field {
+  font-size: 14px;
+  width: 90%;
+  margin-left: 5%;
+}
+
+.container-image {
+  position: relative;
+}
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #008cba;
+  overflow: hidden;
+  width: 100%;
+  height: 0;
+  transition: 0.5s ease;
+}
+
+.container:hover .overlay {
+  height: 100%;
+}
+
+.text {
+  white-space: nowrap;
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  overflow: hidden;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}

@@ -1,36 +1,69 @@
-import { Validators } from '@angular/forms';
-import { FormBuilder } from '@angular/forms';
-import { FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { State } from 'src/app/Store/reducers';
-import * as fromAuth from '../../Store';
+import { Component, OnInit } from "@angular/core";
+import { Router, ActivatedRoute } from "@angular/router";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { first } from "rxjs/operators";
+
+import { AuthenticationService } from "../../Shared/Services/authentication.service";
 
 @Component({
-  selector: 'app-log-in',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  templateUrl: "login.component.html",
+  styleUrls: ["./login.component.css"]
 })
 export class LoginComponent implements OnInit {
-  errorMessage$: Observable<string> = null;
   loginForm: FormGroup;
+  loading = false;
+  submitted = false;
+  returnUrl: string;
+  error = "";
 
-  constructor(private store: Store<State>, private formBuilder: FormBuilder) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
+    private authenticationService: AuthenticationService
+  ) {
+    // redirect to home if already logged in
+    if (this.authenticationService.currentUserValue) {
+      this.router.navigate(["/"]); //should be navigate to admin dashboard if user is admin and to homepage if user is normal user
+    }
+  }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      username: ['', Validators.required],
-      password: ['', Validators.minLength(8)]
+      username: ["", Validators.required],
+      password: ["", Validators.required]
     });
 
-    this.errorMessage$ = this.store.select(fromAuth.getErrorMessage);
+    // get return url from route parameters or default to '/'
+    this.returnUrl = this.route.snapshot.queryParams["returnUrl"] || "/";
   }
 
-  onSubmit(): void {
+  // convenience getter for easy access to form fields
+  get f() {
+    return this.loginForm.controls;
+  }
+
+  onSubmit() {
+    this.submitted = true;
+
+    // stop here if form is invalid
     if (this.loginForm.invalid) {
-      return;
+      return this.error;
     }
-    this.store.dispatch(new fromAuth.LogIn(this.loginForm.value));
+
+    this.loading = true;
+    this.authenticationService
+      .login(this.f.username.value, this.f.password.value)
+      .pipe(first())
+      .subscribe(
+        data => {
+          this.router.navigate([this.returnUrl]);
+          console.log(data);
+        },
+        error => {
+          this.error = error;
+          this.loading = false;
+        }
+      );
   }
 }

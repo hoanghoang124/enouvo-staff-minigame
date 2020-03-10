@@ -1,42 +1,25 @@
-<app-header></app-header>
-<div class="container">
-  <div class="example-container mat-elevation-z8">
-    <div class="example-loading-shade" *ngIf="isLoadingResults">
-      <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
-    </div>
-    <mat-card class="example-card" *ngIf="staff | async; let staff">
-      <mat-card-header>
-        <mat-card-title
-          ><h2>
-            {{ staff.firstName }} {{ staff.middleName }} {{ staff.lastName }}
-          </h2></mat-card-title
-        >
-        <mat-card-subtitle>{{ staff.quote }}</mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content>
-        <img mat-card-sm-image src="{{ staff.avatar }}" />
-        <h3>Email: {{ staff.email }}</h3>
-        <h3>Birthday: {{ staff.birthday }}</h3>
-        <h3>Phone: {{ staff.phone }}</h3>
-        <h3>Adress: {{ staff.addressStreet }}, {{ staff.addressCity }}</h3>
-        <h3>Position: {{ staff.position }}</h3>
-        <h3>Star: {{ staff.star }}</h3>
-      </mat-card-content>
-      <mat-card-actions>
-        <a
-          mat-flat-button
-          color="primary"
-          [routerLink]="['/admin/' + staff.id + '/edit']"
-          ><mat-icon>edit</mat-icon></a
-        >
-        <a mat-flat-button color="warn" (click)="deletestaff(staff.id)"
-          ><mat-icon>delete</mat-icon></a
-        >
-        <a mat-flat-button color="primary" [routerLink]="['/admin']">
-          <mat-icon>arrow_back</mat-icon>
-        </a>
-      </mat-card-actions>
-    </mat-card>
+<div class="example-container mat-elevation-z8">
+  <div class="example-loading-shade"
+       *ngIf="isLoadingResults">
+    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
   </div>
+  <div class="button-row">
+    <a mat-flat-button color="primary" [routerLink]="['/admin']"><mat-icon>list</mat-icon></a>
+  </div>
+  <mat-card class="example-card" *ngIf='staff | async; let staff'>
+    <mat-card-header>
+      <mat-card-title><h2>{{staff.title}}</h2></mat-card-title>
+      <mat-card-subtitle>{{staff.body}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <dl>
+        <dt>Star:</dt>
+        <dd>{{staff.userId}}</dd>
+      </dl>
+    </mat-card-content>
+    <mat-card-actions>
+      <a mat-flat-button color="primary" [routerLink]="[staff.id+'/edit']"><mat-icon>edit</mat-icon></a>
+      <a mat-flat-button color="warn" (click)="deletestaff(staff.id)"><mat-icon>delete</mat-icon></a>
+    </mat-card-actions>
+  </mat-card>
 </div>
-<app-footer></app-footer>

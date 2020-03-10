@@ -15,13 +15,3 @@ th.mat-sort-header-sorted {
   width: 90%;
   margin-left: 5%;
 }
-
-h3 {
-  text-align: center;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-app-footer {
-  position: absolute;
-  overflow: hidden;
-}

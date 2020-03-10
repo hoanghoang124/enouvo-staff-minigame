@@ -1,11 +1,11 @@
-import { Component, OnInit, HostListener, ViewChild } from '@angular/core';
-import { StaffService } from '../Services/staff.service';
-import { Observable } from 'rxjs';
-import { Store, select } from '@ngrx/store';
-import * as fromStaff from '../../Store';
-import { State } from '../../Store/reducers';
-import { MatGridList } from '@angular/material';
-import { Staff } from '../Models/staff.model';
+import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/Shared/Models/user';
+import { StaffService } from 'src/app/Shared/Services/staff.service';
+import { UserService } from 'src/app/Shared/Services/user.service';
+import { AuthenticationService } from 'src/app/Shared/Services/authentication.service';
+import { first } from 'rxjs/operators';
+import { PageEvent } from '@angular/material';
+
 
 export interface Tile {
   color: string;
@@ -20,64 +20,53 @@ export interface Tile {
   styleUrls: ['./user-site.component.css']
 })
 export class UserSiteComponent implements OnInit {
-  getState: Observable<any>;
-  user = null;
-  errorMessage = null;
-  showScroll: boolean;
-  showScrollHeight = 300;
-  hideScrollHeight = 10;
-  currentUser: any;
-  userFromApi: any;
-  staffs: any[];
-  stafflist$: Observable<any>;
-
-  @ViewChild(MatGridList, { static: true }) grid: MatGridList;
-  breakpoint: number;
+  currentUser: User;
+  userFromApi: User;
 
   constructor(
     private staffService: StaffService,
-    private store: Store<State>
-  ) {}
-
-  scrollToTop() {
-    (function smoothscroll() {
-      const currentScroll =
-        document.documentElement.scrollTop || document.body.scrollTop;
-      if (currentScroll > 0) {
-        window.requestAnimationFrame(smoothscroll);
-        window.scrollTo(0, currentScroll - currentScroll / 5);
-      }
-    })();
-  }
-
-  @HostListener('window:scroll', [])
-  onWindowScroll() {
-    if (
-      (window.pageYOffset ||
-        document.documentElement.scrollTop ||
-        document.body.scrollTop) > this.showScrollHeight
-    ) {
-      this.showScroll = true;
-    } else if (
-      this.showScroll &&
-      (window.pageYOffset ||
-        document.documentElement.scrollTop ||
-        document.body.scrollTop) < this.hideScrollHeight
-    ) {
-      this.showScroll = false;
-    }
-  }
-
-  onResize(event) {
-    this.breakpoint = (event.target.innerWidth >= 1330) ? 3 : ((event.target.innerWidth >= 900) ? 2 : 1);
+    private userService: UserService,
+    private authenticationService: AuthenticationService
+  ) {
+    this.currentUser = this.authenticationService.currentUserValue;
   }
 
   ngOnInit() {
-    this.store.dispatch(new fromStaff.GetStaffs());
-    this.stafflist$ = this.store.pipe(select(fromStaff.getAllStaffs));
-    this.stafflist$.subscribe(res => {
-      this.staffs = res as Staff[];
-    });
-    this.breakpoint = (window.innerWidth >= 1330) ? 3 : ((window.innerWidth >= 900) ? 2 : 1);
+    this.userService
+      .getById(this.currentUser.id)
+      .pipe(first())
+      .subscribe(user => {
+        this.userFromApi = user;
+      });
+    //   this.data.data = source;
+    //   this.data.paginator = this.paginator;
+    //   this.data.sort = this.sort;
+    // }
   }
+}
+export class PaginatorConfigurableExample {
+  // MatPaginator Inputs
+  length = 100;
+  pageSize = 10;
+  pageSizeOptions: number[] = [5, 10, 25, 100];
+
+  // MatPaginator Output
+  pageEvent: PageEvent;
+
+  setPageSizeOptions(setPageSizeOptionsInput: string) {
+    if (setPageSizeOptionsInput) {
+      this.pageSizeOptions = setPageSizeOptionsInput
+        .split(',')
+        .map(str => +str);
+    }
+  }
+}
+
+export class GridListDynamicExample {
+  tiles: Tile[] = [
+    { text: 'One', cols: 3, rows: 1, color: 'lightblue' },
+    { text: 'Two', cols: 1, rows: 2, color: 'lightgreen' },
+    { text: 'Three', cols: 1, rows: 1, color: 'lightpink' },
+    { text: 'Four', cols: 2, rows: 1, color: '#DDBDF1' }
+  ];
 }
