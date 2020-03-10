@@ -23,8 +23,7 @@
       <mat-error>
         <span
           *ngIf="
-            (!loginForm.get('password').valid &&
-              loginForm.get('password').touched) ||
+            loginForm.get('password').touched ||
             loginForm.get('password').hasError('minlength')
           "
           >Please enter password, with less than 8 characters.</span
