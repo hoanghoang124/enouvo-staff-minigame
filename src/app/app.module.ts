@@ -1,54 +1,85 @@
-
-import { AngularMaterialModule } from './Shared/Angular-Material/Angular-Material.module';
-import { StoreModule } from '@ngrx/store';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
-import { EffectsModule } from '@ngrx/effects';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
+import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AuthService } from './Auth/Services/auth.service';
+import {
+  TokenInterceptor,
+  ErrorInterceptor
+} from './Auth/Services/token.service';
+import { AuthGuardService as AuthGuard } from './Auth/Services/auth-guard.service';
+import { RoleGuardService as RoleGuard } from './Auth/Services/role-guard.service';
+import { LoginComponent } from './Auth/login/login.component';
+import { UserSiteComponent } from './Main/user-site/user-site.component';
+import { AdminSiteComponent } from './Main/admin-site/admin-site.component';
 import { StaffDetailComponent } from './Main/staff-detail/staff-detail.component';
 import { StaffAddComponent } from './Main/staff-add/staff-add.component';
 import { StaffEditComponent } from './Main/staff-edit/staff-edit.component';
-import { StaffService } from './Shared/Services/staff.service';
-import { NgModule } from '@angular/core';
-import { AppComponent } from './app.component';
-import { UserSiteComponent } from './Main/user-site/user-site.component';
-import { LoginComponent } from './Auth/login/login.component';
-import { AdminSiteComponent } from './Main/admin-site/admin-site.component';
-import { BrowserModule } from '@angular/platform-browser';
+import { HeaderComponent } from './Main/header/header.component';
+import { FooterComponent } from './Main/footer/footer.component';
+import { SharedModule } from './Shared/shared.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { CommonModule } from '@angular/common';
-import { JwtInterceptor } from './Shared/Helpers/jwt.interceptor';
-import { ErrorInterceptor } from './Shared/Helpers/error.interceptor';
-import { fakeBackendProvider } from './Shared/Helpers/fake-backend';
-
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { reducers } from './Store/reducers';
+import { appEffect } from './Store/effects';
+import { AngularMaterialModule } from './Shared/Angular-Material/Angular-Material.module';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { ResetPasswordComponent } from './Auth/reset-password/reset-password.component';
+import { ErrorPageComponent } from './Main/error-page/error-page.component';
+import { ChangePasswordComponent } from './Auth/change-password/change-password.component';
 @NgModule({
   declarations: [
     AppComponent,
-    UserSiteComponent,
     LoginComponent,
+    UserSiteComponent,
     AdminSiteComponent,
     StaffDetailComponent,
     StaffAddComponent,
-    StaffEditComponent
+    StaffEditComponent,
+    HeaderComponent,
+    FooterComponent,
+    ResetPasswordComponent,
+    ErrorPageComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,
-    ReactiveFormsModule,
-    HttpClientModule,
     CommonModule,
+    AppRoutingModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    SharedModule,
     ReactiveFormsModule,
     FormsModule,
-    AppRoutingModule,
-    EffectsModule,
-    StoreModule,
-    AngularMaterialModule
+    AngularMaterialModule,
+    StoreModule.forRoot(reducers),
+    EffectsModule.forRoot(appEffect),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25 //  Retains last 25 states
+    }),
+    StoreRouterConnectingModule.forRoot({
+      stateKey: 'router' // name of reducer key
+    })
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    StaffService,
-
-    // fake back-end
-    fakeBackendProvider
+    AuthService,
+    AuthGuard,
+    RoleGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })
