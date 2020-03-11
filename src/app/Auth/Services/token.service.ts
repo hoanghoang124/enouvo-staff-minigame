@@ -20,7 +20,7 @@ export class TokenInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     this.authService = this.injector.get(AuthService);
-    const token = this.authService.isAuthenticated();
+    const token = this.authService.getToken();
     request = request.clone({
       setHeaders: {
         Authorization: `${token}`,

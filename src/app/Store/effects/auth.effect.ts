@@ -53,6 +53,7 @@ export class AuthEffects {
     switchMap(payload => {
       return this.authService.changePassword(payload).pipe(
         map(user => {
+          this.router.navigateByUrl('/dashboard');
           return new AuthActions.ChangePasswordSuccess(user);
         }),
         catchError(error => of(new AuthActions.ChangePasswordFailure(error)))

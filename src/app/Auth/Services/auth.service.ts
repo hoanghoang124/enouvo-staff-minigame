@@ -9,8 +9,8 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  isAuthenticated(): boolean {
-    return localStorage.getItem('token') != null && !this.isTokenExpired();
+  getToken(): string {
+    return localStorage.getItem('token');
   }
 
   isTokenExpired(): boolean {

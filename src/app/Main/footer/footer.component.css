@@ -1,7 +1,10 @@
 footer {
   text-align: center;
-  background-color: black;
+  background-color: #555b6e;
   bottom: 0;
   position: fixed;
   width: 100%;
+}
+a {
+  color: antiquewhite;
 }
