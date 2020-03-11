@@ -1,18 +1,7 @@
-nav {
-  position: fixed;
-  bottom: 0;
-  background-color: #555b6e;
-  color: #d0b8ac;
-  width: 100%;
-  height: 2rem;
-  padding: 5px;
-  margin: auto;
+footer {
   text-align: center;
-}
-a {
-  color: #efe5dc;
-}
-
-.row {
-  justify-content: center;
+  background-color: black;
+  bottom: 0;
+  position: fixed;
+  width: 100%;
 }

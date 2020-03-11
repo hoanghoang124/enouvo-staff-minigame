@@ -3,18 +3,16 @@ import * as staffActions from '../actions/staff.action';
 import * as _ from 'lodash';
 
 export interface StaffState {
-  data: Staff[];
-  selected: Staff;
-  action: string;
-  done: boolean;
+  staffs: Staff[];
+  selectedStaff: Staff;
+  isLoading: boolean;
   error?: Error;
 }
 
 export const initialState: StaffState = {
-  data: [],
-  selected: null,
-  action: null,
-  done: false,
+  staffs: [],
+  selectedStaff: null,
+  isLoading: false,
   error: null
 };
 
@@ -26,135 +24,97 @@ export function staffReducer(
     case staffActions.StaffActionsType.GET_STAFFS:
       return {
         ...state,
-        action: staffActions.StaffActionsType.GET_STAFFS,
-        done: false,
-        selected: null,
-        error: null
+        isLoading: true,
+        selectedStaff: null,
       };
     case staffActions.StaffActionsType.GET_STAFFS_SUCCESS:
       return {
         ...state,
-        data: action.payload,
-        done: true,
-        selected: null,
-        error: null
+        staffs: action.payload,
+        isLoading: false,
       };
     case staffActions.StaffActionsType.GET_STAFFS_FAILURE:
       return {
         ...state,
-        done: true,
-        selected: null,
+        isLoading: false,
         error: action.payload
       };
     case staffActions.StaffActionsType.GET_STAFF:
       return {
         ...state,
-        action: staffActions.StaffActionsType.GET_STAFF,
-        done: false,
-        selected: null,
+        isLoading: true,
+        selectedStaff: null,
         error: null
       };
     case staffActions.StaffActionsType.GET_STAFF_SUCCESS:
       return {
         ...state,
-        selected: action.payload,
-        done: true,
-        error: null
+        selectedStaff: action.payload,
+        isLoading: false,
       };
     case staffActions.StaffActionsType.GET_STAFF_FAILURE:
       return {
         ...state,
-        selected: null,
-        done: true,
+        isLoading: false,
         error: action.payload
       };
     case staffActions.StaffActionsType.CREATE_STAFF:
       return {
         ...state,
-        selected: action.payload,
-        action: staffActions.StaffActionsType.CREATE_STAFF,
-        done: false,
+        isLoading: true,
         error: null
       };
     case staffActions.StaffActionsType.CREATE_STAFF_SUCCESS: {
-      const newStaff = {
-        ...state.selected,
-        id: action.payload
-      };
-      const data = [...state.data, newStaff];
       return {
         ...state,
-        data,
-        selected: null,
+        staffs: [...state.staffs, action.payload],
         error: null,
-        done: true
+        isLoading: false
       };
     }
     case staffActions.StaffActionsType.CREATE_STAFF_FAILURE:
       return {
         ...state,
-        selected: null,
-        done: true,
+        isLoading: false,
         error: action.payload
       };
     case staffActions.StaffActionsType.UPDATE_STAFF:
       return {
         ...state,
-        selected: action.payload,
-        action: staffActions.StaffActionsType.UPDATE_STAFF,
-        done: false,
+        isLoading: false,
         error: null
       };
-    case staffActions.StaffActionsType.UPDATE_STAFF_SUCCESS: {
-      const index = state.data.findIndex(h => h.id === state.selected.id);
-      if (index >= 0) {
-        const data = [
-          ...state.data.slice(0, index),
-          state.selected,
-          ...state.data.slice(index + 1)
-        ];
-        return {
-          ...state,
-          data,
-          done: true,
-          selected: null,
-          error: null
-        };
+    case staffActions.StaffActionsType.UPDATE_STAFF_SUCCESS:
+      return {
+        ...state,
+        selectedStaff: action.payload,
+        isLoading: false,
       }
-      return state;
-    }
     case staffActions.StaffActionsType.UPDATE_STAFF_FAILURE:
       return {
         ...state,
-        done: true,
-        selected: null,
+        isLoading: false,
         error: action.payload
       };
     case staffActions.StaffActionsType.DELETE_STAFF: {
-      const selected = state.data.find(h => h.id === action.payload);
       return {
         ...state,
-        selected,
-        action: staffActions.StaffActionsType.DELETE_STAFF,
-        done: false,
+        isLoading: true,
         error: null
       };
     }
     case staffActions.StaffActionsType.DELETE_STAFF_SUCCESS: {
-      const data = state.data.filter(h => h.id !== state.selected.id);
       return {
         ...state,
-        data,
-        selected: null,
-        error: null,
-        done: true
+        staffs: _.filter(state.staffs, staff => staff.id !== action.payload.id),
+        selectedStaff: null,
+        isLoading: false
       };
     }
     case staffActions.StaffActionsType.DELETE_STAFF_FAILURE:
       return {
         ...state,
-        selected: null,
-        done: true,
+        isLoading: true,
         error: action.payload
       };
     default:

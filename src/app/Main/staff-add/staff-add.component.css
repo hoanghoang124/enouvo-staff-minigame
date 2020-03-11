@@ -11,10 +11,12 @@
 .example-full-width:nth-last-child() {
   margin-bottom: 10px;
 }
+
 mat-icon {
   padding: auto;
   margin: auto;
 }
+
 a {
   margin-left: 10px;
 }
@@ -24,4 +26,9 @@ h3 {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: auto;
   padding: 10px;
+}
+
+mat-spinner {
+  margin: 0 auto;
+  margin-top: 20%;
 }

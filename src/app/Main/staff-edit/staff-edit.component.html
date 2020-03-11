@@ -1,21 +1,13 @@
 <app-header></app-header>
 <div class="container">
   <div class="example-container mat-elevation-z8">
-    <div class="example-loading-shade" *ngIf="isLoadingResults">
-      <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+    <div class="example-loading-shade" *ngIf="isLoadingResults$ | async">
+      <mat-spinner></mat-spinner>
     </div>
     <mat-card class="example-card">
-      <form [formGroup]="staffForm" (ngSubmit)="onFormSubmit(staffForm.value)">
-        <mat-form-field class="example-full-width" *ngIf="1+1===3">
-          <input matInput placeholder="Id" formControlName="id" />
-          <mat-error>
-            <span *ngIf="staffForm.get('id').errors?.required">
-              Please enter your id !
-            </span>
-          </mat-error>
-        </mat-form-field>
+      <form [formGroup]="staffForm" (ngSubmit)="onFormSubmit()">
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="firstName" formControlName="firstName" pattern="[a-zA-Z ]*">
+          <input matInput placeholder="firstName" formControlName="firstName">
           <mat-error>
             <span *ngIf="staffForm.get('firstName').errors?.required">
               Please enter your first name !
@@ -26,7 +18,7 @@
           </mat-error>
         </mat-form-field>
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="middleName" formControlName="middleName" pattern="[a-zA-Z ]*">
+          <input matInput placeholder="middleName" formControlName="middleName">
           <mat-error>
             <span *ngIf="staffForm.get('middleName').errors?.required">
               Please enter your middle name !
@@ -37,7 +29,7 @@
           </mat-error>
         </mat-form-field>
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="lastName" formControlName="lastName" pattern="[a-zA-Z ]*">
+          <input matInput placeholder="lastName" formControlName="lastName">
           <mat-error>
             <span *ngIf="staffForm.get('lastName').errors?.required">
               Please enter your last name !
@@ -49,7 +41,7 @@
         </mat-form-field>
         <mat-form-field class="example-full-width">
           <input matInput placeholder="avatar" formControlName="avatar" />
-          <img *ngIf="staffForm.get('avatar').valid" [src]="staffForm.get('avatar').value" class="img-responsive"/>
+          <img *ngIf="staffForm.get('avatar').valid" [src]="staffForm.get('avatar').value" class="img-responsive" />
           <mat-error>
             <span *ngIf="staffForm.get('avatar').errors?.required">
               Please enter your avatar !
@@ -59,14 +51,8 @@
         <mat-form-field class="example-full-width">
           <input matInput placeholder="email" formControlName="email" />
           <mat-error>
-            <span
-              *ngIf="staffForm.get('email').errors?.required"
-              >Please enter your email</span
-            >
-            <span
-              *ngIf="staffForm.get('email').errors?.email"
-              >Your email is not valid</span
-            >
+            <span *ngIf="staffForm.get('email').errors?.required">Please enter your email</span>
+            <span *ngIf="staffForm.get('email').errors?.email">Your email is not valid</span>
           </mat-error>
         </mat-form-field>
         <mat-form-field class="example-full-width">
@@ -88,7 +74,7 @@
           </mat-error>
         </mat-form-field>
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="phone" formControlName="phone" pattern="[0-9]*"/>
+          <input matInput placeholder="phone" formControlName="phone" />
           <mat-error>
             <span *ngIf="staffForm.get('phone').errors?.required">
               Please enter your phone !
@@ -99,11 +85,7 @@
           </mat-error>
         </mat-form-field>
         <mat-form-field class="example-full-width">
-          <input
-            matInput
-            placeholder="addressStreet"
-            formControlName="addressStreet"
-          />
+          <input matInput placeholder="addressStreet" formControlName="addressStreet" />
           <mat-error>
             <span *ngIf="staffForm.get('addressStreet').errors?.required">
               Please enter your street !
@@ -111,11 +93,7 @@
           </mat-error>
         </mat-form-field>
         <mat-form-field class="example-full-width">
-          <input
-            matInput
-            placeholder="addressCity"
-            formControlName="addressCity"
-          />
+          <input matInput placeholder="addressCity" formControlName="addressCity" />
           <mat-error>
             <span *ngIf="staffForm.get('addressCity').errors?.required">
               Please enter your city !
@@ -125,18 +103,13 @@
         <mat-form-field class="example-full-width">
           <input matInput placeholder="position" formControlName="position" />
           <mat-error>
-            <span *ngIf="staffForm.get('addressCity').errors?.required">
+            <span *ngIf="staffForm.get('position').errors?.required">
               Please enter your city !
             </span>
           </mat-error>
         </mat-form-field>
         <div class="button-row">
-          <button
-            type="submit"
-            [disabled]="!staffForm.valid"
-            mat-flat-button
-            color="primary"
-          >
+          <button type="submit" [disabled]="!staffForm.valid" mat-flat-button color="primary">
             <mat-icon>save</mat-icon>
           </button>
           <a mat-flat-button color="primary" (click)="productdetails()">

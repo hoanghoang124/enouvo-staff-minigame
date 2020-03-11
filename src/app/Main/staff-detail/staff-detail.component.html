@@ -1,16 +1,16 @@
 <app-header></app-header>
 <div class="container">
+  <div class="example-loading-shade" *ngIf="isLoadingResults$ | async">
+    <mat-spinner></mat-spinner>
+  </div>
   <div class="example-container mat-elevation-z8">
-    <div class="example-loading-shade" *ngIf="isLoadingResults">
-      <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
-    </div>
-    <mat-card class="example-card" *ngIf="staff | async; let staff">
+    <mat-card class="example-card" *ngIf="staff$ | async; let staff">
       <mat-card-header>
-        <mat-card-title
-          ><h2>
+        <mat-card-title>
+          <h2>
             {{ staff.firstName }} {{ staff.middleName }} {{ staff.lastName }}
-          </h2></mat-card-title
-        >
+          </h2>
+        </mat-card-title>
         <mat-card-subtitle>{{ staff.quote }}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
@@ -23,15 +23,12 @@
         <h3>Star: {{ staff.star }}</h3>
       </mat-card-content>
       <mat-card-actions>
-        <a
-          mat-flat-button
-          color="primary"
-          [routerLink]="['/admin/' + staff.id + '/edit']"
-          ><mat-icon>edit</mat-icon></a
-        >
-        <a mat-flat-button color="warn" (click)="deletestaff(staff.id)"
-          ><mat-icon>delete</mat-icon></a
-        >
+        <a mat-flat-button color="primary" [routerLink]="['/admin/' + staff.id + '/edit']">
+          <mat-icon>edit</mat-icon>
+        </a>
+        <a mat-flat-button color="warn" (click)="deletestaff(staff.id)">
+          <mat-icon>delete</mat-icon>
+        </a>
         <a mat-flat-button color="primary" [routerLink]="['/admin']">
           <mat-icon>arrow_back</mat-icon>
         </a>

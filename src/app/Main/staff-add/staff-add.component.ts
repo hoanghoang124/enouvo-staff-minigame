@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { StaffService } from '../Services/staff.service';
+import { Observable } from 'rxjs';
+import { Staff } from '../Models/staff.model';
+import { Store } from '@ngrx/store';
+import { State } from 'src/app/Store';
+import * as fromStaff from '../../Store';
 
 @Component({
   selector: 'app-staff-add',
@@ -10,13 +15,10 @@ import { StaffService } from '../Services/staff.service';
 })
 export class StaffAddComponent implements OnInit {
   staffForm: FormGroup;
-  isLoadingResults = false;
+  isLoadingResults$: Observable<boolean>;
+  staff$: Observable<Staff>;
 
-  constructor(
-    private router: Router,
-    private staffService: StaffService,
-    private formBuilder: FormBuilder
-  ) {}
+  constructor(private formBuilder: FormBuilder, private store: Store<State>) {}
 
   ngOnInit() {
     this.staffForm = this.formBuilder.group({
@@ -24,10 +26,10 @@ export class StaffAddComponent implements OnInit {
       firstName: [null, Validators.required],
       middleName: [null, Validators.required],
       lastName: [null, Validators.required],
-      avatar: [null, Validators.required],
+      avatar: [null],
       email: [null, [Validators.required, Validators.email]],
-      quote: [null, Validators.required],
-      birthday: [{value: null, disabled: true}, Validators.required],
+      quote: [null],
+      birthday: [{ value: null, disabled: true }, Validators.required],
       phone: [null, Validators.required],
       addressStreet: [null, Validators.required],
       addressCity: [null, Validators.required],
@@ -36,17 +38,7 @@ export class StaffAddComponent implements OnInit {
   }
 
   onFormSubmit(form: NgForm) {
-    this.isLoadingResults = true;
-    this.staffService.createStaff(form).subscribe(
-      res => {
-        const Id = res.id;
-        this.isLoadingResults = false;
-        this.router.navigate(['/admin']);
-      },
-      err => {
-        console.log(err);
-        this.isLoadingResults = false;
-      }
-    );
+    this.isLoadingResults$ = this.store.select(fromStaff.getIsLoading);
+    this.store.dispatch(new fromStaff.CreateStaff(this.staffForm.value));
   }
 }

@@ -12,10 +12,10 @@ import { Staff } from '../Models/staff.model';
   styleUrls: ['./admin-site.component.css']
 })
 export class AdminSiteComponent implements OnInit {
-  displayedColumns: string[] = ['name', 'information', 'star'];
+  displayedColumns: string[] = ['full name', 'position', 'star'];
   data = new MatTableDataSource<Staff>();
   stafflist$: Observable<any>;
-  isLoadingResults = true;
+  isLoadingResults$: Observable<boolean>;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
@@ -24,19 +24,16 @@ export class AdminSiteComponent implements OnInit {
     this.data.filter = filterValue.trim().toLowerCase();
   }
 
-  constructor(
-    private store: Store<State>
-  ) {}
+  constructor(private store: Store<State>) {}
 
   ngOnInit() {
     this.store.dispatch(new fromStaff.GetStaffs());
-    this.stafflist$ = this.store.pipe(select(fromStaff.getAllStaffs));
+    this.stafflist$ = this.store.select(fromStaff.getAllStaffs);
     this.stafflist$.subscribe(res => {
-      this.isLoadingResults = false;
+      this.isLoadingResults$ = this.store.select(fromStaff.getIsLoading);
       this.data.data = res as Staff[];
       this.data.paginator = this.paginator;
       this.data.sort = this.sort;
     });
-
   }
 }
