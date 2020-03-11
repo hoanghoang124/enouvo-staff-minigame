@@ -22,6 +22,13 @@ export class AuthEffects {
     switchMap(payload => {
       return this.authService.logIn(payload).pipe(
         map(user => {
+          console.log(user);
+
+          if (user.shouldUserChangePassword) {
+            this.router.navigateByUrl('/change-password');
+          } else {
+            this.router.navigateByUrl('/dashboard');
+          }
           return new AuthActions.LogInSuccess(user);
         }),
         catchError(error => of(new AuthActions.LogInFailure(error)))
@@ -36,11 +43,6 @@ export class AuthEffects {
       localStorage.setItem('token', user.payload.token);
       localStorage.setItem('role', user.payload.scope);
       localStorage.setItem('id', user.payload.id);
-      localStorage.setItem(
-        'shouldUserChangePassword',
-        user.payload.shouldUserChangePassword
-      );
-      this.router.navigateByUrl('/dashboard');
     })
   );
 
