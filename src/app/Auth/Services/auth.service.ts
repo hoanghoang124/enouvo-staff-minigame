@@ -21,6 +21,10 @@ export class AuthService {
     return localStorage.getItem('role');
   }
 
+  shouldUserChangePassword(): string {
+    return localStorage.getItem('shouldUserChangePassword');
+  }
+
   logIn(params): Observable<any> {
     const url = `${this.BASE_URL}/v1/auth/login`;
     return this.http.post<User>(url, params);

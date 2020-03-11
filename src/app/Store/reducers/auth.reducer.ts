@@ -6,12 +6,14 @@ const { AuthActionTypes } = AuthActions;
 
 export interface AuthState {
   role: Role;
-  userId: User;
+  id: User;
+  shouldUserChangePassword: User;
   errorMessage: string;
 }
 export const initialState: AuthState = {
   role: null,
-  userId: null,
+  id: null,
+  shouldUserChangePassword: null,
   errorMessage: null
 };
 
@@ -24,6 +26,8 @@ export function reducer(
       return {
         ...state,
         role: action.payload.scope,
+        shouldUserChangePassword: action.payload.shouldUserChangePassword,
+        id: action.payload.id,
         errorMessage: null
       };
     }
@@ -48,7 +52,7 @@ export function reducer(
     case AuthActionTypes.RESET_PASSWORD_SUCCESS: {
       return {
         ...state,
-        userId: action.payload.userId,
+        id: action.payload.id,
         errorMessage: null
       };
     }
