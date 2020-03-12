@@ -1,4 +1,17 @@
 <app-header></app-header>
+<div class="banner">
+  <h2>Choose your Heroes</h2>
+  <p>
+    Nếu không nhận thức một cách sâu sắc về ý nghĩa đích thực của những cái gần
+    gũi, bình dị, nếu đã không từng đặt chân tới mọi xó xỉnh của trái đất như
+    Nhĩ thì việc ch­a từng đặt chân đến cái bến sông cạnh nhà, việc không thể
+    tới được mảnh đất mơ ước quá đỗi gần gụi kia sẽ không khác thường, không
+    nghịch lí, sẽ lại trôi tuột đi như lẽ thường vẫn thế. Tình huống âý là tình
+    huống để nhân vật bộc lộ cái thế giới bên trong, để “phân tích” niềm “mê say
+    đầy đau khổ” của con người đang tiến dần tới hạn mút cuối cùng của sự sống,
+    để thấy được cái giản dị nhưng bền vững của chân lí nhân sinh.
+  </p>
+</div>
 <div class="grid">
   <mat-grid-list
     [cols]="breakpoint"
@@ -14,35 +27,27 @@
           >
         </mat-card-header>
         <mat-card-content>
-          <img
-            mat-card-lg-image
-            src="{{ staff.avatar }}"
-            style="width: auto; height: 250px;"
-          />
-          <h2>{{ staff.quote }}</h2>
+          <img mat-card-lg-image src="{{ staff.avatar }}" />
+          <p>{{ staff.quote }}</p>
         </mat-card-content>
         <mat-card-footer>
-          <button mat-icon-button color="accent">
-            <mat-icon>add_circle</mat-icon>
+          <button mat-flat-button id="btn-add">
+            <mat-icon id="icon-add">add_circle</mat-icon>
           </button>
-          <button mat-icon-button color="accent">
-            <mat-icon>remove_circle</mat-icon>
+          <button mat-button id="btn-substract">
+            <mat-icon id="icon-substract">remove_circle</mat-icon>
           </button>
         </mat-card-footer>
       </mat-card>
     </mat-grid-tile>
   </mat-grid-list>
-  <button
-    [ngClass]="{ 'show-scroll': showScroll }"
-    (click)="scrollToTop()"
-    class="scroll-to-top"
-  >
-    <img
-      id="scrollTop"
-      src="https://i.imgur.com/nYg7Xeo.png"
-      style="width: 50px; height: auto;"
-    />
-  </button>
 </div>
-
+<mat-icon
+  [ngClass]="{ 'show-scroll': showScroll }"
+  (click)="scrollToTop()"
+  class="scroll-to-top"
+  aria-hidden="false"
+  aria-label="Example home icon"
+  >double_arrow</mat-icon
+>
 <app-footer></app-footer>
