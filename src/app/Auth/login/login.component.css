@@ -31,4 +31,13 @@ button {
   padding: auto;
   background-color: #d0b8ac;
   color: #faf9f9;
+  position: relative;
+}
+
+button ::ng-deep .mat-spinner circle {
+  stroke: #faf9f9;
+}
+
+button ::ng-deep mat-spinner {
+  display: inline-block;
 }

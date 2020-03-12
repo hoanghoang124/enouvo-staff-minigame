@@ -17,6 +17,7 @@ import 'rxjs/add/operator/toPromise';
 })
 export class LoginComponent implements OnInit {
   errorMessage$: Observable<string> = null;
+  isLoadingResults$: Observable<boolean>;
   loginForm: FormGroup;
 
   constructor(
@@ -28,7 +29,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
-      password: ['', Validators.minLength(8)]
+      password: ['', [Validators.required, Validators.minLength(8)]]
     });
     this.errorMessage$ = this.store.select(fromAuth.getErrorMessage);
   }
@@ -37,6 +38,7 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     }
+    this.isLoadingResults$ = this.store.select(fromAuth.getIsLoading);
     this.store.dispatch(new fromAuth.LogIn(this.loginForm.value));
   }
 }

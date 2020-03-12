@@ -1,4 +1,3 @@
-import { Router } from '@angular/router';
 import { Validators } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
@@ -16,6 +15,7 @@ import { User } from '../Models/user.model';
 })
 export class ResetPasswordComponent implements OnInit {
   errorMessage$: Observable<string>;
+  isLoadingResults$: Observable<boolean>;
   resetForm: FormGroup;
 
   constructor(private store: Store<State>, private formBuilder: FormBuilder) {}
@@ -32,7 +32,7 @@ export class ResetPasswordComponent implements OnInit {
       return;
     }
     const id = localStorage.getItem('id');
-    console.log(id);
+    this.isLoadingResults$ = this.store.select(fromAuth.getIsLoading);
     this.store.dispatch(new fromAuth.ResetPassword(id));
   }
 }

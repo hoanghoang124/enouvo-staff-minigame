@@ -14,6 +14,7 @@ import * as fromAuth from '../../Store';
 })
 export class ChangePasswordComponent implements OnInit {
   errorMessage$: Observable<string> = null;
+  isLoadingResults$: Observable<boolean>;
   changeForm: FormGroup;
 
   constructor(private store: Store<State>, private formBuilder: FormBuilder) {}
@@ -30,6 +31,7 @@ export class ChangePasswordComponent implements OnInit {
     if (this.changeForm.invalid) {
       return;
     }
+    this.isLoadingResults$ = this.store.select(fromAuth.getIsLoading);
     this.store.dispatch(new fromAuth.ChangePassword(this.changeForm.value));
   }
 }

@@ -11,11 +11,8 @@ export const getStaff = createSelector(
   getStaffsState,
   state => state.selectedStaff
 );
-export const getIsLoading = createSelector(
+export const getIsStaffLoading = createSelector(
   getStaffsState,
-  state => state.isLoading
+  state => state.isStaffLoading
 );
-export const getError = createSelector(
-  getStaffsState,
-  state => state.error
-);
+export const getError = createSelector(getStaffsState, state => state.error);

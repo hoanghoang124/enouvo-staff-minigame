@@ -22,8 +22,6 @@ export class AuthEffects {
     switchMap(payload => {
       return this.authService.logIn(payload).pipe(
         map(user => {
-          console.log(user);
-
           if (user.shouldUserChangePassword) {
             this.router.navigateByUrl('/change-password');
           } else {
@@ -76,7 +74,7 @@ export class AuthEffects {
     ofType(AuthActionTypes.RESET_PASSWORD),
     map((action: AuthActions.ResetPassword) => action.payload),
     switchMap(payload => {
-      return this.authService.resetPassword(payload).pipe(
+      return this.authService.resetPassword({ userId: payload }).pipe(
         map(user => {
           return new AuthActions.ResetPasswordSuccess(user);
         }),

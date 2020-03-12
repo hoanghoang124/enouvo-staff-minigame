@@ -8,12 +8,14 @@ export interface AuthState {
   role: Role;
   id: User;
   shouldUserChangePassword: User;
+  isLoading: boolean;
   errorMessage: string;
 }
 export const initialState: AuthState = {
   role: null,
   id: null,
   shouldUserChangePassword: null,
+  isLoading: false,
   errorMessage: null
 };
 
@@ -22,43 +24,67 @@ export function reducer(
   action: AuthActions.AuthActions
 ): AuthState {
   switch (action.type) {
+    case AuthActionTypes.LOGIN: {
+      return {
+        ...state,
+        isLoading: true
+      };
+    }
     case AuthActionTypes.LOGIN_SUCCESS: {
       return {
         ...state,
         role: action.payload.scope,
         shouldUserChangePassword: action.payload.shouldUserChangePassword,
         id: action.payload.id,
-        errorMessage: null
+        isLoading: false
       };
     }
     case AuthActionTypes.LOGIN_FAILURE: {
       return {
         ...state,
+        isLoading: false,
         errorMessage: 'Invalid Credentials.'
+      };
+    }
+    case AuthActionTypes.CHANGE_PASSWORD: {
+      return {
+        ...state,
+        isLoading: true,
+        errorMessage: null
       };
     }
     case AuthActionTypes.CHANGE_PASSWORD_SUCCESS: {
       return {
         ...state,
+        isLoading: false,
         errorMessage: null
       };
     }
     case AuthActionTypes.CHANGE_PASSWORD_FAILURE: {
       return {
         ...state,
+        isLoading: false,
         errorMessage: 'Password does not match'
+      };
+    }
+    case AuthActionTypes.RESET_PASSWORD: {
+      return {
+        ...state,
+        isLoading: true
       };
     }
     case AuthActionTypes.RESET_PASSWORD_SUCCESS: {
       return {
         ...state,
         id: action.payload.id,
+        isLoading: false,
         errorMessage: null
       };
     }
     case AuthActionTypes.RESET_PASSWORD_FAILURE: {
       return {
         ...state,
+        isLoading: false,
         errorMessage: 'Invalid Credentials'
       };
     }

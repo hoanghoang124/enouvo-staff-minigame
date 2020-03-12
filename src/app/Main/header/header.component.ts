@@ -18,27 +18,24 @@ export class HeaderComponent implements OnInit {
     this.role = localStorage.getItem('role');
   }
 
-  // admin
-  admin() {
+  admin(): void {
     this.router.navigate(['/admin']);
   }
 
-  // staff
   staff(): void {
     this.router.navigate(['/dashboard']);
   }
 
-  logOut(): void {
-    this.store.dispatch(new LogOut());
-    this.router.navigate(['/login']);
-  }
-
-  // temporary to test reset password and change password component
   resetPassword(): void {
     this.router.navigate(['/reset-password']);
   }
 
   changePassword(): void {
     this.router.navigate(['/change-password']);
+  }
+
+  logOut(): void {
+    this.store.dispatch(new LogOut());
+    this.router.navigate(['/login']);
   }
 }

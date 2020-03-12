@@ -38,6 +38,11 @@
     <div class="button-row">
       <button mat-raised-button color="primary" type="submit">
         Login
+        <mat-spinner
+          [strokeWidth]="2"
+          [diameter]="20"
+          *ngIf="isLoadingResults$ | async"
+        ></mat-spinner>
       </button>
     </div>
   </form>

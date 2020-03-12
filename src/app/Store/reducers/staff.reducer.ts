@@ -5,14 +5,14 @@ import * as _ from 'lodash';
 export interface StaffState {
   staffs: Staff[];
   selectedStaff: Staff;
-  isLoading: boolean;
+  isStaffLoading: boolean;
   error?: Error;
 }
 
 export const initialState: StaffState = {
   staffs: [],
   selectedStaff: null,
-  isLoading: false,
+  isStaffLoading: false,
   error: null
 };
 
@@ -24,25 +24,25 @@ export function staffReducer(
     case staffActions.StaffActionsType.GET_STAFFS:
       return {
         ...state,
-        isLoading: true,
-        selectedStaff: null,
+        isStaffLoading: true,
+        selectedStaff: null
       };
     case staffActions.StaffActionsType.GET_STAFFS_SUCCESS:
       return {
         ...state,
         staffs: action.payload,
-        isLoading: false,
+        isStaffLoading: false
       };
     case staffActions.StaffActionsType.GET_STAFFS_FAILURE:
       return {
         ...state,
-        isLoading: false,
+        isStaffLoading: false,
         error: action.payload
       };
     case staffActions.StaffActionsType.GET_STAFF:
       return {
         ...state,
-        isLoading: true,
+        isStaffLoading: true,
         selectedStaff: null,
         error: null
       };
@@ -50,18 +50,18 @@ export function staffReducer(
       return {
         ...state,
         selectedStaff: action.payload,
-        isLoading: false,
+        isStaffLoading: false
       };
     case staffActions.StaffActionsType.GET_STAFF_FAILURE:
       return {
         ...state,
-        isLoading: false,
+        isStaffLoading: false,
         error: action.payload
       };
     case staffActions.StaffActionsType.CREATE_STAFF:
       return {
         ...state,
-        isLoading: true,
+        isStaffLoading: true,
         error: null
       };
     case staffActions.StaffActionsType.CREATE_STAFF_SUCCESS: {
@@ -69,37 +69,37 @@ export function staffReducer(
         ...state,
         staffs: [...state.staffs, action.payload],
         error: null,
-        isLoading: false
+        isStaffLoading: false
       };
     }
     case staffActions.StaffActionsType.CREATE_STAFF_FAILURE:
       return {
         ...state,
-        isLoading: false,
+        isStaffLoading: false,
         error: action.payload
       };
     case staffActions.StaffActionsType.UPDATE_STAFF:
       return {
         ...state,
-        isLoading: false,
+        isStaffLoading: false,
         error: null
       };
     case staffActions.StaffActionsType.UPDATE_STAFF_SUCCESS:
       return {
         ...state,
         selectedStaff: action.payload,
-        isLoading: false,
-      }
+        isStaffLoading: false
+      };
     case staffActions.StaffActionsType.UPDATE_STAFF_FAILURE:
       return {
         ...state,
-        isLoading: false,
+        isStaffLoading: false,
         error: action.payload
       };
     case staffActions.StaffActionsType.DELETE_STAFF: {
       return {
         ...state,
-        isLoading: true,
+        isStaffLoading: true,
         error: null
       };
     }
@@ -108,13 +108,13 @@ export function staffReducer(
         ...state,
         staffs: _.filter(state.staffs, staff => staff.id !== action.payload.id),
         selectedStaff: null,
-        isLoading: false
+        isStaffLoading: false
       };
     }
     case staffActions.StaffActionsType.DELETE_STAFF_FAILURE:
       return {
         ...state,
-        isLoading: true,
+        isStaffLoading: true,
         error: action.payload
       };
     default:
