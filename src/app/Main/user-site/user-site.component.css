@@ -1,20 +1,20 @@
 .grid {
-  padding-top: 5%;
-  padding-bottom: 5%;
+  height: 800px;
+  overflow: scroll;
 }
 
 mat-grid-list {
-  position: relative;
-  margin: auto;
-  padding-bottom: 0 !important;
+  height: 1080px;
+  overflow: auto;
+  background-color: yellow;
 }
 
 mat-card {
-  width: 95%;
-  height: 95%;
+  width: 200px;
+  height: 400px;
   margin: auto;
   box-sizing: border-box;
-  background-color: #efd6d2;
+  background-color: #fff;
   display: flex;
   flex-direction: column;
   border-radius: 5px;
@@ -38,9 +38,6 @@ mat-card-footer {
 }
 
 button {
-  background-color: #efd6d2;
-  color: #594236;
-  border: none;
   margin-right: 10px;
 }
 

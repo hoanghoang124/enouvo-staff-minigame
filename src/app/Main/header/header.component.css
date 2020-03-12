@@ -1,13 +1,22 @@
 mat-toolbar {
   justify-content: center;
-  background-color: #555b6e;
+  background-color: #5299d3;
 }
 
 .example-spacer {
   flex: 1 1 auto;
 }
 
+#brand {
+  color: #fff;
+}
+
+button {
+  color: #fff;
+  font-size: large;
+}
+
 a {
   text-decoration: none;
-  color: black;
+  color: #011627;
 }
