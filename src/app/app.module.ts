@@ -13,7 +13,10 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { AuthService } from './Auth/Services/auth.service';
-import { TokenInterceptor, ErrorInterceptor } from './Auth/Services/token.service';
+import {
+  TokenInterceptor,
+  ErrorInterceptor
+} from './Auth/Services/token.service';
 import { AuthGuardService as AuthGuard } from './Auth/Services/auth-guard.service';
 import { RoleGuardService as RoleGuard } from './Auth/Services/role-guard.service';
 
@@ -60,7 +63,7 @@ import { appEffect } from './Store/effects';
     BrowserAnimationsModule,
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot(appEffect),
-    StoreDevtoolsModule.instrument({ maxAge: 25 }),  //  Retains last 25 states
+    StoreDevtoolsModule.instrument({ maxAge: 25 }), //  Retains last 25 states
     StoreRouterConnectingModule.forRoot({ stateKey: 'router' }) // name of reducer key
   ],
   providers: [
