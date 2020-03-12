@@ -25,13 +25,13 @@ export function staffReducer(
       return {
         ...state,
         isLoading: true,
-        selectedStaff: null,
+        selectedStaff: null
       };
     case staffActions.StaffActionsType.GET_STAFFS_SUCCESS:
       return {
         ...state,
         staffs: action.payload,
-        isLoading: false,
+        isLoading: false
       };
     case staffActions.StaffActionsType.GET_STAFFS_FAILURE:
       return {
@@ -50,7 +50,7 @@ export function staffReducer(
       return {
         ...state,
         selectedStaff: action.payload,
-        isLoading: false,
+        isLoading: false
       };
     case staffActions.StaffActionsType.GET_STAFF_FAILURE:
       return {
@@ -88,8 +88,8 @@ export function staffReducer(
       return {
         ...state,
         selectedStaff: action.payload,
-        isLoading: false,
-      }
+        isLoading: false
+      };
     case staffActions.StaffActionsType.UPDATE_STAFF_FAILURE:
       return {
         ...state,

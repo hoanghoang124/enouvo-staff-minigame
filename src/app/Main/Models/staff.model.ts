@@ -11,5 +11,4 @@ export interface Staff {
   addressStreet: string;
   addressCity: string;
   position: string;
-  star: number;
 }
