@@ -16,14 +16,17 @@
       <mat-card-content>
         <img src="{{ staff.avatar }}" />
         <h3>Email: {{ staff.email }}</h3>
-        <h3>Birthday: {{ staff.birthday | date:'longDate' }}</h3>
+        <h3>Birthday: {{ staff.birthday | date: 'longDate' }}</h3>
         <h3>Phone: {{ staff.phone }}</h3>
         <h3>Adress: {{ staff.addressStreet }}, {{ staff.addressCity }}</h3>
         <h3>Position: {{ staff.position }}</h3>
-        <h3>Star: {{ staff.star }}</h3>
       </mat-card-content>
       <mat-card-actions>
-        <a mat-flat-button color="primary" [routerLink]="['/admin/' + staff.id + '/edit']">
+        <a
+          mat-flat-button
+          color="primary"
+          [routerLink]="['/admin/' + staff.id + '/edit']"
+        >
           <mat-icon>edit</mat-icon>
         </a>
         <a mat-flat-button color="warn" (click)="deletestaff(staff.id)">

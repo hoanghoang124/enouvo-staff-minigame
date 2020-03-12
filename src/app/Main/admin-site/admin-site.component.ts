@@ -5,6 +5,7 @@ import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { State } from 'src/app/Store/reducers';
 import * as fromStaff from '../../Store';
 import { Staff } from '../Models/staff.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-admin-site',
@@ -12,7 +13,7 @@ import { Staff } from '../Models/staff.model';
   styleUrls: ['./admin-site.component.css']
 })
 export class AdminSiteComponent implements OnInit {
-  displayedColumns: string[] = ['full name', 'position', 'star'];
+  displayedColumns: string[] = ['lastName', 'position', 'actions'];
   data = new MatTableDataSource<Staff>();
   stafflist$: Observable<any>;
   isLoadingResults$: Observable<boolean>;
@@ -24,7 +25,7 @@ export class AdminSiteComponent implements OnInit {
     this.data.filter = filterValue.trim().toLowerCase();
   }
 
-  constructor(private store: Store<State>) {}
+  constructor(private route: ActivatedRoute, private store: Store<State>) {}
 
   ngOnInit() {
     this.store.dispatch(new fromStaff.GetStaffs());
@@ -35,5 +36,12 @@ export class AdminSiteComponent implements OnInit {
       this.data.paginator = this.paginator;
       this.data.sort = this.sort;
     });
+  }
+
+  deletestaff(id) {
+    this.store.dispatch(new fromStaff.DeleteStaff(id));
+  }
+  goto(id) {
+    this.store.dispatch(new fromStaff.GetStaff(id));
   }
 }
