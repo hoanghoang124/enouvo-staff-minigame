@@ -1,3 +1,4 @@
+import { slideInOutAnimation } from './../../../../.history/src/app/Shared/animation/slide-in.animation_20200312193404';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -8,7 +9,9 @@ import * as fromStaff from '../../Store';
 @Component({
   selector: 'app-staff-detail',
   templateUrl: './staff-detail.component.html',
-  styleUrls: ['./staff-detail.component.css']
+  styleUrls: ['./staff-detail.component.css'],
+  animations: [slideInOutAnimation],
+  host: { '[@slideInOutAnimation]': '' }
 })
 export class StaffDetailComponent implements OnInit {
   staff$: Observable<Staff>;

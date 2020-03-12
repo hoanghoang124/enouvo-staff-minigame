@@ -2,14 +2,11 @@
   <mat-toolbar>
     <a routerLink="/dashboard" id="brand">Enouvo IT Solutions</a>
     <a class="example-spacer"></a>
-    <button mat-button [matMenuTriggerFor]="menu">Menu</button>
-    <mat-menu #menu="matMenu">
-      <a mat-menu-item (click)="staff()">Your stars</a>
-      <a mat-menu-item (click)="admin()" *ngIf="role === roles.Admin">Admin</a>
-      <a mat-menu-item (click)="resetPassword()" *ngIf="role === roles.Admin"
-        >Reset Password</a
-      >
-      <a mat-menu-item (click)="logOut()" style="color: tomato;">Log Out</a>
-    </mat-menu>
+    <a mat-button (click)="staff()">Dashboard</a>
+    <a mat-button (click)="admin()" *ngIf="role === roles.Admin">Admin</a>
+    <a mat-button (click)="resetPassword()" *ngIf="role === roles.Admin"
+      >Reset Password</a
+    >
+    <a mat-button (click)="logOut()" id="logOut">Log Out</a>
   </mat-toolbar>
 </header>

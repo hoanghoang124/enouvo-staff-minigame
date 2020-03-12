@@ -8,11 +8,14 @@ import { Staff } from '../Models/staff.model';
 import { Star } from '../Models/star.model';
 import { HttpClient } from '@angular/common/http';
 import Chart from 'chart.js';
+import { fadeInAnimation } from '../animation/fade-in.animation';
 
 @Component({
   selector: 'app-admin-site',
   templateUrl: './admin-site.component.html',
-  styleUrls: ['./admin-site.component.css']
+  styleUrls: ['./admin-site.component.css'],
+  animations: [fadeInAnimation],
+  host: { '[@fadeInAnimation]': '' }
 })
 export class AdminSiteComponent implements OnInit {
   displayedColumns: string[] = ['lastName', 'position', 'actions'];

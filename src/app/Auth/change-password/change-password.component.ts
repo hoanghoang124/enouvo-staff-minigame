@@ -1,3 +1,4 @@
+import { slideInOutAnimation } from './../../Main/animation/slide-in-out.animation';
 import { Validators } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
@@ -10,7 +11,9 @@ import * as fromAuth from '../../Store';
 @Component({
   selector: 'app-change-password',
   templateUrl: './change-password.component.html',
-  styleUrls: ['./change-password.component.css']
+  styleUrls: ['./change-password.component.css'],
+  animations: [slideInOutAnimation],
+  host: { '[@slideInOutAnimation]': '' }
 })
 export class ChangePasswordComponent implements OnInit {
   errorMessage$: Observable<string> = null;

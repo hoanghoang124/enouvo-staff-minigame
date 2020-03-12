@@ -1,3 +1,4 @@
+import { slideInOutAnimation } from './../../../../.history/src/app/Shared/animation/slide-in.animation_20200312193404';
 import { Validators } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
@@ -11,7 +12,9 @@ import { User } from '../Models/user.model';
 @Component({
   selector: 'app-reset-password',
   templateUrl: './reset-password.component.html',
-  styleUrls: ['./reset-password.component.css']
+  styleUrls: ['./reset-password.component.css'],
+  animations: [slideInOutAnimation],
+  host: { '[@slideInOutAnimation]': '' }
 })
 export class ResetPasswordComponent implements OnInit {
   errorMessage$: Observable<string>;

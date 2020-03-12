@@ -13,7 +13,11 @@ footer {
   color: #0f4c81;
 }
 
+#copyRight {
+  color: #011627 !important;
+}
+
 a {
-  padding-left: 2px;
+  padding: 2px;
   color: #fff;
 }

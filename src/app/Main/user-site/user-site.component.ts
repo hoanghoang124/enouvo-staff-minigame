@@ -1,3 +1,4 @@
+import { fadeInAnimation } from '../animation/fade-in.animation';
 import { Component, OnInit, HostListener, ViewChild } from '@angular/core';
 import { StaffService } from '../Services/staff.service';
 import { Observable } from 'rxjs';
@@ -17,7 +18,9 @@ export interface Tile {
 @Component({
   selector: 'app-user-site',
   templateUrl: './user-site.component.html',
-  styleUrls: ['./user-site.component.css']
+  styleUrls: ['./user-site.component.css'],
+  animations: [fadeInAnimation],
+  host: { '[@fadeInAnimation]': '' }
 })
 export class UserSiteComponent implements OnInit {
   getState: Observable<any>;
@@ -69,7 +72,12 @@ export class UserSiteComponent implements OnInit {
   }
 
   onResize(event) {
-    this.breakpoint = (event.target.innerWidth >= 1330) ? 3 : ((event.target.innerWidth >= 900) ? 2 : 1);
+    this.breakpoint =
+      event.target.innerWidth >= 1330
+        ? 3
+        : event.target.innerWidth >= 900
+        ? 2
+        : 1;
   }
 
   ngOnInit() {
@@ -78,6 +86,7 @@ export class UserSiteComponent implements OnInit {
     this.stafflist$.subscribe(res => {
       this.staffs = res as Staff[];
     });
-    this.breakpoint = (window.innerWidth >= 1330) ? 3 : ((window.innerWidth >= 900) ? 2 : 1);
+    this.breakpoint =
+      window.innerWidth >= 1330 ? 3 : window.innerWidth >= 900 ? 2 : 1;
   }
 }

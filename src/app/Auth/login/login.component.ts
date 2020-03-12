@@ -9,11 +9,14 @@ import * as fromAuth from '../../Store';
 import { ChangePasswordComponent } from '../change-password/change-password.component';
 import { MatDialog } from '@angular/material';
 import 'rxjs/add/operator/toPromise';
+import { fadeInAnimation } from 'src/app/Main/animation/fade-in.animation';
 
 @Component({
   selector: 'app-log-in',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  animations: [fadeInAnimation],
+  host: { '[@fadeInAnimation]': '' }
 })
 export class LoginComponent implements OnInit {
   errorMessage$: Observable<string> = null;

@@ -1,6 +1,6 @@
 .banner {
   background-color: #0f4c81;
-  color: aliceblue;
+  color: #fff;
   text-align: center;
   height: 400px;
 }
@@ -81,10 +81,19 @@ mat-card-footer {
 
 #btn-add {
   height: 40px;
-  background-color: #5299d3;
+  background-color: #fcdc3a;
   margin-right: 16px;
   margin-bottom: 16px;
   border-radius: 5px;
+}
+
+#btn-add:hover {
+  border: 1px solid #c9b02e;
+  box-shadow: inset 0 0 5px rgba(230, 179, 41, 1),
+    0 0 20px rgba(230, 179, 41, 1);
+  outline-color: rgba(230, 179, 41, 1);
+  outline-offset: 5px;
+  text-shadow: 1px 1px 2px #e6b329;
 }
 
 #icon-add {
@@ -93,23 +102,32 @@ mat-card-footer {
 
 #btn-substract {
   height: 40px;
-  border: 2px solid #5299d3;
+  border: 2px solid #fcdc3a;
   margin-right: 16px;
   margin-bottom: 16px;
   margin-right: 52px;
 }
 
+#btn-substract:hover {
+  border: 1px solid #c9b02e;
+  box-shadow: inset 0 0 20px rgba(230, 179, 41, 1),
+    0 0 20px rgba(230, 179, 41, 1);
+  outline-color: rgba(230, 179, 41, 1);
+  outline-offset: 15px;
+  text-shadow: 1px 1px 2px #e6b329;
+}
+
 #icon-substract {
-  color: #5299d3;
+  color: #fcdc3a;
 }
 
 .scroll-to-top {
   transform: rotate(-90deg);
   font-size: 60px;
-  color: #a2d729;
+  color: #5299d3;
   position: fixed;
   bottom: 70px;
-  right: 70px;
+  right: 60px;
   opacity: 0;
   transition: all 0.2s ease-in-out;
   background-color: transparent;
