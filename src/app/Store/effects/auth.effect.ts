@@ -89,7 +89,7 @@ export class AuthEffects {
     tap(user => {
       localStorage.setItem('token', user.payload.token);
       localStorage.setItem('id', user.payload.id);
-      this.router.navigateByUrl('/login');
+      this.router.navigateByUrl('/dashboard');
     })
   );
 

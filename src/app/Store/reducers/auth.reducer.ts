@@ -1,3 +1,4 @@
+import { getErrorMessage } from './../selectors/auth.selector';
 import * as AuthActions from '../actions/auth.action';
 import { Role } from 'src/app/Auth/Models/role.model';
 import { User } from './../../Auth/Models/user.model';
@@ -35,7 +36,7 @@ export function reducer(
         ...state,
         role: action.payload.scope,
         shouldUserChangePassword: action.payload.shouldUserChangePassword,
-        id: action.payload.id,
+        id: action.payload.userId,
         isLoading: false
       };
     }
@@ -43,28 +44,26 @@ export function reducer(
       return {
         ...state,
         isLoading: false,
-        errorMessage: 'Invalid Credentials.'
+        errorMessage: action.payload.message
       };
     }
     case AuthActionTypes.CHANGE_PASSWORD: {
       return {
         ...state,
-        isLoading: true,
-        errorMessage: null
+        isLoading: true
       };
     }
     case AuthActionTypes.CHANGE_PASSWORD_SUCCESS: {
       return {
         ...state,
-        isLoading: false,
-        errorMessage: null
+        isLoading: false
       };
     }
     case AuthActionTypes.CHANGE_PASSWORD_FAILURE: {
       return {
         ...state,
         isLoading: false,
-        errorMessage: 'Password does not match'
+        errorMessage: action.payload.message
       };
     }
     case AuthActionTypes.RESET_PASSWORD: {
@@ -78,14 +77,14 @@ export function reducer(
         ...state,
         id: action.payload.id,
         isLoading: false,
-        errorMessage: null
+        errorMessage: action.payload.message
       };
     }
     case AuthActionTypes.RESET_PASSWORD_FAILURE: {
       return {
         ...state,
         isLoading: false,
-        errorMessage: 'Invalid Credentials'
+        errorMessage: action.payload.message
       };
     }
     case AuthActionTypes.LOGOUT: {
