@@ -2,27 +2,32 @@
   <mat-toolbar>
     <a routerLink="/dashboard" id="brand">Enouvo IT Solutions</a>
     <a class="example-spacer"></a>
-    <nav>
+    <nav class="tab">
       <a
-        (click)="staff()"
+        routerLink="/dashboard"
         routerLinkActive="active"
         [routerLinkActiveOptions]="{ exact: true }"
         >Dashboard</a
       >
       <a
-        (click)="admin()"
-        *ngIf="role === roles.Admin"
+        routerLink="/admin"
         routerLinkActive="active"
+        *ngIf="role === roles.Admin"
         >Admin</a
       >
       <a
-        (click)="resetPassword()"
-        *ngIf="role === roles.Admin"
+        routerLink="/reset-password"
         routerLinkActive="active"
+        *ngIf="role === roles.Admin"
         >Reset Password</a
       >
-      <a (click)="logOut()" id="logOut">Log Out</a>
-      <div class="animation start-dashboard"></div>
+      <a
+        routerLink="/change-password"
+        routerLinkActive="active"
+        *ngIf="role !== roles.Admin"
+        >Change Password</a
+      >
+      <a routerLinkActive="active" (click)="logOut()">Log Out</a>
     </nav>
   </mat-toolbar>
 </header>

@@ -66,6 +66,7 @@ export class AuthEffects {
       localStorage.setItem('token', user.payload.token);
       localStorage.setItem('password', user.payload.password);
       localStorage.setItem('newPassword', user.payload.newPassword);
+      this.router.navigateByUrl('/login');
     })
   );
 
@@ -96,8 +97,9 @@ export class AuthEffects {
   @Effect({ dispatch: false })
   public LogOut: Observable<any> = this.actions.pipe(
     ofType(AuthActionTypes.LOGOUT),
-    tap(user => {
+    tap(() => {
       localStorage.clear();
+      this.router.navigateByUrl('/login');
     })
   );
 }

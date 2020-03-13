@@ -8,7 +8,7 @@ export class RoleGuardService implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot): boolean {
     const expectedRole = route.data.expectedRole;
-    if (!this.auth.getToken() || this.auth.isAdmin() !== expectedRole) {
+    if (this.auth.isAdmin() !== expectedRole) {
       this.router.navigate(['/error-page']);
       return false;
     }

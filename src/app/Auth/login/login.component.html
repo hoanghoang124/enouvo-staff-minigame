@@ -21,19 +21,16 @@
         type="password"
       />
       <mat-error>
-        <span
-          *ngIf="
-            loginForm.get('password').touched ||
-            loginForm.get('password').hasError('minlength')
-          "
-          >Please enter password, with less than 8 characters.</span
+        <span *ngIf="loginForm.get('password').errors?.required"
+          >Please enter password</span
         >
+        <span *ngIf="loginForm.get('password').errors?.minlength"
+          >Password with more than 8 characters
+        </span>
       </mat-error>
     </mat-form-field>
     <mat-error>
-      <span id="error-message" *ngIf="errorMessage$ != null">
-        {{ errorMessage$ | async }}
-      </span>
+      <span id="error-message" *ngIf="errorMessage$ != null"> </span>
     </mat-error>
     <div class="button-row">
       <button mat-raised-button color="primary" type="submit">

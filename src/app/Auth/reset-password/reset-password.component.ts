@@ -1,6 +1,4 @@
-import { Validators } from '@angular/forms';
-import { FormBuilder } from '@angular/forms';
-import { FormGroup } from '@angular/forms';
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
@@ -28,6 +26,7 @@ export class ResetPasswordComponent implements OnInit {
       username: ['', Validators.required]
     });
     this.errorMessage$ = this.store.select(fromAuth.getErrorMessage);
+    this.isLoadingResults$ = this.store.select(fromAuth.getIsLoading);
   }
 
   onSubmit(): void {
@@ -35,7 +34,6 @@ export class ResetPasswordComponent implements OnInit {
       return;
     }
     const id = localStorage.getItem('id');
-    this.isLoadingResults$ = this.store.select(fromAuth.getIsLoading);
     this.store.dispatch(new fromAuth.ResetPassword(id));
   }
 }

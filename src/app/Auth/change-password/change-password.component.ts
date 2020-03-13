@@ -1,12 +1,10 @@
-import { slideInOutAnimation } from './../../Main/animation/slide-in-out.animation';
-import { Validators } from '@angular/forms';
-import { FormBuilder } from '@angular/forms';
-import { FormGroup } from '@angular/forms';
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { State } from 'src/app/Store/reducers';
 import * as fromAuth from '../../Store';
+import { slideInOutAnimation } from './../../Main/animation/slide-in-out.animation';
 
 @Component({
   selector: 'app-change-password',
@@ -15,7 +13,7 @@ import * as fromAuth from '../../Store';
   animations: [slideInOutAnimation],
   host: { '[@slideInOutAnimation]': '' }
 })
-export class ChangePasswordComponent implements OnInit {
+export class ChangePasswordComponent implements OnInit, OnDestroy {
   errorMessage$: Observable<string> = null;
   isLoadingResults$: Observable<boolean>;
   changeForm: FormGroup;
@@ -28,13 +26,18 @@ export class ChangePasswordComponent implements OnInit {
       newPassword: ['', [Validators.required, Validators.minLength(8)]]
     });
     this.errorMessage$ = this.store.select(fromAuth.getErrorMessage);
+    this.isLoadingResults$ = this.store.select(fromAuth.getIsLoading);
   }
 
   onSubmit(): void {
     if (this.changeForm.invalid) {
       return;
     }
-    this.isLoadingResults$ = this.store.select(fromAuth.getIsLoading);
     this.store.dispatch(new fromAuth.ChangePassword(this.changeForm.value));
+  }
+
+  ngOnDestroy() {
+    localStorage.removeItem('password');
+    localStorage.removeItem('newPassword');
   }
 }

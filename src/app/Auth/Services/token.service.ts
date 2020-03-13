@@ -1,4 +1,3 @@
-import { LogOut } from './../../Store/actions/auth.action';
 import { Injectable, Injector } from '@angular/core';
 import {
   HttpEvent,
@@ -23,7 +22,7 @@ export class TokenInterceptor implements HttpInterceptor {
     const token = this.authService.getToken();
     request = request.clone({
       setHeaders: {
-        Authorization: `${token}`,
+        Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json'
       }
     });
@@ -41,6 +40,7 @@ export class ErrorInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       catchError((response: any) => {
         if (response instanceof HttpErrorResponse && response.status === 401) {
+          this.authService.logOut();
           this.router.navigateByUrl('/login');
         }
         return throwError(response);

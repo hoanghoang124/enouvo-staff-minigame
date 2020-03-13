@@ -6,9 +6,6 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { State } from 'src/app/Store/reducers';
 import * as fromAuth from '../../Store';
-import { ChangePasswordComponent } from '../change-password/change-password.component';
-import { MatDialog } from '@angular/material';
-import 'rxjs/add/operator/toPromise';
 import { fadeInAnimation } from 'src/app/Main/animation/fade-in.animation';
 
 @Component({
@@ -23,11 +20,7 @@ export class LoginComponent implements OnInit {
   isLoadingResults$: Observable<boolean>;
   loginForm: FormGroup;
 
-  constructor(
-    private store: Store<State>,
-    private formBuilder: FormBuilder,
-    private dialog: MatDialog
-  ) {}
+  constructor(private store: Store<State>, private formBuilder: FormBuilder) {}
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -35,13 +28,14 @@ export class LoginComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(8)]]
     });
     this.errorMessage$ = this.store.select(fromAuth.getErrorMessage);
+    this.isLoadingResults$ = this.store.select(fromAuth.getIsLoading);
   }
 
   onSubmit() {
     if (this.loginForm.invalid) {
       return;
     }
-    this.isLoadingResults$ = this.store.select(fromAuth.getIsLoading);
+
     this.store.dispatch(new fromAuth.LogIn(this.loginForm.value));
   }
 }

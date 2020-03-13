@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Effect, ofType, Actions } from '@ngrx/effects';
-import { Store, Action } from '@ngrx/store';
 
 import * as StaffActions from '../actions';
 import { map, catchError, switchMap } from 'rxjs/operators';
 import { StaffService } from '../../Main/Services/staff.service';
-import { State } from '../reducers';
 import { Router } from '@angular/router';
 
 const { StaffActionsType } = StaffActions;
@@ -15,8 +13,7 @@ export class StaffEffects {
   constructor(
     private actions$: Actions,
     private staffservice: StaffService,
-    private route: Router,
-    private store: Store<State>
+    private route: Router
   ) {}
 
   @Effect()

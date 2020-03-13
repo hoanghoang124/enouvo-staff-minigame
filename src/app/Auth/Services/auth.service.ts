@@ -13,12 +13,12 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
-  isTokenExpired(): boolean {
-    return false;
-  }
-
   isAdmin(): string {
     return localStorage.getItem('role');
+  }
+
+  logOut() {
+    return localStorage.clear();
   }
 
   shouldUserChangePassword(): string {
