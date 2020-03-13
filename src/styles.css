@@ -1,70 +1,66 @@
-/* You can add global styles to this file, and also import other style files */
+header {
+  justify-content: space-between;
+  background-color: #5299d3 !important;
+  height: 4rem;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2), 0 0 20px 0 rgba(0, 0, 0, 0.19);
+}
 
-html,
-body {
-  min-width: 300px !important;
-  background-color: whitesmoke !important;
-  margin: 0;
-  font-family: Roboto, sans-serif;
+.example-spacer {
+  flex: 1 1 auto;
 }
-a {
-  cursor: pointer;
+
+.example-spacer {
+  flex: 1 1 auto;
 }
-body > .inner {
-  display: none;
-}
-body.pg-loaded > .inner {
-  display: block;
-}
-.app-loading {
+
+nav {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-}
-
-.app-loading .spinner {
-  height: 200px;
-  width: 200px;
-  animation: rotate 2s linear infinite;
-  transform-origin: center center;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
   margin: auto;
+  width: fit-content;
+  float: right;
 }
 
-.app-loading .spinner .path {
-  stroke-dasharray: 2, 200;
-  stroke-dashoffset: 0;
-  animation: dash 1.5s ease-in-out infinite;
-  stroke-linecap: round;
-  stroke: #5299d3;
+nav a {
+  font-size: medium;
+  color: #fff;
+  text-decoration: none;
+  position: relative;
+  display: inline-block;
+  text-align: center;
+  margin-left: 15px;
+  padding: 0 5px 0 5px;
 }
 
-@keyframes rotate {
-  100% {
-    transform: rotate(360deg);
-  }
+.tab a.active {
+  border-bottom: 2px solid lawngreen;
 }
 
-@keyframes dash {
-  0% {
-    stroke-dasharray: 1, 200;
-    stroke-dashoffset: 0;
-  }
+/* MAIN STYLES
+--------------------------------------------------------------------- */
 
-  50% {
-    stroke-dasharray: 89, 200;
-    stroke-dashoffset: -35px;
-  }
+/* FOOTER STYLES
+--------------------------------------------------------------------- */
+footer {
+  background-color: #5299d3;
+  height: 2rem;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
 
-  100% {
-    stroke-dasharray: 89, 200;
-    stroke-dashoffset: -124px;
-  }
+.row {
+  width: 100%;
+  text-align: center;
+  margin: 5px 0px 5px 0px;
+  justify-content: center;
+  color: #0f4c81;
+}
+
+#copyRight {
+  color: #011627 !important;
+}
+
+a {
+  padding: 2px;
+  color: #fff;
 }

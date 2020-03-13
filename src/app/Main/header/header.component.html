@@ -1,4 +1,4 @@
-<header>
+<!-- <header>
   <mat-toolbar>
     <a routerLink="/dashboard" id="brand">Enouvo IT Solutions</a>
     <a class="example-spacer"></a>
@@ -7,27 +7,33 @@
         routerLink="/dashboard"
         routerLinkActive="active"
         [routerLinkActiveOptions]="{ exact: true }"
+        *ngIf="authService.isLoggedIn()"
         >Dashboard</a
       >
       <a
         routerLink="/admin"
         routerLinkActive="active"
-        *ngIf="role === roles.Admin"
+        *ngIf="role === roles.Admin && authService.isLoggedIn()"
         >Admin</a
       >
       <a
         routerLink="/reset-password"
         routerLinkActive="active"
-        *ngIf="role === roles.Admin"
+        *ngIf="role === roles.Admin && authService.isLoggedIn()"
         >Reset Password</a
       >
       <a
         routerLink="/change-password"
         routerLinkActive="active"
-        *ngIf="role !== roles.Admin"
+        *ngIf="role !== roles.Admin && authService.isLoggedIn()"
         >Change Password</a
       >
-      <a routerLinkActive="active" (click)="logOut()">Log Out</a>
+      <a
+        routerLinkActive="active"
+        (click)="logOut()"
+        *ngIf="authService.isLoggedIn()"
+        >Log Out</a
+      >
     </nav>
   </mat-toolbar>
-</header>
+</header> -->

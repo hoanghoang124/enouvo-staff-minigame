@@ -2,15 +2,22 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from '../Models/user.model';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private BASE_URL = 'https://training-management-dev.herokuapp.com/api';
+  helper = new JwtHelperService();
 
   constructor(private http: HttpClient) {}
 
   getToken(): string {
     return localStorage.getItem('token');
+  }
+
+  isLoggedIn() {
+    const token = this.getToken();
+    return !this.helper.isTokenExpired(token);
   }
 
   isAdmin(): string {

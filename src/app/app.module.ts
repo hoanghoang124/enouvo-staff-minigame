@@ -26,8 +26,8 @@ import { AdminSiteComponent } from './Main/admin-site/admin-site.component';
 import { StaffDetailComponent } from './Main/staff-detail/staff-detail.component';
 import { StaffAddComponent } from './Main/staff-add/staff-add.component';
 import { StaffEditComponent } from './Main/staff-edit/staff-edit.component';
-import { HeaderComponent } from './Main/header/header.component';
-import { FooterComponent } from './Main/footer/footer.component';
+// import { HeaderComponent } from './Main/header/header.component';
+// import { FooterComponent } from './Main/footer/footer.component';
 import { ResetPasswordComponent } from './Auth/reset-password/reset-password.component';
 import { ErrorPageComponent } from './Main/error-page/error-page.component';
 import { AppComponent } from './app.component';
@@ -40,8 +40,8 @@ import { appEffect } from './Store/effects';
   declarations: [
     AppComponent,
     LoginComponent,
-    FooterComponent,
-    HeaderComponent,
+    // FooterComponent,
+    // HeaderComponent,
     StaffAddComponent,
     UserSiteComponent,
     StaffEditComponent,
