@@ -1,4 +1,3 @@
-import { slideInOutAnimation } from './../../../../.history/src/app/Shared/animation/slide-in.animation_20200312193404';
 import { Validators } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
@@ -8,6 +7,7 @@ import { Store } from '@ngrx/store';
 import { State } from 'src/app/Store/reducers';
 import * as fromAuth from '../../Store';
 import { User } from '../Models/user.model';
+import { slideInOutAnimation } from 'src/app/Main/animation/slide-in-out.animation';
 
 @Component({
   selector: 'app-reset-password',

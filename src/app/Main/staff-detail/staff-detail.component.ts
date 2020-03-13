@@ -1,4 +1,3 @@
-import { slideInOutAnimation } from './../../../../.history/src/app/Shared/animation/slide-in.animation_20200312193404';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -6,6 +5,7 @@ import { Observable } from 'rxjs';
 import { State } from 'src/app/Store/reducers';
 import { Staff } from 'src/app/Main/Models/staff.model';
 import * as fromStaff from '../../Store';
+import { slideInOutAnimation } from '../animation/slide-in-out.animation';
 @Component({
   selector: 'app-staff-detail',
   templateUrl: './staff-detail.component.html',
