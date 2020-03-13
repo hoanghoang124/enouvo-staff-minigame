@@ -81,19 +81,10 @@ mat-card-footer {
 
 #btn-add {
   height: 40px;
-  background-color: #fcdc3a;
+  background-color: lawngreen;
   margin-right: 16px;
   margin-bottom: 16px;
   border-radius: 5px;
-}
-
-#btn-add:hover {
-  border: 1px solid #c9b02e;
-  box-shadow: inset 0 0 5px rgba(230, 179, 41, 1),
-    0 0 20px rgba(230, 179, 41, 1);
-  outline-color: rgba(230, 179, 41, 1);
-  outline-offset: 5px;
-  text-shadow: 1px 1px 2px #e6b329;
 }
 
 #icon-add {
@@ -102,23 +93,14 @@ mat-card-footer {
 
 #btn-substract {
   height: 40px;
-  border: 2px solid #fcdc3a;
+  border: 2px solid lawngreen;
   margin-right: 16px;
   margin-bottom: 16px;
   margin-right: 52px;
 }
 
-#btn-substract:hover {
-  border: 1px solid #c9b02e;
-  box-shadow: inset 0 0 20px rgba(230, 179, 41, 1),
-    0 0 20px rgba(230, 179, 41, 1);
-  outline-color: rgba(230, 179, 41, 1);
-  outline-offset: 15px;
-  text-shadow: 1px 1px 2px #e6b329;
-}
-
 #icon-substract {
-  color: #fcdc3a;
+  color: lawngreen;
 }
 
 .scroll-to-top {
