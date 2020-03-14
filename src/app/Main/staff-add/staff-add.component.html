@@ -2,7 +2,7 @@
   <div class="example-container mat-elevation-z8">
     <mat-spinner *ngIf="isLoadingResults$ | async"></mat-spinner>
     <mat-card class="example-card">
-      <form [formGroup]="staffForm" (ngSubmit)="onFormSubmit(staffForm.value)">
+      <form [formGroup]="staffForm" (ngSubmit)="onFormSubmit()">
         <mat-form-field class="example-full-width">
           <input matInput placeholder="Id" formControlName="id" />
           <mat-error>

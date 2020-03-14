@@ -1,19 +1,58 @@
-<mat-toolbar color="primary">
+<mat-toolbar>
   <div fxHide.gt-xs>
-    <button mat-icon-button (click)="onToggleSidenav()">
+    <button
+      mat-icon-button
+      *ngIf="authService.isLoggedIn()"
+      (click)="onToggleSidenav()"
+    >
       <mat-icon>menu</mat-icon>
     </button>
   </div>
   <div>
-    <a routerLink="/home">Owner-Account</a>
+    <a routerLink="/dashboard">Enouvo IT Solution</a>
   </div>
   <div fxFlex fxLayout fxLayoutAlign="end" fxHide.xs>
     <ul fxLayout fxLayoutGap="15px" class="navigation-items">
       <li>
-        <a routerLink="/owner">Owner Actions</a>
+        <a
+          routerLink="/dashboard"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          *ngIf="authService.isLoggedIn()"
+          >Dashboard</a
+        >
       </li>
       <li>
-        <a routerLink="/account">Account Actions</a>
+        <a
+          routerLink="/admin"
+          routerLinkActive="active"
+          *ngIf="role === roles.Admin && authService.isLoggedIn()"
+          >Admin</a
+        >
+      </li>
+      <li>
+        <a
+          routerLink="/reset-password"
+          routerLinkActive="active"
+          *ngIf="role === roles.Admin && authService.isLoggedIn()"
+          >Reset Password</a
+        >
+      </li>
+      <li>
+        <a
+          routerLink="/change-password"
+          routerLinkActive="active"
+          *ngIf="role === roles.Admin && authService.isLoggedIn()"
+          >Change Password</a
+        >
+      </li>
+      <li>
+        <a
+          routerLinkActive="active"
+          (click)="logOut()"
+          *ngIf="authService.isLoggedIn()"
+          >Log Out</a
+        >
       </li>
     </ul>
   </div>

@@ -5,7 +5,7 @@ a {
 
 a:hover,
 a:active {
-  color: lightgray;
+  border-bottom: 2px solid lawngreen;
 }
 
 .nav-caption {
