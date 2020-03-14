@@ -10,14 +10,6 @@ h2 {
   font-size: 60px;
 }
 
-p {
-  display: block;
-  margin-block-start: 1em;
-  margin-block-end: 1em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
-}
-
 .mat-elevation-z8 {
   margin-top: -150px;
   background-color: whitesmoke;

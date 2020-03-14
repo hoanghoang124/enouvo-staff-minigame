@@ -1,11 +1,15 @@
+.login {
+  height: 100vh;
+}
+
 mat-card {
   background-color: whitesmoke;
-  padding: 30px;
-  border-radius: 15px;
   position: absolute;
-  top: 25%;
+  padding: 30px;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
+  border-radius: 15px;
 }
 
 h2 {

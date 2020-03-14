@@ -10,40 +10,40 @@
     đầy đau khổ” của con người đang tiến dần tới hạn mút cuối cùng của sự sống,
     để thấy được cái giản dị nhưng bền vững của chân lí nhân sinh.
   </p>
-  <mat-grid-list
-    [cols]="breakpoint"
-    rowHeight="1:1"
-    (window:resize)="onResize($event)"
-  >
-    <mat-grid-tile *ngFor="let staff of staffs">
-      <mat-card>
-        <mat-card-header>
-          <mat-card-title
-            >{{ staff.firstName }} {{ staff.middleName }}
-            {{ staff.lastName }}</mat-card-title
-          >
-        </mat-card-header>
-        <mat-card-content>
-          <img mat-card-lg-image src="{{ staff.avatar }}" />
-          <p>{{ staff.quote }}</p>
-        </mat-card-content>
-        <mat-card-footer>
-          <button mat-flat-button id="btn-add">
-            <mat-icon id="icon-add">add_circle</mat-icon>
-          </button>
-          <button mat-button id="btn-substract">
-            <mat-icon id="icon-substract">remove_circle</mat-icon>
-          </button>
-        </mat-card-footer>
-      </mat-card>
-    </mat-grid-tile>
-  </mat-grid-list>
-  <mat-icon
-    [ngClass]="{ 'show-scroll': showScroll }"
-    (click)="scrollToTop()"
-    class="scroll-to-top"
-    aria-hidden="false"
-    aria-label="Example home icon"
-    >double_arrow</mat-icon
-  >
 </div>
+<mat-grid-list
+  [cols]="breakpoint"
+  rowHeight="1:1"
+  (window:resize)="onResize($event)"
+>
+  <mat-grid-tile *ngFor="let staff of staffs">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title
+          >{{ staff.firstName }} {{ staff.middleName }}
+          {{ staff.lastName }}</mat-card-title
+        >
+      </mat-card-header>
+      <mat-card-content>
+        <img mat-card-lg-image src="{{ staff.avatar }}" />
+        <p>{{ staff.quote }}</p>
+      </mat-card-content>
+      <mat-card-footer>
+        <button mat-flat-button id="btn-add">
+          <mat-icon id="icon-add">add_circle</mat-icon>
+        </button>
+        <button mat-button id="btn-substract">
+          <mat-icon id="icon-substract">remove_circle</mat-icon>
+        </button>
+      </mat-card-footer>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>
+<mat-icon
+  [ngClass]="{ 'show-scroll': showScroll }"
+  (click)="scrollToTop()"
+  class="scroll-to-top"
+  aria-hidden="false"
+  aria-label="Example home icon"
+  >double_arrow</mat-icon
+>

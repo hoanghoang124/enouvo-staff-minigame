@@ -10,25 +10,9 @@ h2 {
   font-size: 60px;
 }
 
-p {
-  display: block;
-  margin-block-start: 1em;
-  margin-block-end: 1em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
-}
-
-.grid {
-  width: 80%;
-  position: relative;
-  margin: auto;
-  background-color: transparent;
-}
-
 mat-grid-list {
   height: 100%;
   margin-top: -150px;
-  overflow: auto;
 }
 
 mat-card {
@@ -57,7 +41,6 @@ mat-card-content {
   padding-top: 16px;
   height: 100%;
   flex-grow: 1;
-  overflow: auto;
   text-align: center;
 }
 
@@ -71,7 +54,8 @@ img {
 p {
   width: 100%;
   height: auto;
-  padding: 16px;
+  padding-left: 15%;
+  padding-right: 15%;
 }
 
 mat-card-footer {

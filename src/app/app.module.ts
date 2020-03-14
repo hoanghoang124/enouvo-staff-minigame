@@ -11,7 +11,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from './Shared/Angular-Material/Angular-Material.module';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-
 import { AuthService } from './Auth/Services/auth.service';
 import {
   TokenInterceptor,
@@ -19,6 +18,7 @@ import {
 } from './Auth/Services/token.service';
 import { AuthGuardService as AuthGuard } from './Auth/Services/auth-guard.service';
 import { RoleGuardService as RoleGuard } from './Auth/Services/role-guard.service';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { LoginComponent } from './Auth/login/login.component';
 import { UserSiteComponent } from './Main/user-site/user-site.component';
@@ -26,22 +26,21 @@ import { AdminSiteComponent } from './Main/admin-site/admin-site.component';
 import { StaffDetailComponent } from './Main/staff-detail/staff-detail.component';
 import { StaffAddComponent } from './Main/staff-add/staff-add.component';
 import { StaffEditComponent } from './Main/staff-edit/staff-edit.component';
-// import { HeaderComponent } from './Main/header/header.component';
-// import { FooterComponent } from './Main/footer/footer.component';
 import { ResetPasswordComponent } from './Auth/reset-password/reset-password.component';
 import { ErrorPageComponent } from './Main/error-page/error-page.component';
 import { AppComponent } from './app.component';
 import { ChangePasswordComponent } from './Auth/change-password/change-password.component';
+import { HeaderComponent } from './Main/navigation/header/header.component';
+import { FooterComponent } from './Main/navigation/footer/footer.component';
+import { SidenavListComponent } from './Main/navigation/sidenav-list/sidenav-list.component';
+import { LayoutComponent } from './Main/layout/layout.component';
 
 import { reducers } from './Store/reducers';
 import { appEffect } from './Store/effects';
-
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    // FooterComponent,
-    // HeaderComponent,
     StaffAddComponent,
     UserSiteComponent,
     StaffEditComponent,
@@ -49,7 +48,11 @@ import { appEffect } from './Store/effects';
     AdminSiteComponent,
     StaffDetailComponent,
     ResetPasswordComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    HeaderComponent,
+    FooterComponent,
+    SidenavListComponent,
+    LayoutComponent
   ],
   imports: [
     FormsModule,
@@ -60,6 +63,7 @@ import { appEffect } from './Store/effects';
     HttpClientModule,
     ReactiveFormsModule,
     AngularMaterialModule,
+    FlexLayoutModule,
     BrowserAnimationsModule,
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot(appEffect),
