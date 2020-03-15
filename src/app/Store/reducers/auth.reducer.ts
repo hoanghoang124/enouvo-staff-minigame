@@ -44,7 +44,7 @@ export function reducer(
       return {
         ...state,
         isLoading: false,
-        errorMessage: action.payload.message
+        errorMessage: 'invalid credential'
       };
     }
     case AuthActionTypes.CHANGE_PASSWORD: {
