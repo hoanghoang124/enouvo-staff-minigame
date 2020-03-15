@@ -8,7 +8,6 @@ import {
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { AuthService } from './auth.service';
-import { Router } from '@angular/router';
 import { catchError } from 'rxjs/operators';
 
 @Injectable()

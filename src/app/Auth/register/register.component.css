@@ -5,11 +5,12 @@
 mat-card {
   background-color: whitesmoke;
   position: absolute;
-  padding: 30px;
+  padding: 30px 30px 10px 30px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 15px;
+  height: max-content;
 }
 
 h2 {
@@ -30,11 +31,9 @@ span,
 
 button {
   height: 40px;
-  margin-top: 15px;
+  margin-top: 5px;
   width: 100%;
   padding: auto;
-  color: #faf9f9;
-  position: relative;
 }
 
 button ::ng-deep .mat-spinner circle {

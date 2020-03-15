@@ -24,8 +24,7 @@
     *ngIf="authService.isAdmin()"
     (click)="onSidenavClose()"
   >
-    <mat-icon>account_balance</mat-icon
-    ><span class="nav-caption">Reset Password</span>
+    <mat-icon>warning</mat-icon><span class="nav-caption">Reset Password</span>
   </a>
   <a
     mat-list-item
@@ -33,10 +32,10 @@
     *ngIf="authService.isLoggedIn()"
     (click)="onSidenavClose()"
   >
-    <mat-icon>account_balance</mat-icon
+    <mat-icon>settings_backup_restore</mat-icon
     ><span class="nav-caption">Change Password</span>
   </a>
   <a mat-list-item *ngIf="authService.isLoggedIn()" (click)="logOut()">
-    <mat-icon>account_balance</mat-icon><span class="nav-caption">Log Out</span>
+    <mat-icon>exit_to_app</mat-icon><span class="nav-caption">Log Out</span>
   </a>
 </mat-nav-list>
