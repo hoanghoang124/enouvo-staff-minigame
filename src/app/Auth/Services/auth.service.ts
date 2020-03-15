@@ -1,14 +1,17 @@
+import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from '../Models/user.model';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { Role } from '../Models/role.model';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private BASE_URL = 'https://training-management-dev.herokuapp.com/api';
+  private BASE_URL = environment.apiBaseUrl;
   helper = new JwtHelperService();
-
+  role: string;
+  roles = Role;
   constructor(private http: HttpClient) {}
 
   getToken(): string {
@@ -20,8 +23,13 @@ export class AuthService {
     return !this.helper.isTokenExpired(token);
   }
 
-  isAdmin(): string {
-    return localStorage.getItem('role');
+  isAdmin(): boolean {
+    this.role = localStorage.getItem('role');
+    if (this.role === this.roles.Admin && this.isLoggedIn()) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   logOut() {
@@ -35,6 +43,11 @@ export class AuthService {
   logIn(params): Observable<any> {
     const url = `${this.BASE_URL}/v1/auth/login`;
     return this.http.post<User>(url, params);
+  }
+
+  register(params) {
+    const url = `${this.BASE_URL}/v1/auth/register`;
+    return this.http.post(url, params);
   }
 
   resetPassword(params): Observable<any> {

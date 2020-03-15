@@ -32,18 +32,16 @@ export class TokenInterceptor implements HttpInterceptor {
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor() {}
   intercept(
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
-      catchError((response: any) => {
-        if (response instanceof HttpErrorResponse && response.status === 401) {
-          this.authService.logOut();
-          this.router.navigateByUrl('/login');
+      catchError((err: any) => {
+        if (err instanceof HttpErrorResponse && err.status === 401) {
+          return throwError(err);
         }
-        return throwError(response);
       })
     );
   }

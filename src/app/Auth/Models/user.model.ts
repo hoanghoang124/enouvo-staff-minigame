@@ -6,6 +6,7 @@ export class User {
   password: string;
   firstName: string;
   lastName: string;
+  email: string;
   role: Role;
   token: 'token';
   shouldUserChangePassword: 'shouldUserChangePassword';

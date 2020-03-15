@@ -1,0 +1,46 @@
+.register {
+  height: 100vh;
+}
+
+mat-card {
+  background-color: whitesmoke;
+  position: absolute;
+  padding: 30px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 15px;
+}
+
+h2 {
+  color: blueviolet;
+  padding: 20px 0x 20px 0px;
+  margin-bottom: 10px;
+}
+
+span,
+.example-full-width {
+  width: 100%;
+}
+
+#error-message {
+  margin-bottom: 20px;
+  width: 100px;
+}
+
+button {
+  height: 40px;
+  margin-top: 15px;
+  width: 100%;
+  padding: auto;
+  color: #faf9f9;
+  position: relative;
+}
+
+button ::ng-deep .mat-spinner circle {
+  stroke: #faf9f9;
+}
+
+button ::ng-deep mat-spinner {
+  display: inline-block;
+}

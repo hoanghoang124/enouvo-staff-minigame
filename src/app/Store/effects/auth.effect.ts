@@ -45,6 +45,31 @@ export class AuthEffects {
   );
 
   @Effect()
+  Register$ = this.actions.pipe(
+    ofType(AuthActionTypes.REGISTER),
+    map((action: AuthActions.Register) => action.payload),
+    switchMap(payload => {
+      return this.authService.register(payload).pipe(
+        map(user => {
+          this.router.navigateByUrl('/dashboard');
+          return new AuthActions.RegisterSuccess(user);
+        }),
+        catchError(error => of(new AuthActions.RegisterFailure(error)))
+      );
+    })
+  );
+
+  @Effect({ dispatch: false })
+  RegisterSuccess: Observable<any> = this.actions.pipe(
+    ofType(AuthActionTypes.LOGIN_SUCCESS),
+    tap(user => {
+      localStorage.setItem('token', user.payload.token);
+      localStorage.setItem('username', user.payload.username);
+      localStorage.setItem('email', user.payload.email);
+    })
+  );
+
+  @Effect()
   ChangePassword$ = this.actions.pipe(
     ofType(AuthActionTypes.CHANGE_PASSWORD),
     map((action: AuthActions.ChangePassword) => action.payload),

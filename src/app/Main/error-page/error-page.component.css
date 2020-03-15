@@ -1,4 +1,7 @@
-.header,
+.container {
+  height: 100vh;
+}
+
 body {
   width: 100%;
   justify-content: center;

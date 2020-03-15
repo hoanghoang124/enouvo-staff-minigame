@@ -37,6 +37,7 @@ import { LayoutComponent } from './Main/layout/layout.component';
 
 import { reducers } from './Store/reducers';
 import { appEffect } from './Store/effects';
+import { RegisterComponent } from './Auth/register/register.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,7 +53,8 @@ import { appEffect } from './Store/effects';
     HeaderComponent,
     FooterComponent,
     SidenavListComponent,
-    LayoutComponent
+    LayoutComponent,
+    RegisterComponent
   ],
   imports: [
     FormsModule,

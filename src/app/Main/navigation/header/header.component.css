@@ -22,3 +22,12 @@ a:active {
   padding: 0;
   margin: 0;
 }
+
+#menu {
+  color: white;
+  font-size: large;
+}
+
+#logout {
+  color: red;
+}

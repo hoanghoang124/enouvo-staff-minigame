@@ -11,10 +11,12 @@ import { AuthGuardService as AuthGuard } from './Auth/Services/auth-guard.servic
 import { RoleGuardService as RoleGuard } from './Auth/Services/role-guard.service';
 import { ResetPasswordComponent } from './Auth/reset-password/reset-password.component';
 import { ErrorPageComponent } from './Main/error-page/error-page.component';
+import { RegisterComponent } from './Auth/register/register.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent, canActivate: [RoleGuard] },
   {
     path: 'reset-password',
     component: ResetPasswordComponent,
@@ -33,26 +35,22 @@ export const routes: Routes = [
   {
     path: 'admin',
     component: AdminSiteComponent,
-    canActivate: [RoleGuard],
-    data: { expectedRole: 'admin' }
+    canActivate: [RoleGuard]
   },
   {
     path: 'admin/create',
     component: StaffAddComponent,
-    canActivate: [RoleGuard],
-    data: { expectedRole: 'admin' }
+    canActivate: [RoleGuard]
   },
   {
     path: 'admin/:id/detail',
     component: StaffDetailComponent,
-    canActivate: [RoleGuard],
-    data: { expectedRole: 'admin' }
+    canActivate: [RoleGuard]
   },
   {
     path: 'admin/:id/edit',
     component: StaffEditComponent,
-    canActivate: [RoleGuard],
-    data: { expectedRole: 'admin' }
+    canActivate: [RoleGuard]
   },
   { path: 'error-page', component: ErrorPageComponent },
   { path: '**', redirectTo: 'error-page', pathMatch: 'full' }
