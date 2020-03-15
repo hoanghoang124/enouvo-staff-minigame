@@ -28,7 +28,8 @@ export function reducer(
     case AuthActionTypes.LOGIN: {
       return {
         ...state,
-        isLoading: true
+        isLoading: true,
+        errorMessage: null
       };
     }
     case AuthActionTypes.LOGIN_SUCCESS: {
@@ -44,13 +45,14 @@ export function reducer(
       return {
         ...state,
         isLoading: false,
-        errorMessage: action.payload.message
+        errorMessage: 'invalid credential'
       };
     }
     case AuthActionTypes.CHANGE_PASSWORD: {
       return {
         ...state,
-        isLoading: true
+        isLoading: true,
+        errorMessage: null
       };
     }
     case AuthActionTypes.CHANGE_PASSWORD_SUCCESS: {
@@ -69,7 +71,8 @@ export function reducer(
     case AuthActionTypes.RESET_PASSWORD: {
       return {
         ...state,
-        isLoading: true
+        isLoading: true,
+        errorMessage: null
       };
     }
     case AuthActionTypes.RESET_PASSWORD_SUCCESS: {
