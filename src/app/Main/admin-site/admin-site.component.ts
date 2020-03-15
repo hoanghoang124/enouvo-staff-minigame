@@ -5,8 +5,6 @@ import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { State } from 'src/app/Store/reducers';
 import * as fromStaff from '../../Store';
 import { Staff } from '../Models/staff.model';
-import { Star } from '../Models/star.model';
-import { HttpClient } from '@angular/common/http';
 import Chart from 'chart.js';
 import { fadeInAnimation } from '../animation/fade-in.animation';
 import * as _ from 'lodash';
@@ -26,7 +24,7 @@ export class AdminSiteComponent implements OnInit {
   isLoadingResults$: Observable<boolean>;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-
+  myChart: any;
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.data.filter = filterValue.trim().toLowerCase();
@@ -40,7 +38,7 @@ export class AdminSiteComponent implements OnInit {
       const star = _.map(res, 'star');
 
       const chart = document.getElementById('myChart');
-      const myChart = new Chart(chart, {
+      this.myChart = new Chart(chart, {
         type: 'bar',
         data: {
           labels: name,

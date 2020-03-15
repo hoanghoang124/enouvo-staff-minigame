@@ -1,7 +1,6 @@
-import { getErrorMessage } from './../selectors/auth.selector';
 import * as AuthActions from '../actions/auth.action';
 import { Role } from 'src/app/Auth/Models/role.model';
-import { User } from './../../Auth/Models/user.model';
+import { User } from 'src/app/Auth/Models/user.model';
 
 const { AuthActionTypes } = AuthActions;
 
@@ -58,7 +57,8 @@ export function reducer(
     case AuthActionTypes.CHANGE_PASSWORD_SUCCESS: {
       return {
         ...state,
-        isLoading: false
+        isLoading: false,
+        errorMessage: action.payload.message
       };
     }
     case AuthActionTypes.CHANGE_PASSWORD_FAILURE: {

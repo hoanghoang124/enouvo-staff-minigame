@@ -2,7 +2,20 @@
 .example-container {
   position: relative;
   padding: 5px;
-  overflow-y: auto;
+  display: flexbox;
+}
+
+mat-card {
+  height: 650px;
+  display: flex;
+  flex-direction: column;
+}
+
+form {
+  padding-top: 16px;
+  height: 100%;
+  flex-grow: 1;
+  text-align: center;
 }
 
 .example-form {

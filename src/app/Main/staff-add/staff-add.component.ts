@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
-import { StaffService } from '../Services/staff.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Staff } from '../Models/staff.model';
 import { Store } from '@ngrx/store';
@@ -37,7 +35,7 @@ export class StaffAddComponent implements OnInit {
     });
   }
 
-  onFormSubmit(form: NgForm) {
+  onFormSubmit() {
     this.isLoadingResults$ = this.store.select(fromStaff.getIsLoading);
     this.store.dispatch(new fromStaff.CreateStaff(this.staffForm.value));
   }

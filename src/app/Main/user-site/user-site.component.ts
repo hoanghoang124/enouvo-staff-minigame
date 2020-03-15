@@ -1,6 +1,5 @@
 import { fadeInAnimation } from '../animation/fade-in.animation';
 import { Component, OnInit, HostListener, ViewChild } from '@angular/core';
-import { StaffService } from '../Services/staff.service';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import * as fromStaff from '../../Store';
@@ -37,10 +36,7 @@ export class UserSiteComponent implements OnInit {
   @ViewChild(MatGridList, { static: true }) grid: MatGridList;
   breakpoint: number;
 
-  constructor(
-    private staffService: StaffService,
-    private store: Store<State>
-  ) {}
+  constructor(private store: Store<State>) {}
 
   scrollToTop() {
     (function smoothscroll() {

@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { AuthService } from '../../../Auth/Services/auth.service';
 import { Store } from '@ngrx/store';
 import { LogOut } from 'src/app/Store/actions/auth.action';
-import { Router } from '@angular/router';
 import { State } from 'src/app/Store/reducers';
 import { Role } from 'src/app/Auth/Models/role.model';
 @Component({
@@ -12,30 +12,18 @@ import { Role } from 'src/app/Auth/Models/role.model';
 export class HeaderComponent implements OnInit {
   role: string;
   roles = Role;
-  constructor(private store: Store<State>, private router: Router) {}
+  @Output() public sidenavToggle = new EventEmitter();
+  constructor(private store: Store<State>, public authService: AuthService) {}
 
   ngOnInit() {
     this.role = localStorage.getItem('role');
   }
 
-  admin(): void {
-    this.router.navigate(['/admin']);
-  }
-
-  staff(): void {
-    this.router.navigate(['/dashboard']);
-  }
-
-  resetPassword(): void {
-    this.router.navigate(['/reset-password']);
-  }
-
-  changePassword(): void {
-    this.router.navigate(['/change-password']);
-  }
-
   logOut(): void {
     this.store.dispatch(new LogOut());
-    this.router.navigate(['/login']);
   }
+
+  public onToggleSidenav = () => {
+    this.sidenavToggle.emit();
+  };
 }

@@ -1,7 +1,7 @@
 import { slideInOutAnimation } from './../animation/slide-in-out.animation';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import * as fromStaff from '../../Store';
 import { State } from '../../Store';
@@ -67,7 +67,7 @@ export class StaffEditComponent implements OnInit {
     this.store.dispatch(new fromStaff.UpdateStaff(this.staffForm.value));
   }
 
-  productdetails(id) {
-    this.router.navigate(['/admin/' + this.staff.id + '/detail']);
+  productdetails(index) {
+    this.router.navigate(['/admin/' + index + '/detail']);
   }
 }

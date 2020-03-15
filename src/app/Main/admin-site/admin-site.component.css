@@ -11,11 +11,10 @@ h2 {
 }
 
 p {
-  display: block;
-  margin-block-start: 1em;
-  margin-block-end: 1em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
+  width: 100%;
+  height: auto;
+  padding-left: 15%;
+  padding-right: 15%;
 }
 
 .mat-elevation-z8 {
