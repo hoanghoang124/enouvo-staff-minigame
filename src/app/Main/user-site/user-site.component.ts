@@ -69,7 +69,9 @@ export class UserSiteComponent implements OnInit {
 
   onResize(event) {
     this.breakpoint =
-      event.target.innerWidth >= 1330
+      event.target.innerWidth >= 1440
+        ? 4
+        : event.target.innerWidth >= 1330
         ? 3
         : event.target.innerWidth >= 900
         ? 2
@@ -83,6 +85,12 @@ export class UserSiteComponent implements OnInit {
       this.staffs = res as Staff[];
     });
     this.breakpoint =
-      window.innerWidth >= 1330 ? 3 : window.innerWidth >= 900 ? 2 : 1;
+      window.innerHeight >= 1440
+        ? 4
+        : window.innerWidth >= 1330
+        ? 3
+        : window.innerWidth >= 900
+        ? 2
+        : 1;
   }
 }
