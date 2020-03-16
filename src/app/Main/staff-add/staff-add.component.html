@@ -3,18 +3,26 @@
     <mat-spinner *ngIf="isLoadingResults$ | async"></mat-spinner>
     <mat-card class="example-card">
       <form [formGroup]="staffForm" (ngSubmit)="onFormSubmit()">
-        <mat-form-field class="example-full-width">
-          <input matInput placeholder="Id" formControlName="id" />
+        <mat-form-field style="display: inline;">
+          <input matInput placeholder="ID" formControlName="id" />
           <mat-error>
             <span *ngIf="staffForm.get('id').errors?.required">
               Please enter your id !
             </span>
           </mat-error>
         </mat-form-field>
-        <mat-form-field class="example-full-width">
+        <mat-form-field style="display:inline;">
+          <input matInput placeholder="Avatar" formControlName="avatar" />
+          <img
+            *ngIf="staffForm.get('avatar').valid"
+            [src]="staffForm.get('avatar').value"
+            class="img-responsive"
+          />
+        </mat-form-field>
+        <mat-form-field style="width: 30%;display:inline-flex">
           <input
             matInput
-            placeholder="firstName"
+            placeholder="First Name"
             formControlName="firstName"
             pattern="[a-zA-Z ]*"
           />
@@ -27,10 +35,10 @@
             </span>
           </mat-error>
         </mat-form-field>
-        <mat-form-field class="example-full-width">
+        <mat-form-field style="width: 30%;display:inline-flex">
           <input
             matInput
-            placeholder="middleName"
+            placeholder="Middle Name"
             formControlName="middleName"
             pattern="[a-zA-Z ]*"
           />
@@ -43,10 +51,10 @@
             </span>
           </mat-error>
         </mat-form-field>
-        <mat-form-field class="example-full-width">
+        <mat-form-field style="width: 30%;display:inline-flex">
           <input
             matInput
-            placeholder="lastName"
+            placeholder="Last Name"
             formControlName="lastName"
             pattern="[a-zA-Z ]*"
           />
@@ -59,29 +67,9 @@
             </span>
           </mat-error>
         </mat-form-field>
-        <mat-form-field class="example-full-width">
-          <input matInput placeholder="avatar" formControlName="avatar" />
-          <img
-            *ngIf="staffForm.get('avatar').valid"
-            [src]="staffForm.get('avatar').value"
-            class="img-responsive"
-          />
-        </mat-form-field>
-        <mat-form-field class="example-full-width">
-          <input matInput placeholder="email" formControlName="email" />
-          <mat-error>
-            <span *ngIf="staffForm.get('email').errors?.required"
-              >Please enter your email</span
-            >
-            <span *ngIf="staffForm.get('email').errors?.email"
-              >Your email is not valid</span
-            >
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field class="example-full-width">
-          <input matInput placeholder="quote" formControlName="quote" />
-        </mat-form-field>
-        <mat-form-field class="example-full-width">
+        <mat-form-field
+          style="width: 100%;display:inline-block;padding-right: 10%;"
+        >
           <input
             matInput
             [matDatepicker]="birthday"
@@ -98,10 +86,34 @@
             </span>
           </mat-error>
         </mat-form-field>
-        <mat-form-field class="example-full-width">
+        <mat-form-field style="width: 30%;display:inline-flexbox">
+          <input matInput placeholder="Position" formControlName="position" />
+          <mat-error>
+            <span *ngIf="staffForm.get('position').errors?.required">
+              Please enter your position !
+            </span>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          style="width: 30%;display:inline-flexbox; padding-left: 5%;"
+        >
+          <input matInput placeholder="Email" formControlName="email" />
+          <mat-error>
+            <span *ngIf="staffForm.get('email').errors?.required"
+              >Please enter your email</span
+            >
+            <span *ngIf="staffForm.get('email').errors?.email"
+              >Your email is not valid</span
+            >
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          style="width: 30%;display:inline-flexbox; padding-left: 5%;"
+        >
+          <span matPrefix>+84 &nbsp;</span>
           <input
             matInput
-            placeholder="phone"
+            placeholder="Phone"
             formControlName="phone"
             pattern="[0-9]*"
           />
@@ -114,10 +126,10 @@
             </span>
           </mat-error>
         </mat-form-field>
-        <mat-form-field class="example-full-width">
+        <mat-form-field style="width: 60%;display:inline-block;">
           <input
             matInput
-            placeholder="addressStreet"
+            placeholder="Street"
             formControlName="addressStreet"
           />
           <mat-error>
@@ -126,25 +138,18 @@
             </span>
           </mat-error>
         </mat-form-field>
-        <mat-form-field class="example-full-width">
-          <input
-            matInput
-            placeholder="addressCity"
-            formControlName="addressCity"
-          />
+        <mat-form-field style="float: right;padding-right: 10%;">
+          <input matInput placeholder="City" formControlName="addressCity" />
           <mat-error>
             <span *ngIf="staffForm.get('addressCity').errors?.required">
               Please enter your city !
             </span>
           </mat-error>
         </mat-form-field>
-        <mat-form-field class="example-full-width">
-          <input matInput placeholder="position" formControlName="position" />
-          <mat-error>
-            <span *ngIf="staffForm.get('addressCity').errors?.required">
-              Please enter your city !
-            </span>
-          </mat-error>
+        <mat-form-field
+          style="width: 100%;display:inline-block;padding-right: 10%;"
+        >
+          <input matInput placeholder="Quote" formControlName="quote" />
         </mat-form-field>
         <div class="button-row">
           <button
