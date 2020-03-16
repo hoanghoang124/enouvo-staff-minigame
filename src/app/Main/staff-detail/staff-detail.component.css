@@ -1,8 +1,9 @@
 /* Structure */
 .example-container {
-  position: relative;
-  padding: 5px;
-  display: flexbox;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .example-loading-shade {

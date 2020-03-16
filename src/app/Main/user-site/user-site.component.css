@@ -17,8 +17,8 @@ mat-grid-list {
 
 mat-card {
   width: 350px;
-  height: 400px;
-  margin: auto;
+  height: 380px;
+  margin: 30px 10px;
   background-color: #fff;
   display: flex;
   flex-direction: column;

@@ -5,6 +5,10 @@
   height: 400px;
 }
 
+.container {
+  height: 100vh;
+}
+
 h2 {
   padding-top: 30px;
   font-size: 60px;
@@ -20,10 +24,15 @@ p {
 .mat-elevation-z8 {
   margin-top: -150px;
   background-color: whitesmoke;
+  border-radius: 5px;
 }
 
 table {
   width: 100%;
+}
+
+mat-paginator {
+  border-radius: 5px;
 }
 
 .button-row {
