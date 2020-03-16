@@ -27,7 +27,6 @@ import { StaffDetailComponent } from './Main/staff-detail/staff-detail.component
 import { StaffAddComponent } from './Main/staff-add/staff-add.component';
 import { StaffEditComponent } from './Main/staff-edit/staff-edit.component';
 import { ResetPasswordComponent } from './Auth/reset-password/reset-password.component';
-import { ErrorPageComponent } from './Main/error-page/error-page.component';
 import { AppComponent } from './app.component';
 import { ChangePasswordComponent } from './Auth/change-password/change-password.component';
 import { HeaderComponent } from './Main/navigation/header/header.component';
@@ -45,7 +44,6 @@ import { RegisterComponent } from './Auth/register/register.component';
     StaffAddComponent,
     UserSiteComponent,
     StaffEditComponent,
-    ErrorPageComponent,
     AdminSiteComponent,
     StaffDetailComponent,
     ResetPasswordComponent,

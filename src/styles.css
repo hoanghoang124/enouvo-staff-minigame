@@ -1,7 +1,7 @@
 html,
 body {
   margin: 0;
-  height: 100%;
+  min-height: 100vh;
 }
 
 .app-loading {
@@ -11,6 +11,7 @@ body {
   align-items: center;
   justify-content: center;
   height: 100%;
+  overflow: hidden;
 }
 
 .app-loading .spinner {

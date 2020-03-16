@@ -1,9 +1,16 @@
 mat-sidenav-container,
 mat-sidenav-content,
 mat-sidenav {
-  height: 100%;
+  min-height: 100vh;
 }
 
 mat-sidenav {
   width: 250px;
+}
+.mat-drawer:not(.mat-drawer-side) {
+  position: fixed;
+}
+
+.mat-drawer-backdrop {
+  position: fixed !important;
 }

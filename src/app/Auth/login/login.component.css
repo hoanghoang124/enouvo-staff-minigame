@@ -1,5 +1,6 @@
 .login {
-  height: 100vh;
+  min-height: calc(100vh - 96px);
+  background-color: rgba(15, 76, 129, 1);
 }
 
 mat-card {

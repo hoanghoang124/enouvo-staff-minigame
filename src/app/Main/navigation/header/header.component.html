@@ -14,58 +14,65 @@
   <div fxFlex fxLayout fxLayoutAlign="end" fxHide.xs>
     <ul fxLayout fxLayoutGap="15px" class="navigation-items">
       <li>
-        <a routerLink="/dashboard" *ngIf="authService.isLoggedIn()"
+        <a
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          routerLink="/dashboard"
+          *ngIf="authService.isLoggedIn()"
           >Dashboard</a
         >
       </li>
       <li>
-        <a routerLink="/admin" *ngIf="authService.isAdmin()">Admin </a>
+        <a
+          routerLinkActive="active"
+          routerLink="/admin"
+          *ngIf="authService.isAdmin()"
+          >Admin
+        </a>
       </li>
 
       <li>
-        <button
-          mat-button
+        <a
           id="menu"
           [matMenuTriggerFor]="funtion"
           *ngIf="authService.isLoggedIn()"
         >
           Menu
-        </button>
-
+          <i class="material-icons">
+            arrow_drop_down
+          </i>
+        </a>
         <mat-menu #funtion="matMenu">
-          <button
-            mat-menu-item
-            [matMenuTriggerFor]="adminFuntion"
-            *ngIf="authService.isAdmin()"
-          >
-            Features
-          </button>
-          <button mat-menu-item id="logout" (click)="logOut()">Log Out</button>
-        </mat-menu>
-
-        <mat-menu #adminFuntion="matMenu">
-          <button
+          <a
+            class="menu-link"
             mat-menu-item
             routerLink="/register"
             *ngIf="authService.isAdmin()"
           >
             Register Account
-          </button>
-          <button
+          </a>
+          <a
+            class="menu-link"
             mat-menu-item
             routerLink="/reset-password"
             *ngIf="authService.isAdmin()"
           >
             Reset Password
-          </button>
-          <button
+          </a>
+          <a
+            class="menu-link"
             mat-menu-item
             routerLink="/change-password"
             *ngIf="authService.isLoggedIn()"
           >
             Change Password
-          </button>
+          </a>
+          <a class="menu-link" mat-menu-item id="logout" (click)="logOut()"
+            >Log Out</a
+          >
         </mat-menu>
+
+        <mat-menu #adminFuntion="matMenu"> </mat-menu>
       </li>
     </ul>
   </div>

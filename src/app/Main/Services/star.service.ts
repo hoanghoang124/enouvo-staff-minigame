@@ -7,7 +7,7 @@ import { Star } from '../Models/star.model';
   providedIn: 'root'
 })
 export class StarService {
-  url = 'http://5e55e20836450d001428865d.mockapi.io/star';
+  url = 'https://5e55e20836450d001428865d.mockapi.io/star';
   constructor(private http: HttpClient) {}
 
   getStars(): Observable<any> {
