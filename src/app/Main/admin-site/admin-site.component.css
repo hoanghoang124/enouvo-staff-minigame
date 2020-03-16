@@ -24,7 +24,7 @@ p {
 .mat-elevation-z8 {
   margin-top: -150px;
   background-color: whitesmoke;
-  border-radius: 5px;
+  border-radius: 7px;
 }
 
 table {
@@ -32,11 +32,7 @@ table {
 }
 
 mat-paginator {
-  border-radius: 5px;
-}
-
-.button-row {
-  padding: 1%;
+  border-radius: 7px;
 }
 
 th.mat-sort-header-sorted {

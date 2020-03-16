@@ -6,13 +6,25 @@ mat-toolbar {
 mat-icon {
   color: white;
 }
-li {
-  text-align: center;
-}
 
 a {
   text-decoration: none;
   color: white;
+}
+
+button {
+  background-color: #5299d3;
+  margin: auto;
+  border-style: none;
+}
+
+button #menu-left {
+  padding-top: 8px;
+  margin-right: 5px;
+}
+
+button #menu-right {
+  padding-top: 4px;
 }
 
 a:hover,

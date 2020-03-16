@@ -1,12 +1,22 @@
 /* Structure */
+.container {
+  height: 100vh;
+  overflow: auto;
+}
+
 .example-container {
   position: relative;
+  height: 100vh;
 }
 
 mat-card {
-  height: 100%;
+  height: fit-content;
   display: flex;
   flex-direction: column;
+}
+
+mat-form-filed {
+  height: fit-content;
 }
 
 form {

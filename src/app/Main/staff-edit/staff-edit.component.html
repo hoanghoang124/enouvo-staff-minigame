@@ -1,153 +1,143 @@
 <div class="container">
-  <div class="example-container mat-elevation-z8">
-    <div class="example-loading-shade" *ngIf="isLoadingResults$ | async">
-      <mat-spinner></mat-spinner>
-    </div>
-    <mat-card class="example-card">
-      <form [formGroup]="staffForm" (ngSubmit)="onFormSubmit()">
-        <mat-form-field class="example-full-width">
-          <input matInput placeholder="firstName" formControlName="firstName" />
-          <mat-error>
-            <span *ngIf="staffForm.get('firstName').errors?.required">
-              Please enter your first name !
-            </span>
-            <span *ngIf="staffForm.get('firstName').errors?.pattern">
-              Your first name must contain valid character !
-            </span>
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field class="example-full-width">
-          <input
-            matInput
-            placeholder="middleName"
-            formControlName="middleName"
-          />
-          <mat-error>
-            <span *ngIf="staffForm.get('middleName').errors?.required">
-              Please enter your middle name !
-            </span>
-            <span *ngIf="staffForm.get('middleName').errors?.pattern">
-              Your middle name must contain valid character !
-            </span>
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field class="example-full-width">
-          <input matInput placeholder="lastName" formControlName="lastName" />
-          <mat-error>
-            <span *ngIf="staffForm.get('lastName').errors?.required">
-              Please enter your last name !
-            </span>
-            <span *ngIf="staffForm.get('lastName').errors?.pattern">
-              Your last name must contain valid character !
-            </span>
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field class="example-full-width">
-          <input matInput placeholder="avatar" formControlName="avatar" />
-          <img
-            *ngIf="staffForm.get('avatar').valid"
-            [src]="staffForm.get('avatar').value"
-            class="img-responsive"
-          />
-          <mat-error>
-            <span *ngIf="staffForm.get('avatar').errors?.required">
-              Please enter your avatar !
-            </span>
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field class="example-full-width">
-          <input matInput placeholder="email" formControlName="email" />
-          <mat-error>
-            <span *ngIf="staffForm.get('email').errors?.required"
-              >Please enter your email</span
-            >
-            <span *ngIf="staffForm.get('email').errors?.email"
-              >Your email is not valid</span
-            >
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field class="example-full-width">
-          <input matInput placeholder="quote" formControlName="quote" />
-          <mat-error>
-            <span *ngIf="staffForm.get('quote').errors?.required">
-              Please enter your quote !
-            </span>
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field class="example-full-width">
-          <input
-            matInput
-            [matDatepicker]="birthday"
-            formControlName="birthday"
-          />
-          <mat-datepicker-toggle
-            matSuffix
-            [for]="birthday"
-          ></mat-datepicker-toggle>
-          <mat-datepicker #birthday disabled="false"></mat-datepicker>
-          <mat-error>
-            <span *ngIf="staffForm.get('birthday').errors?.required">
-              Please enter your birthday !
-            </span>
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field class="example-full-width">
-          <input matInput placeholder="phone" formControlName="phone" />
-          <mat-error>
-            <span *ngIf="staffForm.get('phone').errors?.required">
-              Please enter your phone !
-            </span>
-            <span *ngIf="staffForm.get('phone').errors?.pattern">
-              Your last name must contain valid character !
-            </span>
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field class="example-full-width">
-          <input
-            matInput
-            placeholder="addressStreet"
-            formControlName="addressStreet"
-          />
-          <mat-error>
-            <span *ngIf="staffForm.get('addressStreet').errors?.required">
-              Please enter your street !
-            </span>
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field class="example-full-width">
-          <input
-            matInput
-            placeholder="addressCity"
-            formControlName="addressCity"
-          />
-          <mat-error>
-            <span *ngIf="staffForm.get('addressCity').errors?.required">
-              Please enter your city !
-            </span>
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field class="example-full-width">
-          <input matInput placeholder="position" formControlName="position" />
-          <mat-error>
-            <span *ngIf="staffForm.get('position').errors?.required">
-              Please enter your city !
-            </span>
-          </mat-error>
-        </mat-form-field>
-        <div class="button-row">
-          <button
-            type="submit"
-            [disabled]="!staffForm.valid"
-            mat-flat-button
-            color="primary"
-          >
-            <mat-icon>save</mat-icon>
-          </button>
-          <a mat-flat-button color="primary" routerLink="/admin">
-            <mat-icon>arrow_back</mat-icon>
-          </a>
-        </div>
-      </form>
-    </mat-card>
+  <div class="example-loading-shade" *ngIf="isLoadingResults$ | async">
+    <mat-spinner></mat-spinner>
   </div>
+  <mat-card class="example-card">
+    <form [formGroup]="staffForm" (ngSubmit)="onFormSubmit()">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="firstName" formControlName="firstName" />
+        <mat-error>
+          <span *ngIf="staffForm.get('firstName').errors?.required">
+            Please enter your first name !
+          </span>
+          <span *ngIf="staffForm.get('firstName').errors?.pattern">
+            Your first name must contain valid character !
+          </span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="middleName" formControlName="middleName" />
+        <mat-error>
+          <span *ngIf="staffForm.get('middleName').errors?.required">
+            Please enter your middle name !
+          </span>
+          <span *ngIf="staffForm.get('middleName').errors?.pattern">
+            Your middle name must contain valid character !
+          </span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="lastName" formControlName="lastName" />
+        <mat-error>
+          <span *ngIf="staffForm.get('lastName').errors?.required">
+            Please enter your last name !
+          </span>
+          <span *ngIf="staffForm.get('lastName').errors?.pattern">
+            Your last name must contain valid character !
+          </span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="avatar" formControlName="avatar" />
+        <img
+          *ngIf="staffForm.get('avatar').valid"
+          [src]="staffForm.get('avatar').value"
+          class="img-responsive"
+        />
+        <mat-error>
+          <span *ngIf="staffForm.get('avatar').errors?.required">
+            Please enter your avatar !
+          </span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="email" formControlName="email" />
+        <mat-error>
+          <span *ngIf="staffForm.get('email').errors?.required"
+            >Please enter your email</span
+          >
+          <span *ngIf="staffForm.get('email').errors?.email"
+            >Your email is not valid</span
+          >
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="quote" formControlName="quote" />
+        <mat-error>
+          <span *ngIf="staffForm.get('quote').errors?.required">
+            Please enter your quote !
+          </span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput [matDatepicker]="birthday" formControlName="birthday" />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="birthday"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #birthday disabled="false"></mat-datepicker>
+        <mat-error>
+          <span *ngIf="staffForm.get('birthday').errors?.required">
+            Please enter your birthday !
+          </span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="phone" formControlName="phone" />
+        <mat-error>
+          <span *ngIf="staffForm.get('phone').errors?.required">
+            Please enter your phone !
+          </span>
+          <span *ngIf="staffForm.get('phone').errors?.pattern">
+            Your last name must contain valid character !
+          </span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input
+          matInput
+          placeholder="addressStreet"
+          formControlName="addressStreet"
+        />
+        <mat-error>
+          <span *ngIf="staffForm.get('addressStreet').errors?.required">
+            Please enter your street !
+          </span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input
+          matInput
+          placeholder="addressCity"
+          formControlName="addressCity"
+        />
+        <mat-error>
+          <span *ngIf="staffForm.get('addressCity').errors?.required">
+            Please enter your city !
+          </span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="position" formControlName="position" />
+        <mat-error>
+          <span *ngIf="staffForm.get('position').errors?.required">
+            Please enter your city !
+          </span>
+        </mat-error>
+      </mat-form-field>
+      <div class="button-row">
+        <button
+          type="submit"
+          [disabled]="!staffForm.valid"
+          mat-flat-button
+          color="primary"
+        >
+          <mat-icon>save</mat-icon>
+        </button>
+        <a mat-flat-button color="primary" routerLink="/admin">
+          <mat-icon>arrow_back</mat-icon>
+        </a>
+      </div>
+    </form>
+  </mat-card>
 </div>
