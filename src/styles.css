@@ -5,6 +5,9 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
 }
 
+body {
+  background-color: whitesmoke !important;
+}
 .app-loading {
   position: relative;
   display: flex;

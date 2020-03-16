@@ -3,7 +3,7 @@
 }
 
 mat-card {
-  background-color: whitesmoke;
+  background-color: #fff;
   position: absolute;
   padding: 30px 30px 10px 30px;
   top: 50%;
@@ -14,9 +14,10 @@ mat-card {
 }
 
 h2 {
-  color: blueviolet;
+  color: #5299d3;
   padding: 20px 0x 20px 0px;
   margin-bottom: 10px;
+  text-shadow: 0.5px 0.5px 4px rgba(0, 0, 0, 0.2);
 }
 
 span,
@@ -34,6 +35,11 @@ button {
   margin-top: 5px;
   width: 100%;
   padding: auto;
+}
+
+#btn-submit {
+  background-color: #5299d3;
+  color: #fff;
 }
 
 button ::ng-deep .mat-spinner circle {
