@@ -23,6 +23,10 @@ export class ChangePasswordComponent implements OnInit {
   errorMessage$: Observable<string>;
   isLoadingResults$: Observable<boolean>;
   changePasswordForm: FormGroup;
+  hide1 = true;
+  hide2 = true;
+  hide3 = true;
+
   constructor(private store: Store<State>, private formBuilder: FormBuilder) {}
 
   ngOnInit() {
