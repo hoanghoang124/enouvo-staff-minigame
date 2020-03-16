@@ -4,7 +4,7 @@
   </div>
   <mat-card class="example-card">
     <form [formGroup]="staffForm" (ngSubmit)="onFormSubmit()">
-      <mat-form-field class="example-full-width">
+      <mat-form-field>
         <input matInput placeholder="firstName" formControlName="firstName" />
         <mat-error>
           <span *ngIf="staffForm.get('firstName').errors?.required">
@@ -15,7 +15,7 @@
           </span>
         </mat-error>
       </mat-form-field>
-      <mat-form-field class="example-full-width">
+      <mat-form-field>
         <input matInput placeholder="middleName" formControlName="middleName" />
         <mat-error>
           <span *ngIf="staffForm.get('middleName').errors?.required">
@@ -26,7 +26,7 @@
           </span>
         </mat-error>
       </mat-form-field>
-      <mat-form-field class="example-full-width">
+      <mat-form-field>
         <input matInput placeholder="lastName" formControlName="lastName" />
         <mat-error>
           <span *ngIf="staffForm.get('lastName').errors?.required">
@@ -37,7 +37,7 @@
           </span>
         </mat-error>
       </mat-form-field>
-      <mat-form-field class="example-full-width">
+      <mat-form-field>
         <input matInput placeholder="avatar" formControlName="avatar" />
         <img
           *ngIf="staffForm.get('avatar').valid"
@@ -50,7 +50,7 @@
           </span>
         </mat-error>
       </mat-form-field>
-      <mat-form-field class="example-full-width">
+      <mat-form-field>
         <input matInput placeholder="email" formControlName="email" />
         <mat-error>
           <span *ngIf="staffForm.get('email').errors?.required"
@@ -61,7 +61,7 @@
           >
         </mat-error>
       </mat-form-field>
-      <mat-form-field class="example-full-width">
+      <mat-form-field>
         <input matInput placeholder="quote" formControlName="quote" />
         <mat-error>
           <span *ngIf="staffForm.get('quote').errors?.required">
@@ -69,7 +69,7 @@
           </span>
         </mat-error>
       </mat-form-field>
-      <mat-form-field class="example-full-width">
+      <mat-form-field>
         <input matInput [matDatepicker]="birthday" formControlName="birthday" />
         <mat-datepicker-toggle
           matSuffix
@@ -82,7 +82,7 @@
           </span>
         </mat-error>
       </mat-form-field>
-      <mat-form-field class="example-full-width">
+      <mat-form-field>
         <input matInput placeholder="phone" formControlName="phone" />
         <mat-error>
           <span *ngIf="staffForm.get('phone').errors?.required">
@@ -93,7 +93,7 @@
           </span>
         </mat-error>
       </mat-form-field>
-      <mat-form-field class="example-full-width">
+      <mat-form-field>
         <input
           matInput
           placeholder="addressStreet"
@@ -105,7 +105,7 @@
           </span>
         </mat-error>
       </mat-form-field>
-      <mat-form-field class="example-full-width">
+      <mat-form-field>
         <input
           matInput
           placeholder="addressCity"
@@ -117,7 +117,7 @@
           </span>
         </mat-error>
       </mat-form-field>
-      <mat-form-field class="example-full-width">
+      <mat-form-field>
         <input matInput placeholder="position" formControlName="position" />
         <mat-error>
           <span *ngIf="staffForm.get('position').errors?.required">

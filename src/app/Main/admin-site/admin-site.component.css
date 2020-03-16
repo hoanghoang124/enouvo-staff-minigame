@@ -27,6 +27,10 @@ p {
   border-radius: 7px;
 }
 
+.button-row {
+  padding: 10px;
+}
+
 table {
   width: 100%;
 }

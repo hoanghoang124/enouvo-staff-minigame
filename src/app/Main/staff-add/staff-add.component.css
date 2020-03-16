@@ -1,7 +1,12 @@
 /* Structure */
+.staff-add {
+  height: 100vh;
+  background-color: rgba(15, 76, 129, 1);
+}
+
 .example-container {
   position: relative;
-  padding: 5px;
+  height: fit-content;
 }
 
 .example-full-width {
