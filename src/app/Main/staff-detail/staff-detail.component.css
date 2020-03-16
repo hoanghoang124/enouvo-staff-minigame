@@ -2,6 +2,7 @@
 .example-container {
   position: relative;
   padding: 5px;
+  display: flexbox;
 }
 
 .example-loading-shade {

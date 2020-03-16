@@ -30,7 +30,6 @@ mat-card-header {
   flex-direction: row;
   flex-shrink: 0;
   color: #0f4c81;
-  font-size: large;
 }
 
 mat-card-title.mat-card-title {
