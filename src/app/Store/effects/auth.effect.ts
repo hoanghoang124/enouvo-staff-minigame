@@ -29,7 +29,9 @@ export class AuthEffects {
           }
           return new AuthActions.LogInSuccess(user);
         }),
-        catchError(error => of(new AuthActions.LogInFailure(error)))
+        catchError(res => {
+          return of(new AuthActions.LogInFailure(res.error.message));
+        })
       );
     })
   );
@@ -54,18 +56,10 @@ export class AuthEffects {
           this.router.navigateByUrl('/dashboard');
           return new AuthActions.RegisterSuccess(user);
         }),
-        catchError(error => of(new AuthActions.RegisterFailure(error)))
+        catchError(res =>
+          of(new AuthActions.RegisterFailure(res.error.message))
+        )
       );
-    })
-  );
-
-  @Effect({ dispatch: false })
-  RegisterSuccess: Observable<any> = this.actions.pipe(
-    ofType(AuthActionTypes.LOGIN_SUCCESS),
-    tap(user => {
-      localStorage.setItem('token', user.payload.token);
-      localStorage.setItem('username', user.payload.username);
-      localStorage.setItem('email', user.payload.email);
     })
   );
 
@@ -76,22 +70,13 @@ export class AuthEffects {
     switchMap(payload => {
       return this.authService.changePassword(payload).pipe(
         map(user => {
-          this.router.navigateByUrl('/dashboard');
+          this.router.navigateByUrl('/login');
           return new AuthActions.ChangePasswordSuccess(user);
         }),
-        catchError(error => of(new AuthActions.ChangePasswordFailure(error)))
+        catchError(res =>
+          of(new AuthActions.ChangePasswordFailure(res.error.message))
+        )
       );
-    })
-  );
-
-  @Effect({ dispatch: false })
-  ChangePasswordSuccess: Observable<any> = this.actions.pipe(
-    ofType(AuthActionTypes.CHANGE_PASSWORD_SUCCESS),
-    tap(user => {
-      localStorage.setItem('token', user.payload.token);
-      localStorage.setItem('password', user.payload.password);
-      localStorage.setItem('newPassword', user.payload.newPassword);
-      this.router.navigateByUrl('/login');
     })
   );
 
@@ -102,20 +87,13 @@ export class AuthEffects {
     switchMap(payload => {
       return this.authService.resetPassword({ userId: payload }).pipe(
         map(user => {
+          this.router.navigateByUrl('/dashboard');
           return new AuthActions.ResetPasswordSuccess(user);
         }),
-        catchError(error => of(new AuthActions.ResetPasswordFailure(error)))
+        catchError(res =>
+          of(new AuthActions.ResetPasswordFailure(res.error.message))
+        )
       );
-    })
-  );
-
-  @Effect({ dispatch: false })
-  ResetPasswordSuccess: Observable<any> = this.actions.pipe(
-    ofType(AuthActionTypes.RESET_PASSWORD_SUCCESS),
-    tap(user => {
-      localStorage.setItem('token', user.payload.token);
-      localStorage.setItem('id', user.payload.id);
-      this.router.navigateByUrl('/dashboard');
     })
   );
 

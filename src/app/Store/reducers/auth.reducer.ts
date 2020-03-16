@@ -7,14 +7,13 @@ const { AuthActionTypes } = AuthActions;
 export interface AuthState {
   role: Role;
   id: User;
-  shouldUserChangePassword: User;
   isLoading: boolean;
   errorMessage: string;
 }
 export const initialState: AuthState = {
   role: null,
   id: null,
-  shouldUserChangePassword: null,
+
   isLoading: false,
   errorMessage: null
 };
@@ -35,16 +34,16 @@ export function reducer(
       return {
         ...state,
         role: action.payload.scope,
-        shouldUserChangePassword: action.payload.shouldUserChangePassword,
         id: action.payload.userId,
         isLoading: false
       };
     }
     case AuthActionTypes.LOGIN_FAILURE: {
+      console.log('zo day');
       return {
         ...state,
         isLoading: false,
-        errorMessage: 'invalid credential'
+        errorMessage: action.payload
       };
     }
     case AuthActionTypes.CHANGE_PASSWORD: {
@@ -57,15 +56,14 @@ export function reducer(
     case AuthActionTypes.CHANGE_PASSWORD_SUCCESS: {
       return {
         ...state,
-        isLoading: false,
-        errorMessage: action.payload.message
+        isLoading: false
       };
     }
     case AuthActionTypes.CHANGE_PASSWORD_FAILURE: {
       return {
         ...state,
         isLoading: false,
-        errorMessage: action.payload.message
+        errorMessage: action.payload
       };
     }
     case AuthActionTypes.RESET_PASSWORD: {
@@ -79,15 +77,14 @@ export function reducer(
       return {
         ...state,
         id: action.payload.id,
-        isLoading: false,
-        errorMessage: action.payload.message
+        isLoading: false
       };
     }
     case AuthActionTypes.RESET_PASSWORD_FAILURE: {
       return {
         ...state,
         isLoading: false,
-        errorMessage: action.payload.message
+        errorMessage: action.payload
       };
     }
     case AuthActionTypes.LOGOUT: {

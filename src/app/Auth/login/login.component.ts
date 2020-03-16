@@ -16,7 +16,7 @@ import { fadeInAnimation } from 'src/app/Main/animation/fade-in.animation';
   host: { '[@fadeInAnimation]': '' }
 })
 export class LoginComponent implements OnInit {
-  errorMessage$: Observable<string> = null;
+  errorMessage$: Observable<string>;
   isLoadingResults$: Observable<boolean>;
   loginForm: FormGroup;
 

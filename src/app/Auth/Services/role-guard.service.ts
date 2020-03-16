@@ -8,7 +8,7 @@ export class RoleGuardService implements CanActivate {
 
   canActivate(): boolean {
     if (!this.authService.isAdmin()) {
-      this.router.navigate(['/error-page']);
+      this.router.navigate(['/dashboard']);
       return false;
     }
     return true;

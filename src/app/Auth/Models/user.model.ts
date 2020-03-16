@@ -8,6 +8,6 @@ export class User {
   lastName: string;
   email: string;
   role: Role;
-  token: 'token';
-  shouldUserChangePassword: 'shouldUserChangePassword';
+  token: string;
+  shouldUserChangePassword: boolean;
 }

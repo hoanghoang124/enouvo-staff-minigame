@@ -2,19 +2,15 @@
 <mat-card class="register-form">
   <h2>Register account now</h2>
   <form (ngSubmit)="onSubmit()" [formGroup]="registerForm">
-    <mat-form-field class="example-full-width">
+    <mat-form-field class="mat-form-filed">
       <input matInput placeholder="Username" formControlName="username" />
       <mat-error>
-        <span
-          *ngIf="
-            !registerForm.get('username').valid &&
-            registerForm.get('username').touched
-          "
+        <span *ngIf="registerForm.get('username').errors?.required"
           >Please enter username</span
         >
       </mat-error>
     </mat-form-field>
-    <mat-form-field class="example-full-width">
+    <mat-form-field class="mat-form-filed">
       <input
         matInput
         placeholder="Email"
@@ -28,7 +24,9 @@
       </mat-error>
     </mat-form-field>
     <mat-error>
-      <span id="error-message" *ngIf="errorMessage$ != null"> </span>
+      <span id="error-message" *ngIf="errorMessage$ | async">{{
+        errorMessage$ | async
+      }}</span>
     </mat-error>
     <div class="button-row">
       <button mat-raised-button color="primary" type="submit">

@@ -9,6 +9,7 @@ import {
 import { Observable, throwError } from 'rxjs';
 import { AuthService } from './auth.service';
 import { catchError } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
@@ -31,7 +32,7 @@ export class TokenInterceptor implements HttpInterceptor {
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-  constructor() {}
+  constructor(private router: Router) {}
   intercept(
     request: HttpRequest<any>,
     next: HttpHandler
@@ -39,8 +40,9 @@ export class ErrorInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       catchError((err: any) => {
         if (err instanceof HttpErrorResponse && err.status === 401) {
-          return throwError(err);
+          this.router.navigate(['login']);
         }
+        return throwError(err);
       })
     );
   }

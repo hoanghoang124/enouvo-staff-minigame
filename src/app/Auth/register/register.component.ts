@@ -16,7 +16,7 @@ import { slideInOutAnimation } from './../../Main/animation/slide-in-out.animati
   host: { '[@slideInOutAnimation]': '' }
 })
 export class RegisterComponent implements OnInit {
-  errorMessage$: Observable<string> = null;
+  errorMessage$: Observable<string>;
   isLoadingResults$: Observable<boolean>;
   registerForm: FormGroup;
 
