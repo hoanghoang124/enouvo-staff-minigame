@@ -4,7 +4,7 @@
       <mat-spinner *ngIf="isLoadingResults$ | async"></mat-spinner>
       <mat-card class="example-card">
         <form [formGroup]="staffForm" (ngSubmit)="onFormSubmit()">
-          <mat-form-field class="example-full-width">
+          <mat-form-field style="display: inline;">
             <input matInput placeholder="Id" formControlName="id" />
             <mat-error>
               <span *ngIf="staffForm.get('id').errors?.required">
@@ -12,7 +12,15 @@
               </span>
             </mat-error>
           </mat-form-field>
-          <mat-form-field class="example-full-width">
+          <mat-form-field style="display: inline;">
+            <input matInput placeholder="Username" formControlName="username" />
+            <mat-error>
+              <span *ngIf="staffForm.get('username').errors?.required"
+                >Please enter username</span
+              >
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field style="display: inline;">
             <input
               matInput
               placeholder="First Name"
@@ -28,7 +36,7 @@
               </span>
             </mat-error>
           </mat-form-field>
-          <mat-form-field class="example-full-width">
+          <mat-form-field style="display: inline;">
             <input
               matInput
               placeholder="Middle Name"
@@ -44,7 +52,7 @@
               </span>
             </mat-error>
           </mat-form-field>
-          <mat-form-field class="example-full-width">
+          <mat-form-field style="display: inline;">
             <input
               matInput
               placeholder="Last Name"
@@ -60,7 +68,7 @@
               </span>
             </mat-error>
           </mat-form-field>
-          <mat-form-field class="example-full-width">
+          <mat-form-field style="display: inline;">
             <input matInput placeholder="Avatar" formControlName="avatar" />
             <img
               *ngIf="staffForm.get('avatar').valid"
@@ -68,7 +76,7 @@
               class="img-responsive"
             />
           </mat-form-field>
-          <mat-form-field class="example-full-width">
+          <mat-form-field style="display: inline;">
             <input matInput placeholder="Email" formControlName="email" />
             <mat-error>
               <span *ngIf="staffForm.get('email').errors?.required"
@@ -79,7 +87,7 @@
               >
             </mat-error>
           </mat-form-field>
-          <mat-form-field class="example-full-width">
+          <mat-form-field style="display: inline;">
             <input matInput placeholder="Quote" formControlName="quote" />
             <mat-error>
               <span *ngIf="staffForm.get('quote').errors?.required"
@@ -87,7 +95,7 @@
               >
             </mat-error>
           </mat-form-field>
-          <mat-form-field class="example-full-width">
+          <mat-form-field style="display: inline;">
             <input
               matInput
               [matDatepicker]="birthday"
@@ -102,7 +110,7 @@
               </span>
             </mat-error>
           </mat-form-field>
-          <mat-form-field class="example-full-width">
+          <mat-form-field style="display: inline;">
             <input
               matInput
               placeholder="Telephone"
@@ -118,7 +126,7 @@
               </span>
             </mat-error>
           </mat-form-field>
-          <mat-form-field class="example-full-width">
+          <mat-form-field style="display: inline;">
             <input matInput placeholder="City" formControlName="addressCity" />
             <mat-error>
               <span *ngIf="staffForm.get('addressCity').errors?.required">
@@ -126,7 +134,7 @@
               </span>
             </mat-error>
           </mat-form-field>
-          <mat-form-field class="example-full-width">
+          <mat-form-field style="display: inline;">
             <input
               matInput
               placeholder="Street"
@@ -138,10 +146,10 @@
               </span>
             </mat-error>
           </mat-form-field>
-          <mat-form-field class="example-full-width">
+          <mat-form-field style="display: inline;">
             <input matInput placeholder="Position" formControlName="position" />
             <mat-error>
-              <span *ngIf="staffForm.get('addressCity').errors?.required">
+              <span *ngIf="staffForm.get('position').errors?.required">
                 Please enter your city !
               </span>
             </mat-error>
