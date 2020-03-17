@@ -31,14 +31,6 @@
         <a
           class="menu-link"
           mat-menu-item
-          routerLink="/register"
-          *ngIf="authService.isAdmin()"
-        >
-          Register Account
-        </a>
-        <a
-          class="menu-link"
-          mat-menu-item
           routerLink="/reset-password"
           *ngIf="authService.isAdmin()"
         >

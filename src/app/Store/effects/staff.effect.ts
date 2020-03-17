@@ -68,7 +68,7 @@ export class StaffEffects {
       return this.staffservice.createStaff(staff).pipe(
         map(res => {
           console.log(res);
-          this.route.navigate(['/admin/' + staff.id + '/detail']);
+          this.route.navigate(['/admin']);
           return new StaffActions.CreateStaffSuccess(res);
         }),
         catchError(err => [new StaffActions.CreateStaffFail(err)])

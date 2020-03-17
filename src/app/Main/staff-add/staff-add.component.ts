@@ -5,6 +5,7 @@ import { Staff } from '../Models/staff.model';
 import { Store } from '@ngrx/store';
 import { State } from 'src/app/Store';
 import * as appStore from '../../Store';
+import * as fromAuth from '../../Store';
 
 @Component({
   selector: 'app-staff-add',
@@ -14,6 +15,7 @@ import * as appStore from '../../Store';
 export class StaffAddComponent implements OnInit {
   staffForm: FormGroup;
   isLoadingResults$: Observable<boolean>;
+  errorMessage$: Observable<string>;
   staff$: Observable<Staff>;
   hide = true;
 
@@ -35,6 +37,7 @@ export class StaffAddComponent implements OnInit {
       addressCity: [null, Validators.required],
       position: [null, Validators.required]
     });
+    this.errorMessage$ = this.store.select(fromAuth.getErrorMessage);
   }
 
   onFormSubmit() {

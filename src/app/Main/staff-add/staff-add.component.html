@@ -166,6 +166,11 @@
             <a mat-flat-button color="primary" [routerLink]="['/admin']">
               <mat-icon>arrow_back</mat-icon>
             </a>
+            <mat-error>
+              <span id="error-message" *ngIf="errorMessage$ | async">{{
+                errorMessage$ | async
+              }}</span>
+            </mat-error>
           </div>
         </form>
       </mat-card>
