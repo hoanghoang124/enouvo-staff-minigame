@@ -61,7 +61,7 @@ export class StaffAddComponent implements OnInit {
     };
     console.log(register);
     this.isLoadingResults$ = this.store.select(appStore.getIsLoading);
-    this.store.dispatch(new appStore.Create(register));
+    this.store.dispatch(new appStore.Register(register));
     this.store.dispatch(new appStore.CreateStaff(staff));
   }
 }
