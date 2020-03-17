@@ -1,2 +1,2 @@
-import "zone.js/dist/zone";
-import "hammerjs";
+import 'zone.js/dist/zone';
+import 'hammerjs';

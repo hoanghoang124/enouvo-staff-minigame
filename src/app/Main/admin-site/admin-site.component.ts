@@ -1,40 +1,50 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { DataTablesModule } from 'angular-datatables';
-import {BrowserModule} from '@angular/platform-browser';
-import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
-import 'rxjs';
 import { Observable } from 'rxjs';
-import { CommonModule } from '@angular/common';
-import { Store, select } from '@ngrx/store';
-import { AppState } from 'src/app/Main/Store/reducers';
-import { GetStaffs } from 'src/app/Main/Store/actions';
-import { MatPaginator, MatSort } from '@angular/material';
-import { StaffService } from '../Services/staff.service';
-import { getAllStaffs } from '../Store/reducers/staff.reducer';
+import { Store } from '@ngrx/store';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { State } from 'src/app/Store/reducers';
+import * as fromStaff from '../../Store';
+import { Staff } from '../Models/staff.model';
+import { fadeInAnimation } from '../animation/fade-in.animation';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-admin-site',
   templateUrl: './admin-site.component.html',
-  styleUrls: ['./admin-site.component.css']
+  styleUrls: ['./admin-site.component.css'],
+  animations: [fadeInAnimation],
+  host: { '[@fadeInAnimation]': '' }
 })
 export class AdminSiteComponent implements OnInit {
-  displayedColumns: string[] = ['name', 'information', 'star'];
-  data: any = [];
+  displayedColumns: string[] = ['lastName', 'position', 'actions'];
+  data = new MatTableDataSource<Staff>();
   stafflist$: Observable<any>;
-  isLoadingResults = true;
+  isLoadingResults$: Observable<boolean>;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  myChart: any;
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.data.filter = filterValue.trim().toLowerCase();
+  }
 
-  getStaffs() {
-    return this.staffService.getStaffs().subscribe((staffs: {}) => {
-      this.data = staffs;
+  constructor(private store: Store<State>) {}
+
+  ngOnInit() {
+    this.store.dispatch(new fromStaff.GetStaffs());
+    this.stafflist$ = this.store.select(fromStaff.getAllStaffs);
+    this.stafflist$.subscribe(res => {
+      this.isLoadingResults$ = this.store.select(fromStaff.getIsLoading);
+      this.data.data = res as Staff[];
+      this.data.paginator = this.paginator;
+      this.data.sort = this.sort;
     });
   }
 
-  constructor(private staffService: StaffService,
-              private store: Store<AppState>) {}
-
-  ngOnInit() {
-    this.getStaffs();
-    this.store.dispatch(new GetStaffs());
-    this.stafflist$ = this.store.pipe(select(getAllStaffs));
+  deletestaff(id) {
+    this.store.dispatch(new fromStaff.DeleteStaff(id));
+  }
+  goto(id) {
+    this.store.dispatch(new fromStaff.GetStaff(id));
   }
 }

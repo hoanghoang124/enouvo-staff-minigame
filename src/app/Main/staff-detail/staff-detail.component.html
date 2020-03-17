@@ -1,25 +1,52 @@
-<div class="example-container mat-elevation-z8">
-  <div class="example-loading-shade"
-       *ngIf="isLoadingResults">
-    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
-  </div>
-  <div class="button-row">
-    <a mat-flat-button color="primary" [routerLink]="['/dashboard']"><mat-icon>list</mat-icon></a>
-  </div>
-  <mat-card class="example-card" *ngIf="staff | async; let staff">
-    <mat-card-header>
-      <mat-card-title><h2>{{staff.name}}</h2></mat-card-title>
-      <mat-card-subtitle>{{staff.information}}</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-      <dl>
-        <dt>Star:</dt>
-        <dd>{{staff.star}}</dd>
-      </dl>
-    </mat-card-content>
-    <mat-card-actions>
-      <a mat-flat-button color="primary" [routerLink]="[staff.id+'/edit']"><mat-icon>edit</mat-icon></a>
-      <a mat-flat-button color="warn" (click)="deletestaff(staff.id)"><mat-icon>delete</mat-icon></a>
-    </mat-card-actions>
-  </mat-card>
+<div class="container">
+	<div class="example-loading-shade" *ngIf="isLoadingResults$ | async">
+		<mat-spinner></mat-spinner>
+	</div>
+	<div class="example-container mat-elevation-z8">
+		<mat-card class="example-card" *ngIf="staff$ | async; let staff">
+			<div fxLayout="row" fxLayoutGap="10">
+				<div class="staff-detail-column-left" fxFlex="50%">
+					<mat-card-header>
+						<mat-card-title>
+							<img src="{{ staff.avatar }}" />
+							<h2>
+								{{ staff.firstName }} {{ staff.middleName }}
+								{{ staff.lastName }}
+							</h2>
+						</mat-card-title>
+						<mat-card-subtitle>{{ staff.quote }}</mat-card-subtitle>
+					</mat-card-header>
+					<div class="button-row">
+						<a mat-flat-button color="primary" [routerLink]="['/admin']">
+							<mat-icon>arrow_back</mat-icon>
+						</a>
+						<a
+							mat-flat-button
+							color="primary"
+							[routerLink]="['/admin/' + staff.id + '/edit']"
+						>
+							<mat-icon>edit</mat-icon>
+						</a>
+						<a mat-flat-button color="warn" (click)="deletestaff(staff.id)">
+							<mat-icon>delete</mat-icon>
+						</a>
+					</div>
+				</div>
+				<div class="staff-detail-column-right" fxFlex="50%">
+					<mat-card-content>
+						<label>Email:</label>
+						<h5>{{ staff.email }}</h5>
+						<label>Birthday:</label>
+						<h5>{{ staff.birthday | date: 'longDate' }}</h5>
+						<label>Phone:</label>
+						<h5>{{ staff.phone }}</h5>
+						<label>Adress:</label>
+						<h5>{{ staff.addressStreet }}, {{ staff.addressCity }}</h5>
+						<label>Position:</label>
+						<h5>{{ staff.position }}</h5>
+					</mat-card-content>
+				</div>
+			</div>
+		</mat-card>
+	</div>
 </div>

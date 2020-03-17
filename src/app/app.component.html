@@ -1,34 +1,14 @@
-<nav class="navbar navbar-expand navbar-light bg-light" *ngIf="currentUser">
-  <div class="navbar-nav">
-    <a class="nav-item nav-link" routerLink="#"
-      ><img
-        src="https://enouvo.com/wp-content/uploads/2019/10/LOGO-EIS-1.png"
-        height="60px"
-        class="d-inline-block align-top"
-        alt="Enouvo Logo"
-    /></a>
-    <a class="navbar-brand">Xin chào tất cả các dân chơi!</a>
-    <div class="btn-group dropleft">
-      <button
-        type="button"
-        class="btn btn-info dropdown-toggle"
-        data-toggle="dropdown"
-        aria-haspopup="true"
-        aria-expanded="false"
-      >
-        Hi, {{ currentUser.firstName }}!
-      </button>
-      <div class="dropdown-menu">
-        <a class="dropdown-item" href="#">Your stars</a>
-        <a class="nav-item nav-link" routerLink="/admin" *ngIf="isAdmin"
-          >Admin</a
-        >
-        <a class="dropdown-item" (click)="logOut()">Logout</a>
-      </div>
-    </div>
-  </div>
-</nav>
-
-<div class="container">
-  <router-outlet></router-outlet>
-</div>
+<app-layout>
+	<mat-sidenav-container>
+		<mat-sidenav #sidenav role="navigation">
+			<app-sidenav-list (sidenavClose)="sidenav.close()"></app-sidenav-list>
+		</mat-sidenav>
+		<mat-sidenav-content>
+			<app-header (sidenavToggle)="sidenav.toggle()"></app-header>
+			<main>
+				<router-outlet></router-outlet>
+			</main>
+			<app-footer></app-footer>
+		</mat-sidenav-content>
+	</mat-sidenav-container>
+</app-layout>

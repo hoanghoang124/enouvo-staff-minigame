@@ -1,76 +1,90 @@
-import { reducers } from './Store/router.reducer';
-import { reducersLogin } from './Auth/Store/app.state';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AngularMaterialModule } from './Shared/Angular-Material/Angular-Material.module';
-import { StoreModule } from '@ngrx/store';
 import { AppRoutingModule } from './app-routing.module';
-import { EffectsModule } from '@ngrx/effects';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
+import { SharedModule } from './Shared/shared.module';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AngularMaterialModule } from './Shared/Angular-Material/Angular-Material.module';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { AuthService } from './Auth/Services/auth.service';
+import {
+	TokenInterceptor,
+	ErrorInterceptor
+} from './Auth/Services/token.service';
+import { AuthGuardService as AuthGuard } from './Auth/Services/auth-guard.service';
+import { RoleGuardService as RoleGuard } from './Auth/Services/role-guard.service';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
+import { LoginComponent } from './Auth/login/login.component';
+import { UserSiteComponent } from './Main/user-site/user-site.component';
+import { AdminSiteComponent } from './Main/admin-site/admin-site.component';
 import { StaffDetailComponent } from './Main/staff-detail/staff-detail.component';
 import { StaffAddComponent } from './Main/staff-add/staff-add.component';
 import { StaffEditComponent } from './Main/staff-edit/staff-edit.component';
+import { ResetPasswordComponent } from './Auth/reset-password/reset-password.component';
 import { AppComponent } from './app.component';
-import { UserSiteComponent } from './Main/user-site/user-site.component';
-import { LoginComponent } from './Auth/login/login.component';
-import { AdminSiteComponent } from './Main/admin-site/admin-site.component';
-import { HeaderComponent } from './Shared/Components/header/header.component';
-import { FooterComponent } from './Shared/Components/footer/footer.component';
+import { ChangePasswordComponent } from './Auth/change-password/change-password.component';
+import { HeaderComponent } from './Main/navigation/header/header.component';
+import { FooterComponent } from './Main/navigation/footer/footer.component';
+import { SidenavListComponent } from './Main/navigation/sidenav-list/sidenav-list.component';
+import { LayoutComponent } from './Main/layout/layout.component';
 
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-// import { appReducers } from './Main/Store/reducers';
-import { appEffect } from './Main/Store/effects';
-import { SharedModule } from './Shared/shared.module';
-import { AuthEffects } from './Auth/Store/effects/auth.effect';
-import { AuthService } from './Auth/Services/auth.service';
-import { TokenInterceptor } from './Auth/Services/token.service';
-import { AuthGuardService as AuthGuard } from './Auth/Services/auth-guard.service';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { reducers } from './Store/reducers';
+import { appEffect } from './Store/effects';
+import { CreateComponent } from './Auth/create/create.component';
 @NgModule({
-  declarations: [
-    AppComponent,
-    UserSiteComponent,
-    LoginComponent,
-    AdminSiteComponent,
-    StaffDetailComponent,
-    StaffAddComponent,
-    StaffEditComponent,
-    HeaderComponent,
-    FooterComponent
-  ],
-  imports: [
-    BrowserModule,
-    CommonModule,
-    AppRoutingModule,
-    ReactiveFormsModule,
-    FormsModule,
-    HttpClientModule,
-    EffectsModule.forRoot(appEffect),
-    EffectsModule.forRoot([AuthEffects]),
-    StoreModule.forRoot(reducers),
-    StoreModule.forRoot(reducersLogin, {}),
-    StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
-    AngularMaterialModule,
-    SharedModule,
-    BrowserAnimationsModule
-  ],
-  providers: [
-    AuthService,
-    AuthGuard,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptor,
-      multi: true
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptor,
-      multi: true
-    }
-  ],
-  bootstrap: [AppComponent]
+	declarations: [
+		AppComponent,
+		LoginComponent,
+		StaffAddComponent,
+		UserSiteComponent,
+		StaffEditComponent,
+		AdminSiteComponent,
+		StaffDetailComponent,
+		ResetPasswordComponent,
+		ChangePasswordComponent,
+		HeaderComponent,
+		FooterComponent,
+		SidenavListComponent,
+		LayoutComponent,
+		CreateComponent
+	],
+	imports: [
+		FormsModule,
+		CommonModule,
+		SharedModule,
+		BrowserModule,
+		AppRoutingModule,
+		HttpClientModule,
+		ReactiveFormsModule,
+		AngularMaterialModule,
+		FlexLayoutModule,
+		BrowserAnimationsModule,
+		StoreModule.forRoot(reducers),
+		EffectsModule.forRoot(appEffect),
+		StoreDevtoolsModule.instrument({ maxAge: 25 }), //  Retains last 25 states
+		StoreRouterConnectingModule.forRoot({ stateKey: 'router' }) // name of reducer key
+	],
+	providers: [
+		AuthGuard,
+		RoleGuard,
+		AuthService,
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: TokenInterceptor,
+			multi: true
+		},
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: ErrorInterceptor,
+			multi: true
+		}
+	],
+	bootstrap: [AppComponent]
 })
 export class AppModule {}

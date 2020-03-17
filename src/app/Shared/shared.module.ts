@@ -1,16 +1,15 @@
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-// import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { AngularMaterialModule } from './Angular-Material/Angular-Material.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    // StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
-    // !environment.production ? StoreDevtoolsModule.instrument() : [],
-  ]
+    AngularMaterialModule
+  ],
+  declarations: []
 })
-
 export class SharedModule {}

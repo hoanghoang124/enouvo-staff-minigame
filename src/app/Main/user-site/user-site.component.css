@@ -1,12 +1,107 @@
-mat-card-actions {
-  text-align: right;
-}
-.mat-icon-button {
-  border-radius: 50%;
+.banner {
+  background-color: #0f4c81;
+  color: #fff;
+  text-align: center;
+  height: 50vh;
 }
 
-button {
-  border-radius: 50%;
+h2 {
+  padding-top: 2%;
+  font-size: 60px;
+}
+
+p {
+  height: auto;
+  padding-top: 1%;
+  padding-left: 15%;
+  padding-right: 15%;
+}
+mat-grid-list {
+  height: 100%;
+  margin-top: -15vh;
+}
+
+mat-card {
+  width: 350px;
+  height: 400px;
+  margin: 30px 10px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+}
+
+mat-card-header {
+  display: flex;
+  flex-direction: row;
+  flex-shrink: 0;
+  color: #0f4c81;
+}
+
+mat-card-title.mat-card-title {
+  margin-bottom: 0px;
+}
+
+mat-card-content {
+  padding-top: 16px;
+  height: 100%;
+  flex-grow: 1;
+  text-align: center;
+}
+
+img {
+  height: 200px;
+  width: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+mat-card-footer {
+  text-align: right;
+}
+
+#btn-add {
+  height: 40px;
+  background-color: lawngreen;
+  margin-right: 16px;
+  margin-bottom: 16px;
+  border-radius: 5px;
+}
+
+#icon-add {
+  color: #fff;
+}
+
+#btn-substract {
+  height: 40px;
+  border: 2px solid lawngreen;
+  margin-right: 16px;
+  margin-bottom: 16px;
+  margin-right: 52px;
+}
+
+#icon-substract {
+  color: lawngreen;
+}
+
+.scroll-to-top {
+  transform: rotate(-90deg);
+  font-size: 60px;
+  color: #5299d3;
+  position: fixed;
+  bottom: 70px;
+  right: 30px;
+  opacity: 0;
+  transition: all 0.2s ease-in-out;
+  background-color: transparent;
+  cursor: pointer;
+  height: fit-content;
+  width: auto;
+}
+
+.show-scroll {
+  opacity: 1;
+  border: none;
 }
 mat-grid-list {
   padding: 5%;

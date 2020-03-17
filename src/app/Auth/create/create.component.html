@@ -1,0 +1,45 @@
+<div class="register"></div>
+<mat-card class="register-form">
+  <h2>Register account now</h2>
+  <form (ngSubmit)="onSubmit()" [formGroup]="registerForm">
+    <mat-form-field class="mat-form-filed">
+      <input matInput placeholder="Username" formControlName="username" />
+      <mat-error>
+        <span *ngIf="registerForm.get('username').errors?.required"
+          >Please enter username</span
+        >
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="mat-form-filed">
+      <input
+        matInput
+        placeholder="Email"
+        formControlName="email"
+        type="email"
+      />
+      <mat-error>
+        <span *ngIf="registerForm.get('email').errors?.required"
+          >Please enter email</span
+        >
+      </mat-error>
+    </mat-form-field>
+    <mat-error>
+      <span id="error-message" *ngIf="errorMessage$ | async">{{
+        errorMessage$ | async
+      }}</span>
+    </mat-error>
+    <div class="button-row">
+      <button mat-raised-button id="btn-submit" type="submit">
+        Submit
+        <mat-spinner
+          [strokeWidth]="2"
+          [diameter]="20"
+          *ngIf="isLoadingResults$ | async"
+        ></mat-spinner>
+      </button>
+      <button mat-flat-button routerLink="/">
+        Cancel
+      </button>
+    </div>
+  </form>
+</mat-card>

@@ -1,58 +1,73 @@
+import { slideInOutAnimation } from './../animation/slide-in-out.animation';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
-import { StaffService } from '../Services/staff.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { AppState } from '../Store/reducers';
-import { UpdateStaff, GetStaff } from '../Store/actions';
-import { getStaff } from '../Store/reducers/staff.reducer';
+import * as fromStaff from '../../Store';
+import { State } from '../../Store';
+import { Observable } from 'rxjs';
 import { Staff } from '../Models/staff.model';
 
 @Component({
   selector: 'app-staff-edit',
   templateUrl: './staff-edit.component.html',
-  styleUrls: ['./staff-edit.component.css']
+  styleUrls: ['./staff-edit.component.css'],
+  animations: [slideInOutAnimation],
+  host: { '[@slideInOutAnimation]': '' }
 })
 export class StaffEditComponent implements OnInit {
-
+  staffForm: FormGroup;
   staff: Staff;
-  // staffForm: FormGroup;
-  // id = 0;
-  // name = '';
-  // information = '';
-  // star = 0;
-  isLoadingResults = false;
+  isLoadingResults$: Observable<boolean>;
 
-  constructor(private router: Router,
-              private route: ActivatedRoute,
-              private staffService: StaffService,
-              private formBuilder: FormBuilder,
-              private store: Store<AppState>) { }
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private formBuilder: FormBuilder,
+    private store: Store<State>
+  ) {}
 
   ngOnInit() {
-  //   this.getstaff(this.route.snapshot.params.id);
-  //   this.staffForm = this.formBuilder.group({
-  //   name : [null, Validators.required],
-  //   information : [null, Validators.required],
-  //   star : [null, Validators.required]
-  // });
-  this.route.params.subscribe(params => {
-    this.store.dispatch(new GetStaff(+params.id));
-  });
-  this.store.select(getStaff).subscribe(staff => {
-    if (staff != null) {
-      this.staff = staff;
-    }
-  });
+    this.store.dispatch(new fromStaff.GetStaff(this.route.snapshot.params.id));
+
+    this.staffForm = this.formBuilder.group({
+      id: [null, Validators.required],
+      firstName: [
+        null,
+        [Validators.required, Validators.pattern('[a-zA-Z ]*')]
+      ],
+      middleName: [
+        null,
+        [Validators.required, Validators.pattern('[a-zA-Z ]*')]
+      ],
+      lastName: [null, [Validators.required, Validators.pattern('[a-zA-Z ]*')]],
+      avatar: [null, Validators.required],
+      email: [null, [Validators.required, Validators.email]],
+      quote: [null, Validators.required],
+      birthday: [null, Validators.required],
+      phone: [null, [Validators.required, Validators.pattern('[0-9]*')]],
+      addressStreet: [null, Validators.required],
+      addressCity: [null, Validators.required],
+      position: [null, Validators.required]
+    });
+    this.store
+      .select(fromStaff.getStaff)
+      .pipe()
+      .subscribe(staff => {
+        console.log(staff);
+        if (staff) {
+          this.staff = staff;
+          this.staffForm.patchValue(this.staff);
+        }
+      });
+    this.isLoadingResults$ = this.store.select(fromStaff.getIsLoading);
   }
 
-
-  onSaveStaff() {
-    this.isLoadingResults = true;
-    this.store.dispatch(new UpdateStaff(this.staff));
+  onFormSubmit() {
+    this.store.dispatch(new fromStaff.UpdateStaff(this.staffForm.value));
   }
 
-  productdetails() {
-    this.router.navigate(['/dashboard']);
+  productdetails(index) {
+    this.router.navigate(['/admin/' + index + '/detail']);
   }
 }

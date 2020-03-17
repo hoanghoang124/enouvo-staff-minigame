@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { Staff } from '../Models/staff.model';
 import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/Main/Store/reducers';
-import { StaffService } from '../Services/staff.service';
+import { State } from 'src/app/Store';
+import * as appStore from '../../Store';
+import * as fromAuth from '../../Store';
 
 @Component({
   selector: 'app-staff-add',
@@ -11,33 +13,55 @@ import { StaffService } from '../Services/staff.service';
   styleUrls: ['./staff-add.component.css']
 })
 export class StaffAddComponent implements OnInit {
-
   staffForm: FormGroup;
-  isLoadingResults = false;
+  isLoadingResults$: Observable<boolean>;
+  errorMessage$: Observable<string>;
+  staff$: Observable<Staff>;
+  hide = true;
 
-  constructor(private router: Router,
-              private staffService: StaffService,
-              private formBuilder: FormBuilder,
-              private store: Store<AppState>) { }
+  constructor(private formBuilder: FormBuilder, private store: Store<State>) {}
 
   ngOnInit() {
     this.staffForm = this.formBuilder.group({
-      name : [null, Validators.required],
-      information : [null, Validators.required],
-      star : [null, Validators.required],
+      id: [null, Validators.required],
+      username: [null, Validators.required],
+      firstName: [null, Validators.required],
+      middleName: [null, Validators.required],
+      lastName: [null, Validators.required],
+      avatar: [null],
+      email: [null, [Validators.required, Validators.email]],
+      quote: [null, Validators.required],
+      birthday: [{ value: null }, Validators.required],
+      phone: [null, Validators.required],
+      addressStreet: [null, Validators.required],
+      addressCity: [null, Validators.required],
+      position: [null, Validators.required]
     });
+    this.errorMessage$ = this.store.select(fromAuth.getErrorMessage);
   }
 
-  onFormSubmit(form: NgForm) {
-    this.isLoadingResults = true;
-    this.staffService.createStaff(form)
-      .subscribe(res => {
-          const Id = res.id;
-          this.isLoadingResults = false;
-          this.router.navigate(['/admin/', Id]);
-        }, (err) => {
-          console.log(err);
-          this.isLoadingResults = false;
-        });
+  onFormSubmit() {
+    const register = {
+      username: this.staffForm.get('username').value,
+      email: this.staffForm.get('email').value
+    };
+    const staff: Staff = {
+      id: this.staffForm.get('id').value,
+      firstName: this.staffForm.get('firstName').value,
+      middleName: this.staffForm.get('middleName').value,
+      lastName: this.staffForm.get('lastName').value,
+      avatar: this.staffForm.get('avatar').value,
+      email: this.staffForm.get('email').value,
+      quote: this.staffForm.get('quote').value,
+      birthday: this.staffForm.get('birthday').value,
+      phone: this.staffForm.get('phone').value,
+      addressStreet: this.staffForm.get('addressStreet').value,
+      addressCity: this.staffForm.get('addressCity').value,
+      position: this.staffForm.get('position').value
+    };
+    console.log(register);
+    this.isLoadingResults$ = this.store.select(appStore.getIsLoading);
+    this.store.dispatch(new appStore.Create(register));
+    this.store.dispatch(new appStore.CreateStaff(staff));
   }
 }

@@ -1,23 +1,34 @@
 /* Structure */
-
-.example-form {
-  min-width: 150px;
-  max-width: 500px;
-  width: 100%;
+.staff-add {
+  height: 100vh;
+  background-color: rgba(15, 76, 129, 1);
 }
 
-.example-full-width {
-  width: 100%;
+.example-container {
+  position: relative;
+  height: fit-content;
 }
 
-.example-full-width:nth-last-child() {
+mat-form-field {
   margin-bottom: 10px;
 }
 
-.button-row {
-  margin: 10px 0;
+mat-icon {
+  padding: auto;
+  margin: auto;
 }
 
-.mat-flat-button {
-  margin: 5px;
+a {
+  margin-left: 10px;
+}
+
+h3 {
+  text-align: center;
+  margin: auto;
+  padding: 10px;
+}
+
+mat-spinner {
+  margin: 0 auto;
+  margin-top: 20%;
 }

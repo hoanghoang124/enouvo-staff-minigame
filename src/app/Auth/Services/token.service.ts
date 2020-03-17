@@ -1,30 +1,29 @@
-import { Injectable, Injector } from "@angular/core";
+import { Injectable, Injector } from '@angular/core';
 import {
   HttpEvent,
   HttpInterceptor,
   HttpHandler,
   HttpRequest,
   HttpErrorResponse
-} from "@angular/common/http";
-import { Observable } from "rxjs/Observable";
-
-import { AuthService } from "./auth.service";
-import { Router } from "@angular/router";
+} from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { AuthService } from './auth.service';
+import { catchError } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
-  private authService: AuthService;
-  constructor(private injector: Injector) {}
+  constructor(private injector: Injector, private authService: AuthService) {}
   intercept(
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     this.authService = this.injector.get(AuthService);
-    const token: string = this.authService.getToken();
+    const token = this.authService.isLoggedIn();
     request = request.clone({
       setHeaders: {
         Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json"
+        'Content-Type': 'application/json'
       }
     });
     return next.handle(request);
@@ -38,13 +37,13 @@ export class ErrorInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    return next.handle(request).catch((response: any) => {
-      if (response instanceof HttpErrorResponse && response.status === 401) {
-        localStorage.removeItem("token");
-        this.router.navigateByUrl("/login");
-        // console.log(response);
-      }
-      return Observable.throw(response);
-    });
+    return next.handle(request).pipe(
+      catchError((err: any) => {
+        if (err instanceof HttpErrorResponse && err.status === 401) {
+          this.router.navigate(['login']);
+        }
+        return throwError(err);
+      })
+    );
   }
 }

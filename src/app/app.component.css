@@ -1,19 +1,16 @@
-.navbar-nav {
-  width: 100%;
-  justify-content: space-between;
+mat-sidenav-container,
+mat-sidenav-content,
+mat-sidenav {
+  min-height: 100vh;
 }
-img {
-  padding: 0;
+
+mat-sidenav {
+  width: 250px;
 }
-button {
-  border-style: none;
-  height: 45px;
-  width: 150px;
-  padding: auto;
-  margin: auto;
-  top: 15px;
+.mat-drawer:not(.mat-drawer-side) {
+  position: fixed;
 }
-.navbar-brand {
-  display: flex;
-  margin: auto;
+
+.mat-drawer-backdrop {
+  position: fixed !important;
 }

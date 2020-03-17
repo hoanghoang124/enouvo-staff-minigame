@@ -1,37 +1,42 @@
-import { Observable } from "rxjs";
-import { Component, OnInit } from "@angular/core";
-import { Store } from "@ngrx/store";
-
-import { User } from "../Models/user";
-import { AppState, selectAuthState } from "../Store/app.state";
-import { LogIn } from "../Store/actions/auth.action";
+import { Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { State } from 'src/app/Store/reducers';
+import * as fromAuth from '../../Store';
+import { fadeInAnimation } from 'src/app/Main/animation/fade-in.animation';
 
 @Component({
-  selector: "app-log-in",
-  templateUrl: "./login.component.html",
-  styleUrls: ["./login.component.css"]
+  selector: 'app-log-in',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css'],
+  animations: [fadeInAnimation],
+  host: { '[@fadeInAnimation]': '' }
 })
 export class LoginComponent implements OnInit {
-  user: User = new User();
-  getState: Observable<any>;
-  errorMessage: string | null;
+  errorMessage$: Observable<string>;
+  isLoadingResults$: Observable<boolean>;
+  loginForm: FormGroup;
+  hide = true;
 
-  constructor(private store: Store<AppState>) {
-    this.getState = this.store.select(selectAuthState);
-  }
+  constructor(private store: Store<State>, private formBuilder: FormBuilder) {}
 
   ngOnInit() {
-    this.getState.subscribe(state => {
-      this.errorMessage = state.errorMessage;
+    this.loginForm = this.formBuilder.group({
+      username: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(8)]]
     });
+    this.errorMessage$ = this.store.select(fromAuth.getErrorMessage);
+    this.isLoadingResults$ = this.store.select(fromAuth.getIsLoading);
   }
 
-  onSubmit(): void {
-    const payload = {
-      username: this.user.username,
-      password: this.user.password
-    };
-    // console.log("vaoday");
-    this.store.dispatch(new LogIn(payload));
+  onSubmit() {
+    if (this.loginForm.invalid) {
+      return;
+    }
+
+    this.store.dispatch(new fromAuth.LogIn(this.loginForm.value));
   }
 }
