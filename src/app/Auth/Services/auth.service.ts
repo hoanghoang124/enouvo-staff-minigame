@@ -38,18 +38,13 @@ export class AuthService {
     return this.http.post<User>(url, params);
   }
 
-  register(params): Observable<any> {
-    const url = `${this.BASE_URL}/v1/auth/register`;
-    return this.http.post(url, params);
+  getAll() {
+    const url = `${this.BASE_URL}/users`;
+    return this.http.get<User[]>(url);
   }
 
-  resetPassword(params): Observable<any> {
-    const url = `${this.BASE_URL}/v1/auth/reset-password`;
-    return this.http.post<User>(url, params);
-  }
-
-  changePassword(params): Observable<any> {
-    const url = `${this.BASE_URL}/v1/auth/change-password`;
-    return this.http.post<User>(url, params);
+  getById(id: number) {
+    const url = `${this.BASE_URL}/users/${id}`;
+    return this.http.get<User>(url);
   }
 }

@@ -60,3 +60,10 @@ body {
     stroke-dashoffset: -124px;
   }
 }
+body > .inner {
+  display: none;
+}
+
+body.pg-loaded > .inner {
+  display: block;
+}

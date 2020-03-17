@@ -13,8 +13,8 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AuthService } from './Auth/Services/auth.service';
 import {
-  TokenInterceptor,
-  ErrorInterceptor
+	TokenInterceptor,
+	ErrorInterceptor
 } from './Auth/Services/token.service';
 import { AuthGuardService as AuthGuard } from './Auth/Services/auth-guard.service';
 import { RoleGuardService as RoleGuard } from './Auth/Services/role-guard.service';
@@ -38,53 +38,53 @@ import { reducers } from './Store/reducers';
 import { appEffect } from './Store/effects';
 import { CreateComponent } from './Auth/create/create.component';
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    StaffAddComponent,
-    UserSiteComponent,
-    StaffEditComponent,
-    AdminSiteComponent,
-    StaffDetailComponent,
-    ResetPasswordComponent,
-    ChangePasswordComponent,
-    HeaderComponent,
-    FooterComponent,
-    SidenavListComponent,
-    LayoutComponent,
-    CreateComponent
-  ],
-  imports: [
-    FormsModule,
-    CommonModule,
-    SharedModule,
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    AngularMaterialModule,
-    FlexLayoutModule,
-    BrowserAnimationsModule,
-    StoreModule.forRoot(reducers),
-    EffectsModule.forRoot(appEffect),
-    StoreDevtoolsModule.instrument({ maxAge: 25 }), //  Retains last 25 states
-    StoreRouterConnectingModule.forRoot({ stateKey: 'router' }) // name of reducer key
-  ],
-  providers: [
-    AuthGuard,
-    RoleGuard,
-    AuthService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptor,
-      multi: true
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: ErrorInterceptor,
-      multi: true
-    }
-  ],
-  bootstrap: [AppComponent]
+	declarations: [
+		AppComponent,
+		LoginComponent,
+		StaffAddComponent,
+		UserSiteComponent,
+		StaffEditComponent,
+		AdminSiteComponent,
+		StaffDetailComponent,
+		ResetPasswordComponent,
+		ChangePasswordComponent,
+		HeaderComponent,
+		FooterComponent,
+		SidenavListComponent,
+		LayoutComponent,
+		CreateComponent
+	],
+	imports: [
+		FormsModule,
+		CommonModule,
+		SharedModule,
+		BrowserModule,
+		AppRoutingModule,
+		HttpClientModule,
+		ReactiveFormsModule,
+		AngularMaterialModule,
+		FlexLayoutModule,
+		BrowserAnimationsModule,
+		StoreModule.forRoot(reducers),
+		EffectsModule.forRoot(appEffect),
+		StoreDevtoolsModule.instrument({ maxAge: 25 }), //  Retains last 25 states
+		StoreRouterConnectingModule.forRoot({ stateKey: 'router' }) // name of reducer key
+	],
+	providers: [
+		AuthGuard,
+		RoleGuard,
+		AuthService,
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: TokenInterceptor,
+			multi: true
+		},
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: ErrorInterceptor,
+			multi: true
+		}
+	],
+	bootstrap: [AppComponent]
 })
 export class AppModule {}
