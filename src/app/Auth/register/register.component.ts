@@ -6,16 +6,16 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { State } from 'src/app/Store/reducers';
 import * as fromAuth from '../../Store';
-import { slideInOutAnimation } from '../../Main/animation/slide-in-out.animation';
+import { slideInOutAnimation } from './../../Main/animation/slide-in-out.animation';
 
 @Component({
-  selector: 'app-create',
-  templateUrl: './create.component.html',
-  styleUrls: ['./create.component.css'],
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css'],
   animations: [slideInOutAnimation],
   host: { '[@slideInOutAnimation]': '' }
 })
-export class CreateComponent implements OnInit {
+export class RegisterComponent implements OnInit {
   errorMessage$: Observable<string>;
   isLoadingResults$: Observable<boolean>;
   registerForm: FormGroup;
@@ -36,6 +36,6 @@ export class CreateComponent implements OnInit {
       return;
     }
 
-    this.store.dispatch(new fromAuth.Create(this.registerForm.value));
+    this.store.dispatch(new fromAuth.Register(this.registerForm.value));
   }
 }

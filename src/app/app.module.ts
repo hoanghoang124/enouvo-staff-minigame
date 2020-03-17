@@ -36,8 +36,9 @@ import { LayoutComponent } from './Main/layout/layout.component';
 
 import { reducers } from './Store/reducers';
 import { appEffect } from './Store/effects';
-import { CreateComponent } from './Auth/create/create.component';
+import { RegisterComponent } from './Auth/register/register.component';
 @NgModule({
+<<<<<<< HEAD
 	declarations: [
 		AppComponent,
 		LoginComponent,
@@ -86,5 +87,55 @@ import { CreateComponent } from './Auth/create/create.component';
 		}
 	],
 	bootstrap: [AppComponent]
+=======
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    StaffAddComponent,
+    UserSiteComponent,
+    StaffEditComponent,
+    AdminSiteComponent,
+    StaffDetailComponent,
+    ResetPasswordComponent,
+    ChangePasswordComponent,
+    HeaderComponent,
+    FooterComponent,
+    SidenavListComponent,
+    LayoutComponent,
+    RegisterComponent
+  ],
+  imports: [
+    FormsModule,
+    CommonModule,
+    SharedModule,
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    AngularMaterialModule,
+    FlexLayoutModule,
+    BrowserAnimationsModule,
+    StoreModule.forRoot(reducers),
+    EffectsModule.forRoot(appEffect),
+    StoreDevtoolsModule.instrument({ maxAge: 25 }), //  Retains last 25 states
+    StoreRouterConnectingModule.forRoot({ stateKey: 'router' }) // name of reducer key
+  ],
+  providers: [
+    AuthGuard,
+    RoleGuard,
+    AuthService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true
+    }
+  ],
+  bootstrap: [AppComponent]
+>>>>>>> parent of 7452362... * config to deploy
 })
 export class AppModule {}
