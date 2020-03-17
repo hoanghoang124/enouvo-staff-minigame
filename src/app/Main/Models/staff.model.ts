@@ -1,4 +1,7 @@
+import { User } from '../../Auth/Models/user.model';
+
 export interface Staff {
+  userId: User['id'];
   id: number;
 
   firstName: string;
