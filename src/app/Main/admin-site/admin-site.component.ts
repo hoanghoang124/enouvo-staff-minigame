@@ -6,11 +6,11 @@ import 'rxjs';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { Store, select } from '@ngrx/store';
-import { StaffService } from 'src/app/Shared/Services/staff.service';
-import { AppState } from 'src/app/store/reducers';
-import { GetStaffs } from 'src/app/store/actions';
-import { getAllStaffs } from 'src/app/store/selectors/staff.selector';
+import { AppState } from 'src/app/Main/Store/reducers';
+import { GetStaffs } from 'src/app/Main/Store/actions';
 import { MatPaginator, MatSort } from '@angular/material';
+import { StaffService } from '../Services/staff.service';
+import { getAllStaffs } from '../Store/reducers/staff.reducer';
 
 @Component({
   selector: 'app-admin-site',
@@ -22,18 +22,10 @@ export class AdminSiteComponent implements OnInit {
   data: any = [];
   stafflist$: Observable<any>;
   isLoadingResults = true;
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.data.filter = filterValue.trim().toLowerCase();
-  }
 
   getStaffs() {
     return this.staffService.getStaffs().subscribe((staffs: {}) => {
       this.data = staffs;
-      this.data.paginator = this.paginator;
-      this.data.sort = this.sort;
     });
   }
 
@@ -41,19 +33,8 @@ export class AdminSiteComponent implements OnInit {
               private store: Store<AppState>) {}
 
   ngOnInit() {
-
-    // this.staffService.getStaffs()
-    //   .subscribe(res => {
-    //     this.data = res;
-    //     this.isLoadingResults = false;
-    //   }, err => {
-    //     console.log(err);
-    //     this.isLoadingResults = false;
-    //   });
     this.getStaffs();
     this.store.dispatch(new GetStaffs());
     this.stafflist$ = this.store.pipe(select(getAllStaffs));
-    // this.data.paginator = this.paginator;
-    // this.data.sort = this.sort;
   }
 }

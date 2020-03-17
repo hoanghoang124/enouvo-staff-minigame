@@ -1,69 +1,37 @@
+import { Observable } from "rxjs";
 import { Component, OnInit } from "@angular/core";
-import { Router, ActivatedRoute } from "@angular/router";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { first } from "rxjs/operators";
+import { Store } from "@ngrx/store";
 
-import { AuthenticationService } from "../../Shared/Services/authentication.service";
+import { User } from "../Models/user";
+import { AppState, selectAuthState } from "../Store/app.state";
+import { LogIn } from "../Store/actions/auth.action";
 
 @Component({
-  templateUrl: "login.component.html",
+  selector: "app-log-in",
+  templateUrl: "./login.component.html",
   styleUrls: ["./login.component.css"]
 })
 export class LoginComponent implements OnInit {
-  loginForm: FormGroup;
-  loading = false;
-  submitted = false;
-  returnUrl: string;
-  error = "";
+  user: User = new User();
+  getState: Observable<any>;
+  errorMessage: string | null;
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
-    private router: Router,
-    private authenticationService: AuthenticationService
-  ) {
-    // redirect to home if already logged in
-    if (this.authenticationService.currentUserValue) {
-      this.router.navigate(["/"]); //should be navigate to admin dashboard if user is admin and to homepage if user is normal user
-    }
+  constructor(private store: Store<AppState>) {
+    this.getState = this.store.select(selectAuthState);
   }
 
   ngOnInit() {
-    this.loginForm = this.formBuilder.group({
-      username: ["", Validators.required],
-      password: ["", Validators.required]
+    this.getState.subscribe(state => {
+      this.errorMessage = state.errorMessage;
     });
-
-    // get return url from route parameters or default to '/'
-    this.returnUrl = this.route.snapshot.queryParams["returnUrl"] || "/";
   }
 
-  // convenience getter for easy access to form fields
-  get f() {
-    return this.loginForm.controls;
-  }
-
-  onSubmit() {
-    this.submitted = true;
-
-    // stop here if form is invalid
-    if (this.loginForm.invalid) {
-      return this.error;
-    }
-
-    this.loading = true;
-    this.authenticationService
-      .login(this.f.username.value, this.f.password.value)
-      .pipe(first())
-      .subscribe(
-        data => {
-          this.router.navigate([this.returnUrl]);
-          console.log(data);
-        },
-        error => {
-          this.error = error;
-          this.loading = false;
-        }
-      );
+  onSubmit(): void {
+    const payload = {
+      username: this.user.username,
+      password: this.user.password
+    };
+    // console.log("vaoday");
+    this.store.dispatch(new LogIn(payload));
   }
 }

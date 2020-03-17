@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
-import { ErrorStateMatcher } from '@angular/material';
 import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/store/reducers';
-import { StaffService } from 'src/app/Shared/Services/staff.service';
+import { AppState } from 'src/app/Main/Store/reducers';
+import { StaffService } from '../Services/staff.service';
 
 @Component({
   selector: 'app-staff-add',
@@ -25,7 +24,7 @@ export class StaffAddComponent implements OnInit {
     this.staffForm = this.formBuilder.group({
       name : [null, Validators.required],
       information : [null, Validators.required],
-      star : [0, Validators.required],
+      star : [null, Validators.required],
     });
   }
 

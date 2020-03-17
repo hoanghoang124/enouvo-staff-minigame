@@ -4,17 +4,17 @@
     <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
   </div>
   <div class="button-row">
-    <a mat-flat-button color="primary" [routerLink]="['/admin']"><mat-icon>list</mat-icon></a>
+    <a mat-flat-button color="primary" [routerLink]="['/dashboard']"><mat-icon>list</mat-icon></a>
   </div>
-  <mat-card class="example-card" *ngIf='staff | async; let staff'>
+  <mat-card class="example-card" *ngIf="staff | async; let staff">
     <mat-card-header>
-      <mat-card-title><h2>{{staff.title}}</h2></mat-card-title>
-      <mat-card-subtitle>{{staff.body}}</mat-card-subtitle>
+      <mat-card-title><h2>{{staff.name}}</h2></mat-card-title>
+      <mat-card-subtitle>{{staff.information}}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
       <dl>
         <dt>Star:</dt>
-        <dd>{{staff.userId}}</dd>
+        <dd>{{staff.star}}</dd>
       </dl>
     </mat-card-content>
     <mat-card-actions>
