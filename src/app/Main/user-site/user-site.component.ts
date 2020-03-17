@@ -1,11 +1,11 @@
-import { fadeInAnimation } from '../animation/fade-in.animation';
-import { Component, OnInit, HostListener, ViewChild } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Store, select } from '@ngrx/store';
-import * as fromStaff from '../../Store';
-import { State } from '../../Store/reducers';
-import { MatGridList } from '@angular/material';
-import { Staff } from '../Models/staff.model';
+import { fadeInAnimation } from "../animation/fade-in.animation";
+import { Component, OnInit, HostListener, ViewChild } from "@angular/core";
+import { Observable } from "rxjs";
+import { Store, select } from "@ngrx/store";
+import * as fromStaff from "../../Store";
+import { State } from "../../Store/reducers";
+import { MatGridList } from "@angular/material";
+import { Staff } from "../Models/staff.model";
 
 export interface Tile {
   color: string;
@@ -15,11 +15,11 @@ export interface Tile {
 }
 
 @Component({
-  selector: 'app-user-site',
-  templateUrl: './user-site.component.html',
-  styleUrls: ['./user-site.component.css'],
+  selector: "app-user-site",
+  templateUrl: "./user-site.component.html",
+  styleUrls: ["./user-site.component.css"],
   animations: [fadeInAnimation],
-  host: { '[@fadeInAnimation]': '' }
+  host: { "[@fadeInAnimation]": "" }
 })
 export class UserSiteComponent implements OnInit {
   getState: Observable<any>;
@@ -49,7 +49,7 @@ export class UserSiteComponent implements OnInit {
     })();
   }
 
-  @HostListener('window:scroll', [])
+  @HostListener("window:scroll", [])
   onWindowScroll() {
     if (
       (window.pageYOffset ||
@@ -85,7 +85,7 @@ export class UserSiteComponent implements OnInit {
       this.staffs = res as Staff[];
     });
     this.breakpoint =
-      window.innerHeight >= 1440
+      window.innerWidth >= 1440
         ? 4
         : window.innerWidth >= 1330
         ? 3
