@@ -3,6 +3,7 @@
   color: #fff;
   text-align: center;
   height: 400px;
+  height: 50vh;
 }
 
 .container {
@@ -10,21 +11,21 @@
 }
 
 h2 {
-  padding-top: 30px;
+  padding-top: 2%;
   font-size: 60px;
 }
 
 p {
-  width: 100%;
   height: auto;
+  padding-top: 1%;
   padding-left: 15%;
   padding-right: 15%;
 }
 
 .mat-elevation-z8 {
-  margin-top: -150px;
   background-color: whitesmoke;
   border-radius: 7px;
+  margin-top: -15vh;
 }
 
 .button-row {

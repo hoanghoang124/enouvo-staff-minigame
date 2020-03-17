@@ -47,17 +47,17 @@ export class AuthEffects {
   );
 
   @Effect()
-  Register$ = this.actions.pipe(
-    ofType(AuthActionTypes.REGISTER),
-    map((action: AuthActions.Register) => action.payload),
+  Create$ = this.actions.pipe(
+    ofType(AuthActionTypes.CREATE),
+    map((action: AuthActions.Create) => action.payload),
     switchMap(payload => {
       return this.authService.register(payload).pipe(
         map(user => {
           this.router.navigateByUrl('/dashboard');
-          return new AuthActions.RegisterSuccess(user);
+          return new AuthActions.CreateSuccess(user);
         }),
         catchError(res =>
-          of(new AuthActions.RegisterFailure(res.error.message))
+          of(new AuthActions.CreateFailure(res.error.message))
         )
       );
     })

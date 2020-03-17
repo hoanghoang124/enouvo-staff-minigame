@@ -39,7 +39,26 @@ export function reducer(
       };
     }
     case AuthActionTypes.LOGIN_FAILURE: {
-      console.log('zo day');
+      return {
+        ...state,
+        isLoading: false,
+        errorMessage: action.payload
+      };
+    }
+    case AuthActionTypes.CREATE: {
+      return {
+        ...state,
+        isLoading: true,
+        errorMessage: null
+      };
+    }
+    case AuthActionTypes.CREATE_SUCCESS: {
+      return {
+        ...state,
+        isLoading: false
+      };
+    }
+    case AuthActionTypes.CREATE_FAILURE: {
       return {
         ...state,
         isLoading: false,

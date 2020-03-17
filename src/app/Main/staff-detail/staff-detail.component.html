@@ -4,38 +4,6 @@
   </div>
   <div class="example-container mat-elevation-z8">
     <mat-card class="example-card" *ngIf="staff$ | async; let staff">
-      <!-- <mat-card-header>
-        <mat-card-title>
-          <h2>
-            {{ staff.firstName }} {{ staff.middleName }} {{ staff.lastName }}
-          </h2>
-        </mat-card-title>
-        <mat-card-subtitle>{{ staff.quote }}</mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content>
-        <img src="{{ staff.avatar }}" />
-        <h3>Email: {{ staff.email }}</h3>
-        <h3>Birthday: {{ staff.birthday | date: 'longDate' }}</h3>
-        <h3>Phone: {{ staff.phone }}</h3>
-        <h3>Adress: {{ staff.addressStreet }}, {{ staff.addressCity }}</h3>
-        <h3>Position: {{ staff.position }}</h3>
-      </mat-card-content>
-      <mat-card-actions>
-        <a
-          mat-flat-button
-          color="primary"
-          [routerLink]="['/admin/' + staff.id + '/edit']"
-        >
-          <mat-icon>edit</mat-icon>
-        </a>
-        <a mat-flat-button color="warn" (click)="deletestaff(staff.id)">
-          <mat-icon>delete</mat-icon>
-        </a>
-        <a mat-flat-button color="primary" [routerLink]="['/admin']">
-          <mat-icon>arrow_back</mat-icon>
-        </a>
-      </mat-card-actions> -->
-
       <div fxLayout="row" fxLayoutGap="10">
         <div class="staff-detail-column-left" fxFlex="50%">
           <mat-card-header>

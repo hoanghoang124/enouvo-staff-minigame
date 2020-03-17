@@ -6,9 +6,9 @@ export enum AuthActionTypes {
   LOGIN_FAILURE = '[Auth] LoginFailure',
   LOGOUT = '[Auth] Logout',
   GET_STATUS = '[Auth] GetStatus',
-  REGISTER = '[Auth] Register',
-  REGISTER_SUCCESS = '[Auth] RegisterSuccess',
-  REGISTER_FAILURE = '[Auth] RegisterFailure',
+  CREATE = '[Auth] Create',
+  CREATE_SUCCESS = '[Auth] CreateSuccess',
+  CREATE_FAILURE = '[Auth] CreateFailure',
   RESET_PASSWORD = '[Auth] ResetPassword',
   RESET_PASSWORD_SUCCESS = '[Auth] ResetPasswordSuccess',
   RESET_PASSWORD_FAILURE = '[Auth] ResetPasswordFailure',
@@ -40,18 +40,18 @@ export class GetStatus implements Action {
   readonly type = AuthActionTypes.GET_STATUS;
 }
 
-export class Register implements Action {
-  readonly type = AuthActionTypes.REGISTER;
+export class Create implements Action {
+  readonly type = AuthActionTypes.CREATE;
   constructor(public payload: any) {}
 }
 
-export class RegisterSuccess implements Action {
-  readonly type = AuthActionTypes.REGISTER_SUCCESS;
+export class CreateSuccess implements Action {
+  readonly type = AuthActionTypes.CREATE_SUCCESS;
   constructor(public payload: any) {}
 }
 
-export class RegisterFailure implements Action {
-  readonly type = AuthActionTypes.REGISTER_FAILURE;
+export class CreateFailure implements Action {
+  readonly type = AuthActionTypes.CREATE_FAILURE;
   constructor(public payload: any) {}
 }
 
@@ -87,6 +87,9 @@ export type AuthActions =
   | LogInFailure
   | LogOut
   | GetStatus
+  | Create
+  | CreateSuccess
+  | CreateFailure
   | ResetPassword
   | ResetPasswordSuccess
   | ResetPasswordFailure
