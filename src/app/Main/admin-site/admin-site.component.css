@@ -2,8 +2,7 @@
   background-color: #0f4c81;
   color: #fff;
   text-align: center;
-  height: 50vh;
-  padding-top: 3%;
+  height: 400px;
 }
 
 .container {
@@ -16,14 +15,14 @@ h2 {
 }
 
 p {
-  display: inline-block;
+  width: 100%;
   height: auto;
   padding-left: 15%;
   padding-right: 15%;
 }
 
 .mat-elevation-z8 {
-  margin-top: -15vh;
+  margin-top: -150px;
   background-color: whitesmoke;
   border-radius: 7px;
 }
