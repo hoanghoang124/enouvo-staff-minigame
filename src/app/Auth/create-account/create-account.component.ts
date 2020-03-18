@@ -6,24 +6,24 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { State } from 'src/app/Store/reducers';
 import * as fromAuth from '../../Store';
-import { slideInOutAnimation } from './../../Main/animation/slide-in-out.animation';
+import { slideInOutAnimation } from '../../Main/animation/slide-in-out.animation';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css'],
+  selector: 'app-create-account',
+  templateUrl: './create-account.component.html',
+  styleUrls: ['./create-account.component.css'],
   animations: [slideInOutAnimation],
   host: { '[@slideInOutAnimation]': '' }
 })
-export class RegisterComponent implements OnInit {
+export class CreateAccountComponent implements OnInit {
   errorMessage$: Observable<string>;
   isLoadingResults$: Observable<boolean>;
-  registerForm: FormGroup;
+  createAccountForm: FormGroup;
 
   constructor(private store: Store<State>, private formBuilder: FormBuilder) {}
 
   ngOnInit() {
-    this.registerForm = this.formBuilder.group({
+    this.createAccountForm = this.formBuilder.group({
       username: ['', Validators.required],
       email: ['', Validators.required]
     });
@@ -32,10 +32,12 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.registerForm.invalid) {
+    if (this.createAccountForm.invalid) {
       return;
     }
 
-    this.store.dispatch(new fromAuth.Register(this.registerForm.value));
+    this.store.dispatch(
+      new fromAuth.CreateAccount(this.createAccountForm.value)
+    );
   }
 }

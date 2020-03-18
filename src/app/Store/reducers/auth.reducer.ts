@@ -46,6 +46,26 @@ export function reducer(
         errorMessage: action.payload
       };
     }
+    case AuthActionTypes.CREATE_ACCOUNT: {
+      return {
+        ...state,
+        isLoading: true,
+        errorMessage: null
+      };
+    }
+    case AuthActionTypes.CREATE_ACCOUNT_SUCCESS: {
+      return {
+        ...state,
+        isLoading: false
+      };
+    }
+    case AuthActionTypes.CREATE_ACCOUNT_FAILURE: {
+      return {
+        ...state,
+        isLoading: false,
+        errorMessage: action.payload
+      };
+    }
     case AuthActionTypes.CHANGE_PASSWORD: {
       return {
         ...state,

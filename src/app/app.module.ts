@@ -28,6 +28,7 @@ import { StaffAddComponent } from './Main/staff-add/staff-add.component';
 import { StaffEditComponent } from './Main/staff-edit/staff-edit.component';
 import { ResetPasswordComponent } from './Auth/reset-password/reset-password.component';
 import { AppComponent } from './app.component';
+import { CreateAccountComponent } from './Auth/create-account/create-account.component';
 import { ChangePasswordComponent } from './Auth/change-password/change-password.component';
 import { HeaderComponent } from './Main/navigation/header/header.component';
 import { FooterComponent } from './Main/navigation/footer/footer.component';
@@ -36,7 +37,6 @@ import { LayoutComponent } from './Main/layout/layout.component';
 
 import { reducers } from './Store/reducers';
 import { appEffect } from './Store/effects';
-import { RegisterComponent } from './Auth/register/register.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,7 +52,7 @@ import { RegisterComponent } from './Auth/register/register.component';
     FooterComponent,
     SidenavListComponent,
     LayoutComponent,
-    RegisterComponent
+    CreateAccountComponent
   ],
   imports: [
     FormsModule,
