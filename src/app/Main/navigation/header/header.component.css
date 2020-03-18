@@ -1,6 +1,7 @@
 mat-toolbar {
   background-color: #5299d3;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2), 0 0 20px 0 rgba(0, 0, 0, 0.19);
+  height: 64px;
 }
 
 mat-icon {
