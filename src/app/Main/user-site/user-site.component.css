@@ -2,17 +2,17 @@
   background-color: #0f4c81;
   color: #fff;
   text-align: center;
-  height: 400px;
+  height: 50vh;
 }
 
 h2 {
-  padding-top: 30px;
+  padding-top: 2%;
   font-size: 60px;
 }
 
 mat-grid-list {
   height: 100%;
-  margin-top: -150px;
+  margin-top: -15vh;
 }
 
 mat-card {
@@ -53,6 +53,7 @@ img {
 p {
   width: 100%;
   height: auto;
+  padding-top: 1%;
   padding-left: 15%;
   padding-right: 15%;
 }
@@ -87,17 +88,20 @@ mat-card-footer {
 
 .scroll-to-top {
   transform: rotate(-90deg);
-  font-size: 60px;
-  color: #5299d3;
+  font-size: 30px;
+  color: #fff;
   position: fixed;
-  bottom: 70px;
-  right: 60px;
+  bottom: 20px;
+  right: 20px;
   opacity: 0;
   transition: all 0.2s ease-in-out;
   background-color: transparent;
   cursor: pointer;
   height: fit-content;
   width: auto;
+  padding: 5px;
+  background-color: #0f4c81;
+  border-radius: 5px;
 }
 
 .show-scroll {
