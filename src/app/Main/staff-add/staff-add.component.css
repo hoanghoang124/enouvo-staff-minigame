@@ -1,12 +1,16 @@
 /* Structure */
 .staff-add {
-  height: 100vh;
   background-color: rgba(15, 76, 129, 1);
+  overflow: hidden;
+  height: calc(100vh -96px);
 }
 
 .example-container {
   position: relative;
   height: fit-content;
+  overflow: auto;
+  padding: 10px 0;
+  box-shadow: none;
 }
 
 mat-form-field {

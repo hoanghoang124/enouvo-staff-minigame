@@ -7,47 +7,58 @@
 
 h2 {
   padding-top: 2%;
-  font-size: 60px;
 }
 
 mat-grid-list {
   height: 100%;
-  margin-top: -15vh;
+  margin-top: -25vh;
+  padding: 20px;
 }
 
 mat-card {
-  width: 350px;
-  height: 400px;
-  margin: 30px 10px;
+  width: 320px;
+  height: 320px;
   background-color: #fff;
   display: flex;
   flex-direction: column;
   border-radius: 10px;
+  flex-direction: column;
+  position: absolute;
+  box-shadow: 0 4px 20px 0 rgba(255, 255, 255, 0.2),
+    0 4px 20px 0 rgba(0, 0, 0, 0.1) !important;
+}
+
+mat-card-content {
+  height: fit-content;
+  width: 100%;
+  border-radius: 25px;
 }
 
 mat-card-header {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-shrink: 0;
   color: #0f4c81;
+  text-align: center;
+  height: 100%;
 }
 
 mat-card-title.mat-card-title {
-  margin-bottom: 0px;
-}
-
-mat-card-content {
-  padding-top: 16px;
-  height: 100%;
-  flex-grow: 1;
-  text-align: center;
+  margin-bottom: 0;
 }
 
 img {
-  height: 200px;
+  margin-top: 2%;
+  height: 150px;
   width: auto;
   border-radius: 10px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-bottom: 2%;
+}
+
+.bio {
+  height: 50px;
+  margin-bottom: 2%;
 }
 
 p {
@@ -65,8 +76,7 @@ mat-card-footer {
 #btn-add {
   height: 40px;
   background-color: lawngreen;
-  margin-right: 16px;
-  margin-bottom: 16px;
+  margin: 0 16px;
   border-radius: 5px;
 }
 
@@ -78,8 +88,7 @@ mat-card-footer {
   height: 40px;
   border: 2px solid lawngreen;
   margin-right: 16px;
-  margin-bottom: 16px;
-  margin-right: 52px;
+  border-radius: 5px;
 }
 
 #icon-substract {
@@ -107,4 +116,26 @@ mat-card-footer {
 .show-scroll {
   opacity: 1;
   border: none;
+}
+
+/* If the screen size is 601px wide or more, set the font-size of <div> to 80px */
+@media screen and (min-width: 601px) {
+  h2 {
+    font-size: 60px;
+  }
+
+  p {
+    font-size: 1rem;
+  }
+}
+
+/* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
+@media screen and (max-width: 600px) {
+  h2 {
+    font-size: 35px;
+  }
+
+  p {
+    font-size: 1rem;
+  }
 }
