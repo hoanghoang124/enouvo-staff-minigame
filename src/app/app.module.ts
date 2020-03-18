@@ -37,6 +37,7 @@ import { LayoutComponent } from './Main/layout/layout.component';
 import { reducers } from './Store/reducers';
 import { appEffect } from './Store/effects';
 import { RegisterComponent } from './Auth/register/register.component';
+import { UploadFileService } from './Main/Services/upload.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -74,6 +75,7 @@ import { RegisterComponent } from './Auth/register/register.component';
     AuthGuard,
     RoleGuard,
     AuthService,
+    UploadFileService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

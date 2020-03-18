@@ -69,12 +69,10 @@
             </mat-error>
           </mat-form-field>
           <mat-form-field style="display: inline;">
-            <input matInput placeholder="Avatar" formControlName="avatar" />
-            <img
-              *ngIf="staffForm.get('avatar').valid"
-              [src]="staffForm.get('avatar').value"
-              class="img-responsive"
-            />
+            <input matInput type="file" formControlName="avatar" />
+            <button class="btn btn-success" (click)="upload()">
+              Upload
+            </button>
           </mat-form-field>
           <mat-form-field style="display: inline;">
             <input matInput placeholder="Email" formControlName="email" />
