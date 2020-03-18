@@ -40,6 +40,7 @@ button {
 
 #btn-login {
   background-color: #5299d3;
+  color: #fff;
 }
 
 button ::ng-deep .mat-spinner circle {

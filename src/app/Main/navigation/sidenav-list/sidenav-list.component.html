@@ -20,6 +20,14 @@
   </a>
   <a
     mat-list-item
+    routerLink="/create-account"
+    *ngIf="authService.isAdmin()"
+    (click)="onSidenavClose()"
+  >
+    <mat-icon>warning</mat-icon><span class="nav-caption">Create Account</span>
+  </a>
+  <a
+    mat-list-item
     routerLink="/reset-password"
     *ngIf="authService.isAdmin()"
     (click)="onSidenavClose()"

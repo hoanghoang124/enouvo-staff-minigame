@@ -23,19 +23,21 @@
           >{{ staff.firstName }} {{ staff.middleName }}
           {{ staff.lastName }}</mat-card-title
         >
+        <div class="img-aspect-ratio-1-1">
+          <img mat-card-lg-image src="{{ staff.avatar }}" />
+        </div>
+        <div class="bio">
+          <p>{{ staff.quote }}</p>
+        </div>
+        <mat-card-footer>
+          <button mat-flat-button id="btn-add">
+            <mat-icon id="icon-add">add_circle</mat-icon>
+          </button>
+          <button mat-button id="btn-substract">
+            <mat-icon id="icon-substract">remove_circle</mat-icon>
+          </button>
+        </mat-card-footer>
       </mat-card-header>
-      <mat-card-content>
-        <img mat-card-lg-image src="{{ staff.avatar }}" />
-        <p>{{ staff.quote }}</p>
-      </mat-card-content>
-      <mat-card-footer>
-        <button mat-flat-button id="btn-add">
-          <mat-icon id="icon-add">add_circle</mat-icon>
-        </button>
-        <button mat-button id="btn-substract">
-          <mat-icon id="icon-substract">remove_circle</mat-icon>
-        </button>
-      </mat-card-footer>
     </mat-card>
   </mat-grid-tile>
 </mat-grid-list>

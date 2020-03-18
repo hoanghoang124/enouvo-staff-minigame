@@ -1,11 +1,11 @@
-<div class="register"></div>
-<mat-card class="register-form">
-  <h2>Register account now</h2>
-  <form (ngSubmit)="onSubmit()" [formGroup]="registerForm">
+<div class="create-account"></div>
+<mat-card class="create-account-form">
+  <h2>Create employee account</h2>
+  <form (ngSubmit)="onSubmit()" [formGroup]="createAccountForm">
     <mat-form-field class="mat-form-filed">
       <input matInput placeholder="Username" formControlName="username" />
       <mat-error>
-        <span *ngIf="registerForm.get('username').errors?.required"
+        <span *ngIf="createAccountForm.get('username').errors?.required"
           >Please enter username</span
         >
       </mat-error>
@@ -18,7 +18,7 @@
         type="email"
       />
       <mat-error>
-        <span *ngIf="registerForm.get('email').errors?.required"
+        <span *ngIf="createAccountForm.get('email').errors?.required"
           >Please enter email</span
         >
       </mat-error>

@@ -10,14 +10,14 @@ import { UserSiteComponent } from './Main/user-site/user-site.component';
 import { AuthGuardService as AuthGuard } from './Auth/Services/auth-guard.service';
 import { RoleGuardService as AdminGuard } from './Auth/Services/role-guard.service';
 import { ResetPasswordComponent } from './Auth/reset-password/reset-password.component';
-import { RegisterComponent } from './Auth/register/register.component';
+import { CreateAccountComponent } from './Auth/create-account/create-account.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   {
-    path: 'register',
-    component: RegisterComponent,
+    path: 'create-account',
+    component: CreateAccountComponent,
     canActivate: [AdminGuard]
   },
   {
