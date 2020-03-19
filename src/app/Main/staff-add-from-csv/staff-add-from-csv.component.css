@@ -1,8 +1,15 @@
+.mat-elevation-z8 {
+  background-color: whitesmoke;
+  border-radius: 7px;
+}
+
 table.minimalistBlack {
+  height: calc(100vh - 96px);
+  position: absolute;
   border: 3px solid #000;
-  width: 100%;
   text-align: left;
   border-collapse: collapse;
+  overflow: auto;
 }
 
 table.minimalistBlack td,

@@ -5,8 +5,6 @@ import { Staff } from '../Models/staff.model';
 import { Store } from '@ngrx/store';
 import { State } from 'src/app/Store';
 import * as appStore from '../../Store';
-import { UploadFileService } from '../Services/upload.service';
-
 @Component({
   selector: 'app-staff-add',
   templateUrl: './staff-add.component.html',
@@ -19,17 +17,7 @@ export class StaffAddComponent implements OnInit {
   staff$: Observable<Staff>;
   selectedFiles: FileList;
 
-  upload() {
-    const file = this.selectedFiles.item(0);
-    this.uploadService.uploadfile(file);
-  }
-
-  constructor(
-    private formBuilder: FormBuilder,
-    private store: Store<State>,
-    private uploadService: UploadFileService
-  ) {}
-
+  constructor(private formBuilder: FormBuilder, private store: Store<State>) {}
   ngOnInit() {
     this.staffForm = this.formBuilder.group({
       id: [null, Validators.required],

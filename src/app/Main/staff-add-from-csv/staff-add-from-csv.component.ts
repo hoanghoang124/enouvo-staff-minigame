@@ -1,8 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
 import { CSVRecord } from '../Models/staff-csv.model';
-import * as fromStaff from '../../Store';
-import { Store } from '@ngrx/store';
-import { State } from '../../Store';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +12,7 @@ export class StaffAddFromCsvComponent {
   records: any[] = [];
   @ViewChild('csvReader') csvReader: any;
 
-  constructor(private store: Store<State>) {}
+  constructor() {}
 
   uploadListener($event: any): void {
     this.text = [];
@@ -66,10 +63,7 @@ export class StaffAddFromCsvComponent {
         csvRecord.addressStreet = curruntRecord[9].trim();
         csvRecord.addressCity = curruntRecord[10].trim();
         csvRecord.position = curruntRecord[11].trim();
-        csvArr = [...csvArr, csvRecord]; //mảng nè
-        console.log(csvRecord);
-
-        this.store.dispatch(new fromStaff.CreateStaff(csvRecord));
+        // csvArr = [...csvArr, csvRecord]; //mảng nè
       }
     }
     return csvArr;

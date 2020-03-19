@@ -48,7 +48,8 @@ export const routes: Routes = [
   },
   {
     path: 'admin/csv',
-    component: StaffAddFromCsvComponent
+    component: StaffAddFromCsvComponent,
+    canActivate: [AdminGuard]
   },
   {
     path: 'admin/:id/detail',

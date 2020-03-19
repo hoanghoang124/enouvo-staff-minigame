@@ -31,6 +31,10 @@ p {
   padding: 10px;
 }
 
+a {
+  margin-right: 10px;
+}
+
 table {
   width: 100%;
 }
