@@ -5,7 +5,7 @@ import { Staff } from '../Models/staff.model';
 import { Store } from '@ngrx/store';
 import { State } from 'src/app/Store';
 import * as appStore from '../../Store';
-import * as fromAuth from '../../Store';
+import { UploadFileService } from '../Services/upload.service';
 
 @Component({
   selector: 'app-staff-add',
@@ -17,9 +17,18 @@ export class StaffAddComponent implements OnInit {
   isLoadingResults$: Observable<boolean>;
   errorMessage$: Observable<string>;
   staff$: Observable<Staff>;
-  hide = true;
+  selectedFiles: FileList;
 
-  constructor(private formBuilder: FormBuilder, private store: Store<State>) {}
+  upload() {
+    const file = this.selectedFiles.item(0);
+    this.uploadService.uploadfile(file);
+  }
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private store: Store<State>,
+    private uploadService: UploadFileService
+  ) {}
 
   ngOnInit() {
     this.staffForm = this.formBuilder.group({
@@ -37,7 +46,7 @@ export class StaffAddComponent implements OnInit {
       addressCity: [null, Validators.required],
       position: [null, Validators.required]
     });
-    this.errorMessage$ = this.store.select(fromAuth.getErrorMessage);
+    this.errorMessage$ = this.store.select(appStore.getErrorMessage);
   }
 
   onFormSubmit() {
