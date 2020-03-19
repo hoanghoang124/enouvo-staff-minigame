@@ -2,14 +2,27 @@ import { Component, ViewChild } from '@angular/core';
 import { CSVRecord } from '../Models/staff-csv.model';
 
 @Component({
-  selector: 'app-root',
   templateUrl: './staff-add-from-csv.component.html',
   styleUrls: ['./staff-add-from-csv.component.css']
 })
 export class StaffAddFromCsvComponent {
-  title = 'Angular7AppReadCSV';
   text = [];
-  records: any[] = [];
+  public csvArr = [];
+  public records: any[] = [];
+  displayedColumns: string[] = [
+    'id',
+    'firstName',
+    'middleName',
+    'lastName',
+    'avatar',
+    'email',
+    'quote',
+    'birthday',
+    'phone',
+    'addressStreet',
+    'addressCity',
+    'position'
+  ];
   @ViewChild('csvReader') csvReader: any;
 
   constructor() {}
@@ -45,8 +58,6 @@ export class StaffAddFromCsvComponent {
   }
 
   getDataRecordsArrayFromCSVFile(csvRecordsArray: any, headerLength: any) {
-    let csvArr = [];
-
     for (let i = 1; i < csvRecordsArray.length; i++) {
       let curruntRecord = (<string>csvRecordsArray[i]).split(',');
       if (curruntRecord.length == headerLength) {
@@ -63,10 +74,11 @@ export class StaffAddFromCsvComponent {
         csvRecord.addressStreet = curruntRecord[9].trim();
         csvRecord.addressCity = curruntRecord[10].trim();
         csvRecord.position = curruntRecord[11].trim();
+        this.csvArr.push(csvRecord);
         // csvArr = [...csvArr, csvRecord]; //mảng nè
       }
     }
-    return csvArr;
+    return this.csvArr;
   }
 
   isValidCSVFile(file: any) {
