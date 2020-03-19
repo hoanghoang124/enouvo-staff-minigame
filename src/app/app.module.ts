@@ -37,6 +37,7 @@ import { LayoutComponent } from './Main/layout/layout.component';
 
 import { reducers } from './Store/reducers';
 import { appEffect } from './Store/effects';
+import { StaffAddFromCsvComponent } from './Main/staff-add-from-csv/staff-add-from-csv.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,7 +53,8 @@ import { appEffect } from './Store/effects';
     FooterComponent,
     SidenavListComponent,
     LayoutComponent,
-    CreateAccountComponent
+    CreateAccountComponent,
+    StaffAddFromCsvComponent
   ],
   imports: [
     FormsModule,

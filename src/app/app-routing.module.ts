@@ -11,6 +11,7 @@ import { AuthGuardService as AuthGuard } from './Auth/Services/auth-guard.servic
 import { RoleGuardService as AdminGuard } from './Auth/Services/role-guard.service';
 import { ResetPasswordComponent } from './Auth/reset-password/reset-password.component';
 import { CreateAccountComponent } from './Auth/create-account/create-account.component';
+import { StaffAddFromCsvComponent } from './Main/staff-add-from-csv/staff-add-from-csv.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -44,6 +45,10 @@ export const routes: Routes = [
     path: 'admin/create',
     component: StaffAddComponent,
     canActivate: [AdminGuard]
+  },
+  {
+    path: 'admin/csv',
+    component: StaffAddFromCsvComponent
   },
   {
     path: 'admin/:id/detail',
