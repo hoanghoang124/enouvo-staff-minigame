@@ -1,5 +1,4 @@
-/* Structure */
-.staff-add {
+Structure .staff-add {
   background-color: rgba(15, 76, 129, 1);
   overflow: hidden;
   height: calc(100vh -96px);

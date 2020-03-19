@@ -61,6 +61,7 @@ export const routes: Routes = [
     component: StaffEditComponent,
     canActivate: [AdminGuard]
   },
+
   { path: '**', redirectTo: 'dashboard', pathMatch: 'full' }
 ];
 
