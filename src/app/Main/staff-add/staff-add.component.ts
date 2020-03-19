@@ -15,13 +15,11 @@ export class StaffAddComponent implements OnInit {
   isLoadingResults$: Observable<boolean>;
   errorMessage$: Observable<string>;
   staff$: Observable<Staff>;
-  selectedFiles: FileList;
 
   constructor(private formBuilder: FormBuilder, private store: Store<State>) {}
   ngOnInit() {
     this.staffForm = this.formBuilder.group({
       id: [null, Validators.required],
-      username: [null, Validators.required],
       firstName: [null, Validators.required],
       middleName: [null, Validators.required],
       lastName: [null, Validators.required],
@@ -38,10 +36,6 @@ export class StaffAddComponent implements OnInit {
   }
 
   onFormSubmit() {
-    const register = {
-      username: this.staffForm.get('username').value,
-      email: this.staffForm.get('email').value
-    };
     const staff: Staff = {
       id: this.staffForm.get('id').value,
       firstName: this.staffForm.get('firstName').value,
@@ -56,9 +50,7 @@ export class StaffAddComponent implements OnInit {
       addressCity: this.staffForm.get('addressCity').value,
       position: this.staffForm.get('position').value
     };
-    console.log(register);
     this.isLoadingResults$ = this.store.select(appStore.getIsLoading);
-    this.store.dispatch(new appStore.CreateAccount(register));
     this.store.dispatch(new appStore.CreateStaff(staff));
   }
 }

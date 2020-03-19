@@ -38,7 +38,6 @@ import { LayoutComponent } from './Main/layout/layout.component';
 import { reducers } from './Store/reducers';
 import { appEffect } from './Store/effects';
 import { StaffAddFromCsvComponent } from './Main/staff-add-from-csv/staff-add-from-csv.component';
-import { UploadFileService } from './Main/Services/upload.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -77,7 +76,6 @@ import { UploadFileService } from './Main/Services/upload.service';
     AuthGuard,
     RoleGuard,
     AuthService,
-    UploadFileService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
