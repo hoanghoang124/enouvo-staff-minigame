@@ -13,14 +13,6 @@
             </mat-error>
           </mat-form-field>
           <mat-form-field style="display: inline;">
-            <input matInput placeholder="Username" formControlName="username" />
-            <mat-error>
-              <span *ngIf="staffForm.get('username').errors?.required"
-                >Please enter username</span
-              >
-            </mat-error>
-          </mat-form-field>
-          <mat-form-field style="display: inline;">
             <input
               matInput
               placeholder="First Name"
@@ -69,10 +61,12 @@
             </mat-error>
           </mat-form-field>
           <mat-form-field style="display: inline;">
-            <input matInput type="file" formControlName="avatar" />
-            <button class="btn btn-success" (click)="upload()">
-              Upload
-            </button>
+            <input matInput placeholder="Avatar" formControlName="avatar" />
+            <img
+              *ngIf="staffForm.get('avatar').valid"
+              [src]="staffForm.get('avatar').value"
+              class="img-responsive"
+            />
           </mat-form-field>
           <mat-form-field style="display: inline;">
             <input matInput placeholder="Email" formControlName="email" />
