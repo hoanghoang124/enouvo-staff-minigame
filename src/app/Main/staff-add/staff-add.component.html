@@ -4,24 +4,25 @@
       <mat-spinner *ngIf="isLoadingResults$ | async"></mat-spinner>
       <mat-card class="example-card">
         <form [formGroup]="staffForm" (ngSubmit)="onFormSubmit()">
-          <mat-form-field style="display: inline;">
+          <!-- <mat-form-field style="display: inline;">
             <input matInput placeholder="Id" formControlName="id" />
             <mat-error>
               <span *ngIf="staffForm.get('id').errors?.required">
                 Please enter your id !
               </span>
             </mat-error>
-          </mat-form-field>
-          <mat-form-field style="display: inline;">
+          </mat-form-field> -->
+          <!-- <mat-form-field style="display: inline;">
             <input matInput placeholder="Username" formControlName="username" />
             <mat-error>
               <span *ngIf="staffForm.get('username').errors?.required"
                 >Please enter username</span
               >
             </mat-error>
-          </mat-form-field>
+          </mat-form-field> -->
           <mat-form-field style="display: inline;">
             <input
+              type="text"
               matInput
               placeholder="First Name"
               formControlName="firstName"
@@ -29,14 +30,14 @@
             />
             <mat-error>
               <span *ngIf="staffForm.get('firstName').errors?.required">
-                Please enter your first name !
+                First name is required !
               </span>
               <span *ngIf="staffForm.get('firstName').errors?.pattern">
-                Your first name must contain valid character !
+                First name must contain valid character !
               </span>
             </mat-error>
           </mat-form-field>
-          <mat-form-field style="display: inline;">
+          <!-- <mat-form-field style="display: inline;">
             <input
               matInput
               placeholder="Middle Name"
@@ -51,50 +52,67 @@
                 Your middle name must contain valid character !
               </span>
             </mat-error>
-          </mat-form-field>
+          </mat-form-field> -->
           <mat-form-field style="display: inline;">
             <input
+              type="text"
               matInput
+              [matAutocomplete]="auto"
               placeholder="Last Name"
               formControlName="lastName"
               pattern="[a-zA-Z ]*"
             />
+            <mat-autocomplete
+              #auto="matAutocomplete"
+              [displayWith]="displayLastName"
+            >
+              <mat-option
+                *ngFor="let option of filteredLastName | async"
+                [value]="option"
+                >{{ option.lastName }}
+              </mat-option>
+            </mat-autocomplete>
             <mat-error>
               <span *ngIf="staffForm.get('lastName').errors?.required">
-                Please enter your last name !
+                Last name is required !
               </span>
               <span *ngIf="staffForm.get('lastName').errors?.pattern">
-                Your last name must contain valid character !
+                Last name must contain valid character !
               </span>
             </mat-error>
           </mat-form-field>
-          <mat-form-field style="display: inline;">
+          <!-- <mat-form-field style="display: inline;">
             <input matInput placeholder="Avatar" formControlName="avatar" />
             <img
               *ngIf="staffForm.get('avatar').valid"
               [src]="staffForm.get('avatar').value"
               class="img-responsive"
             />
-          </mat-form-field>
+          </mat-form-field> -->
           <mat-form-field style="display: inline;">
-            <input matInput placeholder="Email" formControlName="email" />
+            <input
+              type="email"
+              matInput
+              placeholder="Email"
+              formControlName="email"
+            />
             <mat-error>
               <span *ngIf="staffForm.get('email').errors?.required"
-                >Please enter your email</span
+                >Email is required !</span
               >
               <span *ngIf="staffForm.get('email').errors?.email"
-                >Your email is not valid</span
+                >Email is not valid</span
               >
             </mat-error>
           </mat-form-field>
-          <mat-form-field style="display: inline;">
+          <!-- <mat-form-field style="display: inline;">
             <input matInput placeholder="Quote" formControlName="quote" />
             <mat-error>
               <span *ngIf="staffForm.get('quote').errors?.required"
                 >Please enter your quote</span
               >
             </mat-error>
-          </mat-form-field>
+          </mat-form-field> -->
           <mat-form-field style="display: inline;">
             <input
               matInput
@@ -106,31 +124,48 @@
             <mat-datepicker #birthday></mat-datepicker>
             <mat-error>
               <span *ngIf="staffForm.get('birthday').errors?.required">
-                Please enter your birthday !
+                Birthday is required !
               </span>
             </mat-error>
           </mat-form-field>
           <mat-form-field style="display: inline;">
             <input
+              type="number"
               matInput
+              #input
               placeholder="Telephone"
               formControlName="phone"
               pattern="[0-9]*"
+              onKeyPress="if(this.value.length==10) return false;"
             />
+            <mat-hint align="start">{{ input.value?.length || 0 }}/10</mat-hint>
             <mat-error>
               <span *ngIf="staffForm.get('phone').errors?.required">
-                Please enter your phone !
-              </span>
-              <span *ngIf="staffForm.get('phone').errors?.pattern">
-                Your last name must contain valid character !
+                Telephone is required !
               </span>
             </mat-error>
           </mat-form-field>
           <mat-form-field style="display: inline;">
-            <input matInput placeholder="City" formControlName="addressCity" />
+            <input
+              type="text"
+              matInput
+              [matAutocomplete]="auto"
+              placeholder="City"
+              formControlName="addressCity"
+            />
+            <mat-autocomplete
+              #auto="matAutocomplete"
+              [displayWith]="displayCity"
+            >
+              <mat-option
+                *ngFor="let option of filteredCityName | async"
+                [value]="option"
+                >{{ option.cityName }}
+              </mat-option>
+            </mat-autocomplete>
             <mat-error>
               <span *ngIf="staffForm.get('addressCity').errors?.required">
-                Please enter your city !
+                City is required !
               </span>
             </mat-error>
           </mat-form-field>
@@ -142,15 +177,23 @@
             />
             <mat-error>
               <span *ngIf="staffForm.get('addressStreet').errors?.required">
-                Please enter your street !
+                Street is required !
               </span>
             </mat-error>
           </mat-form-field>
           <mat-form-field style="display: inline;">
-            <input matInput placeholder="Position" formControlName="position" />
+            <!-- <input matInput placeholder="Position" formControlName="position" /> -->
+            <mat-select formControlName="position" placeholder="Position">
+              <mat-option
+                matInput
+                *ngFor="let position of positions"
+                [value]="position"
+                >{{ position }}</mat-option
+              >
+            </mat-select>
             <mat-error>
               <span *ngIf="staffForm.get('position').errors?.required">
-                Please enter your city !
+                Position is required !
               </span>
             </mat-error>
           </mat-form-field>

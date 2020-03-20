@@ -6,6 +6,15 @@ import { Store } from '@ngrx/store';
 import { State } from 'src/app/Store';
 import * as appStore from '../../Store';
 import * as fromAuth from '../../Store';
+import { startWith, map, tap } from 'rxjs/operators';
+
+export interface LastName {
+  lastName: string;
+}
+
+export interface City {
+  cityName: string;
+}
 
 @Component({
   selector: 'app-staff-add',
@@ -18,6 +27,48 @@ export class StaffAddComponent implements OnInit {
   errorMessage$: Observable<string>;
   staff$: Observable<Staff>;
   hide = true;
+
+  options: LastName[] = [
+    { lastName: 'Tran' },
+    { lastName: 'Nguyen' },
+    { lastName: 'Le' },
+    { lastName: 'Pham' },
+    { lastName: 'Hoang' },
+    { lastName: 'Huynh' },
+    { lastName: 'Phan' },
+    { lastName: 'Vu' },
+    { lastName: 'Vo' },
+    { lastName: 'Dang' },
+    { lastName: 'Bui' },
+    { lastName: 'Do' },
+    { lastName: 'Ho' },
+    { lastName: 'Ngo' },
+    { lastName: 'Duong' }
+  ];
+
+  filteredLastName: Observable<LastName[]>;
+
+  cities: City[] = [
+    { cityName: 'An Giang' },
+    { cityName: 'Ba Ria - Vung Tau' },
+    { cityName: 'Bac Giang' },
+    { cityName: 'Bac Kan' },
+    { cityName: 'Bac Lieu' },
+    { cityName: 'Bac Ninh' },
+    { cityName: 'Ben tre' },
+    { cityName: 'Binh Dinh' },
+    { cityName: 'Binh Duong' },
+    { cityName: 'Binh Phuoc' },
+    { cityName: 'Binh Thuan' },
+    { cityName: 'Ca Mau' },
+    { cityName: 'Cao Bang' },
+    { cityName: 'Dong Lam' },
+    { cityName: 'Ky Dong' }
+  ];
+
+  filteredCityName: Observable<City[]>;
+
+  positions: string[] = ['Staff', 'Admin', 'HR', 'Accountant'];
 
   constructor(private formBuilder: FormBuilder, private store: Store<State>) {}
 
@@ -38,6 +89,47 @@ export class StaffAddComponent implements OnInit {
       position: [null, Validators.required]
     });
     this.errorMessage$ = this.store.select(fromAuth.getErrorMessage);
+
+    this.filteredLastName = this.staffForm.get('lastName').valueChanges.pipe(
+      startWith(''),
+      map(value => (typeof value === 'string' ? value : value.lastName)),
+      map(lastName =>
+        lastName ? this._filterLastName(lastName) : this.options.slice()
+      )
+    );
+
+    this.filteredCityName = this.staffForm.get('addressCity').valueChanges.pipe(
+      startWith(''),
+      map(value => (typeof value === 'string' ? value : value.cityName)),
+      tap(city => console.log(city)),
+      map(cityName =>
+        cityName ? this.__filter(cityName) : this.cities.slice()
+      )
+    );
+  }
+
+  displayLastName(user: LastName): string {
+    return user && user.lastName ? user.lastName : '';
+  }
+
+  private _filterLastName(lastName: string): LastName[] {
+    const filterValue = lastName.toLowerCase();
+
+    return this.options.filter(
+      option => option.lastName.toLowerCase().indexOf(filterValue) === 0
+    );
+  }
+
+  displayCity(user: City): string {
+    return user && user.cityName ? user.cityName : '';
+  }
+
+  private __filter(cityName: string): City[] {
+    const filterValue = cityName.toLowerCase();
+
+    return this.cities.filter(
+      city => city.cityName.toLowerCase().indexOf(filterValue) === 0
+    );
   }
 
   onFormSubmit() {
