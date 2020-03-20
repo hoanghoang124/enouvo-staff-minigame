@@ -1,20 +1,29 @@
 /* Structure */
 .staff-add {
   background-color: rgba(15, 76, 129, 1);
-  overflow: hidden;
-  height: calc(100vh -96px);
+  height: calc(100vh - 96px);
 }
 
-.example-container {
-  position: relative;
-  height: fit-content;
+.container {
+  height: calc(100vh - 96px);
   overflow: auto;
-  padding: 10px 0;
-  box-shadow: none;
+}
+
+mat-card {
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 mat-form-field {
-  margin-bottom: 10px;
+  padding-left: 32px;
+}
+
+.row {
+  justify-content: flex-start;
+}
+
+.button-row {
+  padding: 10px 16px;
 }
 
 mat-icon {

@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { State } from 'src/app/Store';
 import * as appStore from '../../Store';
 import * as fromAuth from '../../Store';
-import { startWith, map, tap } from 'rxjs/operators';
+import { startWith, map } from 'rxjs/operators';
 
 export interface LastName {
   lastName: string;
@@ -62,13 +62,61 @@ export class StaffAddComponent implements OnInit {
     { cityName: 'Binh Thuan' },
     { cityName: 'Ca Mau' },
     { cityName: 'Cao Bang' },
+    { cityName: 'Can Tho' },
+    { cityName: 'Da Nang' },
     { cityName: 'Dong Lam' },
-    { cityName: 'Ky Dong' }
+    { cityName: 'Dien Bien' },
+    { cityName: 'Dong Nai' },
+    { cityName: 'Dong Thap' },
+    { cityName: 'Gia Lai' },
+    { cityName: 'Ha Giang' },
+    { cityName: 'Ha Nam' },
+    { cityName: 'Ha Tinh' },
+    { cityName: 'Ha Noi' },
+    { cityName: 'Hai Duong' },
+    { cityName: 'Hai Phong' },
+    { cityName: 'Hau Giang' },
+    { cityName: 'Ho Chi Minh' },
+    { cityName: 'Hoa Binh' },
+    { cityName: 'Hung Yen' },
+    { cityName: 'Khanh Hoa' },
+    { cityName: 'Kien Giang' },
+    { cityName: 'Kon Tum' },
+    { cityName: 'Ky Dong' },
+    { cityName: 'Lai Chau' },
+    { cityName: 'Lam Dong' },
+    { cityName: 'Lang Son' },
+    { cityName: 'Lao Cai' },
+    { cityName: 'Long An' },
+    { cityName: 'Nam Dinh' },
+    { cityName: 'Nghe An' },
+    { cityName: 'Ninh Binh' },
+    { cityName: 'Ninh Thuan' },
+    { cityName: 'Phu Hue' },
+    { cityName: 'Phu Yen' },
+    { cityName: 'Quang Binh' },
+    { cityName: 'Quang Nam' },
+    { cityName: 'Quang Ngai' },
+    { cityName: 'Quang Ninh' },
+    { cityName: 'Quang Tri' },
+    { cityName: 'Soc Trang' },
+    { cityName: 'Son La' },
+    { cityName: 'Tay Ninh' },
+    { cityName: 'Thai Binh' },
+    { cityName: 'Thai Nguyen' },
+    { cityName: 'Thanh Hoa' },
+    { cityName: 'Thua Thien Hue' },
+    { cityName: 'Tien Giang' },
+    { cityName: 'Tra Vinh' },
+    { cityName: 'Tuyen Quang' },
+    { cityName: 'Vinh Long' },
+    { cityName: 'Vinh Phuc' },
+    { cityName: 'Yen Bai' }
   ];
 
   filteredCityName: Observable<City[]>;
 
-  positions: string[] = ['Staff', 'Admin', 'HR', 'Accountant'];
+  positions: string[] = ['Accountant', 'Admin', 'HR', 'Staff'];
 
   constructor(private formBuilder: FormBuilder, private store: Store<State>) {}
 
@@ -101,7 +149,6 @@ export class StaffAddComponent implements OnInit {
     this.filteredCityName = this.staffForm.get('addressCity').valueChanges.pipe(
       startWith(''),
       map(value => (typeof value === 'string' ? value : value.cityName)),
-      tap(city => console.log(city)),
       map(cityName =>
         cityName ? this.__filter(cityName) : this.cities.slice()
       )
