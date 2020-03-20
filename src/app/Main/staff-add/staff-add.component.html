@@ -162,13 +162,13 @@
           <div class="row">
             <mat-form-field appearance="outline">
               <input
-                type="number"
+                type="text"
                 matInput
                 #input
                 placeholder="Telephone"
                 formControlName="phone"
                 pattern="[0-9]*"
-                onKeyPress="if(this.value.length==10) return false;"
+                maxlength="10"
               />
               <mat-hint align="start"
                 >{{ input.value?.length || 0 }}/10</mat-hint
@@ -176,6 +176,9 @@
               <mat-error>
                 <span *ngIf="staffForm.get('phone').errors?.required">
                   Telephone is required !
+                </span>
+                <span *ngIf="staffForm.get('phone').errors?.pattern">
+                  Telephone is not invalid !
                 </span>
               </mat-error>
             </mat-form-field>
@@ -191,7 +194,7 @@
                   >Email is required !</span
                 >
                 <span *ngIf="staffForm.get('email').errors?.email"
-                  >Email is not valid</span
+                  >Email is not valid !</span
                 >
               </mat-error>
             </mat-form-field>
