@@ -5,6 +5,11 @@ import { Staff } from '../Models/staff.model';
 import { Store } from '@ngrx/store';
 import { State } from 'src/app/Store';
 import * as appStore from '../../Store';
+<<<<<<< HEAD
+=======
+import * as fromAuth from '../../Store';
+
+>>>>>>> parent of eb50789... Merge branch 'admin' of https://github.com/hoanghoang124/enouvo-staff-minigame into admin
 @Component({
   selector: 'app-staff-add',
   templateUrl: './staff-add.component.html',
@@ -15,6 +20,12 @@ export class StaffAddComponent implements OnInit {
   isLoadingResults$: Observable<boolean>;
   errorMessage$: Observable<string>;
   staff$: Observable<Staff>;
+<<<<<<< HEAD
+=======
+  hide = true;
+
+  constructor(private formBuilder: FormBuilder, private store: Store<State>) {}
+>>>>>>> parent of eb50789... Merge branch 'admin' of https://github.com/hoanghoang124/enouvo-staff-minigame into admin
 
   constructor(private formBuilder: FormBuilder, private store: Store<State>) {}
   ngOnInit() {
@@ -32,7 +43,7 @@ export class StaffAddComponent implements OnInit {
       addressCity: [null, Validators.required],
       position: [null, Validators.required]
     });
-    this.errorMessage$ = this.store.select(appStore.getErrorMessage);
+    this.errorMessage$ = this.store.select(fromAuth.getErrorMessage);
   }
 
   onFormSubmit() {
