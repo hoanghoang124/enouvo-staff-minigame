@@ -3,32 +3,15 @@
   height: 100vh;
 }
 
-.example-container {
-  height: 100vh;
-}
-
 mat-card {
   height: 100%;
   display: absolute;
   overflow: auto;
 }
 
-mat-form-filed {
-  height: fit-content;
-  width: 30%;
-}
-
 form {
   height: 100%;
   text-align: center;
-}
-
-.example-full-width {
-  width: 100%;
-}
-
-.example-full-width:nth-last-child() {
-  margin-bottom: 10px;
 }
 
 .button-row {
