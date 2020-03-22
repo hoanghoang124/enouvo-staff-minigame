@@ -185,10 +185,10 @@ export class StaffAddComponent implements OnInit {
   }
 
   onFormSubmit() {
-    const register = {
-      username: this.staffForm.get('username').value,
-      email: this.staffForm.get('email').value
-    };
+    // const register = {
+    //   username: this.staffForm.get('username').value,
+    //   email: this.staffForm.get('email').value
+    // };
     const staff: Staff = {
       id: this.staffForm.get('id').value,
       firstName: this.staffForm.get('firstName').value,
@@ -203,9 +203,9 @@ export class StaffAddComponent implements OnInit {
       addressCity: this.staffForm.get('addressCity').value,
       position: this.staffForm.get('position').value
     };
-    console.log(register);
+    // console.log(register);
     this.isLoadingResults$ = this.store.select(appStore.getIsLoading);
-    this.store.dispatch(new appStore.CreateAccount(register));
+    // this.store.dispatch(new appStore.CreateAccount(register));
     this.store.dispatch(new appStore.CreateStaff(staff));
   }
 

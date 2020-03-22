@@ -32,10 +32,11 @@
           </mat-error>
         </mat-form-field>
         <mat-error>
-          <span id="error-message" *ngIf="errorMessage$ | async"
+          <span *ngIf="errorMessage$ | async"
             >{{ errorMessage$ | async }}
           </span>
         </mat-error>
+
         <div class="button-row">
           <button mat-raised-button id="btn-login" type="submit">
             Login
