@@ -10,14 +10,14 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { State } from 'src/app/Store/reducers';
 import * as fromAuth from '../../Store';
-import { slideInOutAnimation } from './../../Main/animation/slide-in-out.animation';
+import { fadeInAnimation } from './../../Main/animation/fade-in.animation';
 
 @Component({
   selector: 'app-change-password',
   templateUrl: './change-password.component.html',
   styleUrls: ['./change-password.component.css'],
-  animations: [slideInOutAnimation],
-  host: { '[@slideInOutAnimation]': '' }
+  animations: [fadeInAnimation],
+  host: { '[@fadeInAnimation]': '' }
 })
 export class ChangePasswordComponent implements OnInit {
   errorMessage$: Observable<string>;

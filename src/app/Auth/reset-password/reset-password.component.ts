@@ -5,14 +5,14 @@ import { Store } from '@ngrx/store';
 import { State } from 'src/app/Store/reducers';
 import * as fromAuth from '../../Store';
 import { User } from '../Models/user.model';
-import { slideInOutAnimation } from 'src/app/Main/animation/slide-in-out.animation';
+import { fadeInAnimation } from './../../Main/animation/fade-in.animation';
 
 @Component({
   selector: 'app-reset-password',
   templateUrl: './reset-password.component.html',
   styleUrls: ['./reset-password.component.css'],
-  animations: [slideInOutAnimation],
-  host: { '[@slideInOutAnimation]': '' }
+  animations: [fadeInAnimation],
+  host: { '[@fadeInAnimation]': '' }
 })
 export class ResetPasswordComponent implements OnInit {
   errorMessage$: Observable<string>;

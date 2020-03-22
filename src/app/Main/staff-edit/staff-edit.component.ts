@@ -44,7 +44,7 @@ export class StaffEditComponent implements OnInit {
       avatar: [null, Validators.required],
       email: [null, [Validators.required, Validators.email]],
       quote: [null, Validators.required],
-      birthday: [null | date: 'dd/MM/yyyy', Validators.required],
+      // birthday: [null | date: 'dd/MM/yyyy', Validators.required],
       phone: [null, [Validators.required, Validators.pattern('[0-9]*')]],
       addressStreet: [null, Validators.required],
       addressCity: [null, Validators.required],
