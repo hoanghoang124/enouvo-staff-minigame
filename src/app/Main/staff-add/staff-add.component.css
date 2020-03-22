@@ -1,19 +1,9 @@
-Structure .staff-add {
-  background-color: rgba(15, 76, 129, 1);
-  overflow: hidden;
-  height: calc(100vh -96px);
-}
-
-.example-container {
-  position: relative;
-  height: fit-content;
-  overflow: auto;
-  padding: 10px 0;
-  box-shadow: none;
-}
-
 mat-form-field {
-  margin-bottom: 10px;
+  padding-left: 32px;
+}
+
+.button-row {
+  padding: 10px 0;
 }
 
 mat-icon {
@@ -22,7 +12,7 @@ mat-icon {
 }
 
 a {
-  margin-left: 10px;
+  margin-left: 16px;
 }
 
 h3 {

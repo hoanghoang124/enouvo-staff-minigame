@@ -1,8 +1,8 @@
-<div class="container">
-  <div class="example-loading-shade" *ngIf="isLoadingResults$ | async">
-    <mat-spinner></mat-spinner>
-  </div>
-  <div class="example-container mat-elevation-z8">
+<div class="row">
+  <div class="container col-12 col-sm-12 col-md-12 col-lg-9 col-xl-6">
+    <div class="example-loading-shade" *ngIf="isLoadingResults$ | async">
+      <mat-spinner></mat-spinner>
+    </div>
     <mat-card class="example-card" *ngIf="staff$ | async; let staff">
       <div fxLayout="row" fxLayoutGap="10">
         <div class="staff-detail-column-left" fxFlex="50%">

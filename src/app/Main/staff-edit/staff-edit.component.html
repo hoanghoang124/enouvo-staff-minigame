@@ -70,12 +70,7 @@
         </mat-error>
       </mat-form-field>
       <mat-form-field>
-        <input matInput [matDatepicker]="birthday" formControlName="birthday" />
-        <mat-datepicker-toggle
-          matSuffix
-          [for]="birthday"
-        ></mat-datepicker-toggle>
-        <mat-datepicker #birthday disabled="false"></mat-datepicker>
+        <input matInput placeholder="birthday" formControlName="birthday" />
         <mat-error>
           <span *ngIf="staffForm.get('birthday').errors?.required">
             Please enter your birthday !

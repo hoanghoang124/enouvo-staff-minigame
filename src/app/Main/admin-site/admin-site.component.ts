@@ -1,7 +1,13 @@
+import { StaffAddComponent } from './../staff-add/staff-add.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import {
+  MatPaginator,
+  MatSort,
+  MatTableDataSource,
+  MatDialog
+} from '@angular/material';
 import { State } from 'src/app/Store/reducers';
 import * as fromStaff from '../../Store';
 import { Staff } from '../Models/staff.model';
@@ -28,7 +34,7 @@ export class AdminSiteComponent implements OnInit {
     this.data.filter = filterValue.trim().toLowerCase();
   }
 
-  constructor(private store: Store<State>) {}
+  constructor(private store: Store<State>, public dialog: MatDialog) {}
 
   ngOnInit() {
     this.store.dispatch(new fromStaff.GetStaffs());
@@ -46,5 +52,9 @@ export class AdminSiteComponent implements OnInit {
   }
   goto(id) {
     this.store.dispatch(new fromStaff.GetStaff(id));
+  }
+
+  openDialog(): void {
+    this.dialog.open(StaffAddComponent);
   }
 }
