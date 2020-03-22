@@ -1,29 +1,9 @@
-/* Structure */
-.staff-add {
-  background-color: rgba(15, 76, 129, 1);
-  height: calc(100vh - 96px);
-}
-
-.container {
-  height: calc(100vh - 96px);
-  overflow: auto;
-}
-
-mat-card {
-  top: 50%;
-  transform: translateY(-50%);
-}
-
 mat-form-field {
   padding-left: 32px;
 }
 
-.row {
-  justify-content: flex-start;
-}
-
 .button-row {
-  padding: 10px 16px;
+  padding: 10px 0;
 }
 
 mat-icon {
@@ -32,7 +12,7 @@ mat-icon {
 }
 
 a {
-  margin-left: 10px;
+  margin-left: 16px;
 }
 
 h3 {

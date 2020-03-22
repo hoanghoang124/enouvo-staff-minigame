@@ -7,6 +7,7 @@ import { State } from 'src/app/Store';
 import * as appStore from '../../Store';
 import * as fromAuth from '../../Store';
 import { startWith, map } from 'rxjs/operators';
+import { MatDialogRef } from '@angular/material/dialog';
 
 export interface LastName {
   lastName: string;
@@ -118,7 +119,11 @@ export class StaffAddComponent implements OnInit {
 
   positions: string[] = ['Accountant', 'Admin', 'HR', 'Staff'];
 
-  constructor(private formBuilder: FormBuilder, private store: Store<State>) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private store: Store<State>,
+    public dialogRef: MatDialogRef<StaffAddComponent>
+  ) {}
 
   ngOnInit() {
     this.staffForm = this.formBuilder.group({
@@ -202,5 +207,9 @@ export class StaffAddComponent implements OnInit {
     this.isLoadingResults$ = this.store.select(appStore.getIsLoading);
     this.store.dispatch(new appStore.CreateAccount(register));
     this.store.dispatch(new appStore.CreateStaff(staff));
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 }

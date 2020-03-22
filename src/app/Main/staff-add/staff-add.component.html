@@ -1,9 +1,8 @@
-<div class="staff-add">
-  <div class="container">
-    <mat-spinner *ngIf="isLoadingResults$ | async"></mat-spinner>
-    <mat-card class="example-card">
-      <form [formGroup]="staffForm" (ngSubmit)="onFormSubmit()">
-        <!-- <mat-form-field style="display: inline;">
+<h3 mat-dialog-title>Fill in the form to add employee</h3>
+<mat-dialog-content>
+  <mat-spinner *ngIf="isLoadingResults$ | async"></mat-spinner>
+  <form [formGroup]="staffForm" (ngSubmit)="onFormSubmit()">
+    <!-- <mat-form-field style="display: inline;">
             <input matInput placeholder="Id" formControlName="id" />
             <mat-error>
               <span *ngIf="staffForm.get('id').errors?.required">
@@ -11,7 +10,7 @@
               </span>
             </mat-error>
           </mat-form-field> -->
-        <!-- <mat-form-field style="display: inline;">
+    <!-- <mat-form-field style="display: inline;">
             <input matInput placeholder="Username" formControlName="username" />
             <mat-error>
               <span *ngIf="staffForm.get('username').errors?.required"
@@ -19,7 +18,7 @@
               >
             </mat-error>
           </mat-form-field> -->
-        <!-- <mat-form-field style="display: inline;">
+    <!-- <mat-form-field style="display: inline;">
             <input
               matInput
               placeholder="Middle Name"
@@ -35,7 +34,7 @@
               </span>
             </mat-error>
           </mat-form-field> -->
-        <!-- <mat-form-field style="display: inline;">
+    <!-- <mat-form-field style="display: inline;">
             <input matInput placeholder="Avatar" formControlName="avatar" />
             <img
               *ngIf="staffForm.get('avatar').valid"
@@ -43,7 +42,7 @@
               class="img-responsive"
             />
           </mat-form-field> -->
-        <!-- <mat-form-field style="display: inline;">
+    <!-- <mat-form-field style="display: inline;">
             <input matInput placeholder="Quote" formControlName="quote" />
             <mat-error>
               <span *ngIf="staffForm.get('quote').errors?.required"
@@ -52,188 +51,176 @@
             </mat-error>
           </mat-form-field> -->
 
-        <mat-list>
-          <mat-list-item>Personal Information</mat-list-item>
-          <div class="row">
-            <mat-form-field appearance="outline">
-              <input
-                type="text"
-                matInput
-                placeholder="First Name"
-                formControlName="firstName"
-                pattern="[a-zA-Z ]*"
-              />
-              <mat-error>
-                <span *ngIf="staffForm.get('firstName').errors?.required">
-                  First name is required !
-                </span>
-                <span *ngIf="staffForm.get('firstName').errors?.pattern">
-                  First name must contain valid character !
-                </span>
-              </mat-error>
-            </mat-form-field>
-            <mat-form-field appearance="outline">
-              <input
-                type="text"
-                matInput
-                [matAutocomplete]="autoLastName"
-                placeholder="Last Name"
-                formControlName="lastName"
-                pattern="[a-zA-Z ]*"
-              />
-              <mat-autocomplete
-                #autoLastName="matAutocomplete"
-                [displayWith]="displayLastName"
-              >
-                <mat-option
-                  *ngFor="let option of filteredLastName | async"
-                  [value]="option"
-                  >{{ option.lastName }}
-                </mat-option>
-              </mat-autocomplete>
-              <mat-error>
-                <span *ngIf="staffForm.get('lastName').errors?.required">
-                  Last name is required !
-                </span>
-                <span *ngIf="staffForm.get('lastName').errors?.pattern">
-                  Last name must contain valid character !
-                </span>
-              </mat-error>
-            </mat-form-field>
-            <mat-form-field appearance="outline">
-              <input
-                matInput
-                [matDatepicker]="birthday"
-                placeholder="Date of Birth"
-                readonly
-              />
-              <mat-datepicker-toggle matSuffix [for]="birthday">
-              </mat-datepicker-toggle>
-              <mat-datepicker #birthday disabled="false"></mat-datepicker>
-              <mat-error>
-                <span *ngIf="staffForm.get('birthday').errors?.required">
-                  Birthday is required !
-                </span>
-              </mat-error>
-            </mat-form-field>
-          </div>
-          <mat-divider></mat-divider>
-          <mat-list-item>Address</mat-list-item>
-          <div class="row">
-            <mat-form-field appearance="outline">
-              <input
-                type="text"
-                matInput
-                [matAutocomplete]="autoCity"
-                placeholder="City"
-                formControlName="addressCity"
-              />
-              <mat-autocomplete
-                #autoCity="matAutocomplete"
-                [displayWith]="displayCity"
-              >
-                <mat-option
-                  *ngFor="let option of filteredCityName | async"
-                  [value]="option"
-                  >{{ option.cityName }}
-                </mat-option>
-              </mat-autocomplete>
-              <mat-error>
-                <span *ngIf="staffForm.get('addressCity').errors?.required">
-                  City is required !
-                </span>
-              </mat-error>
-            </mat-form-field>
-            <mat-form-field appearance="outline">
-              <input
-                matInput
-                placeholder="Street"
-                formControlName="addressStreet"
-              />
-              <mat-error>
-                <span *ngIf="staffForm.get('addressStreet').errors?.required">
-                  Street is required !
-                </span>
-              </mat-error>
-            </mat-form-field>
-          </div>
-          <mat-divider></mat-divider>
-          <mat-list-item>Contact</mat-list-item>
-          <div class="row">
-            <mat-form-field appearance="outline">
-              <input
-                type="text"
-                matInput
-                #input
-                placeholder="Telephone"
-                formControlName="phone"
-                pattern="[0-9]*"
-                maxlength="10"
-              />
-              <mat-hint align="start"
-                >{{ input.value?.length || 0 }}/10</mat-hint
-              >
-              <mat-error>
-                <span *ngIf="staffForm.get('phone').errors?.required">
-                  Telephone is required !
-                </span>
-                <span *ngIf="staffForm.get('phone').errors?.pattern">
-                  Telephone is not invalid !
-                </span>
-              </mat-error>
-            </mat-form-field>
-            <mat-form-field appearance="outline">
-              <input
-                type="email"
-                matInput
-                placeholder="Email"
-                formControlName="email"
-              />
-              <mat-error>
-                <span *ngIf="staffForm.get('email').errors?.required"
-                  >Email is required !</span
-                >
-                <span *ngIf="staffForm.get('email').errors?.email"
-                  >Email is not valid !</span
-                >
-              </mat-error>
-            </mat-form-field>
-            <mat-form-field appearance="outline">
-              <mat-select formControlName="position" placeholder="Position">
-                <mat-option
-                  matInput
-                  *ngFor="let position of positions"
-                  [value]="position"
-                  >{{ position }}</mat-option
-                >
-              </mat-select>
-              <mat-error>
-                <span *ngIf="staffForm.get('position').errors?.required">
-                  Position is required !
-                </span>
-              </mat-error>
-            </mat-form-field>
-          </div>
-        </mat-list>
-        <div class="button-row">
-          <button
-            type="submit"
-            [disabled]="staffForm.invalid"
-            mat-flat-button
-            color="primary"
+    <mat-list>
+      <mat-list-item>Personal Information</mat-list-item>
+      <mat-form-field appearance="outline">
+        <input
+          type="text"
+          matInput
+          placeholder="First Name"
+          formControlName="firstName"
+          pattern="[a-zA-Z ]*"
+        />
+        <mat-error>
+          <span *ngIf="staffForm.get('firstName').errors?.required">
+            First name is required !
+          </span>
+          <span *ngIf="staffForm.get('firstName').errors?.pattern">
+            First name must contain valid character !
+          </span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <input
+          type="text"
+          matInput
+          [matAutocomplete]="autoLastName"
+          placeholder="Last Name"
+          formControlName="lastName"
+          pattern="[a-zA-Z ]*"
+        />
+        <mat-autocomplete
+          #autoLastName="matAutocomplete"
+          [displayWith]="displayLastName"
+        >
+          <mat-option
+            *ngFor="let option of filteredLastName | async"
+            [value]="option"
+            >{{ option.lastName }}
+          </mat-option>
+        </mat-autocomplete>
+        <mat-error>
+          <span *ngIf="staffForm.get('lastName').errors?.required">
+            Last name is required !
+          </span>
+          <span *ngIf="staffForm.get('lastName').errors?.pattern">
+            Last name must contain valid character !
+          </span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <input
+          matInput
+          [matDatepicker]="birthday"
+          placeholder="Date of Birth"
+          readonly
+        />
+        <mat-datepicker-toggle matSuffix [for]="birthday">
+        </mat-datepicker-toggle>
+        <mat-datepicker #birthday disabled="false"></mat-datepicker>
+        <mat-error>
+          <span *ngIf="staffForm.get('birthday').errors?.required">
+            Birthday is required !
+          </span>
+        </mat-error>
+      </mat-form-field>
+      <mat-divider></mat-divider>
+      <mat-list-item>Address</mat-list-item>
+      <mat-form-field appearance="outline">
+        <input
+          type="text"
+          matInput
+          [matAutocomplete]="autoCity"
+          placeholder="City"
+          formControlName="addressCity"
+        />
+        <mat-autocomplete
+          #autoCity="matAutocomplete"
+          [displayWith]="displayCity"
+        >
+          <mat-option
+            *ngFor="let option of filteredCityName | async"
+            [value]="option"
+            >{{ option.cityName }}
+          </mat-option>
+        </mat-autocomplete>
+        <mat-error>
+          <span *ngIf="staffForm.get('addressCity').errors?.required">
+            City is required !
+          </span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <input matInput placeholder="Street" formControlName="addressStreet" />
+        <mat-error>
+          <span *ngIf="staffForm.get('addressStreet').errors?.required">
+            Street is required !
+          </span>
+        </mat-error>
+      </mat-form-field>
+      <mat-divider></mat-divider>
+      <mat-list-item>Contact</mat-list-item>
+      <mat-form-field appearance="outline">
+        <input
+          type="text"
+          matInput
+          #input
+          placeholder="Telephone"
+          formControlName="phone"
+          pattern="[0-9]*"
+          maxlength="10"
+        />
+        <mat-hint align="start">{{ input.value?.length || 0 }}/10</mat-hint>
+        <mat-error>
+          <span *ngIf="staffForm.get('phone').errors?.required">
+            Telephone is required !
+          </span>
+          <span *ngIf="staffForm.get('phone').errors?.pattern">
+            Telephone is not invalid !
+          </span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <input
+          type="email"
+          matInput
+          placeholder="Email"
+          formControlName="email"
+        />
+        <mat-error>
+          <span *ngIf="staffForm.get('email').errors?.required"
+            >Email is required !</span
           >
-            <mat-icon>save</mat-icon>
-          </button>
-          <a mat-flat-button color="primary" [routerLink]="['/admin']">
-            <mat-icon>arrow_back</mat-icon>
-          </a>
-          <mat-error>
-            <span id="error-message" *ngIf="errorMessage$ | async">{{
-              errorMessage$ | async
-            }}</span>
-          </mat-error>
-        </div>
-      </form>
-    </mat-card>
+          <span *ngIf="staffForm.get('email').errors?.email"
+            >Email is not valid !</span
+          >
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-select formControlName="position" placeholder="Position">
+          <mat-option
+            matInput
+            *ngFor="let position of positions"
+            [value]="position"
+            >{{ position }}</mat-option
+          >
+        </mat-select>
+        <mat-error>
+          <span *ngIf="staffForm.get('position').errors?.required">
+            Position is required !
+          </span>
+        </mat-error>
+      </mat-form-field>
+    </mat-list>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <div class="button-row">
+    <a mat-flat-button color="primary" (click)="onNoClick()">
+      <mat-icon>arrow_back</mat-icon>
+    </a>
+    <button
+      type="submit"
+      [disabled]="staffForm.invalid"
+      mat-flat-button
+      color="primary"
+    >
+      <mat-icon>save</mat-icon>
+    </button>
+    <mat-error>
+      <span id="error-message" *ngIf="errorMessage$ | async">{{
+        errorMessage$ | async
+      }}</span>
+    </mat-error>
   </div>
-</div>
+</mat-dialog-actions>
