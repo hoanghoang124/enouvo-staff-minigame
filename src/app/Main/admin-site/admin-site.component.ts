@@ -54,4 +54,8 @@ export class AdminSiteComponent implements OnInit {
   openDialog(): void {
     this.dialog.open(StaffAddComponent);
   }
+
+  openDialog(): void {
+    this.dialog.open(StaffAddComponent);
+  }
 }

@@ -119,6 +119,7 @@ export class StaffAddComponent implements OnInit {
   ngOnInit() {
     this.staffForm = this.formBuilder.group({
       id: [null, Validators.required],
+      username: [null, Validators.required],
       firstName: [null, Validators.required],
       middleName: null,
       lastName: [null, Validators.required],
