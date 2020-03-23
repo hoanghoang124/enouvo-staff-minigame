@@ -11,55 +11,66 @@ import { AuthGuardService as AuthGuard } from './Auth/Services/auth-guard.servic
 import { RoleGuardService as AdminGuard } from './Auth/Services/role-guard.service';
 import { ResetPasswordComponent } from './Auth/reset-password/reset-password.component';
 import { CreateAccountComponent } from './Auth/create-account/create-account.component';
+import { StaffAddFromCsvComponent } from './Main/staff-add-from-csv/staff-add-from-csv.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent },
-  {
-    path: 'create-account',
-    component: CreateAccountComponent,
-    canActivate: [AdminGuard]
-  },
-  {
-    path: 'reset-password',
-    component: ResetPasswordComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'change-password',
-    component: ChangePasswordComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'dashboard',
-    component: UserSiteComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'admin',
-    component: AdminSiteComponent,
-    canActivate: [AdminGuard]
-  },
-  {
-    path: 'admin/create',
-    component: StaffAddComponent,
-    canActivate: [AdminGuard]
-  },
-  {
-    path: 'admin/:id/detail',
-    component: StaffDetailComponent,
-    canActivate: [AdminGuard]
-  },
-  {
-    path: 'admin/:id/edit',
-    component: StaffEditComponent,
-    canActivate: [AdminGuard]
-  },
-  { path: '**', redirectTo: 'dashboard', pathMatch: 'full' }
+	{ path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+	{ path: 'login', component: LoginComponent },
+	{
+		path: 'create-account',
+		component: CreateAccountComponent,
+		canActivate: [AdminGuard]
+	},
+	{
+		path: 'reset-password',
+		component: ResetPasswordComponent,
+		canActivate: [AuthGuard]
+	},
+	{
+		path: 'change-password',
+		component: ChangePasswordComponent,
+		canActivate: [AuthGuard]
+	},
+	{
+		path: 'dashboard',
+		component: UserSiteComponent,
+		canActivate: [AuthGuard]
+	},
+	{
+		path: 'admin',
+		component: AdminSiteComponent,
+		canActivate: [AdminGuard]
+	},
+	{
+		path: 'admin/create',
+		component: StaffAddComponent,
+		canActivate: [AdminGuard]
+	},
+	{
+		path: 'admin/csv',
+		component: StaffAddFromCsvComponent,
+		canActivate: [AdminGuard]
+	},
+	{
+		path: 'admin/:id/detail',
+		component: StaffDetailComponent,
+		canActivate: [AdminGuard]
+	},
+	{
+		path: 'dashboard/:id/detail',
+		component: StaffDetailComponent
+	},
+	{
+		path: 'admin/:id/edit',
+		component: StaffEditComponent,
+		canActivate: [AdminGuard]
+	},
+
+	{ path: '**', redirectTo: 'dashboard', pathMatch: 'full' }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+	imports: [RouterModule.forRoot(routes)],
+	exports: [RouterModule]
 })
 export class AppRoutingModule {}

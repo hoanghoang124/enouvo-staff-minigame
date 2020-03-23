@@ -17,7 +17,7 @@
   (window:resize)="onResize($event)"
 >
   <mat-grid-tile *ngFor="let staff of staffs">
-    <mat-card>
+    <mat-card [routerLink]="[staff.id + '/detail']">
       <mat-card-header>
         <mat-card-title
           >{{ staff.firstName }} {{ staff.middleName }}

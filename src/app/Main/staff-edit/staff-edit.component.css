@@ -1,38 +1,29 @@
 /* Structure */
-.container {
-  height: 100vh;
+.wrapper {
+  background-color: rgba(15, 76, 129, 1);
 }
 
-.example-container {
-  height: 100vh;
+.container {
+  height: 100%;
+}
+
+mat-form-field {
+  padding: 0 16px;
 }
 
 mat-card {
-  height: 100%;
-  display: absolute;
   overflow: auto;
 }
 
-mat-form-filed {
-  height: fit-content;
-  width: 30%;
+h3 {
+  text-align: center;
+  margin: auto;
+  padding: 10px;
 }
 
 form {
   height: 100%;
   text-align: center;
-}
-
-.example-full-width {
-  width: 100%;
-}
-
-.example-full-width:nth-last-child() {
-  margin-bottom: 10px;
-}
-
-.button-row {
-  margin: 10px 0;
 }
 
 .mat-flat-button {

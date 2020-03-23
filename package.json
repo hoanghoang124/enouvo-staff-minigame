@@ -32,8 +32,18 @@
     "@ngrx/router-store": "^5.2.0",
     "@ngrx/store": "5.1.0",
     "@ngrx/store-devtools": "5.1.0",
+<<<<<<< HEAD
+<<<<<<< HEAD
+    "bootstrap": "^4.4.1",
+    "aws-sdk": "^2.641.0",
+=======
     "@types/jest": "^25.1.4",
     "bootstrap": "^4.4.1",
+>>>>>>> e013b0b1d81e19267122216a7ae45b3a8f8cc337
+=======
+    "aws-sdk": "^2.641.0",
+    "bootstrap": "^4.4.1",
+>>>>>>> 4419d59f71efbd9707145d05f70fd345083f6d93
     "chart.js": "2.7.3",
     "express": "^4.17.1",
     "hammerjs": "^2.0.8",
@@ -55,10 +65,17 @@
     "enhanced-resolve": "^3.3.0",
     "jasmine-core": "~3.4.0",
     "jasmine-spec-reporter": "~4.2.1",
+<<<<<<< HEAD
+    "karma": "~4.1.0",
+    "karma-chrome-launcher": "~2.2.0",
+    "karma-coverage-istanbul-reporter": "~2.0.1",
+    "karma-jasmine": "~2.0.1",
+=======
     "karma": "^4.1.0",
     "karma-chrome-launcher": "^2.2.0",
     "karma-coverage-istanbul-reporter": "~2.0.1",
     "karma-jasmine": "^2.0.1",
+>>>>>>> e013b0b1d81e19267122216a7ae45b3a8f8cc337
     "karma-jasmine-html-reporter": "^1.4.0",
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",

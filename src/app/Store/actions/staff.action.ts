@@ -20,7 +20,11 @@ export enum StaffActionsType {
 
   UPDATE_STAFF = '[Staff] Updates Staff',
   UPDATE_STAFF_SUCCESS = '[Staff] Updates Staff Success',
-  UPDATE_STAFF_FAILURE = '[Staff] Updates Staff Failure'
+  UPDATE_STAFF_FAILURE = '[Staff] Updates Staff Failure',
+
+  UPLOAD_IMAGE = '[Image] Upload Image',
+  UPLOAD_IMAGE_SUCCESS = '[Image] Upload Image Success',
+  UPLOAD_IMAGE_FAILURE = '[Image] Upload Image Failure'
 }
 
 export class GetStaffs implements Action {

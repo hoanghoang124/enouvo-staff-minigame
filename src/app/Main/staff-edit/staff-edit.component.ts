@@ -1,4 +1,3 @@
-import { slideInOutAnimation } from './../animation/slide-in-out.animation';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -11,9 +10,7 @@ import { Staff } from '../Models/staff.model';
 @Component({
   selector: 'app-staff-edit',
   templateUrl: './staff-edit.component.html',
-  styleUrls: ['./staff-edit.component.css'],
-  animations: [slideInOutAnimation],
-  host: { '[@slideInOutAnimation]': '' }
+  styleUrls: ['./staff-edit.component.css']
 })
 export class StaffEditComponent implements OnInit {
   staffForm: FormGroup;
@@ -54,7 +51,6 @@ export class StaffEditComponent implements OnInit {
       .select(fromStaff.getStaff)
       .pipe()
       .subscribe(staff => {
-        console.log(staff);
         if (staff) {
           this.staff = staff;
           this.staffForm.patchValue(this.staff);
