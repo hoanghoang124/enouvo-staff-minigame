@@ -6,6 +6,7 @@ import { State } from 'src/app/Store/reducers';
 import { Staff } from 'src/app/Main/Models/staff.model';
 import * as fromStaff from '../../Store';
 import { slideInOutAnimation } from '../animation/slide-in-out.animation';
+import { AuthService } from 'src/app/Auth/Services/auth.service';
 @Component({
   selector: 'app-staff-detail',
   templateUrl: './staff-detail.component.html',
@@ -17,7 +18,11 @@ export class StaffDetailComponent implements OnInit {
   staff$: Observable<Staff>;
   isLoadingResults$: Observable<boolean>;
 
-  constructor(private route: ActivatedRoute, private store: Store<State>) {}
+  constructor(
+    private route: ActivatedRoute,
+    private store: Store<State>,
+    public authService: AuthService
+  ) {}
 
   ngOnInit() {
     this.route.params.subscribe(params => {
