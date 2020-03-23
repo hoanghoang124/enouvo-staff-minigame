@@ -17,17 +17,23 @@
             <mat-card-subtitle>{{ staff.quote }}</mat-card-subtitle>
           </mat-card-header>
           <div class="button-row">
-            <a mat-flat-button color="primary" [routerLink]="['/admin']">
+            <a mat-flat-button color="primary" [routerLink]="['/']">
               <mat-icon>arrow_back</mat-icon>
             </a>
             <a
               mat-flat-button
               color="primary"
               [routerLink]="['/admin/' + staff.id + '/edit']"
+              *ngIf="authService.isAdmin()"
             >
               <mat-icon>edit</mat-icon>
             </a>
-            <a mat-flat-button color="warn" (click)="deletestaff(staff.id)">
+            <a
+              mat-flat-button
+              color="warn"
+              (click)="deletestaff(staff.id)"
+              *ngIf="authService.isAdmin()"
+            >
               <mat-icon>delete</mat-icon>
             </a>
           </div>

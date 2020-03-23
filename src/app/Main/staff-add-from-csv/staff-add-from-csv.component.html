@@ -1,4 +1,5 @@
-<div class="input-group mb-3">
+<!-- read csv -->
+<!-- <div class="input-group mb-3">
   <div class="custom-file">
     <input
       type="file"
@@ -70,4 +71,66 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
+</div> -->
+
+<!-- option 1 -->
+<!-- <h1>File Upload</h1>
+<div class="row">
+  <div class="col-md-6">
+    <div *ngIf="fileUpload.status === 'error'">
+      <div [innerHTML]="fileUpload.message"></div>
+    </div>
+    <div *ngIf="fileUpload.status === 'progress'">
+      <div class="progress" style="height: 20px;margin-bottom:20px;">
+        <div
+          class="progress-bar"
+          role="progressbar"
+          [style.width.%]="fileUpload.message"
+          aria-valuenow="25"
+          aria-valuemin="0"
+          aria-valuemax="100"
+        >
+          {{ fileUpload.message }}%
+        </div>
+      </div>
+    </div>
+    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <input
+          type="text"
+          formControlName="name"
+          class="form-control"
+          placeholder="Name"
+        />
+      </div>
+      <div class="form-group">
+        <input type="file" name="profile" (change)="onSelectedFile($event)" />
+      </div>
+      <div class="form-group">
+        <button class="btn btn-success">Upload</button>
+      </div>
+    </form>
+    <div *ngIf="fileUpload.status === 'success'">
+      <img [src]="fileUpload.filePath" height="200px" />
+    </div>
+    <p>{{ error }}</p>
+  </div>
+</div> -->
+
+<!-- option 2 -->
+<div class="row">
+  <input
+    style="display: none;"
+    #fileInput
+    type="file"
+    (change)="onFileSelected($event)"
+  />
+  <button class="btn- btn-info" type="button" (click)="fileInput.click()">
+    Pick File
+  </button>
+  <p>{{ selectedFile.name }}</p>
+  <button class="btn btn-success" type="button" (click)="onUpload()">
+    Upload
+  </button>
+  <p>{{ uploadProgress }}</p>
 </div>
