@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     AngularMaterialModule
   ],
+  exports: [AngularMaterialModule, ReactiveFormsModule, FormsModule],
   declarations: []
 })
 export class SharedModule {}
