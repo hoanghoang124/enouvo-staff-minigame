@@ -1,6 +1,10 @@
 /* Structure */
+.wrapper {
+  background-color: rgba(15, 76, 129, 1);
+}
+
 .container {
-  height: 100vh;
+  height: 100%;
 }
 
 mat-form-field {
@@ -8,8 +12,6 @@ mat-form-field {
 }
 
 mat-card {
-  height: 100%;
-  display: absolute;
   overflow: auto;
 }
 
@@ -22,10 +24,6 @@ h3 {
 form {
   height: 100%;
   text-align: center;
-}
-
-.button-row {
-  margin: 10px 0;
 }
 
 .mat-flat-button {

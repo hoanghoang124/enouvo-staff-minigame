@@ -50,9 +50,6 @@ export class AdminSiteComponent implements OnInit {
   deletestaff(id) {
     this.store.dispatch(new fromStaff.DeleteStaff(id));
   }
-  goto(id) {
-    this.store.dispatch(new fromStaff.GetStaff(id));
-  }
 
   openDialog(): void {
     this.dialog.open(StaffAddComponent);

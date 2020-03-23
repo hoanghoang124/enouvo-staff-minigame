@@ -57,6 +57,10 @@ export const routes: Routes = [
     canActivate: [AdminGuard]
   },
   {
+    path: 'dashboard/:id/detail',
+    component: StaffDetailComponent
+  },
+  {
     path: 'admin/:id/edit',
     component: StaffEditComponent,
     canActivate: [AdminGuard]
