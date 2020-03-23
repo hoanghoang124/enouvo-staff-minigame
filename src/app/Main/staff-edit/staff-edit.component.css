@@ -3,10 +3,20 @@
   height: 100vh;
 }
 
+mat-form-field {
+  padding: 0 16px;
+}
+
 mat-card {
   height: 100%;
   display: absolute;
   overflow: auto;
+}
+
+h3 {
+  text-align: center;
+  margin: auto;
+  padding: 10px;
 }
 
 form {
