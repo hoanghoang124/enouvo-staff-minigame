@@ -1,16 +1,19 @@
-.create {
+.wrapper {
+  height: calc(100vh - 96px);
+  background-color: rgba(15, 76, 129, 1);
+}
+
+.container {
   height: calc(100vh - 96px);
 }
 
 mat-card {
   background-color: #fff;
-  position: absolute;
   padding: 30px 30px 10px 30px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 15px;
-  height: max-content;
 }
 
 h2 {

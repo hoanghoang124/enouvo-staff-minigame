@@ -1,4 +1,8 @@
 /* Structure */
+.row {
+  height: 100%;
+}
+
 .container {
   height: 100%;
 }
@@ -10,6 +14,8 @@
 }
 
 mat-card {
+  max-height: 100%;
+  overflow: auto;
   border-radius: 10px;
   top: 50%;
   transform: translateY(-50%);
@@ -51,10 +57,11 @@ mat-card-subtitle {
 
 .button-row {
   margin-bottom: 0;
+  padding: 10px 0;
 }
 
 .mat-flat-button {
-  margin: 0 5px 0 5px;
+  margin: 5px;
 }
 
 .staff-detail-column-right {

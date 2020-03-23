@@ -18,7 +18,11 @@ import {
   MatDialogModule,
   MatTabsModule,
   MatListModule,
-  MatSidenavModule
+  MatSidenavModule,
+  MatAutocompleteModule,
+  MatOptionModule,
+  MatSelectModule,
+  MatDividerModule
 } from '@angular/material';
 @NgModule({
   imports: [
@@ -40,7 +44,11 @@ import {
     MatDialogModule,
     MatTabsModule,
     MatListModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatAutocompleteModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatDividerModule
   ],
   exports: [
     MatInputModule,
@@ -60,7 +68,11 @@ import {
     MatDialogModule,
     MatTabsModule,
     MatListModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatAutocompleteModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatDividerModule
   ]
 })
 export class AngularMaterialModule {}

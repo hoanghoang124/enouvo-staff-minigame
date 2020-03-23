@@ -1,15 +1,17 @@
-.login {
-  min-height: calc(100vh - 96px);
+.wrapper {
+  height: calc(100vh - 96px);
   background-color: rgba(15, 76, 129, 1);
+}
+
+.container {
+  height: calc(100vh - 96px);
 }
 
 mat-card {
   background-color: #fff;
-  position: absolute;
   padding: 30px;
   top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateY(-50%);
   border-radius: 15px;
 }
 
@@ -25,10 +27,10 @@ span,
   width: 100%;
 }
 
-#error-message {
+/* #error-message {
   margin-bottom: 20px;
   width: 100px;
-}
+} */
 
 button {
   height: 40px;
