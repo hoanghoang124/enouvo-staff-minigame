@@ -1,3 +1,4 @@
+<!-- read csv -->
 <!-- <div class="input-group mb-3">
   <div class="custom-file">
     <input
@@ -72,7 +73,8 @@
   </table>
 </div> -->
 
-<h1>File Upload</h1>
+<!-- option 1 -->
+<!-- <h1>File Upload</h1>
 <div class="row">
   <div class="col-md-6">
     <div *ngIf="fileUpload.status === 'error'">
@@ -113,4 +115,22 @@
     </div>
     <p>{{ error }}</p>
   </div>
+</div> -->
+
+<!-- option 2 -->
+<div class="row">
+  <input
+    style="display: none;"
+    #fileInput
+    type="file"
+    (change)="onFileSelected($event)"
+  />
+  <button class="btn- btn-info" type="button" (click)="fileInput.click()">
+    Pick File
+  </button>
+  <p>{{ selectedFile.name }}</p>
+  <button class="btn btn-success" type="button" (click)="onUpload()">
+    Upload
+  </button>
+  <p>{{ uploadProgress }}</p>
 </div>
