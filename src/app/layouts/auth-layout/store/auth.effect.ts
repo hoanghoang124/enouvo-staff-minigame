@@ -20,7 +20,6 @@ export class AuthEffects {
     ofType(AuthActionTypes.LOGIN),
     map((action: AuthActions.LogIn) => action.payload),
     switchMap(payload => {
-      console.log("ggg");
       return this.authService.logIn(payload).pipe(
         map(user => {
           if (user.shouldUserChangePassword) {
