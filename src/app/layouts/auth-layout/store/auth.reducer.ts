@@ -1,11 +1,11 @@
 import * as AuthActions from "./auth.action";
-import { Role } from "../models/role.model";
+import { RoleId } from "../models/role.model";
 import { User } from "../models/user.model";
 
 const { AuthActionTypes } = AuthActions;
 
 export interface AuthState {
-  role: Role;
+  role: RoleId;
   id: User;
   isLoading: boolean;
   errorMessage: string;

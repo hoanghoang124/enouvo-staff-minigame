@@ -17,6 +17,7 @@ import { ComponentsModule } from "./components/components.module";
 import { StoreModule } from "@ngrx/store";
 import { EffectsModule } from "@ngrx/effects";
 import { SharedModule } from "./shared/shared.module";
+import { CoreModule } from "./core/core.module";
 
 @NgModule({
   imports: [
@@ -28,6 +29,7 @@ import { SharedModule } from "./shared/shared.module";
     RouterModule,
     AppRoutingModule,
     SharedModule,
+    CoreModule,
     StoreModule.forRoot([]),
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({ maxAge: 25 }), //  Retains last 25 states
