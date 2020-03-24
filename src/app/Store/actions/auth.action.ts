@@ -1,20 +1,20 @@
-import { Action } from '@ngrx/store';
+import { Action } from "@ngrx/store";
 
 export enum AuthActionTypes {
-  LOGIN = '[Auth] Login',
-  LOGIN_SUCCESS = '[Auth] LoginSuccess',
-  LOGIN_FAILURE = '[Auth] LoginFailure',
-  LOGOUT = '[Auth] Logout',
-  GET_STATUS = '[Auth] GetStatus',
-  CREATE_ACCOUNT = '[Auth] CreateAccount',
-  CREATE_ACCOUNT_SUCCESS = '[Auth] CreateAccountSuccess',
-  CREATE_ACCOUNT_FAILURE = '[Auth] CreateAccountFailure',
-  RESET_PASSWORD = '[Auth] ResetPassword',
-  RESET_PASSWORD_SUCCESS = '[Auth] ResetPasswordSuccess',
-  RESET_PASSWORD_FAILURE = '[Auth] ResetPasswordFailure',
-  CHANGE_PASSWORD = '[Auth] ChangePassword',
-  CHANGE_PASSWORD_SUCCESS = '[Auth] ChangePasswordSuccess',
-  CHANGE_PASSWORD_FAILURE = '[Auth] ChangePasswordFailure'
+  LOGIN = "[Auth] Login",
+  LOGIN_SUCCESS = "[Auth] LoginSuccess",
+  LOGIN_FAILURE = "[Auth] LoginFailure",
+  LOGOUT = "[Auth] Logout",
+  GET_STATUS = "[Auth] GetStatus",
+  CREATE_ACCOUNT = "[Auth] CreateAccount",
+  CREATE_ACCOUNT_SUCCESS = "[Auth] CreateAccountSuccess",
+  CREATE_ACCOUNT_FAILURE = "[Auth] CreateAccountFailure",
+  RESET_PASSWORD = "[Auth] ResetPassword",
+  RESET_PASSWORD_SUCCESS = "[Auth] ResetPasswordSuccess",
+  RESET_PASSWORD_FAILURE = "[Auth] ResetPasswordFailure",
+  CHANGE_PASSWORD = "[Auth] ChangePassword",
+  CHANGE_PASSWORD_SUCCESS = "[Auth] ChangePasswordSuccess",
+  CHANGE_PASSWORD_FAILURE = "[Auth] ChangePasswordFailure"
 }
 
 export class LogIn implements Action {

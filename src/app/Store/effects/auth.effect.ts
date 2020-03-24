@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { Actions, Effect, ofType } from '@ngrx/effects';
-import { Observable, of } from 'rxjs';
-import { tap, map, switchMap, catchError } from 'rxjs/operators';
-import { AuthService } from '../../Auth/Services/auth.service';
-import * as AuthActions from '../actions/auth.action';
+import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
+import { Actions, Effect, ofType } from "@ngrx/effects";
+import { Observable, of } from "rxjs";
+import { tap, map, switchMap, catchError } from "rxjs/operators";
+import { AuthService } from "../../Auth/Services/auth.service";
+import * as AuthActions from "../actions/auth.action";
 const { AuthActionTypes } = AuthActions;
 
 @Injectable()
@@ -23,9 +23,9 @@ export class AuthEffects {
       return this.authService.logIn(payload).pipe(
         map(user => {
           if (user.shouldUserChangePassword) {
-            this.router.navigateByUrl('/change-password');
+            this.router.navigateByUrl("/change-password");
           } else {
-            this.router.navigateByUrl('/dashboard');
+            this.router.navigateByUrl("/dashboard");
           }
           return new AuthActions.LogInSuccess(user);
         }),
@@ -36,13 +36,15 @@ export class AuthEffects {
     })
   );
 
+@Effect()
+  
   @Effect({ dispatch: false })
   LogInSuccess: Observable<any> = this.actions.pipe(
     ofType(AuthActionTypes.LOGIN_SUCCESS),
     tap(user => {
-      localStorage.setItem('token', user.payload.token);
-      localStorage.setItem('role', user.payload.scope);
-      localStorage.setItem('id', user.payload.id);
+      localStorage.setItem("token", user.payload.token);
+      localStorage.setItem("role", user.payload.scope);
+      localStorage.setItem("id", user.payload.id);
     })
   );
 
@@ -53,7 +55,7 @@ export class AuthEffects {
     switchMap(payload => {
       return this.authService.create(payload).pipe(
         map(user => {
-          this.router.navigateByUrl('/dashboard');
+          this.router.navigateByUrl("/dashboard");
           return new AuthActions.CreateAccountSuccess(user);
         }),
         catchError(res =>
@@ -70,7 +72,7 @@ export class AuthEffects {
     switchMap(payload => {
       return this.authService.changePassword(payload).pipe(
         map(user => {
-          this.router.navigateByUrl('/login');
+          this.router.navigateByUrl("/login");
           return new AuthActions.ChangePasswordSuccess(user);
         }),
         catchError(res =>
@@ -87,7 +89,7 @@ export class AuthEffects {
     switchMap(payload => {
       return this.authService.resetPassword({ userId: payload }).pipe(
         map(user => {
-          this.router.navigateByUrl('/dashboard');
+          this.router.navigateByUrl("/dashboard");
           return new AuthActions.ResetPasswordSuccess(user);
         }),
         catchError(res =>
@@ -102,7 +104,7 @@ export class AuthEffects {
     ofType(AuthActionTypes.LOGOUT),
     tap(() => {
       localStorage.clear();
-      this.router.navigateByUrl('/login');
+      this.router.navigateByUrl("/login");
     })
   );
 }

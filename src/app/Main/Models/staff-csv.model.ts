@@ -3,12 +3,10 @@ export class CSVRecord {
   firstName: string;
   middleName: string;
   lastName: string;
-  avatar: string;
   email: string;
-  quote: string;
-  birthday: string;
+  roleId: number;
   phone: number;
+  birthday: string;
   addressStreet: string;
   addressCity: string;
-  position: string;
 }

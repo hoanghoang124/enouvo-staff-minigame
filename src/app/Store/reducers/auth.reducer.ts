@@ -1,6 +1,6 @@
-import * as AuthActions from '../actions/auth.action';
-import { Role } from 'src/app/Auth/Models/role.model';
-import { User } from 'src/app/Auth/Models/user.model';
+import * as AuthActions from "../actions/auth.action";
+import { Role } from "src/app/Auth/Models/role.model";
+import { User } from "src/app/Auth/Models/user.model";
 
 const { AuthActionTypes } = AuthActions;
 
@@ -39,7 +39,6 @@ export function reducer(
       };
     }
     case AuthActionTypes.LOGIN_FAILURE: {
-      console.log('zo day');
       return {
         ...state,
         isLoading: false,

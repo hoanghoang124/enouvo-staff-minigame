@@ -1,11 +1,11 @@
-import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { User } from '../Models/user.model';
-import { Role } from '../Models/role.model';
+import { environment } from "src/environments/environment";
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
+import { User } from "../Models/user.model";
+import { Role } from "../Models/role.model";
 
-@Injectable({ providedIn: 'root' })
+@Injectable({ providedIn: "root" })
 export class AuthService {
   private BASE_URL = environment.apiBaseUrl;
   role: string;
@@ -13,11 +13,11 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   isLoggedIn() {
-    return localStorage.getItem('token');
+    return localStorage.getItem("token");
   }
 
   isAdmin(): boolean {
-    this.role = localStorage.getItem('role');
+    this.role = localStorage.getItem("role");
     if (this.role === this.roles.Admin && this.isLoggedIn()) {
       return true;
     } else {
@@ -30,7 +30,7 @@ export class AuthService {
   }
 
   shouldUserChangePassword(): string {
-    return localStorage.getItem('shouldUserChangePassword');
+    return localStorage.getItem("shouldUserChangePassword");
   }
 
   logIn(params): Observable<any> {

@@ -1,28 +1,28 @@
-import { StaffAddComponent } from './../staff-add/staff-add.component';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Store } from '@ngrx/store';
+import { StaffAddComponent } from "./../staff-add/staff-add.component";
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { Observable } from "rxjs";
+import { Store } from "@ngrx/store";
 import {
   MatPaginator,
   MatSort,
   MatTableDataSource,
   MatDialog
-} from '@angular/material';
-import { State } from 'src/app/Store/reducers';
-import * as fromStaff from '../../Store';
-import { Staff } from '../Models/staff.model';
-import { fadeInAnimation } from '../animation/fade-in.animation';
-import * as _ from 'lodash';
+} from "@angular/material";
+import { State } from "src/app/Store/reducers";
+import * as fromStaff from "../../Store";
+import { Staff } from "../Models/staff.model";
+import { fadeInAnimation } from "../animation/fade-in.animation";
+import * as _ from "lodash";
 
 @Component({
-  selector: 'app-admin-site',
-  templateUrl: './admin-site.component.html',
-  styleUrls: ['./admin-site.component.css'],
+  selector: "app-admin-site",
+  templateUrl: "./admin-site.component.html",
+  styleUrls: ["./admin-site.component.css"],
   animations: [fadeInAnimation],
-  host: { '[@fadeInAnimation]': '' }
+  host: { "[@fadeInAnimation]": "" }
 })
 export class AdminSiteComponent implements OnInit {
-  displayedColumns: string[] = ['lastName', 'position', 'actions'];
+  displayedColumns: string[] = ["lastName", "position", "actions"];
   data = new MatTableDataSource<Staff>();
   stafflist$: Observable<any>;
   isLoadingResults$: Observable<boolean>;
@@ -49,10 +49,6 @@ export class AdminSiteComponent implements OnInit {
 
   deletestaff(id) {
     this.store.dispatch(new fromStaff.DeleteStaff(id));
-  }
-
-  openDialog(): void {
-    this.dialog.open(StaffAddComponent);
   }
 
   openDialog(): void {
