@@ -22,8 +22,8 @@ export const ROUTES: RouteInfo[] = [
     title: "Admin",
     icon: "ni-bullet-list-67 text-red",
     class: ""
-  }
-  // { path: '/login', title: 'Login',  icon:'ni-key-25 text-info', class: '' },
+  },
+  { path: "/login", title: "Login", icon: "ni-key-25 text-info", class: "" }
   // { path: '/register', title: 'Register',  icon:'ni-circle-08 text-pink', class: '' }
 ];
 

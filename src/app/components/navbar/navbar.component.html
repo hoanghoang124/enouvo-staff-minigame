@@ -50,6 +50,7 @@
             routerLinkActive="active"
             [routerLink]="['/user-profile']"
             class="dropdown-item"
+            *ngIf="authService.isLoggedIn()"
           >
             <i class="ni ni-single-02"></i>
             <span>My profile</span>
@@ -67,6 +68,7 @@
             routerLinkActive="active"
             [routerLink]="['/user-profile']"
             class="dropdown-item"
+            *ngIf="authService.isLoggedIn()"
           >
             <i class="ni ni-calendar-grid-58"></i>
             <span>Change Password</span>
@@ -81,7 +83,11 @@
             <span>Create Account</span>
           </a>
           <div class="dropdown-divider"></div>
-          <a (click)="logOut()" class="dropdown-item">
+          <a
+            (click)="logOut()"
+            class="dropdown-item"
+            *ngIf="authService.isLoggedIn()"
+          >
             <i class="ni ni-user-run"></i>
             <span>Logout</span>
           </a>

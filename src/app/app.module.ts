@@ -18,7 +18,6 @@ import { StoreModule } from "@ngrx/store";
 import { EffectsModule } from "@ngrx/effects";
 import { SharedModule } from "./shared/shared.module";
 import { CoreModule } from "./core/core.module";
-import { ChangePasswordComponent } from './auth-layout/change-password/change-password.component';
 
 @NgModule({
   imports: [
@@ -36,7 +35,7 @@ import { ChangePasswordComponent } from './auth-layout/change-password/change-pa
     StoreDevtoolsModule.instrument({ maxAge: 25 }), //  Retains last 25 states
     StoreRouterConnectingModule.forRoot({ stateKey: "router" }) // name of reducer key
   ],
-  declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent, ChangePasswordComponent],
+  declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent],
   providers: [],
   bootstrap: [AppComponent]
 })
