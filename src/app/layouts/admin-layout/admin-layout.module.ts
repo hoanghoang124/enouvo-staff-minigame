@@ -13,6 +13,10 @@ import { MapsComponent } from './maps/maps.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { TablesComponent } from './tables/tables.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { reducers } from './store/reducers';
+import { effects } from './store/effects';
 // import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
@@ -22,7 +26,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     HttpClientModule,
     NgbModule,
-    ClipboardModule
+    ClipboardModule,
+    StoreModule.forFeature('page', reducers),
+    EffectsModule.forFeature(effects)
   ],
   declarations: [
     DashboardComponent,

@@ -1,5 +1,5 @@
-import { createSelector } from "@ngrx/store";
-import { selectPageState } from "./../index";
+import { createSelector } from '@ngrx/store';
+import { selectPageState } from '../reducers/index';
 
 export const selectStaffState = createSelector(
   selectPageState,

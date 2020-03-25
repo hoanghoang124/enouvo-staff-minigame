@@ -1,10 +1,10 @@
-import { Injectable } from "@angular/core";
-import { Effect, ofType, Actions } from "@ngrx/effects";
+import { Injectable } from '@angular/core';
+import { Effect, ofType, Actions } from '@ngrx/effects';
 
-import * as StaffActions from "../actions/staff.action";
-import { map, catchError, switchMap } from "rxjs/operators";
-import { StaffService } from "../../services/staff.service";
-import { Router } from "@angular/router";
+import * as StaffActions from '../actions/staff.action';
+import { map, catchError, switchMap } from 'rxjs/operators';
+import { StaffService } from '../../services/staff.service';
+import { Router } from '@angular/router';
 
 const { StaffActionsType } = StaffActions;
 
@@ -52,7 +52,7 @@ export class StaffEffects {
       return this.staffservice.updateStaff(staff).pipe(
         map(res => {
           console.log(res);
-          this.route.navigate(["/admin/" + staff.id + "/detail"]);
+          this.route.navigate(['/admin/' + staff.id + '/detail']);
           return new StaffActions.UpdateStaffSuccess(staff);
         }),
         catchError(err => [new StaffActions.UpdateStaffFail(err)])
@@ -68,7 +68,7 @@ export class StaffEffects {
       return this.staffservice.createStaff(staff).pipe(
         map(res => {
           console.log(res);
-          this.route.navigate(["/admin"]);
+          this.route.navigate(['/admin']);
           return new StaffActions.CreateStaffSuccess(res);
         }),
         catchError(err => [new StaffActions.CreateStaffFail(err)])
@@ -84,7 +84,7 @@ export class StaffEffects {
       return this.staffservice.deleteStaff(staff).pipe(
         map(res => {
           console.log(res);
-          this.route.navigate(["admin"]);
+          this.route.navigate(['admin']);
           return new StaffActions.DeleteStaffSuccess(res);
         }),
         catchError(err => [new StaffActions.DeleteStaffFail(err)])

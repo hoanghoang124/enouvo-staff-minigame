@@ -12,29 +12,25 @@ export class StaffService {
   constructor(private http: HttpClient) {}
 
   getStaffs(): Observable<any> {
-    return this.http.get<Staff>(this.url, httpOptions);
+    return this.http.get<Staff>(this.url);
   }
 
   getStaff(id: number): Observable<any> {
     const url = `${this.url}/${id}`;
-    return this.http.get<Staff>(url, httpOptions);
+    return this.http.get<Staff>(url);
   }
 
   createStaff(staff): Observable<any> {
-    return this.http.post<Staff>(this.url, staff, httpOptions);
+    return this.http.post<Staff>(this.url, staff);
   }
 
   updateStaff(staff): Observable<any> {
     const url = `${this.url}/${staff.id}`;
-    return this.http.put(url, staff, httpOptions);
+    return this.http.put(url, staff);
   }
 
   deleteStaff(id): Observable<any> {
     const url = `${this.url}/${id}`;
-    return this.http.delete<Staff>(url, httpOptions);
+    return this.http.delete<Staff>(url);
   }
 }
-
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};

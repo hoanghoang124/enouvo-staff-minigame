@@ -8,9 +8,9 @@ import {
   FormGroup
 } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { State } from '../../admin-layout/store';
 import * as fromAuthSelector from '../store/auth.selector';
 import * as fromAuthAction from '../store/auth.action';
+import { State } from '../../admin-layout/store/reducers';
 
 @Component({
   selector: 'app-change-password',
