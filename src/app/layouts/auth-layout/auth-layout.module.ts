@@ -8,8 +8,8 @@ import { CommonModule } from '@angular/common';
 import { AuthLayoutRoutes } from './auth-layout.routing';
 
 import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -18,6 +18,6 @@ import { SharedModule } from 'src/app/shared/shared.module';
     EffectsModule.forFeature([AuthEffects]),
     SharedModule
   ],
-  declarations: [LoginComponent, RegisterComponent]
+  declarations: [LoginComponent, ChangePasswordComponent]
 })
 export class AuthLayoutModule {}

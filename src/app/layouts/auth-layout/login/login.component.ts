@@ -14,7 +14,6 @@ export class LoginComponent implements OnInit {
   errorMessage$: Observable<string>;
   isLoadingResults$: Observable<boolean>;
   loginForm: FormGroup;
-  hide = true;
   constructor(private store: Store<State>, private formBuilder: FormBuilder) {}
 
   ngOnInit() {
@@ -27,7 +26,6 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log("sdsd");
     if (this.loginForm.invalid) {
       return;
     }
