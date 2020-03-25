@@ -2,14 +2,13 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ClipboardModule } from 'ngx-clipboard';
 
 import { AdminLayoutRoutes } from './admin-layout.routing';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { IconsComponent } from '../../pages/icons/icons.component';
-import { MapsComponent } from './maps/maps.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { TablesComponent } from './tables/tables.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -17,7 +16,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { reducers } from './store/reducers';
 import { effects } from './store/effects';
-// import { ToastrModule } from 'ngx-toastr';
+import { CreateAccountComponent } from './create-account/create-account.component';
 
 @NgModule({
   imports: [
@@ -28,14 +27,15 @@ import { effects } from './store/effects';
     NgbModule,
     ClipboardModule,
     StoreModule.forFeature('page', reducers),
-    EffectsModule.forFeature(effects)
+    EffectsModule.forFeature(effects),
+    ReactiveFormsModule
   ],
   declarations: [
     DashboardComponent,
     UserProfileComponent,
     TablesComponent,
     IconsComponent,
-    MapsComponent
+    CreateAccountComponent
   ]
 })
 export class AdminLayoutModule {}

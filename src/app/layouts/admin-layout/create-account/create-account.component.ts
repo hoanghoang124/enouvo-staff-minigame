@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { State } from '../../auth-layout/store';
 import * as fromAuthSelector from '../../auth-layout/store/auth.selector';
 import * as fromAuthAction from '../../auth-layout/store/auth.action';
-
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-create-account',
   templateUrl: './create-account.component.html',
@@ -15,7 +15,7 @@ export class CreateAccountComponent implements OnInit {
   errorMessage$: Observable<string>;
   isLoadingResults$: Observable<boolean>;
   createAccountForm: FormGroup;
-
+  model: NgbDateStruct;
   constructor(private store: Store<State>, private formBuilder: FormBuilder) {}
   ngOnInit() {
     this.createAccountForm = this.formBuilder.group({
@@ -41,15 +41,15 @@ export class CreateAccountComponent implements OnInit {
       return;
     } else {
       const createAccountFormValue = {
-        firstName: this.createAccountForm.controls['firstName'].value,
-        middleName: this.createAccountForm.controls['middleName'].value,
-        lastName: this.createAccountForm.controls['lastName'].value,
-        birthday: this.createAccountForm.controls['birthday'].value,
-        email: this.createAccountForm.controls['email'].value,
-        phone: this.createAccountForm.controls['phone'].value,
-        roleId: this.createAccountForm.controls['roleId'].value,
-        addressCity: this.createAccountForm.controls['addressCity'].value,
-        addressStreet: this.createAccountForm.controls['addressStreet'].value
+        firstName: this.createAccountForm.get['firstName'].value,
+        middleName: this.createAccountForm.get['middleName'].value,
+        lastName: this.createAccountForm.get['lastName'].value,
+        birthday: this.createAccountForm.get['birthday'].value,
+        email: this.createAccountForm.get['email'].value,
+        phone: this.createAccountForm.get['phone'].value,
+        roleId: this.createAccountForm.get['roleId'].value,
+        addressCity: this.createAccountForm.get['addressCity'].value,
+        addressStreet: this.createAccountForm.get['addressStreet'].value
       };
       console.log(createAccountFormValue);
       this.store.dispatch(
