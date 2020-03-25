@@ -3,6 +3,8 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { State } from '../store/reducers';
 import * as fromStaff from '../store';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ResetPasswordComponent } from '../reset-password/reset-password.component';
 
 @Component({
   selector: 'app-tables',
@@ -11,10 +13,14 @@ import * as fromStaff from '../store';
 })
 export class TablesComponent implements OnInit {
   staffs$: Observable<any>;
-  constructor(private store: Store<State>) {}
+  constructor(private store: Store<State>, private modalService: NgbModal) {}
 
   ngOnInit() {
     this.store.dispatch(new fromStaff.GetStaffs());
     this.staffs$ = this.store.select(fromStaff.getAllStaffs);
+  }
+
+  open() {
+    const modalRef = this.modalService.open(ResetPasswordComponent);
   }
 }
