@@ -124,17 +124,40 @@
       </form>
       <!-- Navigation -->
       <ul class="navbar-nav">
-        <li
-          *ngFor="let menuItem of menuItems"
-          class="{{ menuItem.class }} nav-item"
-        >
+        <li class=" nav-item" *ngIf="authService.isLoggedIn()">
           <a
             routerLinkActive="active"
-            [routerLink]="[menuItem.path]"
+            [routerLink]="['/dashboard']"
             class="nav-link"
           >
-            <i class="ni {{ menuItem.icon }}"></i>
-            {{ menuItem.title }}
+            dashboard
+          </a>
+        </li>
+        <li class=" nav-item" *ngIf="authService.isAdmin()">
+          <a
+            routerLinkActive="active"
+            [routerLink]="['/tables']"
+            class="nav-link"
+          >
+            admin
+          </a>
+        </li>
+        <li class=" nav-item" *ngIf="authService.isLoggedIn()">
+          <a
+            routerLinkActive="active"
+            [routerLink]="['/user-profile']"
+            class="nav-link"
+          >
+            user profile
+          </a>
+        </li>
+        <li class=" nav-item" *ngIf="authService.isAdmin()">
+          <a
+            routerLinkActive="active"
+            [routerLink]="['/create-account']"
+            class="nav-link"
+          >
+            create account
           </a>
         </li>
       </ul>

@@ -17,6 +17,9 @@ import { EffectsModule } from '@ngrx/effects';
 import { reducers } from './store/reducers';
 import { effects } from './store/effects';
 import { CreateAccountComponent } from './create-account/create-account.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+
+// import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   imports: [
@@ -25,6 +28,7 @@ import { CreateAccountComponent } from './create-account/create-account.componen
     FormsModule,
     HttpClientModule,
     NgbModule,
+    ReactiveFormsModule,
     ClipboardModule,
     StoreModule.forFeature('page', reducers),
     EffectsModule.forFeature(effects),
@@ -35,7 +39,8 @@ import { CreateAccountComponent } from './create-account/create-account.componen
     UserProfileComponent,
     TablesComponent,
     IconsComponent,
-    CreateAccountComponent
+    CreateAccountComponent,
+    ResetPasswordComponent
   ]
 })
 export class AdminLayoutModule {}
