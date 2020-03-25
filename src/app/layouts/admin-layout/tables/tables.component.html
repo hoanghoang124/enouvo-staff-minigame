@@ -12,90 +12,34 @@
           <table class="table align-items-center table-flush">
             <thead class="thead-light">
               <tr>
-                <th scope="col">ID</th>
+                <th scope="col">#</th>
                 <th scope="col">First Name</th>
                 <th scope="col">Last Name</th>
                 <th scope="col">Birthday</th>
+                <th scope="col">Birthyear</th>
                 <th scope="col"></th>
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr *ngFor="let staff of staffs$ | async; index as i">
                 <th scope="row">
                   <div class="media align-items-center">
-                    <a
-                      href="javascript:void(0)"
-                      class="avatar rounded-circle mr-3"
-                    >
-                      <img
-                        alt="Image placeholder"
-                        src="../assets/img/theme/bootstrap.jpg"
-                      />
-                    </a>
                     <div class="media-body">
-                      <span class="mb-0 text-sm">Argon Design System</span>
+                      <span class="mb-0 text-sm">{{ i + 1 }}</span>
                     </div>
                   </div>
                 </th>
                 <td>
-                  $2,500 USD
+                  {{ staff.firstName }}
                 </td>
                 <td>
-                  <span class="badge badge-dot mr-4">
-                    <i class="bg-warning"></i> pending
-                  </span>
+                  {{ staff.lastName }}
                 </td>
                 <td>
-                  <div class="avatar-group">
-                    <a
-                      href="javascript:void(0)"
-                      class="avatar avatar-sm"
-                      data-toggle="tooltip"
-                      data-original-title="Ryan Tompson"
-                    >
-                      <img
-                        alt="Image placeholder"
-                        src="../assets/img/theme/team-1-800x800.jpg"
-                        class="rounded-circle"
-                      />
-                    </a>
-                    <a
-                      href="javascript:void(0)"
-                      class="avatar avatar-sm"
-                      data-toggle="tooltip"
-                      data-original-title="Romina Hadid"
-                    >
-                      <img
-                        alt="Image placeholder"
-                        src="../assets/img/theme/team-2-800x800.jpg"
-                        class="rounded-circle"
-                      />
-                    </a>
-                    <a
-                      href="javascript:void(0)"
-                      class="avatar avatar-sm"
-                      data-toggle="tooltip"
-                      data-original-title="Alexander Smith"
-                    >
-                      <img
-                        alt="Image placeholder"
-                        src="../assets/img/theme/team-3-800x800.jpg"
-                        class="rounded-circle"
-                      />
-                    </a>
-                    <a
-                      href="javascript:void(0)"
-                      class="avatar avatar-sm"
-                      data-toggle="tooltip"
-                      data-original-title="Jessica Doe"
-                    >
-                      <img
-                        alt="Image placeholder"
-                        src="../assets/img/theme/team-4-800x800.jpg"
-                        class="rounded-circle"
-                      />
-                    </a>
-                  </div>
+                  {{ staff.birthday | date: 'dd/MM' }}
+                </td>
+                <td>
+                  {{ staff.birthday | date: 'yyyy' }}
                 </td>
                 <td class="text-right">
                   <div ngbDropdown placement="bottom-right">
@@ -109,7 +53,10 @@
                       ngbDropdownMenu
                       class=" dropdown-menu-right dropdown-menu-arrow"
                     >
-                      <a class="dropdown-item" href="javascript:void(0)"
+                      <a
+                        class="dropdown-item"
+                        [routerLink]="[staff.id + '/user-profile']"
+                        routerLinkActive="router-link-active"
                         >Action</a
                       >
                       <a class="dropdown-item" href="javascript:void(0)"

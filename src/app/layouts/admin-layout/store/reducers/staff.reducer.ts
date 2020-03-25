@@ -1,6 +1,6 @@
-import { Staff } from "../../models/staff.model";
-import * as staffActions from "../actions/staff.action";
-import * as _ from "lodash";
+import { Staff } from '../../models/staff.model';
+import * as staffActions from '../actions/staff.action';
+import * as _ from 'lodash';
 
 export interface StaffState {
   staffs: Staff[];
