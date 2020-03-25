@@ -1,21 +1,21 @@
-import { Component, OnInit } from "@angular/core";
-import { Observable } from "rxjs";
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import {
   AbstractControl,
   FormBuilder,
   Validators,
   ValidatorFn,
   FormGroup
-} from "@angular/forms";
-import { Store } from "@ngrx/store";
-import { State } from "../../admin-layout/store";
-import * as fromAuthSelector from "../store/auth.selector";
-import * as fromAuthAction from "../store/auth.action";
+} from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { State } from '../../admin-layout/store';
+import * as fromAuthSelector from '../store/auth.selector';
+import * as fromAuthAction from '../store/auth.action';
 
 @Component({
-  selector: "app-change-password",
-  templateUrl: "./change-password.component.html",
-  styleUrls: ["./change-password.component.css"]
+  selector: 'app-change-password',
+  templateUrl: './change-password.component.html',
+  styleUrls: ['./change-password.component.scss']
 })
 export class ChangePasswordComponent implements OnInit {
   errorMessage$: Observable<string>;
@@ -27,12 +27,12 @@ export class ChangePasswordComponent implements OnInit {
   ngOnInit() {
     this.changePasswordForm = this.formBuilder.group(
       {
-        currentPassword: ["", Validators.required],
-        newPassword: ["", [Validators.required, Validators.minLength(8)]],
-        confirmPassword: ["", [Validators.required, Validators.minLength(8)]]
+        currentPassword: ['', Validators.required],
+        newPassword: ['', [Validators.required, Validators.minLength(8)]],
+        confirmPassword: ['', [Validators.required, Validators.minLength(8)]]
       },
       {
-        validator: this.MatchPassword("newPassword", "confirmPassword")
+        validator: this.MatchPassword('newPassword', 'confirmPassword')
       }
     );
     this.errorMessage$ = this.store.select(fromAuthSelector.getErrorMessage);
@@ -44,8 +44,8 @@ export class ChangePasswordComponent implements OnInit {
       return;
     }
     const changePasswordValue = {
-      password: this.changePasswordForm.controls["currentPassword"].value,
-      newPassword: this.changePasswordForm.controls["newPassword"].value
+      password: this.changePasswordForm.controls['currentPassword'].value,
+      newPassword: this.changePasswordForm.controls['newPassword'].value
     };
     this.store.dispatch(new fromAuthAction.ChangePassword(changePasswordValue));
   }
@@ -79,7 +79,7 @@ export class ChangePasswordComponent implements OnInit {
       if (!control.value) {
         return null;
       }
-      const regex = new RegExp("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$");
+      const regex = new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$');
       const valid = regex.test(control.value);
       return valid ? null : { invalidPassword: true };
     };

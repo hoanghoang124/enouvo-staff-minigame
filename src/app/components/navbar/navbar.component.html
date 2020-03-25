@@ -57,31 +57,14 @@
           </a>
           <a
             routerLinkActive="active"
-            [routerLink]="['/user-profile']"
-            *ngIf="authService.isAdmin()"
-            class="dropdown-item"
-          >
-            <i class="ni ni-settings-gear-65"></i>
-            <span>Reset Password</span>
-          </a>
-          <a
-            routerLinkActive="active"
-            [routerLink]="['/user-profile']"
+            [routerLink]="['/change-password']"
             class="dropdown-item"
             *ngIf="authService.isLoggedIn()"
           >
             <i class="ni ni-calendar-grid-58"></i>
             <span>Change Password</span>
           </a>
-          <a
-            routerLinkActive="active"
-            [routerLink]="['/create-account']"
-            *ngIf="authService.isAdmin()"
-            class="dropdown-item"
-          >
-            <i class="ni ni-support-16"></i>
-            <span>Create Account</span>
-          </a>
+
           <div class="dropdown-divider"></div>
           <a
             (click)="logOut()"

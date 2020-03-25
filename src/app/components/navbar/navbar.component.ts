@@ -1,20 +1,20 @@
-import { LogOut } from "./../../layouts/auth-layout/store/auth.action";
-import { Component, OnInit, ElementRef } from "@angular/core";
-import { ROUTES } from "../sidebar/sidebar.component";
+import { Component, OnInit, ElementRef } from '@angular/core';
+import { ROUTES } from '../sidebar/sidebar.component';
 import {
   Location,
   LocationStrategy,
   PathLocationStrategy
-} from "@angular/common";
-import { Router } from "@angular/router";
-import { Store } from "@ngrx/store";
-import { State } from "src/app/layouts/auth-layout/store";
-import { AuthService } from "src/app/layouts/auth-layout/services/auth.service";
+} from '@angular/common';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { State } from 'src/app/layouts/auth-layout/store';
+import { AuthService } from 'src/app/layouts/auth-layout/services/auth.service';
+import { LogOut } from './../../layouts/auth-layout/store/auth.action';
 
 @Component({
-  selector: "app-navbar",
-  templateUrl: "./navbar.component.html",
-  styleUrls: ["./navbar.component.scss"]
+  selector: 'app-navbar',
+  templateUrl: './navbar.component.html',
+  styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
   public focus;
@@ -35,7 +35,7 @@ export class NavbarComponent implements OnInit {
   }
   getTitle() {
     var titlee = this.location.prepareExternalUrl(this.location.path());
-    if (titlee.charAt(0) === "#") {
+    if (titlee.charAt(0) === '#') {
       titlee = titlee.slice(1);
     }
 
@@ -44,7 +44,7 @@ export class NavbarComponent implements OnInit {
         return this.listTitles[item].title;
       }
     }
-    return "Dashboard";
+    return 'Dashboard';
   }
 
   logOut(): void {
