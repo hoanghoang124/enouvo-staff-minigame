@@ -3,13 +3,11 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { CreateAccountComponent } from './create-account/create-account.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { TablesComponent } from './tables/tables.component';
-import { AuthGuardService as AuthGuard } from '../auth-layout/services/auth-guard.service';
-import { RoleGuardService as AdminGuard } from '../auth-layout/services/role-guard.service';
+import { AdminGuard } from '../auth-layout/services/role-guard.service';
 export const AdminLayoutRoutes: Routes = [
   {
     path: 'dashboard',
-    component: DashboardComponent,
-    canActivate: [AuthGuard]
+    component: DashboardComponent
   },
   {
     path: 'tables/:id/user-profile',
@@ -20,7 +18,7 @@ export const AdminLayoutRoutes: Routes = [
     path: 'user-profile',
     component: UserProfileComponent
   },
-  { path: 'tables', component: TablesComponent, canActivate: [AdminGuard] },
+  { path: 'tables', component: TablesComponent },
   {
     path: 'create-account',
     component: CreateAccountComponent,

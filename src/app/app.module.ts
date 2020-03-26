@@ -20,8 +20,9 @@ import {
   TokenInterceptor,
   ErrorInterceptor
 } from './core/services/token.service';
-import { AuthGuardService as AuthGuard } from './layouts/auth-layout/services/auth-guard.service';
-import { RoleGuardService as AdminGuard } from './layouts/auth-layout/services/role-guard.service';
+import { AuthGuard } from './layouts/auth-layout/services/auth-guard.service';
+import { AdminGuard } from './layouts/auth-layout/services/role-guard.service';
+import { AuthLayoutModule } from './layouts/auth-layout/auth-layout.module';
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -33,6 +34,7 @@ import { RoleGuardService as AdminGuard } from './layouts/auth-layout/services/r
     AppRoutingModule,
     SharedModule,
     CoreModule,
+    AuthLayoutModule,
     StoreModule.forRoot([]),
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({ maxAge: 25 }), //  Retains last 25 states
