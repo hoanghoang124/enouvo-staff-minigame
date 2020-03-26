@@ -18,6 +18,7 @@ import { reducers } from './store/reducers';
 import { effects } from './store/effects';
 import { CreateAccountComponent } from './create-account/create-account.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { UploadCSVComponent } from './upload-csv/upload-csv.component';
 
 // import { ToastrModule } from 'ngx-toastr';
 
@@ -40,7 +41,8 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     TablesComponent,
     IconsComponent,
     CreateAccountComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    UploadCSVComponent
   ]
 })
 export class AdminLayoutModule {}

@@ -4,6 +4,7 @@ import { CreateAccountComponent } from './create-account/create-account.componen
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { TablesComponent } from './tables/tables.component';
 import { AdminGuard } from '../auth-layout/services/role-guard.service';
+import { UploadCSVComponent } from './upload-csv/upload-csv.component';
 export const AdminLayoutRoutes: Routes = [
   {
     path: 'dashboard',
@@ -20,6 +21,8 @@ export const AdminLayoutRoutes: Routes = [
   },
 
   { path: 'tables', component: TablesComponent, canActivate: [AdminGuard] },
+  { path: 'upload', component: UploadCSVComponent },
+
   {
     path: 'create-account',
     component: CreateAccountComponent,
