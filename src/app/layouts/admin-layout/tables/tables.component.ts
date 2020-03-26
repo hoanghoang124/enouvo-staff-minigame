@@ -5,7 +5,6 @@ import { State } from '../store/reducers';
 import * as fromStaff from '../store';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ResetPasswordComponent } from '../reset-password/reset-password.component';
-
 @Component({
   selector: 'app-tables',
   templateUrl: './tables.component.html',
@@ -13,6 +12,7 @@ import { ResetPasswordComponent } from '../reset-password/reset-password.compone
 })
 export class TablesComponent implements OnInit {
   staffs$: Observable<any>;
+
   constructor(private store: Store<State>, private modalService: NgbModal) {}
 
   ngOnInit() {

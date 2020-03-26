@@ -2,9 +2,8 @@ import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../models/user.model';
-import { RoleId } from '../Models/role.model';
+import { RoleId } from '../models/role.model';
 import { Injectable } from '@angular/core';
-
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private BASE_URL = environment.apiBaseUrl;
