@@ -21,4 +21,4 @@ import { CustomDateParserFormatter } from './providers/date.adapter';
     { provide: NgbDateAdapter, useClass: NgbDateNativeUTCAdapter }
   ]
 })
-export class SharedModule {}
+export class ShareModule {}
