@@ -27,25 +27,12 @@
     <!-- User -->
     <ul class="nav align-items-center d-md-none">
       <li class="nav-item" ngbDropdown placement="bottom-right">
-        <a class="nav-link nav-link-icon" role="button" ngbDropdownToggle>
-          <i class="ni ni-bell-55"></i>
-        </a>
-        <div class="dropdown-menu-arrow dropdown-menu-right" ngbDropdownMenu>
-          <a class="dropdown-item" href="javascript:void(0)">Action</a>
-          <a class="dropdown-item" href="javascript:void(0)">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="javascript:void(0)"
-            >Something else here</a
-          >
-        </div>
-      </li>
-      <li class="nav-item" ngbDropdown placement="bottom-right">
         <a class="nav-link" role="button" ngbDropdownToggle>
           <div class="media align-items-center">
             <span class="avatar avatar-sm rounded-circle">
               <img
                 alt="Image placeholder"
-                src="./assets/img/theme/team-1-800x800.jpg"
+                src="./assets/img/theme/team-4-800x800.jpg"
               />
             </span>
           </div>
@@ -137,17 +124,31 @@
       </form>
       <!-- Navigation -->
       <ul class="navbar-nav">
-        <li
-          *ngFor="let menuItem of menuItems"
-          class="{{ menuItem.class }} nav-item"
-        >
+        <li class=" nav-item" *ngIf="authService.isLoggedIn()">
           <a
             routerLinkActive="active"
-            [routerLink]="[menuItem.path]"
+            [routerLink]="['/dashboard']"
             class="nav-link"
           >
-            <i class="ni {{ menuItem.icon }}"></i>
-            {{ menuItem.title }}
+            dashboard
+          </a>
+        </li>
+        <li class=" nav-item" *ngIf="authService.isAdmin()">
+          <a
+            routerLinkActive="active"
+            [routerLink]="['/tables']"
+            class="nav-link"
+          >
+            admin
+          </a>
+        </li>
+        <li class=" nav-item" *ngIf="authService.isAdmin()">
+          <a
+            routerLinkActive="active"
+            [routerLink]="['/create-account']"
+            class="nav-link"
+          >
+            create account
           </a>
         </li>
       </ul>

@@ -1,5 +1,5 @@
-import { createSelector } from "@ngrx/store";
-import { selectAuthState } from "./index";
+import { createSelector } from '@ngrx/store';
+import { selectAuthState } from './index';
 
 export const selectAuthenState = createSelector(
   selectAuthState,

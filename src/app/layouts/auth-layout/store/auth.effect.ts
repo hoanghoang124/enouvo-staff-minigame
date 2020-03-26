@@ -53,7 +53,7 @@ export class AuthEffects {
     switchMap(payload => {
       return this.authService.create(payload).pipe(
         map(user => {
-          this.router.navigateByUrl('/dashboard');
+          this.router.navigateByUrl('/tables');
           return new AuthActions.CreateAccountSuccess(user);
         }),
         catchError(res =>

@@ -19,8 +19,7 @@ export class StaffEffects {
   @Effect()
   getAllStaffs$ = this.actions$.pipe(
     ofType(StaffActionsType.GET_STAFFS),
-    switchMap(res => {
-      console.log(res);
+    switchMap(() => {
       return this.staffservice.getStaffs().pipe(
         map(staffs => {
           return new StaffActions.GetStaffsSuccess(staffs);
@@ -50,8 +49,7 @@ export class StaffEffects {
     map((action: StaffActions.UpdateStaff) => action.payload),
     switchMap(staff => {
       return this.staffservice.updateStaff(staff).pipe(
-        map(res => {
-          console.log(res);
+        map(() => {
           this.route.navigate(['/admin/' + staff.id + '/detail']);
           return new StaffActions.UpdateStaffSuccess(staff);
         }),
@@ -67,7 +65,6 @@ export class StaffEffects {
     switchMap(staff => {
       return this.staffservice.createStaff(staff).pipe(
         map(res => {
-          console.log(res);
           this.route.navigate(['/admin']);
           return new StaffActions.CreateStaffSuccess(res);
         }),
@@ -83,7 +80,6 @@ export class StaffEffects {
     switchMap(staff => {
       return this.staffservice.deleteStaff(staff).pipe(
         map(res => {
-          console.log(res);
           this.route.navigate(['admin']);
           return new StaffActions.DeleteStaffSuccess(res);
         }),

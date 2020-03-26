@@ -8,15 +8,17 @@ import { CommonModule } from '@angular/common';
 import { AuthLayoutRoutes } from './auth-layout.routing';
 
 import { LoginComponent } from './login/login.component';
-import { SharedModule } from 'src/app/shared/shared.module';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { ComponentsModule } from 'src/app/components/components.module';
+import { SharedModule } from 'src/app/shared/shared.module';
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forChild(AuthLayoutRoutes),
     StoreModule.forFeature('auth', reducers),
     EffectsModule.forFeature([AuthEffects]),
-    SharedModule
+    SharedModule,
+    ComponentsModule
   ],
   declarations: [LoginComponent, ChangePasswordComponent]
 })

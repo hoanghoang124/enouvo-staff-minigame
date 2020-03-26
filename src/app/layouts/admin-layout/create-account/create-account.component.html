@@ -1,6 +1,6 @@
 <div
   class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
-  style="min-height: 600px; background-image: url(assets/img/theme/profile-cover.jpg); background-size: cover; background-position: center top;"
+  style="min-height: 300px; background-image: url(assets/img/theme/profile-cover.jpg); background-size: cover; background-position: center top;"
 >
   <!-- Mask -->
   <span class="mask bg-gradient-danger opacity-8"></span>
@@ -8,12 +8,9 @@
   <div class="container-fluid d-flex align-items-center">
     <div class="row">
       <div class="col-lg-7 col-md-10">
-        <h1 class="display-2 text-white">Hello Jesse</h1>
-        <p class="text-white mt-0 mb-5">
-          This is your profile page. You can see the progress you've made with
-          your work and manage your projects or assigned tasks
-        </p>
-        <a href="#!" class="btn btn-info">Edit profile</a>
+        <h1 class="display-2 text-white">
+          Đường tình anh thua Đường đua anh chấp
+        </h1>
       </div>
     </div>
   </div>
@@ -28,7 +25,13 @@
               <h3 class="mb-0">My account</h3>
             </div>
             <div class="col-4 text-right">
-              <a (click)="onSubmit()" class="btn btn-sm btn-primary">Submit</a>
+              <button (click)="onSubmit()" class="btn btn-sm btn-primary">
+                Submit
+                <i
+                  class="fas fa-spinner fa-pulse spinner"
+                  *ngIf="isLoadingResults$ | async"
+                ></i>
+              </button>
             </div>
           </div>
         </div>
@@ -83,28 +86,45 @@
                 </div>
                 <div class="col-lg-6">
                   <div class="form-group">
-                    <label class="form-control-label" for="birthday"
-                      >Date of Birth</label
-                    >
-                    <!-- <input
-                      type="text"
-                      id="birthday"
-                      class="form-control form-control-alternative"
-                      placeholder="Select date"
-                      formControlName="birthday"
-                    /> -->
-                    <div class="input-group">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text"
-                          ><i class="ni ni-calendar-grid-58"></i
-                        ></span>
+                    <div class="form-group">
+                      <!-- <div class="input-group">
+                        <input
+                          class="form-control"
+                          placeholder="dd-mm-yyyy"
+                          name="dp"
+                          ngbDatepicker
+                          #d="ngbDatepicker"
+                          formControlName="birthday"
+                        />
+                        <div class="input-group-append">
+                          <button
+                            class="btn btn-outline-secondary calendar fa fa-calendar"
+                            (click)="d.toggle()"
+                            type="button"
+                          ></button>
+                        </div>
+                      </div> -->
+                      <label class="form-control-label" for="birthday"
+                        >Date of Birth</label
+                      >
+                      <div class="input-group input-group-alternative">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"
+                            ><i class="ni ni-calendar-grid-58"></i
+                          ></span>
+                        </div>
+                        <input
+                          class="form-control datepicker"
+                          placeholder="Select date"
+                          id="birthday"
+                          name="dp"
+                          ngbDatepicker
+                          #d="ngbDatepicker"
+                          (click)="d.toggle()"
+                          type="text"
+                          formControlName="birthday"
+                        />
                       </div>
-                      <input
-                        class="form-control datepicker"
-                        placeholder="Select date"
-                        type="text"
-                        formControlName="birthday"
-                      />
                     </div>
                   </div>
                 </div>
@@ -146,13 +166,6 @@
                     <label class="form-control-label" for="roleId"
                       >Position</label
                     >
-                    <!-- <input
-                      type="number"
-                      id="roleId"
-                      class="form-control form-control-alternative"
-                      placeholder="Position"
-                      formControlName="roleId"
-                    /> -->
                     <select
                       class="form-control"
                       data-toggle="select"
@@ -160,11 +173,12 @@
                       data-placeholder="Select a state"
                       formControlName="roleId"
                     >
-                      <option>Human Resource</option>
-                      <option>Project Manager</option>
-                      <option>Developer</option>
-                      <option>Tester</option>
-                      <option>Designer</option>
+                      <option selected value="">Select Position</option>
+                      <option
+                        *ngFor="let positionType of positionTypes"
+                        [value]="positionType.roleId"
+                        >{{ positionType.roleName }}</option
+                      >
                     </select>
                   </div>
                 </div>
@@ -175,13 +189,6 @@
                     <label class="form-control-label" for="addressCity"
                       >City</label
                     >
-                    <!-- <input
-                      type="text"
-                      id="addressCity"
-                      class="form-control form-control-alternative"
-                      placeholder="City"
-                      formControlName="addressCity"
-                    /> -->
                     <select
                       class="form-control"
                       data-toggle="select"
@@ -190,69 +197,9 @@
                       data-live-search-placeholder="Search ..."
                       formControlName="addressCity"
                     >
-                      <option>Ba Ria -Vung Tau</option>
-                      <option>An Giang</option>
-                      <option>Bac Giang</option>
-                      <option>Bac Kan</option>
-                      <option>Bac Lieu</option>
-                      <option>Bac Ninh</option>
-                      <option>Ben tre</option>
-                      <option>Binh Dinh</option>
-                      <option>Binh Duong</option>
-                      <option>Binh Phuoc</option>
-                      <option>Binh Thuan</option>
-                      <option>Ca Mau</option>
-                      <option>Cao Bang</option>
-                      <option>Can Tho</option>
-                      <option>Da Nang</option>
-                      <option>Dong Lam</option>
-                      <option>Dien Bien</option>
-                      <option>Dong Nai</option>
-                      <option>Dong Thap</option>
-                      <option>Gia Lai</option>
-                      <option>Ha Giang</option>
-                      <option>Ha Nam</option>
-                      <option>Ha Tinh</option>
-                      <option>Ha Noi</option>
-                      <option>Hai Duong</option>
-                      <option>Hai Phong</option>
-                      <option>Hau Giang</option>
-                      <option>Ho Chi Minh</option>
-                      <option>Hoa Binh</option>
-                      <option>Hung Yen</option>
-                      <option>Khanh Hoa</option>
-                      <option>Kien Giang</option>
-                      <option>Kon Tum</option>
-                      <option>Ky Dong</option>
-                      <option>Lai Chau</option>
-                      <option>Lam Dong</option>
-                      <option>Lang Son</option>
-                      <option>Lao Cai</option>
-                      <option>Long An</option>
-                      <option>Nam Dinh</option>
-                      <option>Nghe An</option>
-                      <option>Ninh Binh</option>
-                      <option>Ninh Thuan</option>
-                      <option>Phu Hue</option>
-                      <option>Phu Yen</option>
-                      <option>Quang Binh</option>
-                      <option>Quang Nam</option>
-                      <option>Quang Ngai</option>
-                      <option>Quang Ninh</option>
-                      <option>Quang Tri</option>
-                      <option>Soc Trang</option>
-                      <option>Son La</option>
-                      <option>Tay Ninh</option>
-                      <option>Thai Binh</option>
-                      <option>Thai Nguyen</option>
-                      <option>Thanh Hoa</option>
-                      <option>Thua Thien Hue</option>
-                      <option>Tien Giang</option>
-                      <option>Tra Vinh</option>
-                      <option>Tuyen Quang</option>
-                      <option>Vinh Long</option>
-                      <option>Vinh Phuc</option>
-                      <option>Yen Ba</option>
+                      <option selected value="">Select City</option>
+
+                      <option *ngFor="let item of city">{{ item }}</option>
                     </select>
                   </div>
                 </div>
