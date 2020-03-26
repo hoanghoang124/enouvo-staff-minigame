@@ -1,14 +1,12 @@
-import {
-  CustomDateParserFormatter,
-  CustomAdapter
-} from './providers/date.adapter';
+import { CustomDateParserFormatter } from './providers/date.adapter';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {
   NgbDateParserFormatter,
-  NgbDateAdapter
+  NgbDateAdapter,
+  NgbDateNativeUTCAdapter
 } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
@@ -20,10 +18,7 @@ import {
       provide: NgbDateParserFormatter,
       useClass: CustomDateParserFormatter
     },
-    {
-      provide: NgbDateAdapter,
-      useClass: CustomAdapter
-    }
+    { provide: NgbDateAdapter, useClass: NgbDateNativeUTCAdapter }
   ]
 })
 export class SharedModule {}

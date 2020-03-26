@@ -5,12 +5,17 @@ import { Store } from '@ngrx/store';
 import { State } from '../../auth-layout/store';
 import * as fromAuthSelector from '../../auth-layout/store/auth.selector';
 import * as fromAuthAction from '../../auth-layout/store/auth.action';
-import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import {
+  NgbDateStruct,
+  NgbDateAdapter,
+  NgbDateNativeUTCAdapter
+} from '@ng-bootstrap/ng-bootstrap';
 import { PositionTypes } from '../../auth-layout/models/role.model';
 @Component({
   selector: 'app-create-account',
   templateUrl: './create-account.component.html',
   styleUrls: ['./create-account.component.scss']
+  // providers: [{ provide: NgbDateAdapter, useClass: NgbDateNativeUTCAdapter }]
 })
 export class CreateAccountComponent implements OnInit {
   errorMessage$: Observable<string>;
