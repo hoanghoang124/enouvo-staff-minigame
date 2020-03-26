@@ -25,7 +25,13 @@
               <h3 class="mb-0">My account</h3>
             </div>
             <div class="col-4 text-right">
-              <a (click)="onSubmit()" class="btn btn-sm btn-primary">Submit</a>
+              <a (click)="onSubmit()" class="btn btn-sm btn-primary"
+                >Submit
+                <i
+                  class="fas fa-spinner fa-pulse spinner"
+                  *ngIf="isLoadingResults$ | async"
+                ></i
+              ></a>
             </div>
           </div>
         </div>
@@ -81,7 +87,7 @@
                 <div class="col-lg-6">
                   <div class="form-group">
                     <div class="form-group">
-                      <div class="input-group">
+                      <!-- <div class="input-group">
                         <input
                           class="form-control"
                           placeholder="dd-mm-yyyy"
@@ -97,6 +103,27 @@
                             type="button"
                           ></button>
                         </div>
+                      </div> -->
+                      <label class="form-control-label" for="birthday"
+                        >Date of Birth</label
+                      >
+                      <div class="input-group input-group-alternative">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"
+                            ><i class="ni ni-calendar-grid-58"></i
+                          ></span>
+                        </div>
+                        <input
+                          class="form-control datepicker"
+                          placeholder="Select date"
+                          id="birthday"
+                          name="dp"
+                          ngbDatepicker
+                          #d="ngbDatepicker"
+                          (click)="d.toggle()"
+                          type="text"
+                          formControlName="birthday"
+                        />
                       </div>
                     </div>
                   </div>
@@ -146,11 +173,11 @@
                       data-placeholder="Select a state"
                       formControlName="roleId"
                     >
-                      <option>Human Resource</option>
-                      <option>Project Manager</option>
-                      <option>Developer</option>
-                      <option>Tester</option>
-                      <option>Designer</option>
+                      <option
+                        *ngFor="let positionType of positionTypes"
+                        [value]="positionType.roleId"
+                        >{{ positionType.roleName }}</option
+                      >
                     </select>
                   </div>
                 </div>

@@ -15,8 +15,7 @@
                 <th scope="col">#</th>
                 <th scope="col">First Name</th>
                 <th scope="col">Last Name</th>
-                <th scope="col">Birthday</th>
-                <th scope="col">Birthyear</th>
+                <th scope="col">Date of Birth</th>
                 <th scope="col"></th>
               </tr>
             </thead>
@@ -36,11 +35,9 @@
                   {{ staff.lastName }}
                 </td>
                 <td>
-                  {{ staff.birthday | date: 'dd/MM' }}
+                  {{ staff.birthday | date: 'dd/MM/yyyy' }}
                 </td>
-                <td>
-                  {{ staff.birthday | date: 'yyyy' }}
-                </td>
+
                 <td class="text-right">
                   <div ngbDropdown placement="bottom-right">
                     <a

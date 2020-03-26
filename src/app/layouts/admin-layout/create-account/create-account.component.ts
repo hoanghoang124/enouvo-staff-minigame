@@ -5,17 +5,24 @@ import { Store } from '@ngrx/store';
 import { State } from '../../auth-layout/store';
 import * as fromAuthSelector from '../../auth-layout/store/auth.selector';
 import * as fromAuthAction from '../../auth-layout/store/auth.action';
-import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import {
+  NgbDateStruct,
+  NgbDateAdapter,
+  NgbDateNativeUTCAdapter
+} from '@ng-bootstrap/ng-bootstrap';
+import { PositionTypes } from '../../auth-layout/models/role.model';
 @Component({
   selector: 'app-create-account',
   templateUrl: './create-account.component.html',
   styleUrls: ['./create-account.component.scss']
+  // providers: [{ provide: NgbDateAdapter, useClass: NgbDateNativeUTCAdapter }]
 })
 export class CreateAccountComponent implements OnInit {
   errorMessage$: Observable<string>;
   isLoadingResults$: Observable<boolean>;
   createAccountForm: FormGroup;
   model: NgbDateStruct;
+  positionTypes = PositionTypes;
   constructor(private store: Store<State>, private formBuilder: FormBuilder) {}
   ngOnInit() {
     this.createAccountForm = this.formBuilder.group({
@@ -40,20 +47,9 @@ export class CreateAccountComponent implements OnInit {
 
       return;
     } else {
-      const createAccountFormValue = {
-        firstName: this.createAccountForm.get['firstName'].value,
-        middleName: this.createAccountForm.get['middleName'].value,
-        lastName: this.createAccountForm.get['lastName'].value,
-        birthday: this.createAccountForm.get['birthday'].value,
-        email: this.createAccountForm.get['email'].value,
-        phone: this.createAccountForm.get['phone'].value,
-        roleId: this.createAccountForm.get['roleId'].value,
-        addressCity: this.createAccountForm.get['addressCity'].value,
-        addressStreet: this.createAccountForm.get['addressStreet'].value
-      };
-      console.log(createAccountFormValue);
+      console.log(this.createAccountForm.value);
       this.store.dispatch(
-        new fromAuthAction.CreateAccount(createAccountFormValue)
+        new fromAuthAction.CreateAccount(this.createAccountForm.value)
       );
     }
   }

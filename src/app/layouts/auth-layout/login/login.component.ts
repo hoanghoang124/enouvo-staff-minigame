@@ -27,9 +27,10 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     if (this.loginForm.invalid) {
-      return;
+      console.log('Form invalid');
+    } else {
+      console.log('Logging in');
+      this.store.dispatch(new fromAuthAction.LogIn(this.loginForm.value));
     }
-
-    this.store.dispatch(new fromAuthAction.LogIn(this.loginForm.value));
   }
 }
