@@ -1,15 +1,15 @@
-import { Injectable, Injector } from "@angular/core";
+import { Injectable, Injector } from '@angular/core';
 import {
   HttpInterceptor,
   HttpRequest,
   HttpHandler,
   HttpEvent,
   HttpErrorResponse
-} from "@angular/common/http";
-import { Observable, throwError } from "rxjs";
-import { Router } from "@angular/router";
-import { AuthService } from "../../layouts/auth-layout/services/auth.service";
-import { catchError } from "rxjs/operators";
+} from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { Router } from '@angular/router';
+import { AuthService } from '../../layouts/auth-layout/services/auth.service';
+import { catchError } from 'rxjs/operators';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
@@ -22,8 +22,7 @@ export class TokenInterceptor implements HttpInterceptor {
     const token = this.authService.isLoggedIn();
     request = request.clone({
       setHeaders: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json"
+        Authorization: `Bearer ${token}`
       }
     });
     return next.handle(request);
@@ -40,7 +39,7 @@ export class ErrorInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       catchError((err: any) => {
         if (err instanceof HttpErrorResponse && err.status === 401) {
-          this.router.navigate(["login"]);
+          this.router.navigate(['login']);
         }
         return throwError(err);
       })
