@@ -5,7 +5,6 @@ import { State } from '../../auth-layout/store';
 import { Observable } from 'rxjs';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import * as fromAuthSelector from '../../auth-layout/store/auth.selector';
-import * as fromAuthAction from '../../auth-layout/store/auth.action';
 import { User } from '../../auth-layout/models/user.model';
 
 @Component({

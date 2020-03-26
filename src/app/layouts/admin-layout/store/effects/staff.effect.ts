@@ -19,7 +19,7 @@ export class StaffEffects {
   @Effect()
   getAllStaffs$ = this.actions$.pipe(
     ofType(StaffActionsType.GET_STAFFS),
-    switchMap(res => {
+    switchMap(() => {
       return this.staffservice.getStaffs().pipe(
         map(staffs => {
           return new StaffActions.GetStaffsSuccess(staffs);
@@ -49,7 +49,7 @@ export class StaffEffects {
     map((action: StaffActions.UpdateStaff) => action.payload),
     switchMap(staff => {
       return this.staffservice.updateStaff(staff).pipe(
-        map(res => {
+        map(() => {
           this.route.navigate(['/admin/' + staff.id + '/detail']);
           return new StaffActions.UpdateStaffSuccess(staff);
         }),

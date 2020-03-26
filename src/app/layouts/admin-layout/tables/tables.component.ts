@@ -21,6 +21,6 @@ export class TablesComponent implements OnInit {
   }
 
   open() {
-    const modalRef = this.modalService.open(ResetPasswordComponent);
+    this.modalService.open(ResetPasswordComponent);
   }
 }
