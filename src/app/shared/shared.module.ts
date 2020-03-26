@@ -1,4 +1,3 @@
-import { CustomDateParserFormatter } from './providers/date.adapter';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
@@ -8,6 +7,7 @@ import {
   NgbDateAdapter,
   NgbDateNativeUTCAdapter
 } from '@ng-bootstrap/ng-bootstrap';
+import { CustomDateParserFormatter } from './providers/date.adapter';
 
 @NgModule({
   declarations: [],

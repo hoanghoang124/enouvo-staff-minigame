@@ -5,12 +5,9 @@ import { Store } from '@ngrx/store';
 import { State } from '../../auth-layout/store';
 import * as fromAuthSelector from '../../auth-layout/store/auth.selector';
 import * as fromAuthAction from '../../auth-layout/store/auth.action';
-import {
-  NgbDateStruct,
-  NgbDateAdapter,
-  NgbDateNativeUTCAdapter
-} from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { PositionTypes } from '../../auth-layout/models/role.model';
+import { Cities } from '../../auth-layout/models/city.model';
 @Component({
   selector: 'app-create-account',
   templateUrl: './create-account.component.html',
@@ -23,6 +20,7 @@ export class CreateAccountComponent implements OnInit {
   createAccountForm: FormGroup;
   model: NgbDateStruct;
   positionTypes = PositionTypes;
+  city = Cities;
   constructor(private store: Store<State>, private formBuilder: FormBuilder) {}
   ngOnInit() {
     this.createAccountForm = this.formBuilder.group({

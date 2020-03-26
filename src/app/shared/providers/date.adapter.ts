@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import {
-  NgbDateAdapter,
   NgbDateStruct,
   NgbDateParserFormatter
 } from '@ng-bootstrap/ng-bootstrap';

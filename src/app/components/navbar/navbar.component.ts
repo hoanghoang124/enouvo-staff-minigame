@@ -1,11 +1,6 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ROUTES } from '../sidebar/sidebar.component';
-import {
-  Location,
-  LocationStrategy,
-  PathLocationStrategy
-} from '@angular/common';
-import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { State } from 'src/app/layouts/auth-layout/store';
 import { AuthService } from 'src/app/layouts/auth-layout/services/auth.service';
@@ -22,8 +17,6 @@ export class NavbarComponent implements OnInit {
   public location: Location;
   constructor(
     location: Location,
-    private element: ElementRef,
-    private router: Router,
     private store: Store<State>,
     public authService: AuthService
   ) {

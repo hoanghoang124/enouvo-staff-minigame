@@ -13,7 +13,6 @@ import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
 import { AuthService } from './layouts/auth-layout/services/auth.service';
 import {
@@ -23,6 +22,7 @@ import {
 import { AuthGuard } from './layouts/auth-layout/services/auth-guard.service';
 import { AdminGuard } from './layouts/auth-layout/services/role-guard.service';
 import { AuthLayoutModule } from './layouts/auth-layout/auth-layout.module';
+import { SharedModule } from './shared/shared.module';
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -32,8 +32,8 @@ import { AuthLayoutModule } from './layouts/auth-layout/auth-layout.module';
     NgbModule,
     RouterModule,
     AppRoutingModule,
-    SharedModule,
     CoreModule,
+    SharedModule,
     AuthLayoutModule,
     StoreModule.forRoot([]),
     EffectsModule.forRoot([]),
