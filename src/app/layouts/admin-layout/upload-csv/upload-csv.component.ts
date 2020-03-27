@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { FileUploader } from 'ng2-file-upload';
 
 @Component({
   selector: 'app-upload-csv',
