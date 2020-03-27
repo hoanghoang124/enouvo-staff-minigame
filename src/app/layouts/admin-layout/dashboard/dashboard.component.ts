@@ -29,13 +29,5 @@ export class DashboardComponent implements OnInit {
     this.stafflist$.subscribe(res => {
       this.staffs = res as Staff[];
     });
-    this.breakpoint =
-      window.innerWidth >= 1440
-        ? 4
-        : window.innerWidth >= 1330
-        ? 3
-        : window.innerWidth >= 900
-        ? 2
-        : 1;
   }
 }
