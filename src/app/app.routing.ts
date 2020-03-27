@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { AuthGuard } from './layouts/auth-layout/services/auth-guard.service';
-// import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 const routes: Routes = [
   {
     path: '',
