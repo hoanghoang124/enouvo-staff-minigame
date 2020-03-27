@@ -23,6 +23,7 @@ import { AuthGuard } from './layouts/auth-layout/services/auth-guard.service';
 import { AdminGuard } from './layouts/auth-layout/services/role-guard.service';
 import { AuthLayoutModule } from './layouts/auth-layout/auth-layout.module';
 import { SharedModule } from './shared/shared.module';
+import { FileSelectDirective } from 'ng2-file-upload';
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -40,7 +41,12 @@ import { SharedModule } from './shared/shared.module';
     StoreDevtoolsModule.instrument({ maxAge: 25 }), //  Retains last 25 states
     StoreRouterConnectingModule.forRoot({ stateKey: 'router' }) // name of reducer key
   ],
-  declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent],
+  declarations: [
+    AppComponent,
+    AdminLayoutComponent,
+    AuthLayoutComponent,
+    FileSelectDirective
+  ],
   providers: [
     AuthGuard,
     AdminGuard,
