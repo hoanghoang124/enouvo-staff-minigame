@@ -45,14 +45,16 @@
                   formControlName="username"
                 />
               </div>
-              <span
-                *ngIf="
-                  loginForm.get('username').errors?.required &&
-                  loginForm.get('username').touched
-                "
-              >
-                Please enter username
-              </span>
+              <div class="error">
+                <span
+                  *ngIf="
+                    loginForm.get('username').errors?.required &&
+                    loginForm.get('username').touched
+                  "
+                >
+                  Please enter username
+                </span>
+              </div>
             </div>
             <div class="form-group">
               <div class="input-group input-group-alternative">
@@ -68,17 +70,19 @@
                   formControlName="password"
                 />
               </div>
-              <span
-                style="align-content: center;"
-                *ngIf="
-                  loginForm.get('password').errors?.required &&
-                  loginForm.get('username').touched
-                "
-                >Please enter password</span
-              >
-              <span *ngIf="loginForm.get('password').errors?.minlength"
-                >Password with more than 8 characters
-              </span>
+              <div class="error">
+                <span
+                  style="align-content: center;"
+                  *ngIf="
+                    loginForm.get('password').errors?.required &&
+                    loginForm.get('username').touched
+                  "
+                  >Please enter password</span
+                >
+                <span *ngIf="loginForm.get('password').errors?.minlength"
+                  >Password with more than 8 characters
+                </span>
+              </div>
             </div>
             <div class="text-center">
               <button type="submit" class="btn btn-primary btn-block my-4">

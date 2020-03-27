@@ -21,8 +21,8 @@ export class StaffEffects {
     ofType(StaffActionsType.GET_STAFFS),
     switchMap(() => {
       return this.staffservice.getStaffs().pipe(
-        map(staffs => {
-          return new StaffActions.GetStaffsSuccess(staffs);
+        map(res => {
+          return new StaffActions.GetStaffsSuccess(res.profiles);
         }),
         catchError(err => [new StaffActions.GetStaffsFail(err)])
       );
@@ -35,8 +35,8 @@ export class StaffEffects {
     map((action: StaffActions.GetStaff) => action.payload),
     switchMap(id => {
       return this.staffservice.getStaff(id).pipe(
-        map(staff => {
-          return new StaffActions.GetStaffSuccess(staff);
+        map(res => {
+          return new StaffActions.GetStaffSuccess(res);
         }),
         catchError(err => [new StaffActions.GetStaffFail(err)])
       );

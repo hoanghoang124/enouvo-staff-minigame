@@ -6,12 +6,13 @@ import { FileUploader } from 'ng2-file-upload';
 @Component({
   selector: 'app-upload-csv',
   templateUrl: './upload-csv.component.html',
-  styleUrls: ['./upload-csv.component.css']
+  styleUrls: ['./upload-csv.component.scss']
 })
 export class UploadCSVComponent implements OnInit {
   headers = new HttpHeaders({
     Authorization: `Bearer ${localStorage.getItem('token')}`
   });
+
   SERVER_URL =
     'https://training-management-dev.herokuapp.com/api/v1/auth/register-by-importing-csv-file';
   form: FormGroup;
@@ -26,17 +27,23 @@ export class UploadCSVComponent implements OnInit {
   }
 
   uploadFile(event) {
-    this.formData.append('file', event.target.files[0]);
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.form.get('file').setValue(file);
+    }
   }
 
   submitForm() {
+    const formData = new FormData();
+
+    formData.append('file', this.form.get('file').value);
     this.http
       .post(this.SERVER_URL, this.formData, {
         headers: this.headers
       })
       .subscribe(
-        response => console.log(response),
-        error => console.log(error)
+        res => console.log(res),
+        err => console.log(err)
       );
     console.log(this.formData);
     const request = new XMLHttpRequest();
