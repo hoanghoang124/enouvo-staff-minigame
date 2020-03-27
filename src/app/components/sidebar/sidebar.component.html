@@ -19,7 +19,7 @@
       [routerLink]="['/dashboard']"
     >
       <img
-        src="./assets/img/brand/red.png"
+        src="./assets/img/brand/enouvo-1.png"
         class="navbar-brand-img"
         alt="..."
       />
@@ -91,7 +91,10 @@
         <div class="row">
           <div class="col-6 collapse-brand">
             <a routerLinkActive="active" [routerLink]="['/dashboard']">
-              <img src="./assets/img/brand/blue.png" />
+              <img
+                src="./assets/img/brand/enouvo-1.png"
+                style="height: 80px;"
+              />
             </a>
           </div>
           <div class="col-6 collapse-close">
@@ -130,7 +133,7 @@
             [routerLink]="['/dashboard']"
             class="nav-link"
           >
-            dashboard
+            Dashboard
           </a>
         </li>
         <li class=" nav-item" *ngIf="authService.isAdmin()">
@@ -139,7 +142,7 @@
             [routerLink]="['/tables']"
             class="nav-link"
           >
-            admin
+            Admin
           </a>
         </li>
         <li class=" nav-item" *ngIf="authService.isAdmin()">
@@ -148,7 +151,7 @@
             [routerLink]="['/create-account']"
             class="nav-link"
           >
-            create account
+            Create Account
           </a>
         </li>
       </ul>

@@ -21,7 +21,7 @@ export const AdminLayoutRoutes: Routes = [
   },
 
   { path: 'tables', component: TablesComponent, canActivate: [AdminGuard] },
-  { path: 'upload', component: UploadCSVComponent },
+  { path: 'upload', component: UploadCSVComponent, canActivate: [AdminGuard] },
 
   {
     path: 'create-account',
