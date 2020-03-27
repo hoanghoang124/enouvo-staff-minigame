@@ -22,21 +22,6 @@ const routes: Routes = [
         canActivate: [AuthGuard]
       }
     ]
-  },
-  // {
-  //   path: '',
-  //   component: AuthLayoutComponent,
-  //   children: [
-  //     {
-  //       path: '',
-  //       loadChildren:
-  //         './layouts/auth-layout/auth-layout.module#AuthLayoutModule'
-  //     }
-  //   ]
-  // },
-  {
-    path: '**',
-    redirectTo: 'dashboard'
   }
 ];
 
