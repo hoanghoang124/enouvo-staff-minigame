@@ -6,7 +6,16 @@
     <div class="col">
       <div class="card shadow">
         <div class="card-header border-0">
-          <h3 class="mb-0">Employees list</h3>
+          <h3 class="mb-0">
+            Employees list
+            <i
+              class="fas fa-spinner fa-pulse spinner"
+              *ngIf="isStaffLoading$ | async"
+            ></i>
+          </h3>
+          <span id="error-message" *ngIf="errorMessage$ | async">
+            {{ errorMessage$ | async }}
+          </span>
         </div>
         <div class="table-responsive">
           <table class="table align-items-center table-flush">
@@ -55,11 +64,12 @@
                       >
                       <a
                         class="dropdown-item"
-                        [routerLink]="[staff.id + '/edit']"
-                        routerLinkActive="router-link-active"
+                        (click)="openModal(editProfileModal, staff)"
                         >Edit</a
                       >
-                      <a class="dropdown-item" (click)="open()"
+                      <a
+                        class="dropdown-item"
+                        (click)="openModal(resetPasswordModal, staff)"
                         >Reset Password</a
                       >
                     </div>
@@ -103,36 +113,246 @@
   </div>
 </div>
 
-<div
-  class="modal fade"
-  id="exampleModal"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button
-          type="button"
-          class="close"
-          data-dismiss="modal"
-          aria-label="Close"
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">
-          Close
-        </button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+<ng-template #editProfileModal let-modal>
+  <div class="modal-header" style="justify-content: space-between;">
+    <h1 class="mb-0">Edit employee profile</h1>
+    <span id="error-message" *ngIf="errorMessage$ | async">
+      {{ errorMessage$ | async }}
+    </span>
+    <div class="col-4 text-right">
+      <button
+        type="button"
+        class="close"
+        (click)="modal.dismiss()"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
     </div>
   </div>
-</div>
+  <div class="modal-body" style="background-color: #f7fafc">
+    <form [formGroup]="editProfileForm" (ngSubmit)="onSubmitEditProfile()">
+      <h6 class="heading-small text-muted mb-4">User information</h6>
+      <div class="pl-lg-4">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label class="form-control-label" for="firstName"
+                >First Name</label
+              >
+              <input
+                type="text"
+                id="firstName"
+                class="form-control form-control-alternative"
+                placeholder="First Name"
+                formControlName="firstName"
+              />
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label class="form-control-label" for="middleName"
+                >Middle Name</label
+              >
+              <input
+                type="text"
+                id="middleName"
+                class="form-control form-control-alternative"
+                placeholder="Middle Name"
+                formControlName="middleName"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label class="form-control-label" for="lastName">Last Name</label>
+              <input
+                type="text"
+                id="lastName"
+                class="form-control form-control-alternative"
+                placeholder="Last Name"
+                formControlName="lastName"
+              />
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <div class="form-group">
+                <label class="form-control-label" for="birthday"
+                  >Date of Birth</label
+                >
+                <div class="input-group input-group-alternative">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"
+                      ><i class="ni ni-calendar-grid-58"></i
+                    ></span>
+                  </div>
+                  <input
+                    class="form-control datepicker"
+                    placeholder="Select date"
+                    id="birthday"
+                    name="dp"
+                    ngbDatepicker
+                    #d="ngbDatepicker"
+                    (click)="d.toggle()"
+                    type="text"
+                    formControlName="birthday"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr class="my-4" />
+      <h6 class="heading-small text-muted mb-4">Contact information</h6>
+      <div class="pl-lg-4">
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="form-group">
+              <label class="form-control-label" for="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                class="form-control form-control-alternative"
+                placeholder="Email"
+                formControlName="email"
+              />
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="form-group">
+              <label class="form-control-label" for="phone">Telephone</label>
+              <input
+                type="text"
+                id="phone"
+                class="form-control form-control-alternative"
+                placeholder="Telephone"
+                formControlName="phone"
+              />
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="form-group">
+              <label class="form-control-label" for="roleId">Position</label>
+              <select
+                class="form-control"
+                data-toggle="select"
+                title="Simple select"
+                data-placeholder="Select a state"
+                formControlName="roleId"
+              >
+                <option selected value="">Select Position</option>
+                <option
+                  *ngFor="let positionType of positionTypes"
+                  [value]="positionType.roleId"
+                  >{{ positionType.roleName }}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="form-group">
+              <label class="form-control-label" for="addressCity">City</label>
+              <select
+                class="form-control"
+                data-toggle="select"
+                title="Simple select"
+                data-live-search="true"
+                data-live-search-placeholder="Search ..."
+                formControlName="addressCity"
+              >
+                <option selected value="">Select City</option>
+
+                <option *ngFor="let item of city">{{ item }}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-lg-8">
+            <div class="form-group">
+              <label class="form-control-label" for="addressStreet"
+                >Address</label
+              >
+              <input
+                id="addressStreet"
+                class="form-control form-control-alternative"
+                placeholder="Address"
+                type="text"
+                formControlName="addressStreet"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button (click)="modal.close('Close click')" class="btn btn-secondary">
+      Close
+    </button>
+    <button (click)="onSubmitEditProfile()" class="btn btn-primary">
+      Submit
+      <i
+        class="fas fa-spinner fa-pulse spinner"
+        *ngIf="isLoadingResults$ | async"
+      ></i>
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #resetPasswordModal let-modal>
+  <div class="md-4">
+    <div class="modal-header">
+      <h1 class="modal-title" id="editProfileLabel">Reset Password</h1>
+      <button
+        type="button"
+        class="close"
+        (click)="modal.dismiss()"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body" style="background-color: #eeeeee;">
+      <p>
+        <strong
+          >Are you sure you want to reset password for this profile?</strong
+        >
+      </p>
+      <p>
+        <strong>
+          Their current password will be permanently deleted.
+          <span class="text-danger">This operation can not be undone.</span>
+        </strong>
+      </p>
+      <form
+        [formGroup]="resetPasswordForm"
+        (ngSubmit)="onSubmitResetPassword()"
+      >
+        <div class="form-group row" style="padding: 0 100px; ">
+          <label for="id" class="col-sm-4 col-form-label">Account Id:</label>
+          <div class="col-sm-8">
+            <input
+              type="number"
+              class="form-control"
+              formControlName="id"
+              id="id"
+            />
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" (click)="modal.dismiss()">
+        Close
+      </button>
+      <button class="btn btn-warning" (click)="onSubmitResetPassword()">
+        Confirm
+      </button>
+    </div>
+  </div>
+</ng-template>

@@ -87,7 +87,6 @@ export class AuthEffects {
     switchMap(payload => {
       return this.authService.resetPassword({ userId: payload }).pipe(
         map(user => {
-          this.router.navigateByUrl('/dashboard');
           return new AuthActions.ResetPasswordSuccess(user);
         }),
         catchError(res =>

@@ -22,7 +22,7 @@
         <div class="card-header bg-white border-0">
           <div class="row align-items-center">
             <div class="col-8">
-              <h3 class="mb-0">Create employee account</h3>
+              <h3 class="mb-0">Edit employee account</h3>
               <span id="error-message" *ngIf="errorMessage$ | async">
                 {{ errorMessage$ | async }}
               </span>
@@ -39,7 +39,7 @@
           </div>
         </div>
         <div class="card-body">
-          <form (ngSubmit)="onSubmit()" [formGroup]="createAccountForm">
+          <form (ngSubmit)="onSubmit()" [formGroup]="editAccountForm">
             <h6 class="heading-small text-muted mb-4">User information</h6>
             <div class="pl-lg-4">
               <div class="row">

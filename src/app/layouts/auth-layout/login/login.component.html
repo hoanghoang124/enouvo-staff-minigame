@@ -29,6 +29,9 @@
         <div class="card-body px-lg-5 py-lg-5">
           <div class="text-center text-muted mb-4">
             <h3>Sign in with credentials</h3>
+            <span id="error-message" *ngIf="errorMessage$ | async">
+              {{ errorMessage$ | async }}
+            </span>
           </div>
           <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
             <div class="form-group mb-3">

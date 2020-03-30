@@ -24,7 +24,7 @@ export class StaffEffects {
         map(res => {
           return new StaffActions.GetStaffsSuccess(res.profiles);
         }),
-        catchError(err => [new StaffActions.GetStaffsFail(err)])
+        catchError(res => [new StaffActions.GetStaffsFail(res.error.message)])
       );
     })
   );
@@ -38,7 +38,7 @@ export class StaffEffects {
         map(res => {
           return new StaffActions.GetStaffSuccess(res);
         }),
-        catchError(err => [new StaffActions.GetStaffFail(err)])
+        catchError(res => [new StaffActions.GetStaffFail(res.error.message)])
       );
     })
   );
@@ -53,7 +53,7 @@ export class StaffEffects {
           this.route.navigate(['/admin/' + staff.id + '/detail']);
           return new StaffActions.UpdateStaffSuccess(staff);
         }),
-        catchError(err => [new StaffActions.UpdateStaffFail(err)])
+        catchError(res => [new StaffActions.UpdateStaffFail(res.error.message)])
       );
     })
   );
@@ -68,7 +68,7 @@ export class StaffEffects {
           this.route.navigate(['/admin']);
           return new StaffActions.CreateStaffSuccess(res);
         }),
-        catchError(err => [new StaffActions.CreateStaffFail(err)])
+        catchError(res => [new StaffActions.CreateStaffFail(res.error.message)])
       );
     })
   );
@@ -83,7 +83,7 @@ export class StaffEffects {
           this.route.navigate(['admin']);
           return new StaffActions.DeleteStaffSuccess(res);
         }),
-        catchError(err => [new StaffActions.DeleteStaffFail(err)])
+        catchError(res => [new StaffActions.DeleteStaffFail(res.error.message)])
       );
     })
   );

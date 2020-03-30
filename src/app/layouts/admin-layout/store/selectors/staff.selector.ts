@@ -18,4 +18,7 @@ export const getIsStaffLoading = createSelector(
   selectStaffState,
   state => state.isStaffLoading
 );
-export const getError = createSelector(selectStaffState, state => state.error);
+export const getError = createSelector(
+  selectStaffState,
+  state => state.errorMessage
+);

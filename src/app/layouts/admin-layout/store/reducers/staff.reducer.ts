@@ -6,14 +6,14 @@ export interface StaffState {
   staffs: Staff[];
   selectedStaff: Staff;
   isStaffLoading: boolean;
-  error?: Error;
+  errorMessage: any;
 }
 
 export const initialState: StaffState = {
   staffs: [],
   selectedStaff: null,
   isStaffLoading: false,
-  error: null
+  errorMessage: null
 };
 
 export function staffReducer(
@@ -37,14 +37,14 @@ export function staffReducer(
       return {
         ...state,
         isStaffLoading: false,
-        error: action.payload
+        errorMessage: action.payload
       };
     case staffActions.StaffActionsType.GET_STAFF:
       return {
         ...state,
         isStaffLoading: true,
         selectedStaff: null,
-        error: null
+        errorMessage: null
       };
     case staffActions.StaffActionsType.GET_STAFF_SUCCESS:
       return {
@@ -56,19 +56,19 @@ export function staffReducer(
       return {
         ...state,
         isStaffLoading: false,
-        error: action.payload
+        errorMessage: action.payload
       };
     case staffActions.StaffActionsType.CREATE_STAFF:
       return {
         ...state,
         isStaffLoading: true,
-        error: null
+        errorMessage: null
       };
     case staffActions.StaffActionsType.CREATE_STAFF_SUCCESS: {
       return {
         ...state,
         staffs: [...state.staffs, action.payload],
-        error: null,
+        errorMessage: null,
         isStaffLoading: false
       };
     }
@@ -76,13 +76,13 @@ export function staffReducer(
       return {
         ...state,
         isStaffLoading: false,
-        error: action.payload
+        errorMessage: action.payload
       };
     case staffActions.StaffActionsType.UPDATE_STAFF:
       return {
         ...state,
         isStaffLoading: false,
-        error: null
+        errorMessage: null
       };
     case staffActions.StaffActionsType.UPDATE_STAFF_SUCCESS:
       return {
@@ -94,13 +94,13 @@ export function staffReducer(
       return {
         ...state,
         isStaffLoading: false,
-        error: action.payload
+        errorMessage: action.payload
       };
     case staffActions.StaffActionsType.DELETE_STAFF: {
       return {
         ...state,
         isStaffLoading: true,
-        error: null
+        errorMessage: null
       };
     }
     case staffActions.StaffActionsType.DELETE_STAFF_SUCCESS: {
@@ -115,7 +115,7 @@ export function staffReducer(
       return {
         ...state,
         isStaffLoading: true,
-        error: action.payload
+        errorMessage: action.payload
       };
     default:
       return state;
