@@ -1,3 +1,4 @@
+import { ComponentsModule } from 'src/app/components/components.module';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
@@ -29,6 +30,7 @@ import { UploadCSVComponent } from './upload-csv/upload-csv.component';
     FormsModule,
     HttpClientModule,
     NgbModule,
+    ComponentsModule,
     ReactiveFormsModule,
     ClipboardModule,
     StoreModule.forFeature('page', reducers),
