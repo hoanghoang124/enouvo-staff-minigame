@@ -30,21 +30,11 @@
                     </div>
                   </div>
                 </th>
-                <td>
-                  {{ staff.firstName }}
-                </td>
-                <td>
-                  {{ staff.lastName }}
-                </td>
-                <td>
-                  {{ staff.birthday | date: 'dd/MM/yyyy' }}
-                </td>
-                <td>
-                  {{ staff.email }}
-                </td>
-                <td>
-                  {{ staff.position }}
-                </td>
+                <td>{{ staff.firstName || 'null' }}</td>
+                <td>{{ staff.lastName || 'null' }}</td>
+                <td>{{ staff.birthday | date: 'dd/MM/yyyy' || 'null' }}</td>
+                <td>{{ staff.email || 'null' }}</td>
+                <td>{{ staff.position || 'null' }}</td>
                 <td class="text-right">
                   <div ngbDropdown placement="bottom-right">
                     <a
