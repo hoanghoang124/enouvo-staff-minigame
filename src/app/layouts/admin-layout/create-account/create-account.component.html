@@ -23,6 +23,9 @@
           <div class="row align-items-center">
             <div class="col-8">
               <h3 class="mb-0">Create employee account</h3>
+              <span id="error-message" *ngIf="errorMessage$ | async">
+                {{ errorMessage$ | async }}
+              </span>
             </div>
             <div class="col-4 text-right">
               <button (click)="onSubmit()" class="btn btn-sm btn-primary">

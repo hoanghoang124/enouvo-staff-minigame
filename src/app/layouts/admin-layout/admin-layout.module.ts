@@ -6,7 +6,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ClipboardModule } from 'ngx-clipboard';
-
 import { AdminLayoutRoutes } from './admin-layout.routing';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { IconsComponent } from '../../pages/icons/icons.component';
@@ -18,9 +17,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { reducers } from './store/reducers';
 import { effects } from './store/effects';
 import { CreateAccountComponent } from './create-account/create-account.component';
-import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { UploadCSVComponent } from './upload-csv/upload-csv.component';
-import { EditAccountComponent } from './edit-account/edit-account.component';
 
 // import { ToastrModule } from 'ngx-toastr';
 
@@ -44,9 +41,7 @@ import { EditAccountComponent } from './edit-account/edit-account.component';
     TablesComponent,
     IconsComponent,
     CreateAccountComponent,
-    ResetPasswordComponent,
-    UploadCSVComponent,
-    EditAccountComponent
+    UploadCSVComponent
   ]
 })
 export class AdminLayoutModule {}
