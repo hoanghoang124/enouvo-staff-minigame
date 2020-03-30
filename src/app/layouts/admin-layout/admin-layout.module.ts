@@ -20,6 +20,7 @@ import { effects } from './store/effects';
 import { CreateAccountComponent } from './create-account/create-account.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { UploadCSVComponent } from './upload-csv/upload-csv.component';
+import { EditAccountComponent } from './edit-account/edit-account.component';
 
 // import { ToastrModule } from 'ngx-toastr';
 
@@ -44,7 +45,8 @@ import { UploadCSVComponent } from './upload-csv/upload-csv.component';
     IconsComponent,
     CreateAccountComponent,
     ResetPasswordComponent,
-    UploadCSVComponent
+    UploadCSVComponent,
+    EditAccountComponent
   ]
 })
 export class AdminLayoutModule {}

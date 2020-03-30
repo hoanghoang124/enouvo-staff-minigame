@@ -1,29 +1,29 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { Cities } from '../../auth-layout/models/city.model';
+import { PositionTypes } from '../../auth-layout/models/role.model';
 import { Store } from '@ngrx/store';
 import { State } from '../../auth-layout/store';
 import * as fromAuthSelector from '../../auth-layout/store/auth.selector';
 import * as fromAuthAction from '../../auth-layout/store/auth.action';
-import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
-import { PositionTypes } from '../../auth-layout/models/role.model';
-import { Cities } from '../../auth-layout/models/city.model';
+
 @Component({
-  selector: 'app-create-account',
-  templateUrl: './create-account.component.html',
-  styleUrls: ['./create-account.component.scss']
-  // providers: [{ provide: NgbDateAdapter, useClass: NgbDateNativeUTCAdapter }]
+  selector: 'app-edit-account',
+  templateUrl: './edit-account.component.html',
+  styleUrls: ['./edit-account.component.scss']
 })
-export class CreateAccountComponent implements OnInit {
+export class EditAccountComponent implements OnInit {
   errorMessage$: Observable<string>;
   isLoadingResults$: Observable<boolean>;
-  createAccountForm: FormGroup;
+  editAccountForm: FormGroup;
   model: NgbDateStruct;
   positionTypes = PositionTypes;
   city = Cities;
   constructor(private store: Store<State>, private formBuilder: FormBuilder) {}
   ngOnInit() {
-    this.createAccountForm = this.formBuilder.group({
+    this.editAccountForm = this.formBuilder.group({
       firstName: ['', Validators.required],
       middleName: ['', Validators.required],
       lastName: ['', Validators.required],
@@ -39,12 +39,12 @@ export class CreateAccountComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.createAccountForm.invalid) {
+    if (this.editAccountForm.invalid) {
       console.log('Form invalid');
       return;
     } else {
       this.store.dispatch(
-        new fromAuthAction.CreateAccount(this.createAccountForm.value)
+        new fromAuthAction.CreateAccount(this.editAccountForm.value)
       );
     }
   }
