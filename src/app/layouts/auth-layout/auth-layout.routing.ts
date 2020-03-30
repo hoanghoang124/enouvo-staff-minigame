@@ -2,8 +2,15 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 import { Routes } from '@angular/router';
 
 import { LoginComponent } from './login/login.component';
+import { AuthLayoutComponent } from './auth-layout.component';
 
 export const AuthLayoutRoutes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'change-password', component: ChangePasswordComponent }
+  {
+    path: '',
+    component: AuthLayoutComponent,
+    children: [
+      { path: 'login', component: LoginComponent },
+      { path: 'change-password', component: ChangePasswordComponent }
+    ]
+  }
 ];

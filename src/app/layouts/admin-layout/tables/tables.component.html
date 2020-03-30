@@ -6,7 +6,7 @@
     <div class="col">
       <div class="card shadow">
         <div class="card-header border-0">
-          <h3 class="mb-0">Card tables</h3>
+          <h3 class="mb-0">Employees list</h3>
         </div>
         <div class="table-responsive">
           <table class="table align-items-center table-flush">
@@ -16,6 +16,8 @@
                 <th scope="col">First Name</th>
                 <th scope="col">Last Name</th>
                 <th scope="col">Date of Birth</th>
+                <th scope="col">Email</th>
+                <th scope="col">Position</th>
                 <th scope="col"></th>
               </tr>
             </thead>
@@ -28,16 +30,11 @@
                     </div>
                   </div>
                 </th>
-                <td>
-                  {{ staff.firstName }}
-                </td>
-                <td>
-                  {{ staff.lastName }}
-                </td>
-                <td>
-                  {{ staff.birthday | date: 'dd/MM/yyyy' }}
-                </td>
-
+                <td>{{ staff.firstName || 'null' }}</td>
+                <td>{{ staff.lastName || 'null' }}</td>
+                <td>{{ staff.birthday | date: 'dd/MM/yyyy' || 'null' }}</td>
+                <td>{{ staff.email || 'null' }}</td>
+                <td>{{ staff.position || 'null' }}</td>
                 <td class="text-right">
                   <div ngbDropdown placement="bottom-right">
                     <a

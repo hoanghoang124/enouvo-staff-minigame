@@ -22,7 +22,7 @@ import {
 import { AuthGuard } from './layouts/auth-layout/services/auth-guard.service';
 import { AdminGuard } from './layouts/auth-layout/services/role-guard.service';
 import { AuthLayoutModule } from './layouts/auth-layout/auth-layout.module';
-import { ShareModule } from './share/share.module';
+import { SharedModule } from './shared/shared.module';
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -33,7 +33,7 @@ import { ShareModule } from './share/share.module';
     RouterModule,
     AppRoutingModule,
     CoreModule,
-    ShareModule,
+    SharedModule,
     AuthLayoutModule,
     StoreModule.forRoot([]),
     EffectsModule.forRoot([]),

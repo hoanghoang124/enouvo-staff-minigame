@@ -1,0 +1,16 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+  <div>
+    <form [formGroup]="form" (ngSubmit)="submitForm()">
+      <div>
+        <input
+          type="file"
+          formControlName="file"
+          (change)="uploadFile($event)"
+        />
+      </div>
+      <div>
+        <button type="submit">Upload</button>
+      </div>
+    </form>
+  </div>
+</div>

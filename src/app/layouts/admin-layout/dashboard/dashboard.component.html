@@ -21,7 +21,13 @@
           <div class="row justify-content-center">
             <div class="col-lg-3 order-lg-2">
               <div class="card-profile-image">
-                <img src="{{ staff.avatar }}" class="rounded-circle" />
+                <img
+                  src="{{
+                    staff.avatarUrl ||
+                      '../../../../../../assets/img/avatar/IMG_1171.JPG'
+                  }}"
+                  class="rounded-circle"
+                />
               </div>
             </div>
           </div>
@@ -49,13 +55,13 @@
             </div>
             <div class="text-center">
               <h3>
-                {{ staff.firstName }} {{ staff.middleName
-                }}<span class="font-weight-light"> {{ staff.lastName }}</span>
+                {{ staff.firstName }} {{ staff.middleName }}
+                {{ staff.lastName }}
               </h3>
 
               <div class="h5 mt-4">
                 <i class="ni business_briefcase-24 mr-2"></i
-                >{{ staff.position }}
+                >{{ staff.position || 'null' }}
               </div>
               <hr class="my-4" />
               <a [routerLink]="[staff.id + '/user-profile']">Show more</a>

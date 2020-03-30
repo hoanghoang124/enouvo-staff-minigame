@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  Url: 'https://5e55e20836450d001428865d.mockapi.io/staff',
+  Url: 'https://training-management-dev.herokuapp.com/api/v1/profiles',
   apiBaseUrl: 'https://training-management-dev.herokuapp.com/api'
 };
 /*

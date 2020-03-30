@@ -3,7 +3,7 @@ export interface Staff {
   firstName: string;
   middleName: string;
   lastName: string;
-  avatar: string;
+  avatarUrl: string;
   email: string;
   quote: string;
   birthday: string;
