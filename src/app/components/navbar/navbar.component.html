@@ -7,6 +7,13 @@
       [routerLink]="['/dashboard']"
       >Dashboard</a
     >
+    <a
+      class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block"
+      routerLinkActive="active"
+      [routerLink]="['/tables']"
+      *ngIf="authService.isAdmin()"
+      >Admin</a
+    >
     <!-- Form -->
     <form
       class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto"
@@ -65,8 +72,17 @@
             <i class="ni ni-calendar-grid-58"></i>
             <span>Change Password</span>
           </a>
-
           <div class="dropdown-divider"></div>
+          <a
+            routerLinkActive="active"
+            [routerLink]="['/create-account']"
+            class="dropdown-item"
+            *ngIf="authService.isAdmin()"
+          >
+            <i class="ni ni-circle-08"></i>
+            <span>Create Account</span>
+          </a>
+          <div class="dropdown-divider" *ngIf="authService.isAdmin()"></div>
           <a
             (click)="logOut()"
             class="dropdown-item"

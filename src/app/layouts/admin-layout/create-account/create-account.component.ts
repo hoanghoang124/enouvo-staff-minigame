@@ -48,4 +48,15 @@ export class CreateAccountComponent implements OnInit {
       );
     }
   }
+
+  //onsumit edit profile
+  // onSubmitEditProfile() {
+  //   if (this.editProfileForm.invalid) {
+  //     return;
+  //   } else {
+  //     this.store.dispatch(
+  //       new fromStaff.UpdateStaff(this.editProfileForm.value)
+  //     );
+  //   }
+  // }
 }

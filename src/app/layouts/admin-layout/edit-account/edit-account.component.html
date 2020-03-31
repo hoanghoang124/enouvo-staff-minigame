@@ -23,7 +23,7 @@
           <div class="row align-items-center">
             <div class="col-8">
               <h3 class="mb-0">Edit employee account</h3>
-              <span id="error-message" *ngIf="errorMessage$ | async">
+              <span class="badge badge-warning" id="error-message" *ngIf="errorMessage$ | async">
                 {{ errorMessage$ | async }}
               </span>
             </div>

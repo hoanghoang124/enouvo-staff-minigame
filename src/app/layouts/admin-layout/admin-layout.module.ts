@@ -18,6 +18,8 @@ import { reducers } from './store/reducers';
 import { effects } from './store/effects';
 import { CreateAccountComponent } from './create-account/create-account.component';
 import { UploadCSVComponent } from './upload-csv/upload-csv.component';
+import { ConfirmResetPasswordModalComponent } from './modal/confirm-reset-password-modal/confirm-reset-password-modal.component';
+import { UploadCsvModalComponent } from './modal/upload-csv-modal/upload-csv-modal.component';
 
 // import { ToastrModule } from 'ngx-toastr';
 
@@ -41,7 +43,9 @@ import { UploadCSVComponent } from './upload-csv/upload-csv.component';
     TablesComponent,
     IconsComponent,
     CreateAccountComponent,
-    UploadCSVComponent
+    UploadCSVComponent,
+    ConfirmResetPasswordModalComponent,
+    UploadCsvModalComponent
   ]
 })
 export class AdminLayoutModule {}

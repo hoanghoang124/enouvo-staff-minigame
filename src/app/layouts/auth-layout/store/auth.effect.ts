@@ -85,7 +85,7 @@ export class AuthEffects {
     ofType(AuthActionTypes.RESET_PASSWORD),
     map((action: AuthActions.ResetPassword) => action.payload),
     switchMap(payload => {
-      return this.authService.resetPassword({ userId: payload }).pipe(
+      return this.authService.resetPassword(payload).pipe(
         map(user => {
           return new AuthActions.ResetPasswordSuccess(user);
         }),
