@@ -1,59 +1,101 @@
-<nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
-  <div class="container-fluid">
-    <!-- Brand -->
-    <a
-      class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block"
-      routerLinkActive="active"
-      [routerLink]="['/dashboard']"
-      >Dashboard</a
+<nav
+  class="navbar navbar-horizontal navbar-expand-md shadow bg-white"
+  id="navbar-main"
+>
+  <div class="container-fluid px-0">
+    <!-- Toggler -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      (click)="isCollapsed = !isCollapsed"
+      [attr.aria-expanded]="!isCollapsed"
+      aria-controls="sidenav-collapse-main"
     >
-    <a
-      class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block"
-      routerLinkActive="active"
-      [routerLink]="['/tables']"
-      *ngIf="authService.isAdmin()"
-      >Admin</a
+      <span
+        class="nav-link font-weight-bold text-sm"
+        style="font-size: 14px; line-height: 21px;"
+        >Menu</span
+      >
+    </button>
+    <!-- Menu -->
+    <div
+      class="collapse navbar-collapse"
+      [ngbCollapse]="isCollapsed"
+      id="sidenav-collapse-main"
     >
-    <!-- Form -->
-    <form
-      class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto"
-    >
-      <div class="form-group mb-0" [ngClass]="{ focused: focus === true }">
-        <div class="input-group input-group-alternative">
-          <div class="input-group-prepend">
-            <span class="input-group-text"><i class="fas fa-search"></i></span>
+      <!-- Collapse header -->
+      <div class="navbar-collapse-header d-md-none">
+        <div class="row">
+          <div class="col-6 collapse-brand">
+            <a routerLinkActive="active" [routerLink]="['/dashboard']">
+              <img src="../../../assets/img/brand/enouvo-1.png" />
+            </a>
           </div>
-          <input
-            class="form-control"
-            placeholder="Search"
-            type="text"
-            (focus)="focus = true"
-            (blur)="focus = false"
-          />
+          <div class="col-6 collapse-close">
+            <button
+              type="button"
+              class="navbar-toggler"
+              (click)="isCollapsed = !isCollapsed"
+            >
+              <span></span>
+              <span></span>
+            </button>
+          </div>
         </div>
       </div>
-    </form>
+      <ul class="navbar-nav" style="z-index: 10;">
+        <li
+          *ngFor="let menuItem of menuItems"
+          class="{{ menuItem.class }} nav-item"
+        >
+          <a
+            routerLinkActive="active"
+            [routerLink]="[menuItem.path]"
+            class="nav-link"
+          >
+            {{ menuItem.title }}
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Brand -->
+    <a
+      class="navbar-brand"
+      routerLinkActive="active"
+      [routerLink]="['/dashboard']"
+    >
+      <img
+        src="../../../assets/img/brand/enouvo.png"
+        class="navbar-brand-img"
+        alt="..."
+      />
+    </a>
+
     <!-- User -->
-    <ul class="navbar-nav align-items-center d-none d-md-flex">
-      <li class="nav-item" ngbDropdown placement="bottom-right">
-        <a class="nav-link pr-0" role="button" ngbDropdownToggle>
+    <ul class="nav align-items-center">
+      <li
+        class="nav-item"
+        ngbDropdown
+        placement="bottom-right"
+        style="cursor: pointer;"
+      >
+        <a class="nav-link" role="button" ngbDropdownToggle id="navbarDropdown">
           <div class="media align-items-center">
             <span class="avatar avatar-sm rounded-circle">
               <img
                 alt="Image placeholder"
-                src="
-                ../../../assets/img/avatar/IMG_1171.JPG"
+                src="../../../assets/img/avatar/IMG_1171.JPG"
               />
             </span>
-            <div class="media-body ml-2 d-none d-lg-block">
-              <span class="mb-0 text-sm  font-weight-bold">Jessica Jones</span>
+            <div class="media-body ml-2" style="cursor: default;">
+              <span class="mb-0 text-sm nav-link font-weight-bold"
+                >Hi, Dev
+              </span>
             </div>
           </div>
         </a>
-        <div class="dropdown-menu-arrow dropdown-menu-right" ngbDropdownMenu>
-          <div class=" dropdown-header noti-title">
-            <h6 class="text-overflow m-0">Welcome!</h6>
-          </div>
+        <div ngbDropdownMenu aria-labelledby="navbarDropdown">
           <a
             routerLinkActive="active"
             [routerLink]="['/user-profile']"

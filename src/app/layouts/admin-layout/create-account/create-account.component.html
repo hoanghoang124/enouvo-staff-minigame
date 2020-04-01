@@ -1,14 +1,14 @@
 <div
   class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
-  style="min-height: 300px; background-image: url(assets/img/theme/profile-cover.jpg); background-size: cover; background-position: center top;"
+  style="min-height: 300px; "
 >
   <!-- Mask -->
-  <span class="mask bg-gradient-danger opacity-8"></span>
+  <span class="mask  opacity-8"></span>
   <!-- Header container -->
   <div class="container-fluid d-flex align-items-center">
     <div class="row">
       <div class="col-lg-7 col-md-10">
-        <h1 class="display-2 text-white">
+        <h1 class="display-2 text-blue">
           Đường tình anh thua Đường đua anh chấp
         </h1>
       </div>
@@ -19,11 +19,15 @@
   <div class="row">
     <div class="col-xl-12 order-xl-1">
       <div class="card bg-secondary shadow">
-        <div class="card-header bg-white border-0">
+        <div class="card-header  border-0">
           <div class="row align-items-center">
             <div class="col-8">
               <h3 class="mb-0">Create employee account</h3>
-              <span class="badge badge-warning" id="error-message" *ngIf="errorMessage$ | async">
+              <span
+                class="badge badge-warning"
+                id="error-message"
+                *ngIf="errorMessage$ | async"
+              >
                 {{ errorMessage$ | async }}
               </span>
             </div>

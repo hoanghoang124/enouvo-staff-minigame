@@ -226,7 +226,7 @@ $love-color: $red !default;
 
 // Body
 
-$body-bg: #f8f9fe !default;
+$body-bg: #fef8f9 !default;
 $body-color: $gray-700 !default;
 
 // Sections
@@ -672,7 +672,7 @@ $noui-origin-border-radius: 2px !default;
 
 // Dropdown
 
-$dropdown-bg: $white !default;
+$dropdown-bg: #fefdf8 !default;
 $dropdown-border-width: 0 !default;
 $dropdown-border-color: rgba($black, 0.15) !default;
 $dropdown-border-radius: $border-radius-lg !default;
@@ -904,7 +904,7 @@ $card-img-overlay-padding: 1.25rem !default;
 //$card-group-margin:                 ($grid-gutter-width / 2);
 //$card-deck-margin:                  $card-group-margin !default;
 
-$card-columns-count: 4 !default;
+$card-columns-count: 3 !default;
 $card-columns-gap: 1.25rem !default;
 $card-columns-margin: $card-spacer-y !default;
 
@@ -977,7 +977,7 @@ $footer-padding-y: 2.5rem;
 $footer-padding-x: 0;
 
 $footer-link-font-size: 0.85rem !default;
-$footer-bg: theme-color('secondary') !default;
+$footer-bg: #fef8f9 !default;
 $footer-color: $gray-600 !default;
 $footer-link-color: $gray-600 !default;
 $footer-link-hover-color: $gray-700 !default;
