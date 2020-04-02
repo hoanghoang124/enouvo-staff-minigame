@@ -5,6 +5,9 @@
 // Navbar links
 
 .navbar-horizontal {
+  .navbar-collapse {
+    flex-grow: 0;
+  }
   .navbar-nav {
     .nav-link {
       font-size: $navbar-nav-link-font-size;
@@ -15,6 +18,19 @@
 
       .nav-link-inner--text {
         margin-left: 0.25rem;
+      }
+
+      &.active {
+        color: #0f4c81;
+        background: $gray-200;
+        font-weight: bolder;
+      }
+
+      padding: 0.5rem 1rem;
+      border-radius: $navbar-nav-link-border-radius;
+
+      i {
+        margin-right: 0.625rem;
       }
     }
   }
@@ -65,15 +81,6 @@
           [data-toggle='dropdown']::after {
             transform: rotate(180deg);
           }
-        }
-      }
-      .nav-link {
-        padding-top: $navbar-nav-link-padding-y;
-        padding-bottom: $navbar-nav-link-padding-y;
-        border-radius: $navbar-nav-link-border-radius;
-
-        i {
-          margin-right: 0.625rem;
         }
       }
 

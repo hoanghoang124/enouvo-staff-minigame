@@ -1,0 +1,11 @@
+.main-content {
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  .container-fluid {
+    flex: 1;
+    overflow: auto;
+    padding: 1rem;
+  }
+}

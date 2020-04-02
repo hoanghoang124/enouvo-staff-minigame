@@ -1,7 +1,12 @@
 nav {
-  background-color: #de2e2e;
+  background-color: #fefdf8 !important;
 }
 
-a {
-  margin-right: 20px;
+nav.navbar {
+  z-index: 1000;
+}
+
+.setting:hover {
+  cursor: pointer;
+  color: rgba(82, 95, 127, 0.5);
 }
