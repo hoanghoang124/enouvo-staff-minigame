@@ -61,9 +61,23 @@
                 <input
                   class="form-control"
                   placeholder="Password"
-                  type="password"
                   formControlName="password"
+                  [type]="hide ? 'password' : 'text'"
                 />
+                <div class="input-group-append">
+                  <span class="input-group-text">
+                    <i
+                      *ngIf="hide === true"
+                      class="fa fa-eye"
+                      (click)="hide = !hide"
+                    ></i>
+                    <i
+                      *ngIf="hide === false"
+                      class="fa fa-eye-slash"
+                      (click)="hide = !hide"
+                    ></i>
+                  </span>
+                </div>
               </div>
               <div class="error">
                 <span
