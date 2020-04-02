@@ -49,8 +49,6 @@ export class TablesComponent implements OnInit {
     );
   }
 
-  editProfile() {}
-
   public openConfirmationDialog(userId) {
     this.dialogService
       .confirm(
