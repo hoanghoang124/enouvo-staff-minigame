@@ -4,8 +4,7 @@
 
 export const environment = {
   production: false,
-  Url: 'https://training-management-dev.herokuapp.com/api/v1/profiles',
-  apiBaseUrl: 'https://training-management-dev.herokuapp.com/api'
+  apiBaseUrl: "https://training-management-dev.herokuapp.com/api"
 };
 /*
  * For easier debugging in development mode, you can import the following file

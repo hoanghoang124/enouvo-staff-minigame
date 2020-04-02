@@ -1,7 +1,12 @@
-.card-header {
-  background-color: #f8fefd;
+.row {
+  justify-content: center;
 }
 
+.card-header {
+  border-radius: inherit;
+  background-color: #fefdf8;
+}
 .card-body {
-  background-color: #f8fefd;
+  border-radius: inherit;
+  background-color: #f8f9fe;
 }

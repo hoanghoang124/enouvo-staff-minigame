@@ -1,5 +1,5 @@
-import { createSelector } from '@ngrx/store';
-import { selectAuthState } from './index';
+import { createSelector } from "@ngrx/store";
+import { selectAuthState } from "./index";
 
 export const selectAuthenState = createSelector(
   selectAuthState,
@@ -9,6 +9,11 @@ export const selectAuthenState = createSelector(
 export const getRole = createSelector(selectAuthenState, state => state.role);
 
 export const getId = createSelector(selectAuthenState, state => state.id);
+
+export const getUsername = createSelector(
+  selectAuthenState,
+  state => state.username
+);
 
 export const getIsLoading = createSelector(
   selectAuthenState,

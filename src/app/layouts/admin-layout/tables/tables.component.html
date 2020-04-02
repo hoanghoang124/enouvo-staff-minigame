@@ -1,5 +1,6 @@
 <div class="header pb-8 pt-5 pt-md-8"></div>
 <!-- Page content -->
+
 <div class="container-fluid mt--7">
   <!-- Table -->
   <div class="row">
@@ -8,10 +9,6 @@
         <div class="card-header border-0">
           <h3 class="mb-0">
             Employees list
-            <i
-              class="fas fa-spinner fa-pulse spinner"
-              *ngIf="isStaffLoading$ | async"
-            ></i>
           </h3>
           <span
             class="badge badge-warning"
@@ -21,6 +18,7 @@
             {{ errorMessage$ | async }}
           </span>
         </div>
+        <app-loading *ngIf="isStaffLoading$ | async"></app-loading>
         <div class="table-responsive">
           <table class="table align-items-center table-flush">
             <thead class="thead-light">
@@ -31,7 +29,7 @@
                 <th scope="col">Date of Birth</th>
                 <th scope="col">Email</th>
                 <th scope="col">Position</th>
-                <th scope="col"></th>
+                <th scope="col" class="action">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -43,12 +41,12 @@
                     </div>
                   </div>
                 </th>
-                <td>{{ staff.firstName || 'n/a' }}</td>
-                <td>{{ staff.lastName || 'n/a' }}</td>
-                <td>{{ staff.birthday | date: 'dd/MM/yyyy' || 'n/a' }}</td>
-                <td>{{ staff.email || 'n/a' }}</td>
-                <td>{{ staff.position || 'n/a' }}</td>
-                <td class="text-right">
+                <td>{{ staff.firstName || "n/a" }}</td>
+                <td>{{ staff.lastName || "n/a" }}</td>
+                <td>{{ staff.birthday | date: "dd/MM/yyyy" || "n/a" }}</td>
+                <td>{{ staff.email || "n/a" }}</td>
+                <td>{{ staff.position || "n/a" }}</td>
+                <td class="action">
                   <div ngbDropdown placement="bottom-right">
                     <a
                       class="btn btn-sm btn-icon-only text-light"

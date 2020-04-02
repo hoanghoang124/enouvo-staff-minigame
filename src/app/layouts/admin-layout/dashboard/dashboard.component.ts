@@ -18,6 +18,7 @@ export class DashboardComponent implements OnInit {
   userFromApi: any;
   staffs: any[];
   stafflist$: Observable<any>;
+  isStaffLoading$: Observable<any>;
 
   breakpoint: number;
 
@@ -25,6 +26,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.store.dispatch(new fromStaff.GetStaffs());
+    this.isStaffLoading$ = this.store.select(fromStaff.getIsStaffLoading);
     this.stafflist$ = this.store.pipe(select(fromStaff.getAllStaffs));
     this.stafflist$.subscribe(res => {
       this.staffs = res as Staff[];

@@ -90,7 +90,7 @@
             </span>
             <div class="media-body ml-2" style="cursor: default;">
               <span class="mb-0 text-sm nav-link font-weight-bold"
-                >Hi, Dev
+                >Hi, {{ username }}
               </span>
             </div>
           </div>
@@ -105,6 +105,8 @@
             <i class="ni ni-single-02"></i>
             <span>My profile</span>
           </a>
+
+          <div class="dropdown-divider"></div>
           <a
             routerLinkActive="active"
             [routerLink]="['/change-password']"
@@ -114,7 +116,6 @@
             <i class="ni ni-calendar-grid-58"></i>
             <span>Change Password</span>
           </a>
-          <div class="dropdown-divider"></div>
           <a
             routerLinkActive="active"
             [routerLink]="['/create-account']"

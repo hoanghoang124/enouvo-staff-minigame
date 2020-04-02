@@ -1,18 +1,20 @@
-import * as AuthActions from './auth.action';
-import { RoleId } from '../models/role.model';
-import { User } from '../models/user.model';
+import * as AuthActions from "./auth.action";
+import { RoleId } from "../models/role.model";
+import { User } from "../models/user.model";
 
 const { AuthActionTypes } = AuthActions;
 
 export interface AuthState {
   role: RoleId;
   id: User;
+  username: string;
   isLoading: boolean;
   errorMessage: string;
 }
 export const initialState: AuthState = {
   role: null,
   id: null,
+  username: null,
   isLoading: false,
   errorMessage: null
 };
@@ -32,6 +34,7 @@ export function reducer(
     case AuthActionTypes.LOGIN_SUCCESS: {
       return {
         ...state,
+        username: action.payload.username,
         role: action.payload.scope,
         id: action.payload.userId,
         isLoading: false
