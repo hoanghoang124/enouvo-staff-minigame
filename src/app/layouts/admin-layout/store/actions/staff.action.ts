@@ -1,30 +1,30 @@
-import { Action } from '@ngrx/store';
-import { Staff } from '../../models/staff.model';
+import { Action } from "@ngrx/store";
+import { Staff } from "../../models/staff.model";
 
 export enum StaffActionsType {
-  GET_STAFFS = '[Staff] Get Staffs',
-  GET_STAFFS_SUCCESS = '[Staff] Get Staffs Success',
-  GET_STAFFS_FAILURE = '[Staff] Get Staffs Fail',
+  GET_STAFFS = "[Staff] Get Staffs",
+  GET_STAFFS_SUCCESS = "[Staff] Get Staffs Success",
+  GET_STAFFS_FAILURE = "[Staff] Get Staffs Fail",
 
-  GET_STAFF = '[Staff] Get Staff',
-  GET_STAFF_SUCCESS = '[Staff] Get Staff Success',
-  GET_STAFF_FAILURE = '[Staff] Get Staff Fail',
+  GET_STAFF = "[Staff] Get Staff",
+  GET_STAFF_SUCCESS = "[Staff] Get Staff Success",
+  GET_STAFF_FAILURE = "[Staff] Get Staff Fail",
 
-  DELETE_STAFF = '[Staff] Deletes Staff',
-  DELETE_STAFF_SUCCESS = '[Staff] Deletes Staff Success',
-  DELETE_STAFF_FAILURE = '[Staff] Deletes Staff Failure',
+  DELETE_STAFF = "[Staff] Deletes Staff",
+  DELETE_STAFF_SUCCESS = "[Staff] Deletes Staff Success",
+  DELETE_STAFF_FAILURE = "[Staff] Deletes Staff Failure",
 
-  CREATE_STAFF = '[Staff] Create Staff',
-  CREATE_STAFF_SUCCESS = '[Staff] Creates Staff Success',
-  CREATE_STAFF_FAILURE = '[Staff] Create Staff Failure',
+  CREATE_STAFF = "[Staff] Create Staff",
+  CREATE_STAFF_SUCCESS = "[Staff] Creates Staff Success",
+  CREATE_STAFF_FAILURE = "[Staff] Create Staff Failure",
 
-  UPDATE_STAFF = '[Staff] Updates Staff',
-  UPDATE_STAFF_SUCCESS = '[Staff] Updates Staff Success',
-  UPDATE_STAFF_FAILURE = '[Staff] Updates Staff Failure',
+  UPDATE_STAFF = "[Staff] Updates Staff",
+  UPDATE_STAFF_SUCCESS = "[Staff] Updates Staff Success",
+  UPDATE_STAFF_FAILURE = "[Staff] Updates Staff Failure",
 
-  UPLOAD_IMAGE = '[Image] Upload Image',
-  UPLOAD_IMAGE_SUCCESS = '[Image] Upload Image Success',
-  UPLOAD_IMAGE_FAILURE = '[Image] Upload Image Failure'
+  UPLOAD_IMAGE = "[Image] Upload Image",
+  UPLOAD_IMAGE_SUCCESS = "[Image] Upload Image Success",
+  UPLOAD_IMAGE_FAILURE = "[Image] Upload Image Failure"
 }
 
 export class GetStaffs implements Action {

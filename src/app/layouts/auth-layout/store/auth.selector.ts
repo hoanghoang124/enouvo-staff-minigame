@@ -15,12 +15,42 @@ export const getUsername = createSelector(
   state => state.username
 );
 
-export const getIsLoading = createSelector(
+export const getIsLgnLoading = createSelector(
   selectAuthenState,
-  state => state.isLoading
+  state => state.isLgnLoading
 );
 
-export const getErrorMessage = createSelector(
+export const getIsCrtAccLoading = createSelector(
   selectAuthenState,
-  state => state.errorMessage
+  state => state.isCrtAccLoading
+);
+
+export const getIsChgPswLoading = createSelector(
+  selectAuthenState,
+  state => state.isChgPswLoading
+);
+
+export const getIsRstPswLoading = createSelector(
+  selectAuthenState,
+  state => state.isRstPswLoading
+);
+
+export const getErrorLgnMessage = createSelector(
+  selectAuthenState,
+  state => state.errorLgnMessage
+);
+
+export const getErrorChgPswMessage = createSelector(
+  selectAuthenState,
+  state => state.errorChgPswMessage
+);
+
+export const getErrorCrtAccMessage = createSelector(
+  selectAuthenState,
+  state => state.errorChgPswMessage
+);
+
+export const getErrorRsPswMessage = createSelector(
+  selectAuthenState,
+  state => state.errorRstPswMessage
 );

@@ -22,8 +22,10 @@ export class LoginComponent implements OnInit {
       username: ["", Validators.required],
       password: ["", [Validators.required, Validators.minLength(8)]]
     });
-    this.errorMessage$ = this.store.select(fromAuthSelector.getErrorMessage);
-    this.isLoadingResults$ = this.store.select(fromAuthSelector.getIsLoading);
+    this.errorMessage$ = this.store.select(fromAuthSelector.getErrorLgnMessage);
+    this.isLoadingResults$ = this.store.select(
+      fromAuthSelector.getIsLgnLoading
+    );
   }
 
   onSubmit() {

@@ -8,15 +8,27 @@ export interface AuthState {
   role: RoleId;
   id: User;
   username: string;
-  isLoading: boolean;
-  errorMessage: string;
+  isLgnLoading: boolean;
+  isCrtAccLoading: boolean;
+  isChgPswLoading: boolean;
+  isRstPswLoading: boolean;
+  errorLgnMessage: string;
+  errorCrtAccMessage: string;
+  errorChgPswMessage: string;
+  errorRstPswMessage: string;
 }
 export const initialState: AuthState = {
   role: null,
   id: null,
   username: null,
-  isLoading: false,
-  errorMessage: null
+  isLgnLoading: false,
+  isCrtAccLoading: false,
+  isChgPswLoading: false,
+  isRstPswLoading: false,
+  errorLgnMessage: null,
+  errorCrtAccMessage: null,
+  errorChgPswMessage: null,
+  errorRstPswMessage: null
 };
 
 export function reducer(
@@ -27,8 +39,8 @@ export function reducer(
     case AuthActionTypes.LOGIN: {
       return {
         ...state,
-        isLoading: true,
-        errorMessage: null
+        isLgnLoading: true,
+        errorLgnMessage: null
       };
     }
     case AuthActionTypes.LOGIN_SUCCESS: {
@@ -37,75 +49,75 @@ export function reducer(
         username: action.payload.username,
         role: action.payload.scope,
         id: action.payload.userId,
-        isLoading: false
+        isLgnLoading: false
       };
     }
     case AuthActionTypes.LOGIN_FAILURE: {
       return {
         ...state,
-        isLoading: false,
-        errorMessage: action.payload
+        isLgnLoading: false,
+        errorLgnMessage: action.payload
       };
     }
     case AuthActionTypes.CREATE_ACCOUNT: {
       return {
         ...state,
-        isLoading: true,
-        errorMessage: null
+        isCrtAccLoading: true,
+        errorCrtAccMessage: null
       };
     }
     case AuthActionTypes.CREATE_ACCOUNT_SUCCESS: {
       return {
         ...state,
-        isLoading: false
+        isCrtAccLoading: false
       };
     }
     case AuthActionTypes.CREATE_ACCOUNT_FAILURE: {
       return {
         ...state,
-        isLoading: false,
-        errorMessage: action.payload
+        isCrtAccLoading: false,
+        errorCrtAccMessage: action.payload
       };
     }
     case AuthActionTypes.CHANGE_PASSWORD: {
       return {
         ...state,
-        isLoading: true,
-        errorMessage: null
+        isChgPswLoading: true,
+        errorChgPswMessage: null
       };
     }
     case AuthActionTypes.CHANGE_PASSWORD_SUCCESS: {
       return {
         ...state,
-        isLoading: false
+        isChgPswLoading: false
       };
     }
     case AuthActionTypes.CHANGE_PASSWORD_FAILURE: {
       return {
         ...state,
-        isLoading: false,
-        errorMessage: action.payload
+        isChgPswLoading: false,
+        errorChgPswMessage: action.payload
       };
     }
     case AuthActionTypes.RESET_PASSWORD: {
       return {
         ...state,
-        isLoading: true,
-        errorMessage: null
+        isRstPswLoading: true,
+        errorRstPswMessage: null
       };
     }
     case AuthActionTypes.RESET_PASSWORD_SUCCESS: {
       return {
         ...state,
         id: action.payload.id,
-        isLoading: false
+        isRstPswLoading: false
       };
     }
     case AuthActionTypes.RESET_PASSWORD_FAILURE: {
       return {
         ...state,
-        isLoading: false,
-        errorMessage: action.payload
+        isRstPswLoading: false,
+        errorRstPswMessage: action.payload
       };
     }
     case AuthActionTypes.LOGOUT: {
