@@ -21,13 +21,16 @@ export class ChangePasswordComponent implements OnInit {
   errorMessage$: Observable<string>;
   isLoadingResults$: Observable<boolean>;
   changePasswordForm: FormGroup;
+  hide1 = true;
+  hide2 = true;
+  hide3 = true;
 
   constructor(private store: Store<State>, private formBuilder: FormBuilder) {}
 
   ngOnInit() {
     this.changePasswordForm = this.formBuilder.group(
       {
-        currentPassword: ['', Validators.required],
+        currentPassword: ['', [Validators.required, Validators.minLength(8)]],
         newPassword: ['', [Validators.required, Validators.minLength(8)]],
         confirmPassword: ['', [Validators.required, Validators.minLength(8)]]
       },
