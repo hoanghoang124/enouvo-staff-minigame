@@ -1,0 +1,75 @@
+<div class="header  pb-8 pt-5 pt-md-8">
+  <div class="container-fluid">
+    <div class="header-body">
+      <!-- Card stats -->
+      <!-- <span class="mask bg-gradient-danger opacity-8"></span> -->
+      <!-- Header container -->
+      <!-- <div class="container-fluid d-flex align-items-center">
+        <div class="row">
+          <div class="col-lg-7 col-md-10"></div>
+        </div>
+      </div> -->
+    </div>
+  </div>
+  <app-loading *ngIf="isStaffLoading$ | async"></app-loading>
+  <div class="container-fluid ">
+    <div class="row">
+      <div class="card-deck m-4 " *ngFor="let staff of stafflist$ | async">
+        <div
+          class="card card-profile shadow"
+          style="min-width: 20rem; max-width: 20rem;"
+        >
+          <div class="row justify-content-center">
+            <div class="col-lg-3 order-lg-2">
+              <div class="card-profile-image">
+                <img
+                  src="{{
+                    staff.avatarUrl ||
+                      '../../../../../../assets/img/avatar/IMG_1171.JPG'
+                  }}"
+                  class="rounded-circle"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4"
+          >
+            <div class="d-flex justify-content-between">
+              <a class="btn btn-sm mr-4"
+                ><img
+                  src="https://img.icons8.com/color/48/000000/thumb-up--v1.png"
+              /></a>
+              <a class="btn btn-sm float-right"
+                ><img
+                  src="https://img.icons8.com/color/48/000000/poor-quality--v1.png"
+              /></a>
+            </div>
+          </div>
+          <div class="card-body pt-0 pt-md-4">
+            <div class="row">
+              <div class="col">
+                <div
+                  class="card-profile-stats d-flex justify-content-center mt-md-5"
+                ></div>
+              </div>
+            </div>
+            <div class="text-center">
+              <h3 style="text-transform: capitalize;">
+                {{ staff.firstName }} {{ staff.middleName }}
+                {{ staff.lastName }}
+              </h3>
+
+              <div class="h5 mt-4" style="text-transform: capitalize;">
+                <i class="ni business_briefcase-24 mr-2"></i
+                >{{ staff.position || 'null' }}
+              </div>
+              <hr class="my-4" />
+              <a [routerLink]="[staff.id + '/user-profile']">Show more</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

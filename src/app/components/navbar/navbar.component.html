@@ -1,0 +1,134 @@
+<nav
+  class="navbar navbar-horizontal navbar-expand-md shadow bg-white"
+  id="navbar-main"
+>
+  <div class="container-fluid px-0">
+    <!-- Toggler -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      (click)="isCollapsed = !isCollapsed"
+      [attr.aria-expanded]="!isCollapsed"
+      aria-controls="sidenav-collapse-main"
+    >
+      <span
+        class="nav-link font-weight-bold text-sm"
+        style="font-size: 14px; line-height: 21px;"
+        >Menu</span
+      >
+    </button>
+    <!-- Menu -->
+    <div
+      class="collapse navbar-collapse"
+      [ngbCollapse]="isCollapsed"
+      id="sidenav-collapse-main"
+    >
+      <!-- Collapse header -->
+      <div class="navbar-collapse-header d-md-none">
+        <div class="row">
+          <div class="col-6 collapse-brand">
+            <a routerLinkActive="active" [routerLink]="['/dashboard']">
+              <img src="../../../assets/img/brand/enouvo-1.png" />
+            </a>
+          </div>
+          <div class="col-6 collapse-close">
+            <button
+              type="button"
+              class="navbar-toggler"
+              (click)="isCollapsed = !isCollapsed"
+            >
+              <span></span>
+              <span></span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <ul class="navbar-nav" style="z-index: 10;">
+        <li
+          *ngFor="let menuItem of menuItems"
+          class="{{ menuItem.class }} nav-item"
+        >
+          <a
+            routerLinkActive="active"
+            [routerLink]="[menuItem.path]"
+            class="nav-link"
+            *ngIf="authService.isAdmin()"
+          >
+            {{ menuItem.title }}
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Brand -->
+    <a
+      class="navbar-brand"
+      routerLinkActive="active"
+      [routerLink]="['/dashboard']"
+    >
+      <img
+        src="../../../assets/img/brand/enouvo.png"
+        class="navbar-brand-img"
+        alt="..."
+      />
+    </a>
+
+    <!-- User -->
+    <ul class="nav align-items-center">
+      <li
+        class="nav-item"
+        ngbDropdown
+        placement="bottom-right"
+        style="cursor: pointer;"
+      >
+        <a class="nav-link" role="button" ngbDropdownToggle id="navbarDropdown">
+          <div class="media align-items-center">
+            <span class="avatar avatar-sm rounded-circle">
+              <img
+                alt="Image placeholder"
+                src="../../../assets/img/avatar/IMG_1171.JPG"
+              />
+            </span>
+            <div class="media-body ml-2" style="cursor: default;">
+              <span class="mb-0 text-sm nav-link font-weight-bold"
+                >Hi, {{ username }}
+              </span>
+            </div>
+          </div>
+        </a>
+        <div ngbDropdownMenu aria-labelledby="navbarDropdown">
+          <a
+            routerLinkActive="active"
+            [routerLink]="['/user-profile']"
+            class="dropdown-item"
+            *ngIf="authService.isLoggedIn()"
+            aria-disabled="true"
+          >
+            <i class="ni ni-single-02"></i>
+            <span>My profile</span>
+          </a>
+
+          <div class="dropdown-divider"></div>
+          <a
+            class="dropdown-item"
+            routerLinkActive="active"
+            [routerLink]="['/change-password']"
+            *ngIf="authService.isLoggedIn()"
+          >
+            <i class="ni ni-calendar-grid-58"></i>
+            <span>Change Password</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a
+            (click)="logOut()"
+            class="dropdown-item"
+            *ngIf="authService.isLoggedIn()"
+          >
+            <i class="ni ni-user-run"></i>
+            <span>Logout</span>
+          </a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>

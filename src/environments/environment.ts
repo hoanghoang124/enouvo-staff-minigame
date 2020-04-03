@@ -4,10 +4,8 @@
 
 export const environment = {
   production: false,
-  Url: 'https://5e55e20836450d001428865d.mockapi.io/staff',
-  apiBaseUrl: 'https://training-management-dev.herokuapp.com/api'
+  apiBaseUrl: "https://training-management-dev.herokuapp.com/api"
 };
-
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
