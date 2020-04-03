@@ -4,3 +4,20 @@ td {
 .modal-footer {
   padding: 16px 24px;
 }
+
+table,
+.card-header,
+.card-footer {
+  background-color: #fefdf8;
+}
+th,
+td {
+  width: fit-content;
+  max-width: 120px;
+}
+
+.action {
+  max-width: 70px;
+  text-align: center;
+  padding: 16px 0;
+}

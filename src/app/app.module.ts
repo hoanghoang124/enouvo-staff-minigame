@@ -23,6 +23,7 @@ import { AuthGuard } from './layouts/auth-layout/services/auth-guard.service';
 import { AdminGuard } from './layouts/auth-layout/services/role-guard.service';
 import { AuthLayoutModule } from './layouts/auth-layout/auth-layout.module';
 import { SharedModule } from './shared/shared.module';
+import { UploadService } from './layouts/admin-layout/upload-csv/upload.service';
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -45,6 +46,7 @@ import { SharedModule } from './shared/shared.module';
     AuthGuard,
     AdminGuard,
     AuthService,
+    UploadService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

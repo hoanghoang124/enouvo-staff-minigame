@@ -1,4 +1,4 @@
-<div class="header bg-gradient-danger py-7 py-lg-8">
+<div class="header">
   <div class="container">
     <div class="header-body text-center mb-7">
       <div class="row justify-content-center">
@@ -7,18 +7,6 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="separator separator-bottom separator-skew zindex-100">
-    <svg
-      x="0"
-      y="0"
-      viewBox="0 0 2560 100"
-      preserveAspectRatio="none"
-      version="1.1"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
-    </svg>
   </div>
 </div>
 <!-- Page content -->
@@ -29,7 +17,11 @@
         <div class="card-body px-lg-5 py-lg-5">
           <div class="text-center text-muted mb-4">
             <h3>Sign in with credentials</h3>
-            <span id="error-message" *ngIf="errorMessage$ | async">
+            <span
+              class="badge badge-warning"
+              id="error-message"
+              *ngIf="errorMessage$ | async"
+            >
               {{ errorMessage$ | async }}
             </span>
           </div>
@@ -69,9 +61,23 @@
                 <input
                   class="form-control"
                   placeholder="Password"
-                  type="password"
                   formControlName="password"
+                  [type]="hide ? 'password' : 'text'"
                 />
+                <div class="input-group-append">
+                  <span class="input-group-text">
+                    <i
+                      *ngIf="hide === true"
+                      class="fa fa-eye"
+                      (click)="hide = !hide"
+                    ></i>
+                    <i
+                      *ngIf="hide === false"
+                      class="fa fa-eye-slash"
+                      (click)="hide = !hide"
+                    ></i>
+                  </span>
+                </div>
               </div>
               <div class="error">
                 <span

@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Staff } from '../models/staff.model';
-import { ActivatedRoute } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { State } from '../store/reducers';
-import * as fromStaff from '../store';
+import { Component, OnInit } from "@angular/core";
+import { Observable } from "rxjs";
+import { Staff } from "../models/staff.model";
+import { ActivatedRoute } from "@angular/router";
+import { Store } from "@ngrx/store";
+import { State } from "../store/reducers";
+import * as fromStaff from "../store";
 
 @Component({
-  selector: 'app-user-profile',
-  templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.scss']
+  selector: "app-user-profile",
+  templateUrl: "./user-profile.component.html",
+  styleUrls: ["./user-profile.component.scss"]
 })
 export class UserProfileComponent implements OnInit {
   staff$: Observable<Staff>;
@@ -22,6 +22,6 @@ export class UserProfileComponent implements OnInit {
       this.store.dispatch(new fromStaff.GetStaff(params.id));
     });
     this.staff$ = this.store.select(fromStaff.getStaff);
-    this.isLoadingResults$ = this.store.select(fromStaff.getIsStaffLoading);
+    this.isLoadingResults$ = this.store.select(fromStaff.getIsGtStfLoading);
   }
 }
