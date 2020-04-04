@@ -17,7 +17,7 @@ export class StaffService {
   }
 
   getStaff(id: number): Observable<any> {
-    const url = `${this.BASE_URL}/${id}`;
+    const url = `${this.BASE_URL}/v1/profiles/${id}`;
     return this.http.get<Staff>(url);
   }
 

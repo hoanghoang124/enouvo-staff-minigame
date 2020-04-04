@@ -111,8 +111,7 @@
           <div class="dropdown-divider"></div>
           <a
             class="dropdown-item"
-            routerLinkActive="active"
-            [routerLink]="['/change-password']"
+            (click)="openChangePasswordDialog()"
             *ngIf="authService.isLoggedIn()"
           >
             <i class="ni ni-calendar-grid-58"></i>

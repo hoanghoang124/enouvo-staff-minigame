@@ -11,11 +11,11 @@ export const AdminLayoutRoutes: Routes = [
     component: DashboardComponent
   },
   {
-    path: 'dashboard/:id/user-profile',
+    path: 'dashboard/:id',
     component: UserProfileComponent
   },
   {
-    path: 'tables/:id/user-profile',
+    path: 'tables/:id',
     component: UserProfileComponent,
     canActivate: [AdminGuard]
   },
