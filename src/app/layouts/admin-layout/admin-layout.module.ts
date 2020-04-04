@@ -37,7 +37,7 @@ import { dialogs } from "./modal";
     ClipboardModule,
     StoreModule.forFeature("page", reducers),
     EffectsModule.forFeature(effects),
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   declarations: [
     dialogs,
@@ -49,7 +49,7 @@ import { dialogs } from "./modal";
     UploadCSVComponent,
     ConfirmResetPasswordModalComponent,
     UploadCsvModalComponent,
-    ChangePasswordModalComponent
-  ]
+    ChangePasswordModalComponent,
+  ],
 })
 export class AdminLayoutModule {}
