@@ -21,6 +21,7 @@ import { UploadCSVComponent } from "./upload-csv/upload-csv.component";
 import { ConfirmResetPasswordModalComponent } from "./modal/confirm-reset-password-modal/confirm-reset-password-modal.component";
 import { UploadCsvModalComponent } from "./modal/upload-csv-modal/upload-csv-modal.component";
 import { ChangePasswordModalComponent } from "./modal/change-password-modal/change-password-modal.component";
+import { dialogs } from "./modal";
 
 // import { ToastrModule } from 'ngx-toastr';
 
@@ -39,6 +40,7 @@ import { ChangePasswordModalComponent } from "./modal/change-password-modal/chan
     ReactiveFormsModule
   ],
   declarations: [
+    dialogs,
     DashboardComponent,
     UserProfileComponent,
     TablesComponent,

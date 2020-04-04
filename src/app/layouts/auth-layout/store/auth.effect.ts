@@ -5,6 +5,7 @@ import { Observable, of } from "rxjs";
 import { tap, map, switchMap, catchError } from "rxjs/operators";
 import { AuthService } from "../services/auth.service";
 import * as AuthActions from "./auth.action";
+import { DialogService } from "../../admin-layout/services/dialog.service";
 const { AuthActionTypes } = AuthActions;
 
 @Injectable()
@@ -12,24 +13,25 @@ export class AuthEffects {
   constructor(
     private actions: Actions,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private dialogService: DialogService
   ) {}
 
   @Effect()
   logIn$ = this.actions.pipe(
     ofType(AuthActionTypes.LOGIN),
     map((action: AuthActions.LogIn) => action.payload),
-    switchMap(payload => {
+    switchMap((payload) => {
       return this.authService.logIn(payload).pipe(
-        map(user => {
+        map((user) => {
           if (user.shouldUserChangePassword) {
-            this.router.navigateByUrl("/change-password");
+            this.dialogService.changePassword("Change Password Form");
           } else {
             this.router.navigateByUrl("/dashboard");
           }
           return new AuthActions.LogInSuccess(user);
         }),
-        catchError(res => {
+        catchError((res) => {
           return of(new AuthActions.LogInFailure(res.error.message));
         })
       );
@@ -39,7 +41,7 @@ export class AuthEffects {
   @Effect({ dispatch: false })
   LogInSuccess: Observable<any> = this.actions.pipe(
     ofType(AuthActionTypes.LOGIN_SUCCESS),
-    tap(user => {
+    tap((user) => {
       localStorage.setItem("token", user.payload.token);
       localStorage.setItem("role", user.payload.scope);
       localStorage.setItem("id", user.payload.id);
@@ -51,13 +53,13 @@ export class AuthEffects {
   CreateAccount$ = this.actions.pipe(
     ofType(AuthActionTypes.CREATE_ACCOUNT),
     map((action: AuthActions.CreateAccount) => action.payload),
-    switchMap(payload => {
+    switchMap((payload) => {
       return this.authService.create(payload).pipe(
-        map(user => {
+        map((user) => {
           this.router.navigateByUrl("/tables");
           return new AuthActions.CreateAccountSuccess(user);
         }),
-        catchError(res =>
+        catchError((res) =>
           of(new AuthActions.CreateAccountFailure(res.error.message))
         )
       );
@@ -68,13 +70,12 @@ export class AuthEffects {
   ChangePassword$ = this.actions.pipe(
     ofType(AuthActionTypes.CHANGE_PASSWORD),
     map((action: AuthActions.ChangePassword) => action.payload),
-    switchMap(payload => {
+    switchMap((payload) => {
       return this.authService.changePassword(payload).pipe(
-        map(user => {
-          this.router.navigateByUrl("/dashboard");
+        map((user) => {
           return new AuthActions.ChangePasswordSuccess(user);
         }),
-        catchError(res =>
+        catchError((res) =>
           of(new AuthActions.ChangePasswordFailure(res.error.message))
         )
       );
@@ -85,12 +86,12 @@ export class AuthEffects {
   ResetPassword$: Observable<any> = this.actions.pipe(
     ofType(AuthActionTypes.RESET_PASSWORD),
     map((action: AuthActions.ResetPassword) => action.payload),
-    switchMap(payload => {
+    switchMap((payload) => {
       return this.authService.resetPassword(payload).pipe(
-        map(user => {
+        map((user) => {
           return new AuthActions.ResetPasswordSuccess(user);
         }),
-        catchError(res =>
+        catchError((res) =>
           of(new AuthActions.ResetPasswordFailure(res.error.message))
         )
       );
