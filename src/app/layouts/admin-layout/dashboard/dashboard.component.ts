@@ -1,14 +1,14 @@
-import { Component, OnInit } from "@angular/core";
-import { Observable } from "rxjs";
-import { Store, select } from "@ngrx/store";
-import { Staff } from "../models/staff.model";
-import { State } from "../store/reducers";
-import * as fromStaff from "../store";
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Store, select } from '@ngrx/store';
+import { Staff } from '../models/staff.model';
+import { State } from '../store/reducers';
+import * as fromStaff from '../store';
 
 @Component({
-  selector: "app-dashboard",
-  templateUrl: "./dashboard.component.html",
-  styleUrls: ["./dashboard.component.scss"]
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
   getState: Observable<any>;

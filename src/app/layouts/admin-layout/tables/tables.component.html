@@ -57,11 +57,11 @@
                     </div>
                   </div>
                 </th>
-                <td>{{ staff.firstName || "n/a" }}</td>
-                <td>{{ staff.lastName || "n/a" }}</td>
-                <td>{{ staff.birthday | date: "dd/MM/yyyy" || "n/a" }}</td>
-                <td>{{ staff.email || "n/a" }}</td>
-                <td>{{ staff.position || "n/a" }}</td>
+                <td>{{ staff.firstName || 'n/a' }}</td>
+                <td>{{ staff.lastName || 'n/a' }}</td>
+                <td>{{ staff.birthday | date: 'dd/MM/yyyy' || 'n/a' }}</td>
+                <td>{{ staff.email || 'n/a' }}</td>
+                <td>{{ staff.position || 'n/a' }}</td>
                 <td class="action">
                   <div ngbDropdown placement="bottom-right">
                     <a
@@ -76,7 +76,7 @@
                     >
                       <a
                         class="dropdown-item"
-                        [routerLink]="[staff.id + '/user-profile']"
+                        [routerLink]="[staff.id]"
                         routerLinkActive="router-link-active"
                         >Detail</a
                       >
