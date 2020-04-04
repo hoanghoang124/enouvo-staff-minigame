@@ -10,7 +10,7 @@ import { DialogService } from "src/app/layouts/admin-layout/services/dialog.serv
 @Component({
   selector: "app-navbar",
   templateUrl: "./navbar.component.html",
-  styleUrls: ["./navbar.component.scss"]
+  styleUrls: ["./navbar.component.scss"],
 })
 export class NavbarComponent implements OnInit {
   public focus;
@@ -28,8 +28,8 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     this.username = localStorage.getItem("username");
-    this.listTitles = ROUTES.filter(listTitle => listTitle);
-    this.menuItems = ROUTES.filter(menuItem => menuItem);
+    this.listTitles = ROUTES.filter((listTitle) => listTitle);
+    this.menuItems = ROUTES.filter((menuItem) => menuItem);
     this.router.events.subscribe(() => {
       this.isCollapsed = true;
     });
@@ -37,8 +37,8 @@ export class NavbarComponent implements OnInit {
 
   public openChangePasswordDialog() {
     this.dialogService
-      .changePassword("Change your password")
-      .then(event => console.log("Execute changing password:", event))
+      .changePassword("Change Password Form")
+      .then((event) => console.log("Execute changing password:", event))
       .catch(() => console.log("User dismissed the dialog"));
   }
 

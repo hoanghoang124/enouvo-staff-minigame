@@ -13,7 +13,7 @@ import { DialogService } from "../services/dialog.service";
 @Component({
   selector: "app-tables",
   templateUrl: "./tables.component.html",
-  styleUrls: ["./tables.component.scss"]
+  styleUrls: ["./tables.component.scss"],
 })
 export class TablesComponent implements OnInit {
   staffs$: Observable<any>;
@@ -45,7 +45,7 @@ export class TablesComponent implements OnInit {
 
     //get loading status
     this.isLoadingResults$ = this.store.select(
-      fromAuthSelector.getIsRstPswLoading
+      fromAuthSelector.getIsCrtAccLoading
     );
   }
 
@@ -56,7 +56,7 @@ export class TablesComponent implements OnInit {
         "Are you sure you want to reset password for this account? This action can not be undone.",
         userId
       )
-      .then(confirmed => console.log("User confirmed:", confirmed))
+      .then((confirmed) => console.log("User confirmed:", confirmed))
       .catch(() => console.log("User dismissed the dialog"));
   }
 }
