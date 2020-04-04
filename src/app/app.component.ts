@@ -7,15 +7,15 @@ import {
   NavigationCancel,
   NavigationError,
 } from "@angular/router";
-
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.scss"],
 })
 export class AppComponent {
-  public showOverlay = true;
   title = "enouvo-staff-minigame";
+  public showOverlay = true;
+
   constructor(private router: Router) {
     this.router.events.subscribe((event: RouterEvent) => {
       this.navigationInterceptor(event);
