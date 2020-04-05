@@ -20,7 +20,6 @@ export class UserProfileComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.store.dispatch(new fromStaff.GetStaff(params.id));
-      console.log(params.id);
     });
     this.staff$ = this.store.select(fromStaff.getStaff);
     this.isLoadingResults$ = this.store.select(fromStaff.getIsGtStfLoading);
