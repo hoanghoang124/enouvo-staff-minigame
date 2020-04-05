@@ -9,6 +9,7 @@
       type="button"
       (click)="isCollapsed = !isCollapsed"
       [attr.aria-expanded]="!isCollapsed"
+      *ngIf="authService.isAdmin()"
       aria-controls="sidenav-collapse-main"
     >
       <span
@@ -98,8 +99,6 @@
         </a>
         <div ngbDropdownMenu aria-labelledby="navbarDropdown">
           <a
-            routerLinkActive="active"
-            [routerLink]="['/user-profile']"
             class="dropdown-item"
             *ngIf="authService.isLoggedIn()"
             aria-disabled="true"

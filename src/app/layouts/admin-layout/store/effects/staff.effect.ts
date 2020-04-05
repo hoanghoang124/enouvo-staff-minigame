@@ -36,7 +36,7 @@ export class StaffEffects {
     switchMap(id => {
       return this.staffservice.getStaff(id).pipe(
         map(res => {
-          return new StaffActions.GetStaffSuccess(res);
+          return new StaffActions.GetStaffSuccess(res.profile);
         }),
         catchError(res => [new StaffActions.GetStaffFail(res.error.message)])
       );
