@@ -22,7 +22,13 @@
           <div class="col-lg-3 order-lg-2">
             <div class="card-profile-image">
               <a href="javascript:void(0)">
-                <img src="{{ staff.avatarUrl }}" class="rounded-circle" />
+                <img
+                  src="{{
+                    staff.avatarUrl ||
+                      '../../../../../../assets/img/avatar/IMG_1171.JPG'
+                  }}"
+                  class="rounded-circle"
+                />
               </a>
             </div>
           </div>
