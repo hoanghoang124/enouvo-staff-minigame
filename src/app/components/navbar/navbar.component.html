@@ -9,6 +9,7 @@
       type="button"
       (click)="isCollapsed = !isCollapsed"
       [attr.aria-expanded]="!isCollapsed"
+      *ngIf="authService.isAdmin()"
       aria-controls="sidenav-collapse-main"
     >
       <span
@@ -97,18 +98,6 @@
           </div>
         </a>
         <div ngbDropdownMenu aria-labelledby="navbarDropdown">
-          <a
-            routerLinkActive="active"
-            [routerLink]="['/user-profile']"
-            class="dropdown-item"
-            *ngIf="authService.isLoggedIn()"
-            aria-disabled="true"
-          >
-            <i class="ni ni-single-02"></i>
-            <span>My profile</span>
-          </a>
-
-          <div class="dropdown-divider"></div>
           <a
             class="dropdown-item"
             (click)="openChangePasswordDialog()"

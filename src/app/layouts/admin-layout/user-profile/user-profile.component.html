@@ -1,24 +1,22 @@
 <div
   *ngIf="staff$ | async; let staff"
   class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
-  style="min-height: 600px; background-image: url(); background-size: cover; background-position: center top;"
 >
   <!-- Mask -->
-  <span class="mask bg-gradient-danger opacity-8"></span>
   <!-- Header container -->
   <div class="container-fluid d-flex align-items-center">
-    <div class="row">
+    <!-- <div class="row">
       <div class="col-lg-7 col-md-10">
         <h1 class="display-2 text-white">
           Hello, this is <strong>{{ staff.lastName }}</strong> home
         </h1>
       </div>
-    </div>
+    </div> -->
   </div>
 </div>
 <div class="container-fluid mt--7" *ngIf="staff$ | async; let staff">
   <div class="row">
-    <div class="col-xl-12 order-xl-2 mb-5 mb-xl-0">
+    <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
       <div class="card card-profile shadow">
         <div class="row justify-content-center">
           <div class="col-lg-3 order-lg-2">
@@ -30,16 +28,7 @@
           </div>
         </div>
         <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
-          <div class="d-flex justify-content-between">
-            <a href="javascript:void(0)" class="btn btn-sm btn-info mr-4"
-              >Connect</a
-            >
-            <a
-              href="javascript:void(0)"
-              class="btn btn-sm btn-default float-right"
-              >Message</a
-            >
-          </div>
+          <div class="d-flex justify-content-between"></div>
         </div>
         <div class="card-body pt-0 pt-md-4">
           <div class="row">
@@ -48,32 +37,213 @@
                 class="card-profile-stats d-flex justify-content-center mt-md-5"
               >
                 <div>
-                  <span class="heading">{{ staff.email }}</span>
-                  <span class="description">Email</span>
-                </div>
-                <div>
-                  <span class="heading">{{ staff.phone }}</span>
-                  <span class="description">Phone</span>
+                  <span class="heading"
+                    >{{ staff.firstName }} {{ staff.lastName }}</span
+                  >
+                  <span class="description">{{
+                    staff.position || 'Position'
+                  }}</span>
                 </div>
               </div>
             </div>
           </div>
           <div class="text-center">
-            <h3>
-              {{ staff.firstName }} {{ staff.middleName }} {{ staff.lastName }}
-            </h3>
+            <h3 style="text-transform: capitalize;">{{ staff.addressCity }}</h3>
             <div class="h5 font-weight-300">
-              <i class="ni location_pin mr-2"></i>{{ staff.addressStreet }},
-              {{ staff.addressCity }}
-            </div>
-            <div class="h5 mt-4">
-              <i class="ni business_briefcase-24 mr-2"></i>{{ staff.position }}
+              <i
+                class="ni location_pin mr-2"
+                style="text-transform: capitalize;"
+              >
+                {{ staff.addressStreet }}</i
+              >
             </div>
             <hr class="my-4" />
             <p>
-              {{ staff.quote }}
+              {{ staff.quote || 'quote' }}
             </p>
           </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-8 order-xl-1">
+      <div class="card bg-secondary shadow">
+        <div class="card-header bg-white border-0">
+          <div class="row align-items-center">
+            <div class="col-8">
+              <h3 class="mb-0">Employee Profile</h3>
+            </div>
+            <div class="col-4 text-right">
+              <!-- <a href="#!" class="btn btn-sm btn-primary">Edit</a> -->
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <h6 class="heading-small text-muted mb-4">User information</h6>
+          <div class="pl-lg-4">
+            <div class="row">
+              <div class="col-lg-6">
+                <label class="form-control-label" for="firstName"
+                  >First Name</label
+                >
+                <input
+                  type="text"
+                  id="firstName"
+                  class="form-control form-control-alternative"
+                  placeholder="{{ staff.firstName }}"
+                  readonly
+                />
+              </div>
+              <div class="col-lg-6">
+                <label class="form-control-label" for="middleName"
+                  >Middle Name</label
+                >
+                <input
+                  type="text"
+                  id="middleName"
+                  class="form-control form-control-alternative"
+                  placeholder="{{ staff.middleName }}"
+                  readonly
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6">
+                <label class="form-control-label" for="lastName"
+                  >Last Name</label
+                >
+                <input
+                  type="text"
+                  id="lastName"
+                  class="form-control form-control-alternative"
+                  placeholder="{{ staff.lastName }}"
+                  readonly
+                />
+              </div>
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label class="form-control-label" for="birthday"
+                    >Date of Birth</label
+                  >
+                  <div class="input-group input-group-alternative">
+                    <!-- <div class="input-group-prepend">
+                          <span class="input-group-text"
+                            ><i class="ni ni-calendar-grid-58"></i
+                          ></span>
+                        </div> -->
+                    <input
+                      type="datetime"
+                      class="form-control form-control-alternative"
+                      placeholder="{{ staff.birthday }}"
+                      id="birthday"
+                      readonly
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr class="my-4" />
+          <!-- Address -->
+          <h6 class="heading-small text-muted mb-4">Contact information</h6>
+          <div class="pl-lg-4">
+            <div class="row">
+              <div class="col-lg-4">
+                <label class="form-control-label" for="email">Email</label>
+                <input
+                  type="text"
+                  id="email"
+                  class="form-control form-control-alternative"
+                  placeholder="{{ staff.email }}"
+                  readonly
+                />
+              </div>
+              <div class="col-lg-4">
+                <label class="form-control-label" for="phone">Telephone</label>
+                <input
+                  type="text"
+                  id="phone"
+                  class="form-control form-control-alternative"
+                  placeholder="{{ staff.phone }}"
+                  readonly
+                />
+              </div>
+              <div class="col-lg-4">
+                <label class="form-control-label" for="roleId">Position</label>
+                <input
+                  type="text"
+                  id="roleId"
+                  class="form-control form-control-alternative"
+                  placeholder="{{ staff.position }}"
+                  readonly
+                />
+                <!-- <select
+                      class="form-control"
+                      data-toggle="select"
+                      title="Simple select"
+                      data-placeholder="Select a state"
+                      formControlName="roleId"
+                    >
+                      <option selected value="">Select Position</option>
+                      <option
+                        *ngFor="let positionType of positionTypes"
+                        [value]="positionType.roleId"
+                        >{{ positionType.roleName }}
+                      </option>
+                    </select> -->
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-4">
+                <label class="form-control-label" for="addressCity">City</label>
+                <input
+                  type="text"
+                  id="addressCity"
+                  class="form-control form-control-alternative"
+                  placeholder="{{ staff.addressCity }}"
+                  readonly
+                />
+                <!-- <select
+                      class="form-control"
+                      data-toggle="select"
+                      title="Simple select"
+                      data-live-search="true"
+                      data-live-search-placeholder="Search ..."
+                      formControlName="addressCity"
+                    >
+                      <option selected value="">Select City</option>
+
+                      <option *ngFor="let item of city">{{ item }}</option>
+                    </select> -->
+              </div>
+              <div class="col-lg-8">
+                <label class="form-control-label" for="addressStreet"
+                  >Address</label
+                >
+                <input
+                  id="addressStreet"
+                  class="form-control form-control-alternative"
+                  placeholder="{{ staff.addressStreet }}"
+                  type="text"
+                  readonly
+                />
+              </div>
+            </div>
+          </div>
+          <!-- <hr class="my-4" /> -->
+          <!-- Description -->
+          <!-- <h6 class="heading-small text-muted mb-4">About me</h6>
+            <div class="pl-lg-4">
+              <div class="form-group">
+                <label>About Me</label>
+                <textarea
+                  rows="4"
+                  class="form-control form-control-alternative"
+                  placeholder="A few words about you ..."
+                >
+A beautiful Dashboard for Bootstrap 4. It is Free and Open Source.</textarea
+                >
+              </div>
+            </div> -->
         </div>
       </div>
     </div>

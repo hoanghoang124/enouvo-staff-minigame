@@ -39,7 +39,7 @@ export class ErrorInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       catchError((err: any) => {
         if (err instanceof HttpErrorResponse && err.status === 401) {
-          this.router.navigate(['login']);
+          this.router.navigate(['dashboard']);
         }
         return throwError(err);
       })

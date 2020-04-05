@@ -19,7 +19,7 @@ export const AdminLayoutRoutes: Routes = [
     component: UserProfileComponent,
     canActivate: [AdminGuard]
   },
-
+  { path: 'user-site', component: UserProfileComponent },
   { path: 'tables', component: TablesComponent, canActivate: [AdminGuard] },
   { path: 'upload', component: UploadCSVComponent, canActivate: [AdminGuard] },
 

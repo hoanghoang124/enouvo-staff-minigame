@@ -1,19 +1,19 @@
-import { Component, OnInit } from "@angular/core";
-import { Store } from "@ngrx/store";
-import { Observable } from "rxjs";
-import { State } from "../store/reducers";
-import * as fromStaff from "../store";
-import { NgbDateStruct } from "@ng-bootstrap/ng-bootstrap";
-import { FormGroup } from "@angular/forms";
-import { PositionTypes } from "../../auth-layout/models/role.model";
-import { Cities } from "../../auth-layout/models/city.model";
-import * as fromAuthSelector from "../../auth-layout/store/auth.selector";
-import { DialogService } from "../services/dialog.service";
+import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { State } from '../store/reducers';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { FormGroup } from '@angular/forms';
+import { PositionTypes } from '../../auth-layout/models/role.model';
+import { Cities } from '../../auth-layout/models/city.model';
+import { DialogService } from '../services/dialog.service';
+import * as fromAuthSelector from '../../auth-layout/store/auth.selector';
+import * as fromStaff from '../store';
 
 @Component({
-  selector: "app-tables",
-  templateUrl: "./tables.component.html",
-  styleUrls: ["./tables.component.scss"],
+  selector: 'app-tables',
+  templateUrl: './tables.component.html',
+  styleUrls: ['./tables.component.scss']
 })
 export class TablesComponent implements OnInit {
   staffs$: Observable<any>;
@@ -52,11 +52,11 @@ export class TablesComponent implements OnInit {
   public openConfirmationDialog(userId) {
     this.dialogService
       .confirm(
-        "Please confirm...",
-        "Are you sure you want to reset password for this account? This action can not be undone.",
+        'Please confirm...',
+        'Are you sure you want to reset password for this account? This action can not be undone.',
         userId
       )
-      .then((confirmed) => console.log("User confirmed:", confirmed))
-      .catch(() => console.log("User dismissed the dialog"));
+      .then(confirmed => console.log('User confirmed:', confirmed))
+      .catch(() => console.log('User dismissed the dialog'));
   }
 }
