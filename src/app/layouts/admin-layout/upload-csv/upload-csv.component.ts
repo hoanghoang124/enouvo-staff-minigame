@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { HttpHeaders } from '@angular/common/http';
 import { UploadService } from './upload.service';
 
 @Component({
@@ -8,9 +7,6 @@ import { UploadService } from './upload.service';
   styleUrls: ['./upload-csv.component.scss']
 })
 export class UploadCSVComponent implements OnInit {
-  headers = new HttpHeaders({
-    Authorization: `Bearer ${localStorage.getItem('token')}`
-  });
   @ViewChild('file') file;
   canBeClosed = true;
   primaryButtonText = 'Upload';

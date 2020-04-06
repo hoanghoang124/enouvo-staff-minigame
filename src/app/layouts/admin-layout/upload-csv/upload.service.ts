@@ -35,7 +35,7 @@ export class UploadService {
       // tell it to report the upload progress
       const req = new HttpRequest('POST', url, formData, {
         reportProgress: true,
-        headers: new HttpHeaders('Authorization: `Bearer ${token}`')
+        headers: new HttpHeaders('Authorization: `Bearer ${token}`', 'Content-Type':'multipart/form-data')
       });
 
       // create a new progress-subject for every file
