@@ -11,7 +11,9 @@ import { Observable } from 'rxjs/Observable';
 
 const url =
   'https://training-management-dev.herokuapp.com/api/v1/auth/register-by-importing-csv-file';
-
+const header = new HttpHeaders();
+header.set('Authorization', `Bearer ${localStorage.getItem('token')}`);
+// header.set('Content-Type', 'multipart/form-data');
 @Injectable()
 export class UploadService {
   constructor(private http: HttpClient) {}
@@ -29,15 +31,14 @@ export class UploadService {
     files.forEach(file => {
       // create a new multipart-form for every file
       const formData: FormData = new FormData();
-      formData.append('file', file, file.name);
+      formData.append('file', file);
 
       // create a http-post request and pass the form
       // tell it to report the upload progress
       const req = new HttpRequest('POST', url, formData, {
         reportProgress: true,
-        headers: new HttpHeaders('Authorization: `Bearer ${token}`')
+        headers: header
       });
-
       // create a new progress-subject for every file
       const progress = new Subject<number>();
 
