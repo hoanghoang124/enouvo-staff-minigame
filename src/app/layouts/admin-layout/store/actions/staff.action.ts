@@ -24,7 +24,9 @@ export enum StaffActionsType {
 
   UPLOAD_IMAGE = '[Image] Upload Image',
   UPLOAD_IMAGE_SUCCESS = '[Image] Upload Image Success',
-  UPLOAD_IMAGE_FAILURE = '[Image] Upload Image Failure'
+  UPLOAD_IMAGE_FAILURE = '[Image] Upload Image Failure',
+
+  GET_STAFFS_QUERY = '[Staff] Get Staff by Query'
 }
 
 export class GetStaffs implements Action {
@@ -33,7 +35,7 @@ export class GetStaffs implements Action {
 
 export class GetStaffsSuccess implements Action {
   public readonly type = StaffActionsType.GET_STAFFS_SUCCESS;
-  constructor(public payload: Staff[]) {}
+  constructor(public payload: any) {}
 }
 
 export class GetStaffsFail implements Action {

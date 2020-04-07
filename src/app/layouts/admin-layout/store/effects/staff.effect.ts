@@ -15,6 +15,13 @@ export class StaffEffects {
     private staffservice: StaffService,
     private route: Router
   ) {}
+  @Effect()
+  getStaffsQuery$ = this.actions$.pipe(
+    ofType(StaffActionsType.GET_STAFFS_SUCCESS),
+    switchMap(() => {
+      return this.staffservice.getStaffs();
+    })
+  );
 
   @Effect()
   getAllStaffs$ = this.actions$.pipe(
