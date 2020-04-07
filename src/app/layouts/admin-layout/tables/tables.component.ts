@@ -32,18 +32,18 @@ export class TablesComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    //get staffs from api
+    // get staffs from api
     this.store.dispatch(new fromStaff.GetStaffs());
     this.staffs$ = this.store.select(fromStaff.getAllStaffs);
     this.errorMessage$ = this.store.select(fromStaff.getErrorGtAllStfMessage);
     this.isStaffLoading$ = this.store.select(fromStaff.getIsGtAllStfLoading);
 
-    //get error message response from API
+    // get error message response from API
     this.errorMessage$ = this.store.select(
       fromAuthSelector.getErrorRsPswMessage
     );
 
-    //get loading status
+    // get loading status
     this.isLoadingResults$ = this.store.select(
       fromAuthSelector.getIsCrtAccLoading
     );
