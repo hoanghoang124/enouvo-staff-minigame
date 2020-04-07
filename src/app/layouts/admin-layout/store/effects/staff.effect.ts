@@ -87,4 +87,19 @@ export class StaffEffects {
       );
     })
   );
+
+  @Effect()
+  uploadCSV$ = this.actions$.pipe(
+    ofType(StaffActionsType.UPLOAD_CSV),
+    map((action: StaffActions.UploadCSV) => action.payload),
+    switchMap(file => {
+      console.log(file);
+      return this.staffservice.uploadCSV(file).pipe(
+        map(() => {
+          return new StaffActions.UploadCSVSuccess();
+        }),
+        catchError(() => [new StaffActions.UploadCSVFailure()])
+      );
+    })
+  );
 }
