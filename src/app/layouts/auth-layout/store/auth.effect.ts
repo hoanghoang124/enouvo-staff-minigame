@@ -25,6 +25,7 @@ export class AuthEffects {
       return this.authService.logIn(payload).pipe(
         map(user => {
           if (user.shouldUserChangePassword) {
+            this.router.navigateByUrl('/dashboard');
             this.dialogService.changePassword('Change Password Form');
           } else {
             this.router.navigateByUrl('/dashboard');
