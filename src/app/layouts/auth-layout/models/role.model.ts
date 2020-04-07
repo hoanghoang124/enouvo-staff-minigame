@@ -1,6 +1,7 @@
 export enum RoleId {
   User = 'user',
-  Admin = 'humanResource'
+  HR = 'humanResource',
+  PM = 'projectManager'
 }
 export const PositionTypes = [
   { roleId: 1, roleName: 'Human Resource' },

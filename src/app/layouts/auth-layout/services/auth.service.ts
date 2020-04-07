@@ -17,7 +17,10 @@ export class AuthService {
 
   isAdmin(): boolean {
     this.role = localStorage.getItem('role');
-    if (this.role === this.roles.Admin && this.isLoggedIn()) {
+    if (
+      (this.role === this.roles.HR || this.role === this.roles.PM) &&
+      this.isLoggedIn()
+    ) {
       return true;
     } else {
       return false;

@@ -3,17 +3,14 @@ import {
   HttpClient,
   HttpRequest,
   HttpEventType,
-  HttpResponse,
-  HttpHeaders
+  HttpResponse
 } from '@angular/common/http';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 
 const url =
   'https://training-management-dev.herokuapp.com/api/v1/auth/register-by-importing-csv-file';
-const header = new HttpHeaders();
-header.set('Authorization', `Bearer ${localStorage.getItem('token')}`);
-// header.set('Content-Type', 'multipart/form-data');
+
 @Injectable()
 export class UploadService {
   constructor(private http: HttpClient) {}
@@ -36,9 +33,9 @@ export class UploadService {
       // create a http-post request and pass the form
       // tell it to report the upload progress
       const req = new HttpRequest('POST', url, formData, {
-        reportProgress: true,
-        headers: header
+        reportProgress: true
       });
+
       // create a new progress-subject for every file
       const progress = new Subject<number>();
 
