@@ -37,7 +37,10 @@ export class NavbarComponent implements OnInit {
 
   public openChangePasswordDialog() {
     this.dialogService
-      .changePassword('Change Password Form')
+      .changePassword(
+        'Change Password Form',
+        'Tips: A secure enough password can protect your privacy.'
+      )
       .then(event => console.log('Execute changing password:', event))
       .catch(() => console.log('User dismissed the dialog'));
   }

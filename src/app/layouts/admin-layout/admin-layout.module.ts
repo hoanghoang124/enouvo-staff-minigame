@@ -22,6 +22,7 @@ import { ConfirmResetPasswordModalComponent } from "./modal/confirm-reset-passwo
 import { UploadCsvModalComponent } from "./modal/upload-csv-modal/upload-csv-modal.component";
 import { ChangePasswordModalComponent } from "./modal/change-password-modal/change-password-modal.component";
 import { dialogs } from "./modal";
+import { CampaignComponent } from './campaign/campaign.component';
 
 // import { ToastrModule } from 'ngx-toastr';
 
@@ -50,6 +51,7 @@ import { dialogs } from "./modal";
     ConfirmResetPasswordModalComponent,
     UploadCsvModalComponent,
     ChangePasswordModalComponent,
+    CampaignComponent,
   ],
 })
 export class AdminLayoutModule {}

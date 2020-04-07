@@ -1,3 +1,4 @@
+import { CampaignComponent } from './campaign/campaign.component';
 import { Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CreateAccountComponent } from './create-account/create-account.component';
@@ -19,8 +20,8 @@ export const AdminLayoutRoutes: Routes = [
     component: UserProfileComponent,
     canActivate: [AdminGuard]
   },
-  { path: 'user-site', component: UserProfileComponent },
   { path: 'tables', component: TablesComponent, canActivate: [AdminGuard] },
+  { path: 'campaign', component: CampaignComponent, canActivate: [AdminGuard] },
   { path: 'upload', component: UploadCSVComponent, canActivate: [AdminGuard] },
 
   {

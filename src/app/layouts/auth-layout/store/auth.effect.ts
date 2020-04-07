@@ -26,7 +26,10 @@ export class AuthEffects {
         map(user => {
           if (user.shouldUserChangePassword) {
             this.router.navigateByUrl('/dashboard');
-            this.dialogService.changePassword('Change Password Form');
+            this.dialogService.changePassword(
+              'Change Password Form',
+              'Login successful, update your password now!'
+            );
           } else {
             this.router.navigateByUrl('/dashboard');
           }

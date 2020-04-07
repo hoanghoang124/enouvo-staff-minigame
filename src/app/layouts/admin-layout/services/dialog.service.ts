@@ -31,6 +31,7 @@ export class DialogService {
 
   public changePassword(
     title: string,
+    message: string,
     btnOkText: string = 'Submit',
     btnCancelText: string = 'Cancel',
     dialogSize: 'sm' | 'md' | 'lg' = 'md'
@@ -39,6 +40,7 @@ export class DialogService {
       size: dialogSize
     });
     modalRef.componentInstance.title = title;
+    modalRef.componentInstance.message = message;
     modalRef.componentInstance.btnOkText = btnOkText;
     modalRef.componentInstance.btnCancelText = btnCancelText;
 
