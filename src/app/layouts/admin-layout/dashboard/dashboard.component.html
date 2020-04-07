@@ -1,3 +1,5 @@
+<app-loading *ngIf="isStaffLoading$ | async"></app-loading>
+
 <div class="header  pb-8 pt-5 pt-md-8">
   <div class="container-fluid">
     <div class="header-body">
@@ -11,7 +13,6 @@
       </div> -->
     </div>
   </div>
-  <app-loading *ngIf="isStaffLoading$ | async"></app-loading>
   <div class="container-fluid ">
     <div class="row">
       <div class="card-deck m-4 " *ngFor="let staff of stafflist$ | async">

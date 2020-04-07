@@ -1,16 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { HttpHeaders } from '@angular/common/http';
-import { UploadService } from './upload.service';
-
+import { Store } from '@ngrx/store';
+// import { UploadService } from './upload.service';
+import { State } from '../store/reducers';
+import * as fromStaff from '../store';
 @Component({
   selector: 'app-upload-csv',
   templateUrl: './upload-csv.component.html',
   styleUrls: ['./upload-csv.component.scss']
 })
 export class UploadCSVComponent implements OnInit {
-  headers = new HttpHeaders({
-    Authorization: `Bearer ${localStorage.getItem('token')}`
-  });
   @ViewChild('file') file;
   canBeClosed = true;
   primaryButtonText = 'Upload';
@@ -19,6 +17,10 @@ export class UploadCSVComponent implements OnInit {
   uploadSuccessful = false;
   public files: Set<File> = new Set();
   progress: any;
+
+  constructor(private store: Store<State>) {}
+
+  ngOnInit() {}
 
   addFiles() {
     this.file.nativeElement.click();
@@ -33,13 +35,13 @@ export class UploadCSVComponent implements OnInit {
     }
   }
   closeDialog() {
-    this.progress = this.uploadService.upload(this.files);
-    const allProgressObservables = [];
-    for (const key in this.progress) {
-      allProgressObservables.push(this.progress[key].progress);
-    }
-  }
-  constructor(private uploadService: UploadService) {}
+    console.log(this.files);
+    this.store.dispatch(new fromStaff.UploadCSV(this.files));
+    // this.progress = this.uploadService.upload(this.files);
 
-  ngOnInit() {}
+    // const allProgressObservables = [];
+    // for (const key in this.progress) {
+    //   allProgressObservables.push(this.progress[key].progress);
+    // }
+  }
 }
