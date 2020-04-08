@@ -80,6 +80,9 @@ export class TablesComponent implements OnInit {
       .catch(() => console.log('User dismissed the dialog'));
   }
 
+  openCreateAccountDialog() {
+    this.dialogService.createAccout();
+  }
   // change page size
   // changePageSize(event) {
   //   const limit = parseInt(event.target.value, 10);

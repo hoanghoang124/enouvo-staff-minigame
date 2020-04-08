@@ -16,12 +16,12 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { reducers } from './store/reducers';
 import { effects } from './store/effects';
-import { CreateAccountComponent } from './create-account/create-account.component';
 import { ConfirmResetPasswordModalComponent } from './modal/confirm-reset-password-modal/confirm-reset-password-modal.component';
 import { UploadCsvModalComponent } from './modal/upload-csv-modal/upload-csv-modal.component';
 import { ChangePasswordModalComponent } from './modal/change-password-modal/change-password-modal.component';
 import { dialogs } from './modal';
 import { CampaignComponent } from './campaign/campaign.component';
+import { CreateAccountModalComponent } from './modal/create-account-modal/create-account-modal.component';
 
 // import { ToastrModule } from 'ngx-toastr';
 
@@ -45,11 +45,11 @@ import { CampaignComponent } from './campaign/campaign.component';
     UserProfileComponent,
     TablesComponent,
     IconsComponent,
-    CreateAccountComponent,
     ConfirmResetPasswordModalComponent,
     UploadCsvModalComponent,
     ChangePasswordModalComponent,
-    CampaignComponent
+    CampaignComponent,
+    CreateAccountModalComponent
   ]
 })
 export class AdminLayoutModule {}

@@ -3,6 +3,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmResetPasswordModalComponent } from '../modal/confirm-reset-password-modal/confirm-reset-password-modal.component';
 import { ChangePasswordModalComponent } from '../modal/change-password-modal/change-password-modal.component';
 import { UploadCsvModalComponent } from '../modal/upload-csv-modal/upload-csv-modal.component';
+import { CreateAccountModalComponent } from '../modal/create-account-modal/create-account-modal.component';
 @Injectable({
   providedIn: 'root'
 })
@@ -64,6 +65,16 @@ export class DialogService {
     modalRef.componentInstance.note = note;
     modalRef.componentInstance.btnOkText = btnOkText;
     modalRef.componentInstance.btnCancelText = btnCancelText;
+
+    return modalRef.result;
+  }
+
+  public createAccout(
+    dialogSize: 'sm' | 'md' | 'lg' | 'xl' = 'lg'
+  ): Promise<boolean> {
+    const modalRef = this.modalService.open(CreateAccountModalComponent, {
+      size: dialogSize
+    });
 
     return modalRef.result;
   }
