@@ -37,7 +37,7 @@ export class GetStaffs implements Action {
 
 export class GetStaffsSuccess implements Action {
   public readonly type = StaffActionsType.GET_STAFFS_SUCCESS;
-  constructor(public payload: Staff[]) {}
+  constructor(public payload: any) {}
 }
 
 export class GetStaffsFail implements Action {

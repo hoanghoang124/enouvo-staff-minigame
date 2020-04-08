@@ -13,6 +13,11 @@ export class StaffService {
     'https://training-management-dev.herokuapp.com/api/v1/auth/register-by-importing-csv-file';
   constructor(private http: HttpClient) {}
 
+  getStaffsQuery(params?: any): Observable<any> {
+    const url = `${this.BASE_URL}/v1/profiles`;
+    return this.http.get<any>(url, params);
+  }
+
   getStaffs(): Observable<any> {
     const url = `${this.BASE_URL}/v1/profiles`;
     return this.http.get<Staff>(url);
