@@ -53,8 +53,8 @@ export class DialogService {
     message: string,
     note: string,
     btnOkText: string = 'Upload',
-    btnCancelText: string = 'Cancel',
-    dialogSize: 'sm' | 'md' | 'lg' = 'md'
+    btnCancelText: string = 'Close',
+    dialogSize: 'sm' | 'md' | 'lg' = 'lg'
   ): Promise<boolean> {
     const modalRef = this.modalService.open(UploadCsvModalComponent, {
       size: dialogSize

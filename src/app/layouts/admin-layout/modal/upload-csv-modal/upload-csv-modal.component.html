@@ -21,12 +21,18 @@
     <button class="btn btn-primary" (click)="addFiles()">
       Add Files
     </button>
+    <i>{{ uploadingProgress }}</i>
   </div>
   <div style="float: inline-end;">
     <button type="button" class="btn btn-secondary" (click)="decline()">
       {{ btnCancelText }}
     </button>
-    <button type="button" class="btn btn-success" (click)="accept()">
+    <button
+      type="button"
+      class="btn btn-success"
+      [disabled]="uploadSuccessful"
+      (click)="accept()"
+    >
       {{ btnOkText }}
     </button>
   </div>

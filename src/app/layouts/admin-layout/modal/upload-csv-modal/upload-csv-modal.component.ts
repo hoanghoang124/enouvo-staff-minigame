@@ -1,9 +1,13 @@
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { State } from 'src/app/layouts/auth-layout/store';
-import { UploadService } from '../../services/upload.service';
+import {
+  HttpClient,
+  HttpEventType,
+  HttpRequest,
+  HttpResponse
+} from '@angular/common/http';
 
 @Component({
   selector: 'app-upload-csv-modal',
@@ -18,15 +22,15 @@ export class UploadCsvModalComponent implements OnInit {
   @Input() btnOkText: string;
   @Input() btnCancelText: string;
 
-  isLoadingResult$: Observable<boolean>;
-  canBeClosed = true;
-  showCancelButton = true;
+  url =
+    'https://training-management-dev.herokuapp.com/api/v1/auth/register-by-importing-csv-file';
+  progress: any;
+  uploadingProgress: number;
   uploadSuccessful = false;
   public files: Set<File> = new Set();
-  progress: any;
 
   constructor(
-    private uploadService: UploadService,
+    private http: HttpClient,
     private store: Store<State>,
     private activeModal: NgbActiveModal
   ) {}
@@ -48,17 +52,34 @@ export class UploadCsvModalComponent implements OnInit {
     }
   }
 
+  private upload(files: Set<File>) {
+    files.forEach(file => {
+      const formData: FormData = new FormData();
+      formData.append('file', file);
+      const req = new HttpRequest('POST', this.url, formData, {
+        reportProgress: true
+      });
+      // send the http-request and subscribe for progress-updates
+      this.http.request(req).subscribe(event => {
+        if (event.type === HttpEventType.UploadProgress) {
+          const percentDone = Math.round((100 * event.loaded) / event.total);
+          return (this.uploadingProgress = percentDone);
+        } else if (event instanceof HttpResponse) {
+          this.uploadSuccessful = true;
+        }
+      });
+    });
+  }
   public decline() {
-    this.activeModal.close(false);
+    this.activeModal.close(true);
   }
 
   public accept() {
-    this.progress = this.uploadService.upload(this.files);
+    this.progress = this.upload(this.files);
     const allProgressObservables = [];
     for (const key in this.progress) {
       allProgressObservables.push(this.progress[key].progress);
     }
-    this.activeModal.close(true);
   }
 
   public dismiss() {
