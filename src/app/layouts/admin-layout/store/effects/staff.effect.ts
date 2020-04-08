@@ -5,6 +5,7 @@ import * as StaffActions from '../actions/staff.action';
 import { map, catchError, switchMap } from 'rxjs/operators';
 import { StaffService } from '../../services/staff.service';
 import { Router } from '@angular/router';
+// import { of } from 'rxjs';
 
 const { StaffActionsType } = StaffActions;
 
@@ -15,13 +16,18 @@ export class StaffEffects {
     private staffservice: StaffService,
     private route: Router
   ) {}
-  @Effect()
-  getStaffsQuery$ = this.actions$.pipe(
-    ofType(StaffActionsType.GET_STAFFS_SUCCESS),
-    switchMap(() => {
-      return this.staffservice.getStaffs();
-    })
-  );
+  // @Effect()
+  // getStaffsQuery$ = this.actions$.pipe(
+  //   ofType(StaffActionsType.GET_STAFFS_SUCCESS),
+  //   switchMap(action => {
+  //     return this.staffservice.getStaffsQuery(action.payload).pipe(
+  //       map(res => new StaffActions.GetStaffsQuerySuccess(res)),
+  //       catchError(() =>
+  //         of(new StaffActions.GetStaffsQueryFail())
+  //       )
+  //     );
+  //   })
+  // );
 
   @Effect()
   getAllStaffs$ = this.actions$.pipe(

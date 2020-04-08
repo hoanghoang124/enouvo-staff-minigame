@@ -6,6 +6,10 @@ export enum StaffActionsType {
   GET_STAFFS_SUCCESS = '[Staff] Get Staffs Success',
   GET_STAFFS_FAILURE = '[Staff] Get Staffs Fail',
 
+  GET_STAFFS_QUERY = '[Staff] Get Staffs From Query',
+  GET_STAFFS_QUERY_SUCCESS = '[Staff] Get Staffs From Query Success',
+  GET_STAFFS_QUERY_FAILURE = '[Staff] Get Staffs From Query Fail',
+
   GET_STAFF = '[Staff] Get Staff',
   GET_STAFF_SUCCESS = '[Staff] Get Staff Success',
   GET_STAFF_FAILURE = '[Staff] Get Staff Fail',
@@ -43,6 +47,18 @@ export class GetStaffsSuccess implements Action {
 export class GetStaffsFail implements Action {
   public readonly type = StaffActionsType.GET_STAFFS_FAILURE;
   constructor(public payload: Error) {}
+}
+
+export class GetStaffsQuery implements Action {
+  readonly type = StaffActionsType.GET_STAFFS_QUERY;
+  constructor(public payload: any) {}
+}
+export class GetStaffsQuerySuccess implements Action {
+  readonly type = StaffActionsType.GET_STAFFS_QUERY_SUCCESS;
+  constructor(public payload: any) {}
+}
+export class GetStaffsQueryFail implements Action {
+  readonly type = StaffActionsType.GET_STAFFS_QUERY_FAILURE;
 }
 
 export class GetStaff implements Action {
@@ -122,6 +138,9 @@ export type StaffActions =
   | GetStaffs
   | GetStaffsSuccess
   | GetStaffsFail
+  | GetStaffsQuery
+  | GetStaffsQuerySuccess
+  | GetStaffsQueryFail
   | DeleteStaff
   | DeleteStaffSuccess
   | DeleteStaffFail
