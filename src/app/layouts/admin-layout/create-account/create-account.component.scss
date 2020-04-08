@@ -2,16 +2,12 @@
   justify-content: center;
 }
 
-.card-header,
+.card-header {
+  border-radius: inherit;
+  background-color: #ffffff;
+}
+
 .card-body {
   border-radius: inherit;
-  background-color: #fefdf8;
-}
-
-.card-header {
-  padding-bottom: 0;
-}
-
-.card-body {
-  padding-top: 0;
+  background-color: #f7fafc;
 }
