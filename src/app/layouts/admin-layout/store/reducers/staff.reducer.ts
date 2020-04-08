@@ -5,6 +5,7 @@ import * as _ from 'lodash';
 export interface StaffState {
   staffs: Staff[];
   selectedStaff: Staff;
+  total: number;
   isGtStfLoading: boolean;
   isGtAllStfLoading: boolean;
   isUpdStfLoading: boolean;
@@ -18,6 +19,7 @@ export interface StaffState {
 export const initialState: StaffState = {
   staffs: [],
   selectedStaff: null,
+  total: 0,
   isGtStfLoading: false,
   isGtAllStfLoading: false,
   isUpdStfLoading: false,
@@ -50,6 +52,20 @@ export function staffReducer(
         ...state,
         isGtAllStfLoading: false,
         errorGtAllStfMessage: action.payload
+      };
+    case staffActions.StaffActionsType.GET_STAFFS_QUERY:
+      return { ...state, isGtAllStfLoading: true, selectedStaff: null };
+    case staffActions.StaffActionsType.GET_STAFFS_QUERY_SUCCESS:
+      return {
+        ...state,
+        staffs: action.payload,
+        total: staffActions.GetStaffsQuery.length + 1,
+        isGtAllStfLoading: false
+      };
+    case staffActions.StaffActionsType.GET_STAFFS_QUERY_FAILURE:
+      return {
+        ...state,
+        isGtAllStfLoading: false
       };
     case staffActions.StaffActionsType.GET_STAFF:
       return {

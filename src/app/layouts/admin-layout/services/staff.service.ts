@@ -15,7 +15,7 @@ export class StaffService {
 
   getStaffsQuery(params?: any): Observable<any> {
     const url = `${this.BASE_URL}/v1/profiles`;
-    return this.http.get<any>(url, params);
+    return this.http.get<Staff>(url, params);
   }
 
   getStaffs(): Observable<any> {

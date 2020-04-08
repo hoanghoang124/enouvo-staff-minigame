@@ -38,8 +38,8 @@ export class TablesComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.tableQuery = this.defaultQuery;
-    this.fetchTableData(this.tableQuery);
+    // this.tableQuery = this.defaultQuery;
+    // this.fetchTableData(this.tableQuery);
 
     // get staffs from api
     this.store.dispatch(new fromStaff.GetStaffs());
@@ -70,21 +70,21 @@ export class TablesComponent implements OnInit {
   }
 
   // change page size
-  changePageSize(event) {
-    const limit = parseInt(event.target.value, 10);
-    this.tableQuery = { ...this.tableQuery, limit };
-    this.fetchTableData(this.tableQuery);
-  }
+  // changePageSize(event) {
+  //   const limit = parseInt(event.target.value, 10);
+  //   this.tableQuery = { ...this.tableQuery, limit };
+  //   this.fetchTableData(this.tableQuery);
+  // }
 
   // change page
-  changePage(event) {
-    this.tableQuery = { ...this.tableQuery, offset: event };
-    this.fetchTableData({ ...this.tableQuery, offset: event });
-  }
+  // changePage(event) {
+  //   this.tableQuery = { ...this.tableQuery, offset: event };
+  //   this.fetchTableData({ ...this.tableQuery, offset: event });
+  // }
 
   // fetch table data with query
-  fetchTableData(query: tableQuery) {
-    query = { ...query, offset: (query.offset - 1) * query.limit };
-    this.store.dispatch(new fromStaff.GetStaffs(query));
-  }
+  // fetchTableData(query: tableQuery) {
+  //   query = { ...query, offset: (query.offset - 1) * query.limit };
+  //   this.store.dispatch(new fromStaff.GetStaffs(query));
+  // }
 }

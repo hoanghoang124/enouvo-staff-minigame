@@ -29,7 +29,7 @@ export class UploadCSVComponent implements OnInit {
   onFilesAdded() {
     const files: { [key: string]: File } = this.file.nativeElement.files;
     for (const key in files) {
-      if (!isNaN(parseInt(key))) {
+      if (!isNaN(Number(key))) {
         this.files.add(files[key]);
       }
     }
