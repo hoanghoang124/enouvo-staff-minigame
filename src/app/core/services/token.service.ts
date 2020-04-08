@@ -22,7 +22,7 @@ export class TokenInterceptor implements HttpInterceptor {
     const token = this.authService.isLoggedIn();
     request = request.clone({
       setHeaders: {
-        Authorization: `Bearer ${token}`
+        Authorization: token
       }
     });
     return next.handle(request);
