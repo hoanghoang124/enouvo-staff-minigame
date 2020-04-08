@@ -58,6 +58,17 @@ export class TablesComponent implements OnInit {
     );
   }
 
+  openUploadCSVFileDialog() {
+    this.dialogService
+      .uploadCSVFile(
+        'Register staff by CSV',
+        'Register many staffs as the same time by import CSV file.',
+        'Note: Only accecpt .csv'
+      )
+      .then(confirmed => console.log('User comfirmed:', confirmed))
+      .catch(() => console.log('User dimissed the dialog'));
+  }
+
   openConfirmationDialog(userId) {
     this.dialogService
       .confirm(
