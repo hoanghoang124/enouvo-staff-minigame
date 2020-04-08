@@ -28,11 +28,7 @@ export enum StaffActionsType {
 
   UPLOAD_IMAGE = '[Image] Upload Image',
   UPLOAD_IMAGE_SUCCESS = '[Image] Upload Image Success',
-  UPLOAD_IMAGE_FAILURE = '[Image] Upload Image Failure',
-
-  UPLOAD_CSV = '[Staff] Upload CSV',
-  UPLOAD_CSV_SUCCESS = '[Staff] Upload CSV Success',
-  UPLOAD_CSV_FAILURE = '[Staff] Upload CSV Failure'
+  UPLOAD_IMAGE_FAILURE = '[Image] Upload Image Failure'
 }
 
 export class GetStaffs implements Action {
@@ -121,19 +117,6 @@ export class UpdateStaffFail implements Action {
   constructor(public payload: Error) {}
 }
 
-export class UploadCSV implements Action {
-  public readonly type = StaffActionsType.UPLOAD_CSV;
-  constructor(public payload: any) {}
-}
-
-export class UploadCSVSuccess implements Action {
-  public readonly type = StaffActionsType.UPLOAD_CSV_SUCCESS;
-}
-
-export class UploadCSVFailure implements Action {
-  public readonly type = StaffActionsType.UPLOAD_CSV_FAILURE;
-}
-
 export type StaffActions =
   | GetStaffs
   | GetStaffsSuccess
@@ -152,7 +135,4 @@ export type StaffActions =
   | GetStaffFail
   | UpdateStaff
   | UpdateStaffSuccess
-  | UpdateStaffFail
-  | UploadCSV
-  | UploadCSVSuccess
-  | UploadCSVFailure;
+  | UpdateStaffFail;

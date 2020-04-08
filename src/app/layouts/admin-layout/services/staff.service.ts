@@ -9,8 +9,6 @@ import { environment } from 'src/environments/environment';
 })
 export class StaffService {
   private BASE_URL = environment.apiBaseUrl;
-  url =
-    'https://training-management-dev.herokuapp.com/api/v1/auth/register-by-importing-csv-file';
   constructor(private http: HttpClient) {}
 
   getStaffsQuery(params?: any): Observable<any> {
@@ -40,11 +38,5 @@ export class StaffService {
   deleteStaff(id): Observable<any> {
     const url = `${this.BASE_URL}/${id}`;
     return this.http.delete<Staff>(url);
-  }
-
-  public uploadCSV(file): Observable<any> {
-    const param = new FormData();
-    param.append('file', file);
-    return this.http.post<any>(this.url, param);
   }
 }
