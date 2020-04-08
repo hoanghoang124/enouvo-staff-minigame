@@ -36,7 +36,7 @@ export class AuthEffects {
           return new AuthActions.LogInSuccess(user);
         }),
         catchError(res => {
-          return of(new AuthActions.LogInFailure(res.error.message));
+          return of(new AuthActions.LogInFailure(res));
         })
       );
     })
