@@ -22,6 +22,8 @@ import { ChangePasswordModalComponent } from './modal/change-password-modal/chan
 import { dialogs } from './modal';
 import { CampaignComponent } from './campaign/campaign.component';
 import { CreateAccountModalComponent } from './modal/create-account-modal/create-account-modal.component';
+import { CreateCampaignModalComponent } from './modal/create-campaign-modal/create-campaign-modal.component';
+import { UserProfileModalComponent } from './modal/user-profile-modal/user-profile-modal.component';
 
 // import { ToastrModule } from 'ngx-toastr';
 
@@ -49,7 +51,9 @@ import { CreateAccountModalComponent } from './modal/create-account-modal/create
     UploadCsvModalComponent,
     ChangePasswordModalComponent,
     CampaignComponent,
-    CreateAccountModalComponent
+    CreateAccountModalComponent,
+    CreateCampaignModalComponent,
+    UserProfileModalComponent
   ]
 })
 export class AdminLayoutModule {}

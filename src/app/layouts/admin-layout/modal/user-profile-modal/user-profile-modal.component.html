@@ -1,0 +1,163 @@
+<div class="modal-header">
+  <h1 class="modal-title">Employee Profile</h1>
+  <button type="button" class="close" aria-label="Close" (click)="dismiss()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="row" *ngIf="staff$ | async; let staff">
+    <div class="col-xl-12 order-xl-1">
+      <div class="card-body">
+        <h6 class="heading-small text-muted mb-4">User information</h6>
+        <div class="pl-lg-4">
+          <div class="row">
+            <div class="col-lg-6">
+              <label class="form-control-label" for="firstName"
+                >First Name</label
+              >
+              <input
+                type="text"
+                id="firstName"
+                class="form-control form-control-alternative"
+                placeholder="{{ staff.firstName }}"
+                style="text-transform: capitalize;"
+                aria-readonly="true"
+                disabled
+              />
+            </div>
+            <div class="col-lg-6">
+              <label class="form-control-label" for="middleName"
+                >Middle Name</label
+              >
+              <input
+                type="text"
+                id="middleName"
+                class="form-control form-control-alternative"
+                placeholder="{{ staff.middleName }}"
+                style="text-transform: capitalize;"
+                aria-readonly="true"
+                disabled
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6">
+              <label class="form-control-label" for="lastName">Last Name</label>
+              <input
+                type="text"
+                id="lastName"
+                class="form-control form-control-alternative"
+                placeholder="{{ staff.lastName }}"
+                style="text-transform: capitalize;"
+                aria-readonly="true"
+                disabled
+              />
+            </div>
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label class="form-control-label" for="birthday"
+                  >Date of Birth</label
+                >
+                <div class="input-group input-group-alternative">
+                  <input
+                    type="datetime"
+                    class="form-control form-control-alternative"
+                    placeholder="{{ staff.birthday | date: 'dd/MM/yyyy' }}"
+                    id="birthday"
+                    aria-readonly="true"
+                    disabled
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr class="my-4" />
+        <!-- Address -->
+        <h6 class="heading-small text-muted mb-4">Contact information</h6>
+        <div class="pl-lg-4">
+          <div class="row">
+            <div class="col-lg-4">
+              <label class="form-control-label" for="email">Email</label>
+              <input
+                type="text"
+                id="email"
+                class="form-control form-control-alternative"
+                placeholder="{{ staff.email }}"
+                aria-readonly="true"
+                disabled
+              />
+            </div>
+            <div class="col-lg-4">
+              <label class="form-control-label" for="phone">Telephone</label>
+              <input
+                type="text"
+                id="phone"
+                class="form-control form-control-alternative"
+                placeholder="{{ staff.phone }}"
+                aria-readonly="true"
+                disabled
+              />
+            </div>
+            <div class="col-lg-4">
+              <label class="form-control-label" for="roleId">Position</label>
+              <input
+                type="text"
+                id="roleId"
+                class="form-control form-control-alternative"
+                placeholder="{{ staff.position }}"
+                aria-readonly="true"
+                disabled
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-4">
+              <label class="form-control-label" for="addressCity">City</label>
+              <input
+                type="text"
+                id="addressCity"
+                class="form-control form-control-alternative"
+                placeholder="{{ staff.addressCity }}"
+                style="text-transform: capitalize;"
+                aria-readonly="true"
+                disabled
+              />
+            </div>
+            <div class="col-lg-8">
+              <label class="form-control-label" for="addressStreet"
+                >Address</label
+              >
+              <input
+                id="addressStreet"
+                class="form-control form-control-alternative"
+                placeholder="{{ staff.addressStreet }}"
+                style="text-transform: capitalize;"
+                type="text"
+                aria-readonly="true"
+                disabled
+              />
+            </div>
+          </div>
+        </div>
+        <hr class="my-4" />
+        <!-- Quote -->
+        <h6 class="heading-small text-muted mb-4">About</h6>
+        <div class="pl-lg-4">
+          <div class="form-group">
+            <label class="form-control-label" for="quote">Quote</label>
+            <input
+              id="quote"
+              class="form-control form-control-alternative"
+              placeholder="{{ staff.quote }}"
+              style="text-transform: capitalize;"
+              type="text"
+              aria-readonly="true"
+              disabled
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

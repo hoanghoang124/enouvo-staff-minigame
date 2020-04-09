@@ -31,6 +31,16 @@ export const getIsUpdStfStfLoading = createSelector(
   state => state.isUpdStfLoading
 );
 
+export const getIsCrtAccLoading = createSelector(
+  selectStaffState,
+  state => state.isCrtAccLoading
+);
+
+export const getIsCrtCmpLoading = createSelector(
+  selectStaffState,
+  state => state.isCrtCmpLoading
+);
+
 export const getIsDltStfStfLoading = createSelector(
   selectStaffState,
   state => state.isDltStfLoading
@@ -49,6 +59,16 @@ export const getErrorGtStfMessage = createSelector(
 export const getErrorMessage = createSelector(
   selectStaffState,
   state => state.errorUpdStfMessage
+);
+
+export const getErrorCrtAccMessage = createSelector(
+  selectStaffState,
+  state => state.errorCrtAccMessage
+);
+
+export const getErrorCrtCmpMessage = createSelector(
+  selectStaffState,
+  state => state.errorCrtCmpMessage
 );
 
 export const getErrorDltStfMessage = createSelector(

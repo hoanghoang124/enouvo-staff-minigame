@@ -12,11 +12,7 @@
       *ngIf="authService.isAdmin()"
       aria-controls="sidenav-collapse-main"
     >
-      <span
-        class="nav-link font-weight-bold text-sm"
-        style="font-size: 14px; line-height: 21px;"
-        >Menu</span
-      >
+      <span class="ni ni-bullet-list-67" style="color: #0f4c81;"></span>
     </button>
     <!-- Menu -->
     <div
@@ -98,6 +94,15 @@
           </div>
         </a>
         <div ngbDropdownMenu aria-labelledby="navbarDropdown">
+          <!-- <a
+            class="dropdown-item"
+            routerLink="/user-profile"
+            *ngIf="authService.isLoggedIn()"
+          >
+            <i class="ni ni-calendar-grid-58"></i>
+            <span>My Profile</span>
+          </a> -->
+          <div class="dropdown-divider"></div>
           <a
             class="dropdown-item"
             (click)="openChangePasswordDialog()"

@@ -20,17 +20,13 @@
             <div class="col text-right">
               <button
                 (click)="openUploadCSVFileDialog()"
-                class="btn btn-sm btn-default"
+                class="btn  btn-default"
               >
                 Import CSV
-                <i
-                  class="fas fa-spinner fa-pulse spinner"
-                  *ngIf="isLoadingResults$ | async"
-                ></i>
               </button>
               <button
                 (click)="openCreateAccountDialog()"
-                class="btn btn-sm btn-primary"
+                class="btn btn-primary"
               >
                 Create Account
                 <i
@@ -56,7 +52,10 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let staff of staffs$ | async; index as i">
+              <tr
+                *ngFor="let staff of staffs$ | async; index as i"
+                (click)="openUserProfileModal(staff.id)"
+              >
                 <th scope="row">
                   <div class="media align-items-center">
                     <div class="media-body">

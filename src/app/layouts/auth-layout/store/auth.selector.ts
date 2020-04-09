@@ -1,5 +1,5 @@
-import { createSelector } from "@ngrx/store";
-import { selectAuthState } from "./index";
+import { createSelector } from '@ngrx/store';
+import { selectAuthState } from './index';
 
 export const selectAuthenState = createSelector(
   selectAuthState,
@@ -20,11 +20,6 @@ export const getIsLgnLoading = createSelector(
   state => state.isLgnLoading
 );
 
-export const getIsCrtAccLoading = createSelector(
-  selectAuthenState,
-  state => state.isCrtAccLoading
-);
-
 export const getIsChgPswLoading = createSelector(
   selectAuthenState,
   state => state.isChgPswLoading
@@ -41,11 +36,6 @@ export const getErrorLgnMessage = createSelector(
 );
 
 export const getErrorChgPswMessage = createSelector(
-  selectAuthenState,
-  state => state.errorChgPswMessage
-);
-
-export const getErrorCrtAccMessage = createSelector(
   selectAuthenState,
   state => state.errorChgPswMessage
 );

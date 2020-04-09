@@ -3,6 +3,8 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Staff } from '../models/staff.model';
 import { environment } from 'src/environments/environment';
+import { User } from '../../auth-layout/models/user.model';
+import { Campaign } from '../../auth-layout/models/campaign.model';
 
 @Injectable({
   providedIn: 'root'
@@ -26,8 +28,13 @@ export class StaffService {
     return this.http.get<Staff>(url);
   }
 
-  createStaff(staff): Observable<any> {
-    return this.http.post<Staff>(this.BASE_URL, staff);
+  create(params): Observable<any> {
+    const url = `${this.BASE_URL}/v1/auth/register`;
+    return this.http.post<User>(url, params);
+  }
+
+  createCampaign(campaign): Observable<any> {
+    return this.http.post<Campaign>(this.BASE_URL, campaign);
   }
 
   updateStaff(staff): Observable<any> {

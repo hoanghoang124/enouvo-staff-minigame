@@ -19,8 +19,8 @@
             </div>
             <div class="col-4 text-right">
               <button
-                routerLink="/create-account"
-                class="btn btn-sm btn-primary"
+                (click)="openCreateCampaignDialog()"
+                class="btn  btn-primary"
               >
                 Create Campaign
                 <i
@@ -94,11 +94,7 @@
                         routerLinkActive="router-link-active"
                         >Detail</a
                       >
-                      <a
-                        class="dropdown-item"
-                        (click)="openConfirmationDialog(staff.id)"
-                        >Reset Password</a
-                      >
+                      <a class="dropdown-item">Reset Password</a>
                     </div>
                   </div>
                 </td>

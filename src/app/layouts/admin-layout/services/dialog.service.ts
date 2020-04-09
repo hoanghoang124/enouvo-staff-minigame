@@ -4,6 +4,8 @@ import { ConfirmResetPasswordModalComponent } from '../modal/confirm-reset-passw
 import { ChangePasswordModalComponent } from '../modal/change-password-modal/change-password-modal.component';
 import { UploadCsvModalComponent } from '../modal/upload-csv-modal/upload-csv-modal.component';
 import { CreateAccountModalComponent } from '../modal/create-account-modal/create-account-modal.component';
+import { CreateCampaignModalComponent } from '../modal/create-campaign-modal/create-campaign-modal.component';
+import { UserProfileModalComponent } from '../modal/user-profile-modal/user-profile-modal.component';
 @Injectable({
   providedIn: 'root'
 })
@@ -73,6 +75,28 @@ export class DialogService {
     dialogSize: 'sm' | 'md' | 'lg' | 'xl' = 'lg'
   ): Promise<boolean> {
     const modalRef = this.modalService.open(CreateAccountModalComponent, {
+      size: dialogSize
+    });
+
+    return modalRef.result;
+  }
+
+  public seeProfile(
+    userId: number,
+    dialogSize: 'sm' | 'md' | 'lg' = 'lg'
+  ): Promise<boolean> {
+    const modalRef = this.modalService.open(UserProfileModalComponent, {
+      size: dialogSize
+    });
+    modalRef.componentInstance.userId = userId;
+
+    return modalRef.result;
+  }
+
+  public createCampaign(
+    dialogSize: 'sm' | 'md' | 'lg' = 'lg'
+  ): Promise<boolean> {
+    const modalRef = this.modalService.open(CreateCampaignModalComponent, {
       size: dialogSize
     });
 
