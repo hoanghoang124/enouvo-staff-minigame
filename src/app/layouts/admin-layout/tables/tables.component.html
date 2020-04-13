@@ -42,13 +42,13 @@
           <table class="table align-items-center table-flush">
             <thead class="thead-light">
               <tr>
-                <th scope="col" style="text-align: center;">#</th>
-                <th scope="col">First Name</th>
-                <th scope="col">Last Name</th>
-                <th scope="col">Date of Birth</th>
-                <th scope="col">Email</th>
-                <th scope="col">Position</th>
-                <th scope="col" class="action">Actions</th>
+                <th style="text-align: center;">#</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Date of Birth</th>
+                <th>Email</th>
+                <th>Position</th>
+                <th class="action">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -86,31 +86,8 @@
                 </td>
                 <td>{{ staff.email || 'n/a' }}</td>
                 <td>{{ staff.position || 'n/a' }}</td>
-                <td class="action">
-                  <div ngbDropdown placement="bottom-right">
-                    <a
-                      class="btn btn-sm btn-icon-only text-light"
-                      ngbDropdownToggle
-                    >
-                      <i>Edit</i>
-                    </a>
-                    <div
-                      ngbDropdownMenu
-                      class="dropdown-menu-right dropdown-menu-arrow"
-                    >
-                      <a
-                        class="dropdown-item"
-                        [routerLink]="[staff.id]"
-                        routerLinkActive="router-link-active"
-                        >Detail</a
-                      >
-                      <a
-                        class="dropdown-item"
-                        (click)="openConfirmationDialog(staff.id)"
-                        >Reset Password</a
-                      >
-                    </div>
-                  </div>
+                <td class="action" (click)="openConfirmationDialog(staff.id)">
+                  <button class="btn btn-sm btn-warning">Reset Password</button>
                 </td>
               </tr>
             </tbody>

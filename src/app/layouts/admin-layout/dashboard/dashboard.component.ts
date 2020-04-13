@@ -4,6 +4,7 @@ import { Store, select } from '@ngrx/store';
 import { Staff } from '../models/staff.model';
 import { State } from '../store/reducers';
 import * as fromStaff from '../store';
+import { DialogService } from '../services/dialog.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -22,6 +23,7 @@ export class DashboardComponent implements OnInit {
 
   breakpoint: number;
 
+  private dialogService: DialogService;
   constructor(private store: Store<State>) {}
 
   ngOnInit() {
@@ -31,5 +33,12 @@ export class DashboardComponent implements OnInit {
     this.stafflist$.subscribe(res => {
       this.staffs = res as Staff[];
     });
+  }
+
+  openUserProfileModal(userId) {
+    this.dialogService
+      .seeProfile(userId)
+      .then(confirmed => console.log('User confirmed, confirmed', confirmed))
+      .catch(() => console.log('User dismissed the dialog'));
   }
 }

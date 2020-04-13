@@ -21,7 +21,7 @@ export class DialogService {
   ): Promise<boolean> {
     const modalRef = this.modalService.open(
       ConfirmResetPasswordModalComponent,
-      { size: 'md' }
+      { size: 'md', centered: true }
     );
     modalRef.componentInstance.title = title;
     modalRef.componentInstance.message = message;
@@ -39,7 +39,8 @@ export class DialogService {
     btnCancelText: string = 'Cancel'
   ): Promise<boolean> {
     const modalRef = this.modalService.open(ChangePasswordModalComponent, {
-      size: 'lg'
+      size: 'lg',
+      centered: true
     });
     modalRef.componentInstance.title = title;
     modalRef.componentInstance.message = message;
@@ -57,7 +58,8 @@ export class DialogService {
     btnCancelText: string = 'Close'
   ): Promise<boolean> {
     const modalRef = this.modalService.open(UploadCsvModalComponent, {
-      size: 'lg'
+      size: 'lg',
+      centered: true
     });
     modalRef.componentInstance.title = title;
     modalRef.componentInstance.message = message;
@@ -70,7 +72,8 @@ export class DialogService {
 
   public createAccout(): Promise<boolean> {
     const modalRef = this.modalService.open(CreateAccountModalComponent, {
-      windowClass: 'dialog-size-xl'
+      windowClass: 'dialog-size-xl',
+      centered: true
     });
 
     return modalRef.result;
@@ -78,7 +81,8 @@ export class DialogService {
 
   public seeProfile(userId: number): Promise<boolean> {
     const modalRef = this.modalService.open(UserProfileModalComponent, {
-      windowClass: 'dialog-size-xxl'
+      windowClass: 'dialog-size-xxl',
+      centered: true
     });
     modalRef.componentInstance.userId = userId;
 
@@ -87,7 +91,8 @@ export class DialogService {
 
   public createCampaign(): Promise<boolean> {
     const modalRef = this.modalService.open(CreateCampaignModalComponent, {
-      windowClass: 'dialog-size-xl'
+      windowClass: 'dialog-size-xl',
+      centered: true
     });
 
     return modalRef.result;
