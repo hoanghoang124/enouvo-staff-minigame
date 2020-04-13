@@ -20,13 +20,13 @@
             <div class="col text-right">
               <button
                 (click)="openUploadCSVFileDialog()"
-                class="btn  btn-default"
+                class="btn btn-sm btn-default"
               >
                 Import CSV
               </button>
               <button
                 (click)="openCreateAccountDialog()"
-                class="btn btn-primary"
+                class="btn btn-sm btn-primary"
               >
                 Create Account
                 <i
@@ -52,10 +52,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr
-                *ngFor="let staff of staffs$ | async; index as i"
-                (click)="openUserProfileModal(staff.id)"
-              >
+              <tr *ngFor="let staff of staffs$ | async; index as i">
                 <th scope="row">
                   <div class="media align-items-center">
                     <div class="media-body">
@@ -75,11 +72,18 @@
                     </div>
                   </div>
                 </th>
-                <td>{{ staff.firstName || 'n/a' }}</td>
+                <td
+                  style="font-weight: bold;"
+                  (click)="openUserProfileModal(staff.id)"
+                >
+                  {{ staff.firstName || 'n/a' }}
+                </td>
                 <td>
                   {{ staff.lastName || 'n/a' }}
                 </td>
-                <td>{{ staff.birthday | date: 'dd/MM/yyyy' || 'n/a' }}</td>
+                <td>
+                  {{ staff.birthday | date: 'dd/MM/yyyy' || 'n/a' }}
+                </td>
                 <td>{{ staff.email || 'n/a' }}</td>
                 <td>{{ staff.position || 'n/a' }}</td>
                 <td class="action">

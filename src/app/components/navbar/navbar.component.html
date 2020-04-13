@@ -88,21 +88,12 @@
             </span>
             <div class="media-body ml-2" style="cursor: default;">
               <span class="mb-0 text-sm nav-link font-weight-bold"
-                >Hi, {{ username }}
+                >{{ username }}
               </span>
             </div>
           </div>
         </a>
         <div ngbDropdownMenu aria-labelledby="navbarDropdown">
-          <!-- <a
-            class="dropdown-item"
-            routerLink="/user-profile"
-            *ngIf="authService.isLoggedIn()"
-          >
-            <i class="ni ni-calendar-grid-58"></i>
-            <span>My Profile</span>
-          </a> -->
-          <div class="dropdown-divider"></div>
           <a
             class="dropdown-item"
             (click)="openChangePasswordDialog()"

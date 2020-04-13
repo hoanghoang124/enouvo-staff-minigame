@@ -34,7 +34,8 @@ export class StaffService {
   }
 
   createCampaign(campaign): Observable<any> {
-    return this.http.post<Campaign>(this.BASE_URL, campaign);
+    const url = `${this.BASE_URL}/v1/campaigns`;
+    return this.http.post<Campaign>(url, campaign);
   }
 
   updateStaff(staff): Observable<any> {

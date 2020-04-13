@@ -9,6 +9,14 @@ body {
 }
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
   overflow: auto;
+}
+
+.dialog-size-xl .modal-dialog {
+  max-width: 1024px;
+}
+
+.dialog-size-xxl .modal-dialog {
+  max-width: 1440px;
 }

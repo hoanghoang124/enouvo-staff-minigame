@@ -24,23 +24,23 @@ export class CreateCampaignModalComponent implements OnInit {
   ngOnInit() {
     this.createCampaignForm = this.formBuilder.group({
       title: ['', Validators.required],
-      starLimit: ['', Validators.required],
       description: ['', Validators.required],
+      isCampaignActive: [true],
       startDate: ['', Validators.required],
-      endDate: ['', Validators.required]
+      endDate: ['', Validators.required],
+      starLimitation: ['', Validators.required]
     });
-    this.errorMessage$ = this.store.select(fromStaff.getErrorCrtAccMessage);
-    this.isLoadingResults$ = this.store.select(fromStaff.getIsCrtAccLoading);
+    this.errorMessage$ = this.store.select(fromStaff.getErrorCrtCmpMessage);
+    this.isLoadingResults$ = this.store.select(fromStaff.getIsCrtCmpLoading);
   }
 
   onSubmit() {
-    console.log(this.createCampaignForm.value);
     if (this.createCampaignForm.invalid) {
       console.log('Form invalid');
       return;
     } else {
       this.store.dispatch(
-        new fromStaff.CreateAccount(this.createCampaignForm.value)
+        new fromStaff.CreateCampaign(this.createCampaignForm.value)
       );
       this.activeModal.dismiss();
     }

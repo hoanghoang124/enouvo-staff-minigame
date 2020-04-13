@@ -6,11 +6,19 @@
 .modal-body {
   background-color: #f7fafc;
   border-radius: 5px;
-  padding: 0;
+  padding: 30px;
 }
 
+img {
+  margin-top: 80px;
+}
+
+.card {
+  background-color: #f7fafc !important;
+}
+
+.card-header,
 .card-body {
   background-color: #f7fafc !important;
   border-radius: inherit;
-  border-radius: 5px;
 }

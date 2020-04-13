@@ -17,12 +17,11 @@ export class DialogService {
     message: string,
     userId: number,
     btnOkText: string = 'Confirm',
-    btnCancelText: string = 'Cancel',
-    dialogSize: 'sm' | 'md' | 'lg' = 'md'
+    btnCancelText: string = 'Cancel'
   ): Promise<boolean> {
     const modalRef = this.modalService.open(
       ConfirmResetPasswordModalComponent,
-      { size: dialogSize }
+      { size: 'md' }
     );
     modalRef.componentInstance.title = title;
     modalRef.componentInstance.message = message;
@@ -37,11 +36,10 @@ export class DialogService {
     title: string,
     message: string,
     btnOkText: string = 'Submit',
-    btnCancelText: string = 'Cancel',
-    dialogSize: 'sm' | 'md' | 'lg' = 'md'
+    btnCancelText: string = 'Cancel'
   ): Promise<boolean> {
     const modalRef = this.modalService.open(ChangePasswordModalComponent, {
-      size: dialogSize
+      size: 'lg'
     });
     modalRef.componentInstance.title = title;
     modalRef.componentInstance.message = message;
@@ -56,11 +54,10 @@ export class DialogService {
     message: string,
     note: string,
     btnOkText: string = 'Upload',
-    btnCancelText: string = 'Close',
-    dialogSize: 'sm' | 'md' | 'lg' = 'lg'
+    btnCancelText: string = 'Close'
   ): Promise<boolean> {
     const modalRef = this.modalService.open(UploadCsvModalComponent, {
-      size: dialogSize
+      size: 'lg'
     });
     modalRef.componentInstance.title = title;
     modalRef.componentInstance.message = message;
@@ -71,33 +68,26 @@ export class DialogService {
     return modalRef.result;
   }
 
-  public createAccout(
-    dialogSize: 'sm' | 'md' | 'lg' | 'xl' = 'lg'
-  ): Promise<boolean> {
+  public createAccout(): Promise<boolean> {
     const modalRef = this.modalService.open(CreateAccountModalComponent, {
-      size: dialogSize
+      windowClass: 'dialog-size-xl'
     });
 
     return modalRef.result;
   }
 
-  public seeProfile(
-    userId: number,
-    dialogSize: 'sm' | 'md' | 'lg' = 'lg'
-  ): Promise<boolean> {
+  public seeProfile(userId: number): Promise<boolean> {
     const modalRef = this.modalService.open(UserProfileModalComponent, {
-      size: dialogSize
+      windowClass: 'dialog-size-xxl'
     });
     modalRef.componentInstance.userId = userId;
 
     return modalRef.result;
   }
 
-  public createCampaign(
-    dialogSize: 'sm' | 'md' | 'lg' = 'lg'
-  ): Promise<boolean> {
+  public createCampaign(): Promise<boolean> {
     const modalRef = this.modalService.open(CreateCampaignModalComponent, {
-      size: dialogSize
+      windowClass: 'dialog-size-xl'
     });
 
     return modalRef.result;

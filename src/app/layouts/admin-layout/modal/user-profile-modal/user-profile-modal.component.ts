@@ -15,7 +15,6 @@ export class UserProfileModalComponent implements OnInit {
   @Input() userId: number;
 
   staff$: Observable<Staff>;
-  isLoadingResults$: Observable<boolean>;
 
   constructor(
     private store: Store<State>,
@@ -25,7 +24,6 @@ export class UserProfileModalComponent implements OnInit {
   ngOnInit() {
     this.store.dispatch(new fromStaff.GetStaff(this.userId));
     this.staff$ = this.store.select(fromStaff.getStaff);
-    this.isLoadingResults$ = this.store.select(fromStaff.getIsGtStfLoading);
   }
 
   public dismiss() {
