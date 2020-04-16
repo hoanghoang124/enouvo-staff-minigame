@@ -1,8 +1,9 @@
 import { Staff } from '../../models/staff.model';
 import * as staffActions from '../actions/staff.action';
 import * as _ from 'lodash';
+import { EntityAdapter, createEntityAdapter, EntityState } from '@ngrx/entity';
 
-export interface StaffState {
+export interface StaffState extends EntityState<Staff> {
   staffs: Staff[];
   selectedStaff: Staff;
   total: number;
@@ -16,7 +17,9 @@ export interface StaffState {
   errorDltStfMessage: any;
 }
 
-export const initialState: StaffState = {
+const adapter: EntityAdapter<Staff> = createEntityAdapter<Staff>();
+
+const initialState: StaffState = adapter.getInitialState({
   staffs: [],
   selectedStaff: null,
   total: 0,
@@ -28,7 +31,7 @@ export const initialState: StaffState = {
   errorGtAllStfMessage: null,
   errorUpdStfMessage: null,
   errorDltStfMessage: null
-};
+});
 
 export function staffReducer(
   state = initialState,
@@ -56,12 +59,12 @@ export function staffReducer(
     case staffActions.StaffActionsType.GET_STAFFS_QUERY:
       return { ...state, isGtAllStfLoading: true, selectedStaff: null };
     case staffActions.StaffActionsType.GET_STAFFS_QUERY_SUCCESS:
-      return {
+      return adapter.setAll(action.payload.results, {
         ...state,
         staffs: action.payload,
-        total: staffActions.GetStaffsQuery.length + 1,
+        total: action.payload.total,
         isGtAllStfLoading: false
-      };
+      });
     case staffActions.StaffActionsType.GET_STAFFS_QUERY_FAILURE:
       return {
         ...state,
@@ -130,3 +133,9 @@ export function staffReducer(
       return state;
   }
 }
+export const {
+  selectAll,
+  selectEntities,
+  selectIds,
+  selectTotal
+} = adapter.getSelectors();

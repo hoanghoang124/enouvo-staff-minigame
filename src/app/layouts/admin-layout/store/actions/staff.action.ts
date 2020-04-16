@@ -46,15 +46,15 @@ export class GetStaffsFail implements Action {
 }
 
 export class GetStaffsQuery implements Action {
-  readonly type = StaffActionsType.GET_STAFFS_QUERY;
-  constructor(public payload: any) {}
+  public readonly type = StaffActionsType.GET_STAFFS_QUERY;
+  constructor(public payload?: any) {}
 }
 export class GetStaffsQuerySuccess implements Action {
-  readonly type = StaffActionsType.GET_STAFFS_QUERY_SUCCESS;
+  public readonly type = StaffActionsType.GET_STAFFS_QUERY_SUCCESS;
   constructor(public payload: any) {}
 }
 export class GetStaffsQueryFail implements Action {
-  readonly type = StaffActionsType.GET_STAFFS_QUERY_FAILURE;
+  public readonly type = StaffActionsType.GET_STAFFS_QUERY_FAILURE;
 }
 
 export class GetStaff implements Action {
