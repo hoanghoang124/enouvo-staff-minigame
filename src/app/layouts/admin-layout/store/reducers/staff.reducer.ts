@@ -1,40 +1,47 @@
 import { Staff } from '../../models/staff.model';
+import { Campaign } from '../../models/campaign.model';
 import * as staffActions from '../actions/staff.action';
 import * as _ from 'lodash';
 
 export interface StaffState {
   staffs: Staff[];
   selectedStaff: Staff;
+  selectedCampaign: Campaign;
   total: number;
   isGtStfLoading: boolean;
   isGtAllStfLoading: boolean;
   isUpdStfLoading: boolean;
   isCrtAccLoading: boolean;
   isCrtCmpLoading: boolean;
+  isUpdCmpLoading: boolean;
   isDltStfLoading: boolean;
   errorGtAllStfMessage: any;
   errorGtStfMessage: any;
   errorUpdStfMessage: any;
   errorCrtAccMessage: any;
   errorCrtCmpMessage: any;
+  errorUpdCmpMessage: any;
   errorDltStfMessage: any;
 }
 
 export const initialState: StaffState = {
   staffs: [],
   selectedStaff: null,
+  selectedCampaign: null,
   total: 0,
   isGtStfLoading: false,
   isGtAllStfLoading: false,
   isUpdStfLoading: false,
   isCrtAccLoading: false,
   isCrtCmpLoading: false,
+  isUpdCmpLoading: false,
   isDltStfLoading: false,
   errorGtStfMessage: null,
   errorGtAllStfMessage: null,
   errorUpdStfMessage: null,
   errorCrtAccMessage: null,
   errorCrtCmpMessage: null,
+  errorUpdCmpMessage: null,
   errorDltStfMessage: null
 };
 
@@ -137,7 +144,7 @@ export function staffReducer(
     case staffActions.StaffActionsType.UPDATE_STAFF:
       return {
         ...state,
-        isGtAllStfLoading: false,
+        isGtAllStfLoading: true,
         errorUpdStfMessage: null
       };
     case staffActions.StaffActionsType.UPDATE_STAFF_SUCCESS:
@@ -151,6 +158,24 @@ export function staffReducer(
         ...state,
         isGtAllStfLoading: false,
         errorUpdStfMessage: action.payload
+      };
+    case staffActions.StaffActionsType.UPDATE_CAMPAIGN:
+      return {
+        ...state,
+        isUpdCmpLoading: true,
+        errorUpdCmpMessage: null
+      };
+    case staffActions.StaffActionsType.UPDATE_CAMPAIGN_SUCCESS:
+      return {
+        ...state,
+        isUpdCmpLoading: false,
+        selectedCampaign: action.payload
+      };
+    case staffActions.StaffActionsType.UPDATE_CAMPAIGN_FAILURE:
+      return {
+        ...state,
+        isUpdCmpLoading: false,
+        errorUpdCmpMessage: action.payload
       };
     case staffActions.StaffActionsType.DELETE_STAFF: {
       return {
@@ -170,7 +195,7 @@ export function staffReducer(
     case staffActions.StaffActionsType.DELETE_STAFF_FAILURE:
       return {
         ...state,
-        isGtAllStfLoading: true,
+        isGtAllStfLoading: false,
         errorDltStfMessage: action.payload
       };
     default:

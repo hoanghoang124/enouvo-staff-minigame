@@ -22,6 +22,10 @@ export enum StaffActionsType {
   CREATE_CAMPAIGN_SUCCESS = '[Staff] Create Campaign Success',
   CREATE_CAMPAIGN_FAILURE = '[Staff] Create Campaign Failure',
 
+  UPDATE_CAMPAIGN = '[Staff] Update Campaign',
+  UPDATE_CAMPAIGN_SUCCESS = '[Staff] Update Campaign Success',
+  UPDATE_CAMPAIGN_FAILURE = '[Staff] Update Campaign Failure',
+
   DELETE_STAFF = '[Staff] Deletes Staff',
   DELETE_STAFF_SUCCESS = '[Staff] Deletes Staff Success',
   DELETE_STAFF_FAILURE = '[Staff] Deletes Staff Failure',
@@ -104,6 +108,19 @@ export class CreateCampaignFail implements Action {
   constructor(public payload: any) {}
 }
 
+export class UpdateCampaign implements Action {
+  public readonly type = StaffActionsType.UPDATE_CAMPAIGN;
+  constructor(public payload: any) {}
+}
+export class UpdateCampaignSuccess implements Action {
+  public readonly type = StaffActionsType.UPDATE_CAMPAIGN_SUCCESS;
+  constructor(public payload: any) {}
+}
+export class UpdateCampaignFail implements Action {
+  public readonly type = StaffActionsType.UPDATE_CAMPAIGN_FAILURE;
+  constructor(public payload: any) {}
+}
+
 export class DeleteStaff implements Action {
   public readonly type = StaffActionsType.DELETE_STAFF;
   constructor(public payload: Staff) {}
@@ -153,6 +170,9 @@ export type StaffActions =
   | CreateCampaign
   | CreateCampaignSuccess
   | CreateCampaignFail
+  | UpdateCampaign
+  | UpdateCampaignSuccess
+  | UpdateCampaignFail
   | UpdateStaff
   | UpdateStaffSuccess
   | UpdateStaffFail;

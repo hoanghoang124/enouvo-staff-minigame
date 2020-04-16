@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Staff } from '../models/staff.model';
 import { environment } from 'src/environments/environment';
 import { User } from '../../auth-layout/models/user.model';
-import { Campaign } from '../../auth-layout/models/campaign.model';
+import { Campaign } from '../models/campaign.model';
 
 @Injectable({
   providedIn: 'root'
@@ -41,6 +41,11 @@ export class StaffService {
   updateStaff(staff): Observable<any> {
     const url = `${this.BASE_URL}/${staff.id}`;
     return this.http.put(url, staff);
+  }
+
+  updateCampaign(id: number): Observable<any> {
+    const url = `${this.BASE_URL}/v1/campaigns/${id}`;
+    return this.http.put<Campaign>(url, id);
   }
 
   deleteStaff(id): Observable<any> {

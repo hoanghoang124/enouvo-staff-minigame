@@ -1,18 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Effect, ofType, Actions } from '@ngrx/effects';
-
-import * as StaffActions from '../actions/staff.action';
-import { map, catchError, switchMap } from 'rxjs/operators';
+import { map, catchError, switchMap, tap } from 'rxjs/operators';
+import { of, Observable } from 'rxjs';
 import { StaffService } from '../../services/staff.service';
 import { Router } from '@angular/router';
-import { of } from 'rxjs';
+import * as StaffActions from '../actions/staff.action';
 
 const { StaffActionsType } = StaffActions;
 
 @Injectable()
 export class StaffEffects {
   constructor(
-    private actions$: Actions,
+    private actions: Actions,
     private staffservice: StaffService,
     private route: Router
   ) {}
@@ -30,7 +29,7 @@ export class StaffEffects {
   // );
 
   @Effect()
-  getAllStaffs$ = this.actions$.pipe(
+  getAllStaffs$ = this.actions.pipe(
     ofType(StaffActionsType.GET_STAFFS),
     switchMap(() => {
       return this.staffservice.getStaffs().pipe(
@@ -43,7 +42,7 @@ export class StaffEffects {
   );
 
   @Effect()
-  getStaff$ = this.actions$.pipe(
+  getStaff$ = this.actions.pipe(
     ofType(StaffActionsType.GET_STAFF),
     map((action: StaffActions.GetStaff) => action.payload),
     switchMap(id => {
@@ -57,7 +56,7 @@ export class StaffEffects {
   );
 
   @Effect()
-  CreateAccount$ = this.actions$.pipe(
+  CreateAccount$ = this.actions.pipe(
     ofType(StaffActionsType.CREATE_ACCOUNT),
     map((action: StaffActions.CreateAccount) => action.payload),
     switchMap(payload => {
@@ -74,14 +73,13 @@ export class StaffEffects {
   );
 
   @Effect()
-  createCampaign$ = this.actions$.pipe(
+  createCampaign$ = this.actions.pipe(
     ofType(StaffActionsType.CREATE_CAMPAIGN),
     map((action: StaffActions.CreateCampaign) => action.payload),
     switchMap(campaign => {
       return this.staffservice.createCampaign(campaign).pipe(
-        map(res => {
-          this.route.navigate(['/admin']);
-          return new StaffActions.CreateCampaignSuccess(res);
+        map(campaign => {
+          return new StaffActions.CreateCampaignSuccess(campaign);
         }),
         catchError(res => [
           new StaffActions.CreateCampaignFail(res.error.message)
@@ -90,8 +88,16 @@ export class StaffEffects {
     })
   );
 
+  @Effect({ dispatch: false })
+  CreateCampaignSuccess$: Observable<any> = this.actions.pipe(
+    ofType(StaffActionsType.CREATE_CAMPAIGN_SUCCESS),
+    tap(campaign => {
+      localStorage.setItem('campaignId', campaign.payload.campaignId);
+    })
+  );
+
   @Effect()
-  updateStaff$ = this.actions$.pipe(
+  updateStaff$ = this.actions.pipe(
     ofType(StaffActionsType.UPDATE_STAFF),
     map((action: StaffActions.UpdateStaff) => action.payload),
     switchMap(staff => {
@@ -106,7 +112,23 @@ export class StaffEffects {
   );
 
   @Effect()
-  removeStaff$ = this.actions$.pipe(
+  updateCampaign$ = this.actions.pipe(
+    ofType(StaffActionsType.UPDATE_CAMPAIGN),
+    map((action: StaffActions.UpdateCampaign) => action.payload),
+    switchMap(id => {
+      return this.staffservice.updateCampaign(id).pipe(
+        map(res => {
+          return new StaffActions.UpdateCampaignSuccess(res);
+        }),
+        catchError(res => [
+          new StaffActions.UpdateCampaignFail(res.error.message)
+        ])
+      );
+    })
+  );
+
+  @Effect()
+  removeStaff$ = this.actions.pipe(
     ofType(StaffActionsType.DELETE_STAFF),
     map((action: StaffActions.DeleteStaff) => action.payload),
     switchMap(staff => {

@@ -15,6 +15,7 @@ export class CampaignComponent implements OnInit {
   isStaffLoading$: Observable<boolean>;
   isLoadingResults$: Observable<boolean>;
   errorMessage$: Observable<string>;
+  campaignId: number;
   constructor(
     private store: Store<State>,
     private dialogService: DialogService
@@ -26,9 +27,14 @@ export class CampaignComponent implements OnInit {
     this.errorMessage$ = this.store.select(fromStaff.getErrorCrtCmpMessage);
     this.isLoadingResults$ = this.store.select(fromStaff.getIsCrtCmpLoading);
     this.isStaffLoading$ = this.store.select(fromStaff.getIsGtAllStfLoading);
+    this.campaignId = Number(localStorage.getItem('campaignId'));
   }
 
   openCreateCampaignDialog() {
     this.dialogService.createCampaign();
+  }
+
+  openUpdateCampaignDialog(campaignId) {
+    this.dialogService.updateCampaign(campaignId);
   }
 }

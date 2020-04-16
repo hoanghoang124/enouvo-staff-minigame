@@ -73,7 +73,12 @@
                 <td>{{ staff.position || 'n/a' }}</td>
                 <td>{{ staff.position || 'n/a' }}</td>
                 <td class="action">
-                  <button class="btn btn-sm btn-info">Update</button>
+                  <button
+                    class="btn btn-sm btn-info"
+                    (click)="openUpdateCampaignDialog(campaignId)"
+                  >
+                    Modify
+                  </button>
                 </td>
               </tr>
             </tbody>

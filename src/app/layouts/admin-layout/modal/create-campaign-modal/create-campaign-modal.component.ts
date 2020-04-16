@@ -25,7 +25,7 @@ export class CreateCampaignModalComponent implements OnInit {
     this.createCampaignForm = this.formBuilder.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
-      isCampaignActive: [true],
+      isCampaignActive: [false],
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
       starLimitation: ['', Validators.required]
