@@ -25,9 +25,9 @@ export class CreateCampaignModalComponent implements OnInit {
     this.createCampaignForm = this.formBuilder.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
-      isCampaignActive: [false],
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
+      isCampaignActive: [true],
       starLimitation: ['', Validators.required]
     });
     this.errorMessage$ = this.store.select(fromStaff.getErrorCrtCmpMessage);

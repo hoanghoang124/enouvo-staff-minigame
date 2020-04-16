@@ -9,7 +9,7 @@ import { Campaign } from '../../models/campaign.model';
 @Component({
   selector: 'app-campaign-profile-modal',
   templateUrl: './campaign-profile-modal.component.html',
-  styleUrls: ['./campaign-profile-modal.component.css']
+  styleUrls: ['./campaign-profile-modal.component.scss']
 })
 export class CampaignProfileModalComponent implements OnInit {
   @Input() campaignId: number;

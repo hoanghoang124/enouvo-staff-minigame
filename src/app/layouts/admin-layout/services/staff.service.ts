@@ -48,9 +48,9 @@ export class StaffService {
     return this.http.put(url, staff);
   }
 
-  updateCampaign(id: number): Observable<any> {
+  updateCampaign(id: number, params): Observable<any> {
     const url = `${this.BASE_URL}/v1/campaigns/${id}`;
-    return this.http.put<Campaign>(url, id);
+    return this.http.put<Campaign>(url, params);
   }
 
   deleteStaff(id): Observable<any> {
