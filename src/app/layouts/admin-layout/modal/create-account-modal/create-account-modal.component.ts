@@ -6,8 +6,8 @@ import { PositionTypes } from 'src/app/layouts/auth-layout/models/role.model';
 import { Cities } from 'src/app/layouts/auth-layout/models/city.model';
 import { Store } from '@ngrx/store';
 import { State } from 'src/app/layouts/auth-layout/store';
-import * as fromAuthSelector from '../../../auth-layout/store/auth.selector';
-import * as fromAuthAction from '../../../auth-layout/store/auth.action';
+import * as fromStaff from '../../store/index';
+
 @Component({
   selector: 'app-create-account-modal',
   templateUrl: './create-account-modal.component.html',
@@ -39,21 +39,18 @@ export class CreateAccountModalComponent implements OnInit {
       addressCity: ['', Validators.required],
       addressStreet: ['', Validators.required]
     });
-    this.errorMessage$ = this.store.select(
-      fromAuthSelector.getErrorCrtAccMessage
-    );
-    this.isLoadingResults$ = this.store.select(
-      fromAuthSelector.getIsCrtAccLoading
-    );
+    this.errorMessage$ = this.store.select(fromStaff.getErrorCrtAccMessage);
+    this.isLoadingResults$ = this.store.select(fromStaff.getIsCrtAccLoading);
   }
 
   onSubmit() {
+    console.log(this.createAccountForm.value);
     if (this.createAccountForm.invalid) {
       console.log('Form invalid');
       return;
     } else {
       this.store.dispatch(
-        new fromAuthAction.CreateAccount(this.createAccountForm.value)
+        new fromStaff.CreateAccount(this.createAccountForm.value)
       );
       this.activeModal.dismiss();
     }

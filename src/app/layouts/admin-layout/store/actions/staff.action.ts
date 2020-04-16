@@ -14,13 +14,17 @@ export enum StaffActionsType {
   GET_STAFF_SUCCESS = '[Staff] Get Staff Success',
   GET_STAFF_FAILURE = '[Staff] Get Staff Fail',
 
+  CREATE_ACCOUNT = '[Auth] CreateAccount',
+  CREATE_ACCOUNT_SUCCESS = '[Auth] CreateAccountSuccess',
+  CREATE_ACCOUNT_FAILURE = '[Auth] CreateAccountFailure',
+
+  CREATE_CAMPAIGN = '[Staff] Create Campaign',
+  CREATE_CAMPAIGN_SUCCESS = '[Staff] Create Campaign Success',
+  CREATE_CAMPAIGN_FAILURE = '[Staff] Create Campaign Failure',
+
   DELETE_STAFF = '[Staff] Deletes Staff',
   DELETE_STAFF_SUCCESS = '[Staff] Deletes Staff Success',
   DELETE_STAFF_FAILURE = '[Staff] Deletes Staff Failure',
-
-  CREATE_STAFF = '[Staff] Create Staff',
-  CREATE_STAFF_SUCCESS = '[Staff] Creates Staff Success',
-  CREATE_STAFF_FAILURE = '[Staff] Create Staff Failure',
 
   UPDATE_STAFF = '[Staff] Updates Staff',
   UPDATE_STAFF_SUCCESS = '[Staff] Updates Staff Success',
@@ -72,6 +76,34 @@ export class GetStaffFail implements Action {
   constructor(public payload: Error) {}
 }
 
+export class CreateAccount implements Action {
+  readonly type = StaffActionsType.CREATE_ACCOUNT;
+  constructor(public payload: any) {}
+}
+
+export class CreateAccountSuccess implements Action {
+  readonly type = StaffActionsType.CREATE_ACCOUNT_SUCCESS;
+  constructor(public payload: any) {}
+}
+
+export class CreateAccountFailure implements Action {
+  readonly type = StaffActionsType.CREATE_ACCOUNT_FAILURE;
+  constructor(public payload: any) {}
+}
+
+export class CreateCampaign implements Action {
+  public readonly type = StaffActionsType.CREATE_CAMPAIGN;
+  constructor(public payload: any) {}
+}
+export class CreateCampaignSuccess implements Action {
+  public readonly type = StaffActionsType.CREATE_CAMPAIGN_SUCCESS;
+  constructor(public payload: any) {}
+}
+export class CreateCampaignFail implements Action {
+  public readonly type = StaffActionsType.CREATE_CAMPAIGN_FAILURE;
+  constructor(public payload: any) {}
+}
+
 export class DeleteStaff implements Action {
   public readonly type = StaffActionsType.DELETE_STAFF;
   constructor(public payload: Staff) {}
@@ -84,21 +116,6 @@ export class DeleteStaffSuccess implements Action {
 
 export class DeleteStaffFail implements Action {
   public readonly type = StaffActionsType.DELETE_STAFF_FAILURE;
-  constructor(public payload: Error) {}
-}
-
-export class CreateStaff implements Action {
-  public readonly type = StaffActionsType.CREATE_STAFF;
-  constructor(public payload: Staff) {}
-}
-
-export class CreateStaffSuccess implements Action {
-  public readonly type = StaffActionsType.CREATE_STAFF_SUCCESS;
-  constructor(public payload: Staff) {}
-}
-
-export class CreateStaffFail implements Action {
-  public readonly type = StaffActionsType.CREATE_STAFF_FAILURE;
   constructor(public payload: Error) {}
 }
 
@@ -127,12 +144,15 @@ export type StaffActions =
   | DeleteStaff
   | DeleteStaffSuccess
   | DeleteStaffFail
-  | CreateStaff
-  | CreateStaffSuccess
-  | CreateStaffFail
   | GetStaff
   | GetStaffSuccess
   | GetStaffFail
+  | CreateAccount
+  | CreateAccountSuccess
+  | CreateAccountFailure
+  | CreateCampaign
+  | CreateCampaignSuccess
+  | CreateCampaignFail
   | UpdateStaff
   | UpdateStaffSuccess
   | UpdateStaffFail;

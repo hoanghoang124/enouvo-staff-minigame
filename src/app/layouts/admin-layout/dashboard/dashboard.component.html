@@ -1,74 +1,91 @@
 <app-loading *ngIf="isStaffLoading$ | async"></app-loading>
 
-<div class="header  pb-8 pt-5 pt-md-8">
-  <div class="container-fluid">
-    <div class="header-body">
-      <!-- Card stats -->
-      <!-- <span class="mask bg-gradient-danger opacity-8"></span> -->
-      <!-- Header container -->
-      <!-- <div class="container-fluid d-flex align-items-center">
-        <div class="row">
-          <div class="col-lg-7 col-md-10"></div>
-        </div>
-        <h2>Campaign here</h2>
-      </div> -->
-    </div>
-  </div>
-  <div class="container-fluid ">
-    <div class="row">
-      <div class="card-deck m-4 " *ngFor="let staff of stafflist$ | async">
-        <div
-          class="card card-profile shadow"
-          style="min-width: 20rem; max-width: 20rem;"
-        >
-          <div class="row justify-content-center">
-            <div class="col-lg-3 order-lg-2">
-              <div class="card-profile-image">
-                <img
-                  src="{{
-                    staff.avatarUrl ||
-                      '../../../../../../assets/img/avatar/IMG_1171.JPG'
-                  }}"
-                  class="rounded-circle"
-                />
-              </div>
-            </div>
-          </div>
-          <div
-            class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4"
-          >
-            <div class="d-flex justify-content-between">
-              <a class="btn btn-sm mr-4"
-                ><img
-                  src="https://img.icons8.com/color/48/000000/thumb-up--v1.png"
-              /></a>
-              <a class="btn btn-sm float-right"
-                ><img
-                  src="https://img.icons8.com/color/48/000000/poor-quality--v1.png"
-              /></a>
-            </div>
-          </div>
-          <div class="card-body pt-0 pt-md-4">
+<div class="container-fluid">
+  <div class="header-body">
+    <!-- Card stats -->
+    <div class="row" style="padding: 0 39px;">
+      <div class="col-xl col-lg ">
+        <div class="card card-stats mb-4 mb-xl-0 shadow">
+          <div class="card-body">
             <div class="row">
               <div class="col">
+                <h5 class="card-title text-uppercase text-muted mb-0">
+                  Hot event
+                </h5>
+                <span class="h2 font-weight-bold mb-0">350,897</span>
+              </div>
+              <div class="col-auto">
                 <div
-                  class="card-profile-stats d-flex justify-content-center mt-md-5"
-                ></div>
+                  class="icon icon-shape bg-danger text-white rounded-circle shadow"
+                >
+                  <i class="fas fa-chart-bar"></i>
+                </div>
               </div>
             </div>
-            <div class="text-center">
-              <h3 style="text-transform: capitalize;">
-                {{ staff.firstName }} {{ staff.middleName }}
-                {{ staff.lastName }}
-              </h3>
+            <p class="mt-3 mb-0 text-muted text-sm">
+              <span class="text-success mr-2"
+                ><i class="fa fa-arrow-up"></i> 3.48%</span
+              >
+              <span class="text-nowrap">Since last month</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="card-deck m-4 " *ngFor="let staff of stafflist$ | async">
+      <div
+        class="card card-profile shadow"
+        style="min-width: 20rem; max-width: 20rem;"
+      >
+        <div class="row justify-content-center">
+          <div class="col-lg-3 order-lg-2">
+            <div class="card-profile-image">
+              <img
+                src="{{
+                  staff.avatarUrl ||
+                    '../../../../../../assets/img/avatar/IMG_1171.JPG'
+                }}"
+                class="rounded-circle"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+          <div class="d-flex justify-content-between">
+            <a class="btn btn-sm mr-4"
+              ><img
+                src="https://img.icons8.com/color/48/000000/thumb-up--v1.png"
+            /></a>
+            <a class="btn btn-sm float-right"
+              ><img
+                src="https://img.icons8.com/color/48/000000/poor-quality--v1.png"
+            /></a>
+          </div>
+        </div>
+        <div class="card-body pt-0 pt-md-4">
+          <div class="row">
+            <div class="col">
+              <div
+                class="card-profile-stats d-flex justify-content-center mt-md-5"
+              ></div>
+            </div>
+          </div>
+          <div class="text-center">
+            <h3 style="text-transform: capitalize;">
+              {{ staff.firstName }} {{ staff.middleName }}
+              {{ staff.lastName }}
+            </h3>
 
-              <div class="h5 mt-4" style="text-transform: capitalize;">
-                <i class="ni business_briefcase-24 mr-2"></i
-                >{{ staff.position || 'null' }}
-              </div>
-              <hr class="my-4" />
-              <a [routerLink]="[staff.id]">Show more</a>
+            <div class="h5 mt-4" style="text-transform: capitalize;">
+              <i class="ni business_briefcase-24 mr-2"></i
+              >{{ staff.position || 'null' }}
             </div>
+            <hr class="my-4" />
+            <a [routerLink]="[staff.id]">Show more</a>
           </div>
         </div>
       </div>

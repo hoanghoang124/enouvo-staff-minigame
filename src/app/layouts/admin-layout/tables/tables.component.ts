@@ -4,11 +4,8 @@ import { Observable } from 'rxjs';
 import { State } from '../store/reducers';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup } from '@angular/forms';
-import { PositionTypes } from '../../auth-layout/models/role.model';
-import { Cities } from '../../auth-layout/models/city.model';
 import { DialogService } from '../services/dialog.service';
 import { pageSizes } from '../models/pagination.model';
-import * as fromAuthSelector from '../../auth-layout/store/auth.selector';
 import * as fromStaff from '../store';
 import { TableQuery } from '../models/tableQuery.model';
 import { Staff } from '../models/staff.model';
@@ -26,8 +23,6 @@ export class TablesComponent implements OnInit {
   editProfileForm: FormGroup;
   resetPasswordForm: FormGroup;
   model: NgbDateStruct;
-  positionTypes = PositionTypes;
-  city = Cities;
   pageSizes = pageSizes;
   tableQuery: TableQuery;
   totalItems$: Observable<number>;
@@ -51,16 +46,7 @@ export class TablesComponent implements OnInit {
     this.staffs$ = this.store.select(fromStaff.getStaffsQuery);
     this.errorMessage$ = this.store.select(fromStaff.getErrorGtAllStfMessage);
     this.isStaffLoading$ = this.store.select(fromStaff.getIsGtAllStfLoading);
-
-    // get error message response from API
-    this.errorMessage$ = this.store.select(
-      fromAuthSelector.getErrorRsPswMessage
-    );
-
-    // get loading status
-    this.isLoadingResults$ = this.store.select(
-      fromAuthSelector.getIsCrtAccLoading
-    );
+    this.isLoadingResults$ = this.store.select(fromStaff.getIsCrtAccLoading);
   }
 
   openUploadCSVFileDialog() {
@@ -82,6 +68,13 @@ export class TablesComponent implements OnInit {
         userId
       )
       .then(confirmed => console.log('User confirmed:', confirmed))
+      .catch(() => console.log('User dismissed the dialog'));
+  }
+
+  openUserProfileModal(userId) {
+    this.dialogService
+      .seeProfile(userId)
+      .then(confirmed => console.log('User confirmed, confirmed', confirmed))
       .catch(() => console.log('User dismissed the dialog'));
   }
 

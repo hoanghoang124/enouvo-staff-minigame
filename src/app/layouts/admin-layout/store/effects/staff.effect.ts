@@ -56,6 +56,40 @@ export class StaffEffects {
   );
 
   @Effect()
+  CreateAccount$ = this.actions$.pipe(
+    ofType(StaffActionsType.CREATE_ACCOUNT),
+    map((action: StaffActions.CreateAccount) => action.payload),
+    switchMap(payload => {
+      return this.staffservice.create(payload).pipe(
+        map(user => {
+          this.route.navigateByUrl('/tables');
+          return new StaffActions.CreateAccountSuccess(user);
+        }),
+        catchError(res =>
+          of(new StaffActions.CreateAccountFailure(res.error.message))
+        )
+      );
+    })
+  );
+
+  @Effect()
+  createCampaign$ = this.actions$.pipe(
+    ofType(StaffActionsType.CREATE_CAMPAIGN),
+    map((action: StaffActions.CreateCampaign) => action.payload),
+    switchMap(campaign => {
+      return this.staffservice.createCampaign(campaign).pipe(
+        map(res => {
+          this.route.navigate(['/admin']);
+          return new StaffActions.CreateCampaignSuccess(res);
+        }),
+        catchError(res => [
+          new StaffActions.CreateCampaignFail(res.error.message)
+        ])
+      );
+    })
+  );
+
+  @Effect()
   updateStaff$ = this.actions$.pipe(
     ofType(StaffActionsType.UPDATE_STAFF),
     map((action: StaffActions.UpdateStaff) => action.payload),
@@ -66,21 +100,6 @@ export class StaffEffects {
           return new StaffActions.UpdateStaffSuccess(staff);
         }),
         catchError(res => [new StaffActions.UpdateStaffFail(res.error.message)])
-      );
-    })
-  );
-
-  @Effect()
-  createStaff$ = this.actions$.pipe(
-    ofType(StaffActionsType.CREATE_STAFF),
-    map((action: StaffActions.CreateStaff) => action.payload),
-    switchMap(staff => {
-      return this.staffservice.createStaff(staff).pipe(
-        map(res => {
-          this.route.navigate(['/admin']);
-          return new StaffActions.CreateStaffSuccess(res);
-        }),
-        catchError(res => [new StaffActions.CreateStaffFail(res.error.message)])
       );
     })
   );

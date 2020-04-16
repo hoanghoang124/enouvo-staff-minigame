@@ -54,23 +54,6 @@ export class AuthEffects {
   );
 
   @Effect()
-  CreateAccount$ = this.actions.pipe(
-    ofType(AuthActionTypes.CREATE_ACCOUNT),
-    map((action: AuthActions.CreateAccount) => action.payload),
-    switchMap(payload => {
-      return this.authService.create(payload).pipe(
-        map(user => {
-          this.router.navigateByUrl('/tables');
-          return new AuthActions.CreateAccountSuccess(user);
-        }),
-        catchError(res =>
-          of(new AuthActions.CreateAccountFailure(res.error.message))
-        )
-      );
-    })
-  );
-
-  @Effect()
   ChangePassword$ = this.actions.pipe(
     ofType(AuthActionTypes.CHANGE_PASSWORD),
     map((action: AuthActions.ChangePassword) => action.payload),

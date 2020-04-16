@@ -12,11 +12,7 @@
       *ngIf="authService.isAdmin()"
       aria-controls="sidenav-collapse-main"
     >
-      <span
-        class="nav-link font-weight-bold text-sm"
-        style="font-size: 14px; line-height: 21px;"
-        >Menu</span
-      >
+      <span class="ni ni-bullet-list-67" style="color: #0f4c81;"></span>
     </button>
     <!-- Menu -->
     <div
@@ -75,7 +71,7 @@
     </a>
 
     <!-- User -->
-    <ul class="nav align-items-center">
+    <ul class="nav align-items-center" *ngIf="staff$ | async; let staff">
       <li
         class="nav-item"
         ngbDropdown
@@ -87,17 +83,30 @@
             <span class="avatar avatar-sm rounded-circle">
               <img
                 alt="Image placeholder"
-                src="../../../assets/img/avatar/IMG_1171.JPG"
+                src="{{
+                  staff.avatarUrl || '../../../assets/img/avatar/IMG_1171.JPG'
+                }}"
               />
             </span>
             <div class="media-body ml-2" style="cursor: default;">
-              <span class="mb-0 text-sm nav-link font-weight-bold"
-                >Hi, {{ username }}
+              <span
+                class="mb-0 text-sm nav-link font-weight-bold"
+                style="text-transform: capitalize;"
+                >{{ staff.firstName }}
               </span>
             </div>
           </div>
         </a>
         <div ngbDropdownMenu aria-labelledby="navbarDropdown">
+          <a
+            class="dropdown-item"
+            (click)="openUserProfileModal(userId)"
+            *ngIf="authService.isLoggedIn()"
+          >
+            <i class="ni ni-circle-08"></i>
+            <span>My Profile</span>
+          </a>
+          <div class="dropdown-divider"></div>
           <a
             class="dropdown-item"
             (click)="openChangePasswordDialog()"

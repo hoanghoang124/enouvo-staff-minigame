@@ -5,6 +5,7 @@
 td {
   text-transform: capitalize;
 }
+
 .modal-footer {
   padding: 16px 24px;
 }
@@ -14,10 +15,11 @@ table,
 .card-footer {
   background-color: #ffffff;
 }
+
 th,
 td {
   width: fit-content;
-  max-width: 120px;
+  max-width: 50px;
 }
 
 .action {

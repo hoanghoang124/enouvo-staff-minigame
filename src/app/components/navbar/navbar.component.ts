@@ -1,3 +1,4 @@
+import { Staff } from 'src/app/layouts/admin-layout/models/staff.model';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { State } from 'src/app/layouts/auth-layout/store';
@@ -6,6 +7,9 @@ import { LogOut } from './../../layouts/auth-layout/store/auth.action';
 import { ROUTES } from 'src/app/layouts/admin-layout/models/app-routes.model';
 import { Router } from '@angular/router';
 import { DialogService } from 'src/app/layouts/admin-layout/services/dialog.service';
+import { Observable } from 'rxjs';
+import * as fromStaff from '../../layouts/admin-layout/store';
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -16,8 +20,9 @@ export class NavbarComponent implements OnInit {
   public listTitles: any[];
   public menuItems: any[];
   public isCollapsed = true;
-  staffId: number;
-  username: string;
+  isLoadingResults$: Observable<boolean>;
+  staff$: Observable<Staff>;
+  userId: number = Number(localStorage.getItem('id'));
 
   constructor(
     private store: Store<State>,
@@ -27,21 +32,30 @@ export class NavbarComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.username = localStorage.getItem('username');
     this.listTitles = ROUTES.filter(listTitle => listTitle);
     this.menuItems = ROUTES.filter(menuItem => menuItem);
     this.router.events.subscribe(() => {
       this.isCollapsed = true;
     });
+    this.store.dispatch(new fromStaff.GetStaff(this.userId));
+    this.staff$ = this.store.select(fromStaff.getStaff);
+    // this.username = localStorage.getItem('username');
   }
 
-  public openChangePasswordDialog() {
+  openChangePasswordDialog() {
     this.dialogService
       .changePassword(
         'Change Password Form',
         'Tips: A secure enough password can protect your privacy.'
       )
       .then(event => console.log('Execute changing password:', event))
+      .catch(() => console.log('User dismissed the dialog'));
+  }
+
+  openUserProfileModal(userId) {
+    this.dialogService
+      .seeProfile(userId)
+      .then(confirmed => console.log('User confirmed, confirmed', confirmed))
       .catch(() => console.log('User dismissed the dialog'));
   }
 

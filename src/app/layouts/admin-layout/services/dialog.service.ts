@@ -4,6 +4,8 @@ import { ConfirmResetPasswordModalComponent } from '../modal/confirm-reset-passw
 import { ChangePasswordModalComponent } from '../modal/change-password-modal/change-password-modal.component';
 import { UploadCsvModalComponent } from '../modal/upload-csv-modal/upload-csv-modal.component';
 import { CreateAccountModalComponent } from '../modal/create-account-modal/create-account-modal.component';
+import { CreateCampaignModalComponent } from '../modal/create-campaign-modal/create-campaign-modal.component';
+import { UserProfileModalComponent } from '../modal/user-profile-modal/user-profile-modal.component';
 @Injectable({
   providedIn: 'root'
 })
@@ -15,12 +17,11 @@ export class DialogService {
     message: string,
     userId: number,
     btnOkText: string = 'Confirm',
-    btnCancelText: string = 'Cancel',
-    dialogSize: 'sm' | 'md' | 'lg' = 'md'
+    btnCancelText: string = 'Cancel'
   ): Promise<boolean> {
     const modalRef = this.modalService.open(
       ConfirmResetPasswordModalComponent,
-      { size: dialogSize }
+      { size: 'md', centered: true }
     );
     modalRef.componentInstance.title = title;
     modalRef.componentInstance.message = message;
@@ -35,11 +36,11 @@ export class DialogService {
     title: string,
     message: string,
     btnOkText: string = 'Submit',
-    btnCancelText: string = 'Cancel',
-    dialogSize: 'sm' | 'md' | 'lg' = 'md'
+    btnCancelText: string = 'Cancel'
   ): Promise<boolean> {
     const modalRef = this.modalService.open(ChangePasswordModalComponent, {
-      size: dialogSize
+      size: 'lg',
+      centered: true
     });
     modalRef.componentInstance.title = title;
     modalRef.componentInstance.message = message;
@@ -54,11 +55,11 @@ export class DialogService {
     message: string,
     note: string,
     btnOkText: string = 'Upload',
-    btnCancelText: string = 'Close',
-    dialogSize: 'sm' | 'md' | 'lg' = 'lg'
+    btnCancelText: string = 'Close'
   ): Promise<boolean> {
     const modalRef = this.modalService.open(UploadCsvModalComponent, {
-      size: dialogSize
+      size: 'lg',
+      centered: true
     });
     modalRef.componentInstance.title = title;
     modalRef.componentInstance.message = message;
@@ -69,11 +70,29 @@ export class DialogService {
     return modalRef.result;
   }
 
-  public createAccout(
-    dialogSize: 'sm' | 'md' | 'lg' | 'xl' = 'lg'
-  ): Promise<boolean> {
+  public createAccout(): Promise<boolean> {
     const modalRef = this.modalService.open(CreateAccountModalComponent, {
-      size: dialogSize
+      windowClass: 'dialog-size-xl',
+      centered: true
+    });
+
+    return modalRef.result;
+  }
+
+  public seeProfile(userId: number): Promise<boolean> {
+    const modalRef = this.modalService.open(UserProfileModalComponent, {
+      windowClass: 'dialog-size-xxl',
+      centered: true
+    });
+    modalRef.componentInstance.userId = userId;
+
+    return modalRef.result;
+  }
+
+  public createCampaign(): Promise<boolean> {
+    const modalRef = this.modalService.open(CreateCampaignModalComponent, {
+      windowClass: 'dialog-size-xl',
+      centered: true
     });
 
     return modalRef.result;

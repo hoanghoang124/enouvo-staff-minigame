@@ -1,5 +1,11 @@
-<div class="container-fluid mt--7" *ngIf="staff$ | async; let staff">
-  <div class="row">
+<div class="modal-header">
+  <h1 class="modal-title">Employee Profile</h1>
+  <button type="button" class="close" aria-label="Close" (click)="dismiss()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="row" *ngIf="staff$ | async; let staff">
     <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
       <div class="card card-profile shadow">
         <div class="row justify-content-center">
@@ -20,7 +26,7 @@
         <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
           <div class="d-flex justify-content-between"></div>
         </div>
-        <div class="card-body pt-0 pt-md-4">
+        <div class="card-body pt-0 pt-md-4" style="margin-top: 60px;">
           <div class="row">
             <div class="col">
               <div
@@ -54,17 +60,6 @@
     </div>
     <div class="col-xl-8 order-xl-1">
       <div class="card bg-secondary shadow">
-        <div class="card-header bg-white border-0">
-          <div class="row align-items-center">
-            <div class="col-8">
-              <h3 class="mb-0">Employee Profile</h3>
-            </div>
-            <div class="col-4 text-right">
-              <!-- <a href="#!" class="btn btn-sm btn-primary">Edit</a> -->
-            </div>
-          </div>
-          <hr class="my-4" />
-        </div>
         <div class="card-body">
           <h6 class="heading-small text-muted mb-4">User information</h6>
           <div class="pl-lg-4">
@@ -169,20 +164,6 @@
                   aria-readonly="true"
                   disabled
                 />
-                <!-- <select
-                      class="form-control"
-                      data-toggle="select"
-                      title="Simple select"
-                      data-placeholder="Select a state"
-                      formControlName="roleId"
-                    >
-                      <option selected value="">Select Position</option>
-                      <option
-                        *ngFor="let positionType of positionTypes"
-                        [value]="positionType.roleId"
-                        >{{ positionType.roleName }}
-                      </option>
-                    </select> -->
               </div>
             </div>
             <div class="row">
@@ -197,18 +178,6 @@
                   aria-readonly="true"
                   disabled
                 />
-                <!-- <select
-                      class="form-control"
-                      data-toggle="select"
-                      title="Simple select"
-                      data-live-search="true"
-                      data-live-search-placeholder="Search ..."
-                      formControlName="addressCity"
-                    >
-                      <option selected value="">Select City</option>
-
-                      <option *ngFor="let item of city">{{ item }}</option>
-                    </select> -->
               </div>
               <div class="col-lg-8">
                 <label class="form-control-label" for="addressStreet"
@@ -226,21 +195,6 @@
               </div>
             </div>
           </div>
-          <!-- <hr class="my-4" /> -->
-          <!-- Description -->
-          <!-- <h6 class="heading-small text-muted mb-4">About me</h6>
-            <div class="pl-lg-4">
-              <div class="form-group">
-                <label>About Me</label>
-                <textarea
-                  rows="4"
-                  class="form-control form-control-alternative"
-                  placeholder="A few words about you ..."
-                >
-A beautiful Dashboard for Bootstrap 4. It is Free and Open Source.</textarea
-                >
-              </div>
-            </div> -->
         </div>
       </div>
     </div>
