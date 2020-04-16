@@ -17,7 +17,7 @@ export class StaffEffects {
   ) {}
 
   @Effect()
-  getStaffsQuery$ = this.actions$.pipe(
+  getStaffsQuery$ = this.actions.pipe(
     ofType(StaffActionsType.GET_STAFFS_QUERY),
     switchMap(() => {
       return this.staffservice.getStaffs().pipe(

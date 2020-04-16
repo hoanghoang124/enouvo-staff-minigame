@@ -41,7 +41,7 @@ export class TablesComponent implements OnInit {
 
   ngOnInit() {
     this.tableQuery = this.defaultQuery;
-    this.fetchTableData(this.tableQuery);
+    // this.fetchTableData(this.tableQuery);
 
     // get staffs from api
     this.store.dispatch(new fromStaff.GetStaffs());
