@@ -7,6 +7,7 @@ import { EntityAdapter, createEntityAdapter, EntityState } from '@ngrx/entity';
 export interface StaffState extends EntityState<Staff> {
   staffs: Staff[];
   selectedStaff: Staff;
+  campaigns: Campaign[];
   selectedCampaign: Campaign;
   total: number;
   isGtStfLoading: boolean;
@@ -14,12 +15,14 @@ export interface StaffState extends EntityState<Staff> {
   isUpdStfLoading: boolean;
   isCrtAccLoading: boolean;
   isCrtCmpLoading: boolean;
+  isGtAllCmpLoading: boolean;
   isUpdCmpLoading: boolean;
   isDltStfLoading: boolean;
   errorGtAllStfMessage: any;
   errorGtStfMessage: any;
   errorUpdStfMessage: any;
   errorCrtAccMessage: any;
+  errorGtAllCmpMessage: any;
   errorCrtCmpMessage: any;
   errorUpdCmpMessage: any;
   errorDltStfMessage: any;
@@ -30,6 +33,7 @@ const adapter: EntityAdapter<Staff> = createEntityAdapter<Staff>();
 const initialState: StaffState = adapter.getInitialState({
   staffs: [],
   selectedStaff: null,
+  campaigns: [],
   selectedCampaign: null,
   total: 0,
   isGtStfLoading: false,
@@ -37,6 +41,7 @@ const initialState: StaffState = adapter.getInitialState({
   isUpdStfLoading: false,
   isCrtAccLoading: false,
   isCrtCmpLoading: false,
+  isGtAllCmpLoading: false,
   isUpdCmpLoading: false,
   isDltStfLoading: false,
   errorGtStfMessage: null,
@@ -44,6 +49,7 @@ const initialState: StaffState = adapter.getInitialState({
   errorUpdStfMessage: null,
   errorCrtAccMessage: null,
   errorCrtCmpMessage: null,
+  errorGtAllCmpMessage: null,
   errorUpdCmpMessage: null,
   errorDltStfMessage: null
 });
@@ -143,6 +149,24 @@ export function staffReducer(
         errorCrtCmpMessage: action.payload
       };
     }
+    case staffActions.StaffActionsType.GET_CAMPAIGN:
+      return {
+        ...state,
+        isGtAllCmpLoading: true,
+        selectedCampaign: null
+      };
+    case staffActions.StaffActionsType.GET_CAMPAIGN_SUCCESS:
+      return {
+        ...state,
+        campaigns: action.payload,
+        isGtAllCmpLoading: false
+      };
+    case staffActions.StaffActionsType.GET_CAMPAIGN_FAILURE:
+      return {
+        ...state,
+        isGtAllCmpLoading: false,
+        errorGtAllCmpMessage: action.payload
+      };
     case staffActions.StaffActionsType.UPDATE_STAFF:
       return {
         ...state,

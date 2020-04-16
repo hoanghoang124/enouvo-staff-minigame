@@ -6,6 +6,7 @@ import { UploadCsvModalComponent } from '../modal/upload-csv-modal/upload-csv-mo
 import { CreateAccountModalComponent } from '../modal/create-account-modal/create-account-modal.component';
 import { CreateCampaignModalComponent } from '../modal/create-campaign-modal/create-campaign-modal.component';
 import { UserProfileModalComponent } from '../modal/user-profile-modal/user-profile-modal.component';
+import { CampaignProfileModalComponent } from './../modal/campaign-profile-modal/campaign-profile-modal.component';
 import { UpdateCampaignModalComponent } from '../modal/update-campaign-modal/update-campaign-modal.component';
 @Injectable({
   providedIn: 'root'
@@ -95,6 +96,16 @@ export class DialogService {
       windowClass: 'dialog-size-xl',
       centered: true
     });
+
+    return modalRef.result;
+  }
+
+  public seeCampaign(campaignId: number): Promise<boolean> {
+    const modalRef = this.modalService.open(CampaignProfileModalComponent, {
+      windowClass: 'dialog-size-xl',
+      centered: true
+    });
+    modalRef.componentInstance.campaignId = campaignId;
 
     return modalRef.result;
   }

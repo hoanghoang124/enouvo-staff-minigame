@@ -31,7 +31,7 @@
             </div>
           </div>
         </div>
-        <app-loading *ngIf="isStaffLoading$ | async"></app-loading>
+        <!-- <app-loading *ngIf="isStaffLoading$ | async"></app-loading> -->
         <div class="table-responsive">
           <table class="table align-items-center table-flush">
             <thead class="thead-light">
@@ -50,7 +50,7 @@
             </thead>
             <tbody>
               <tr
-                *ngFor="let staff of staffs$ | async; index as i"
+                *ngFor="let campaign of campaigns$ | async; index as i"
                 style="text-transform: capitalize;"
               >
                 <th scope="row">
@@ -61,21 +61,21 @@
                   </div>
                 </th>
                 <td style="font-weight: bold;">
-                  {{ staff.firstName || 'n/a' }}
+                  {{ campaign.title || 'n/a' }}
                 </td>
                 <td>
-                  {{ staff.lastName || 'n/a' }}
+                  {{ campaign.description || 'n/a' }}
                 </td>
-                <td>{{ staff.birthday | date: 'dd/MM/yyyy' || 'n/a' }}</td>
-                <td>{{ staff.email || 'n/a' }}</td>
-                <td>{{ staff.position || 'n/a' }}</td>
-                <td>{{ staff.position || 'n/a' }}</td>
-                <td>{{ staff.position || 'n/a' }}</td>
-                <td>{{ staff.position || 'n/a' }}</td>
+                <td>{{ campaign.startDate | date: 'dd/MM/yyyy' || 'n/a' }}</td>
+                <td>{{ campaign.endDate | date: 'dd/MM/yyyy' || 'n/a' }}</td>
+                <td>{{ campaign.starLimitation || 'n/a' }}</td>
+                <td>{{ campaign.position || 'n/a' }}</td>
+                <td>{{ campaign.position || 'n/a' }}</td>
+                <td>{{ campaign.isCampaignActive || 'n/a' }}</td>
                 <td class="action">
                   <button
                     class="btn btn-sm btn-info"
-                    (click)="openUpdateCampaignDialog(campaignId)"
+                    (click)="openUpdateCampaignDialog(campaign.id)"
                   >
                     Modify
                   </button>

@@ -28,6 +28,11 @@ export class StaffService {
     return this.http.get<Staff>(url);
   }
 
+  getCampaigns(): Observable<any> {
+    const url = `${this.BASE_URL}/v1/campaigns`;
+    return this.http.get<Campaign>(url);
+  }
+
   create(params): Observable<any> {
     const url = `${this.BASE_URL}/v1/auth/register`;
     return this.http.post<User>(url, params);

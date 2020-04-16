@@ -17,7 +17,7 @@ export class StaffEffects {
   ) {}
 
   @Effect()
-  getStaffsQuery$ = this.actions$.pipe(
+  getStaffsQuery$ = this.actions.pipe(
     ofType(StaffActionsType.GET_STAFFS_QUERY),
     switchMap(() => {
       return this.staffservice.getStaffs().pipe(
@@ -83,6 +83,19 @@ export class StaffEffects {
         catchError(res => [
           new StaffActions.CreateCampaignFail(res.error.message)
         ])
+      );
+    })
+  );
+
+  @Effect()
+  getCampaigns$ = this.actions.pipe(
+    ofType(StaffActionsType.GET_CAMPAIGN),
+    switchMap(() => {
+      return this.staffservice.getCampaigns().pipe(
+        map(res => {
+          return new StaffActions.GetCampaignSuccess(res.campaigns);
+        }),
+        catchError(res => [new StaffActions.GetCampaignFail(res.error.message)])
       );
     })
   );

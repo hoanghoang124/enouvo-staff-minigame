@@ -21,6 +21,11 @@ export const getAllStaffs = createSelector(
   state => state.staffs
 );
 
+export const getAllCampaigns = createSelector(
+  selectStaffState,
+  state => state.campaigns
+);
+
 export const getStaff = createSelector(
   selectStaffState,
   state => state.selectedStaff
@@ -49,6 +54,11 @@ export const getIsCrtAccLoading = createSelector(
 export const getIsCrtCmpLoading = createSelector(
   selectStaffState,
   state => state.isCrtCmpLoading
+);
+
+export const getIsGtAllCmpLoading = createSelector(
+  selectStaffState,
+  state => state.isGtAllCmpLoading
 );
 
 export const getIsUpdCmpLoading = createSelector(
@@ -84,6 +94,11 @@ export const getErrorCrtAccMessage = createSelector(
 export const getErrorCrtCmpMessage = createSelector(
   selectStaffState,
   state => state.errorCrtCmpMessage
+);
+
+export const getErrorGtAllCmpMessage = createSelector(
+  selectStaffState,
+  state => state.errorGtAllCmpMessage
 );
 
 export const getErrorUpdCmpMessage = createSelector(

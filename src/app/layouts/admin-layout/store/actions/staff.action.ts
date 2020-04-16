@@ -18,13 +18,17 @@ export enum StaffActionsType {
   CREATE_ACCOUNT_SUCCESS = '[Auth] CreateAccountSuccess',
   CREATE_ACCOUNT_FAILURE = '[Auth] CreateAccountFailure',
 
-  CREATE_CAMPAIGN = '[Staff] Create Campaign',
-  CREATE_CAMPAIGN_SUCCESS = '[Staff] Create Campaign Success',
-  CREATE_CAMPAIGN_FAILURE = '[Staff] Create Campaign Failure',
+  CREATE_CAMPAIGN = '[Campaign] Create Campaign',
+  CREATE_CAMPAIGN_SUCCESS = '[Campaign] Create Campaign Success',
+  CREATE_CAMPAIGN_FAILURE = '[Campaign] Create Campaign Failure',
 
-  UPDATE_CAMPAIGN = '[Staff] Update Campaign',
-  UPDATE_CAMPAIGN_SUCCESS = '[Staff] Update Campaign Success',
-  UPDATE_CAMPAIGN_FAILURE = '[Staff] Update Campaign Failure',
+  GET_CAMPAIGN = '[Campaign] Get Campaign',
+  GET_CAMPAIGN_SUCCESS = '[Campaign] Get Campaign Success',
+  GET_CAMPAIGN_FAILURE = '[Campaign] Get Campaign Failure',
+
+  UPDATE_CAMPAIGN = '[Campaign] Update Campaign',
+  UPDATE_CAMPAIGN_SUCCESS = '[Campaign] Update Campaign Success',
+  UPDATE_CAMPAIGN_FAILURE = '[Campaign] Update Campaign Failure',
 
   DELETE_STAFF = '[Staff] Deletes Staff',
   DELETE_STAFF_SUCCESS = '[Staff] Deletes Staff Success',
@@ -108,6 +112,18 @@ export class CreateCampaignFail implements Action {
   constructor(public payload: any) {}
 }
 
+export class GetCampaign implements Action {
+  public readonly type = StaffActionsType.GET_CAMPAIGN;
+}
+export class GetCampaignSuccess implements Action {
+  public readonly type = StaffActionsType.GET_CAMPAIGN_SUCCESS;
+  constructor(public payload: any) {}
+}
+export class GetCampaignFail implements Action {
+  public readonly type = StaffActionsType.GET_CAMPAIGN_FAILURE;
+  constructor(public payload: any) {}
+}
+
 export class UpdateCampaign implements Action {
   public readonly type = StaffActionsType.UPDATE_CAMPAIGN;
   constructor(public payload: any) {}
@@ -170,6 +186,9 @@ export type StaffActions =
   | CreateCampaign
   | CreateCampaignSuccess
   | CreateCampaignFail
+  | GetCampaign
+  | GetCampaignSuccess
+  | GetCampaignFail
   | UpdateCampaign
   | UpdateCampaignSuccess
   | UpdateCampaignFail
