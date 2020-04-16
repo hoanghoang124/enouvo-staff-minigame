@@ -1,9 +1,19 @@
 import { createSelector } from '@ngrx/store';
 import { selectPageState } from '../reducers/index';
+import * as fromStaff from '../reducers/staff.reducer';
 
 export const selectStaffState = createSelector(
   selectPageState,
   state => state.staffState
+);
+
+export const getStaffsQuery = createSelector(
+  selectStaffState,
+  fromStaff.selectAll
+);
+export const getTotalQuestions = createSelector(
+  selectStaffState,
+  state => state.total
 );
 
 export const getAllStaffs = createSelector(

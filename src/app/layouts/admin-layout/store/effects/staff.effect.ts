@@ -15,18 +15,17 @@ export class StaffEffects {
     private staffservice: StaffService,
     private route: Router
   ) {}
-  // @Effect()
-  // getStaffsQuery$ = this.actions$.pipe(
-  //   ofType(StaffActionsType.GET_STAFFS_SUCCESS),
-  //   switchMap(action => {
-  //     return this.staffservice.getStaffsQuery(action.payload).pipe(
-  //       map(res => new StaffActions.GetStaffsQuerySuccess(res)),
-  //       catchError(() =>
-  //         of(new StaffActions.GetStaffsQueryFail())
-  //       )
-  //     );
-  //   })
-  // );
+
+  @Effect()
+  getStaffsQuery$ = this.actions$.pipe(
+    ofType(StaffActionsType.GET_STAFFS_QUERY),
+    switchMap(() => {
+      return this.staffservice.getStaffs().pipe(
+        map(res => new StaffActions.GetStaffsQuerySuccess(res)),
+        catchError(() => of(new StaffActions.GetStaffsQueryFail()))
+      );
+    })
+  );
 
   @Effect()
   getAllStaffs$ = this.actions.pipe(
