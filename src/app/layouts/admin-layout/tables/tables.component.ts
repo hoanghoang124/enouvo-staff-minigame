@@ -9,6 +9,8 @@ import { pageSizes } from '../models/pagination.model';
 import * as fromStaff from '../store';
 import { TableQuery } from '../models/tableQuery.model';
 import { Staff } from '../models/staff.model';
+import { NgbdSortableHeaderDirective } from 'src/app/shared/ngbd-sortable-header.directive';
+import { SortEvent } from 'src/app/shared/sort.model';
 
 @Component({
   selector: 'app-tables',
@@ -26,10 +28,11 @@ export class TablesComponent implements OnInit {
   pageSizes = pageSizes;
   tableQuery: TableQuery;
   totalItems$: Observable<number>;
+  searchText: string;
   defaultQuery = { limit: 10, offset: 1 };
-  // @ViewChildren(NgbdSortableHeaderDirective) headers: QueryList<
-  //   NgbdSortableHeaderDirective
-  // >;
+  @ViewChildren(NgbdSortableHeaderDirective) headers: QueryList<
+    NgbdSortableHeaderDirective
+  >;
 
   constructor(
     private store: Store<State>,
@@ -42,8 +45,8 @@ export class TablesComponent implements OnInit {
 
     // get staffs from api
     this.store.dispatch(new fromStaff.GetStaffs());
-    // this.staffs$ = this.store.select(fromStaff.getAllStaffs);
-    this.staffs$ = this.store.select(fromStaff.getStaffsQuery);
+    this.staffs$ = this.store.select(fromStaff.getAllStaffs);
+    this.totalItems$ = this.store.select(fromStaff.getTotalQuestions);
     this.errorMessage$ = this.store.select(fromStaff.getErrorGtAllStfMessage);
     this.isStaffLoading$ = this.store.select(fromStaff.getIsGtAllStfLoading);
     this.isLoadingResults$ = this.store.select(fromStaff.getIsCrtAccLoading);
@@ -108,6 +111,11 @@ export class TablesComponent implements OnInit {
         this.tableQuery = { ...this.tableQuery, ...this.defaultQuery };
         break;
     }
+    this.fetchTableData(this.tableQuery);
+  }
+
+  changeQuery(query: TableQuery = {}) {
+    this.tableQuery = { ...this.defaultQuery, ...query };
     this.fetchTableData(this.tableQuery);
   }
 

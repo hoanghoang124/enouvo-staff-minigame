@@ -3,6 +3,8 @@ export interface TableQuery {
   offset?: number;
   orderBy?: string;
   filter?: any;
+  q?: any;
   page?: number;
   perPage?: number;
+  bundleId?: string;
 }

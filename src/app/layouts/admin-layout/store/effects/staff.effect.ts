@@ -20,8 +20,8 @@ export class StaffEffects {
   @Effect()
   getStaffsQuery$ = this.actions$.pipe(
     ofType(StaffActionsType.GET_STAFFS_QUERY),
-    switchMap(action => {
-      return this.staffservice.getStaffsQuery(action.payload).pipe(
+    switchMap(() => {
+      return this.staffservice.getStaffs().pipe(
         map(res => new StaffActions.GetStaffsQuerySuccess(res)),
         catchError(() => of(new StaffActions.GetStaffsQueryFail()))
       );

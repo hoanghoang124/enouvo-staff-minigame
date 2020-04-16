@@ -65,11 +65,10 @@ export function staffReducer(
         errorGtAllStfMessage: action.payload
       };
     case staffActions.StaffActionsType.GET_STAFFS_QUERY:
-      return { ...state, isGtAllStfLoading: true, selectedStaff: null };
+      return { ...state, isGtAllStfLoading: true };
     case staffActions.StaffActionsType.GET_STAFFS_QUERY_SUCCESS:
-      return adapter.setAll(action.payload.results, {
+      return adapter.addAll(action.payload.results, {
         ...state,
-        staffs: action.payload,
         total: action.payload.total,
         isGtAllStfLoading: false
       });

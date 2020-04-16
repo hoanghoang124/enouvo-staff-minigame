@@ -11,6 +11,10 @@ export const getStaffsQuery = createSelector(
   selectStaffState,
   fromStaff.selectAll
 );
+export const getTotalQuestions = createSelector(
+  selectStaffState,
+  state => state.total
+);
 
 export const getAllStaffs = createSelector(
   selectStaffState,
