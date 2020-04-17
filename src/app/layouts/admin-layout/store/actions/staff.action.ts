@@ -34,6 +34,7 @@ export enum StaffActionsType {
 
 export class GetStaffs implements Action {
   public readonly type = StaffActionsType.GET_STAFFS;
+  constructor(public payload?: any) {}
 }
 
 export class GetStaffsSuccess implements Action {
@@ -44,18 +45,6 @@ export class GetStaffsSuccess implements Action {
 export class GetStaffsFail implements Action {
   public readonly type = StaffActionsType.GET_STAFFS_FAILURE;
   constructor(public payload: Error) {}
-}
-
-export class GetStaffsQuery implements Action {
-  public readonly type = StaffActionsType.GET_STAFFS_QUERY;
-  constructor(public payload?: any) {}
-}
-export class GetStaffsQuerySuccess implements Action {
-  public readonly type = StaffActionsType.GET_STAFFS_QUERY_SUCCESS;
-  constructor(public payload: any) {}
-}
-export class GetStaffsQueryFail implements Action {
-  public readonly type = StaffActionsType.GET_STAFFS_QUERY_FAILURE;
 }
 
 export class GetStaff implements Action {
@@ -126,28 +115,10 @@ export class UpdateCampaignFail implements Action {
   constructor(public payload: any) {}
 }
 
-// export class UpdateStaff implements Action {
-//   public readonly type = StaffActionsType.UPDATE_STAFF;
-//   constructor(public payload: Staff) {}
-// }
-
-// export class UpdateStaffSuccess implements Action {
-//   public readonly type = StaffActionsType.UPDATE_STAFF_SUCCESS;
-//   constructor(public payload: Staff) {}
-// }
-
-// export class UpdateStaffFail implements Action {
-//   public readonly type = StaffActionsType.UPDATE_STAFF_FAILURE;
-//   constructor(public payload: Error) {}
-// }
-
 export type StaffActions =
   | GetStaffs
   | GetStaffsSuccess
   | GetStaffsFail
-  | GetStaffsQuery
-  | GetStaffsQuerySuccess
-  | GetStaffsQueryFail
   | GetStaff
   | GetStaffSuccess
   | GetStaffFail

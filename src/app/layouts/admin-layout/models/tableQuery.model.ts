@@ -6,5 +6,4 @@ export interface TableQuery {
   q?: any;
   page?: number;
   perPage?: number;
-  bundleId?: string;
 }

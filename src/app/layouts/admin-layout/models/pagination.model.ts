@@ -1,4 +1,4 @@
-export const pageSizes = [2, 5, 10];
+export const pageSizes = [5, 10, 15];
 export interface Page {
   page: number;
   itemsPerPage: number;

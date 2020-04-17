@@ -17,23 +17,13 @@ export class StaffEffects {
   ) {}
 
   @Effect()
-  getStaffsQuery$ = this.actions.pipe(
-    ofType(StaffActionsType.GET_STAFFS_QUERY),
-    switchMap(() => {
-      return this.staffservice.getStaffs().pipe(
-        map(res => new StaffActions.GetStaffsQuerySuccess(res)),
-        catchError(() => of(new StaffActions.GetStaffsQueryFail()))
-      );
-    })
-  );
-
-  @Effect()
   getAllStaffs$ = this.actions.pipe(
     ofType(StaffActionsType.GET_STAFFS),
-    switchMap(() => {
-      return this.staffservice.getStaffs().pipe(
+    map((action: StaffActions.GetStaffs) => action.payload),
+    switchMap(query => {
+      return this.staffservice.getStaffs(query).pipe(
         map(res => {
-          return new StaffActions.GetStaffsSuccess(res.profiles);
+          return new StaffActions.GetStaffsSuccess(res);
         }),
         catchError(res => [new StaffActions.GetStaffsFail(res.error.message)])
       );
