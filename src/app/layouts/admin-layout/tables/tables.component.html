@@ -1,3 +1,16 @@
+<div class="input-group mx-5 mt-5">
+  <input
+    type="text"
+    class="form-control bg-light large"
+    placeholder="Search for..."
+    aria-label="Search"
+  />
+  <div class="input-group-append mr-7">
+    <button class="btn btn-primary" type="button">
+      <i class="fas fa-search fa-sm"></i>
+    </button>
+  </div>
+</div>
 <div class="container-fluid mt--7">
   <!-- Table -->
   <div class="row">
@@ -114,6 +127,7 @@
             [page]="tableQuery.offset"
             (pageChange)="changePage($event)"
             class="pagination-sm"
+            [boundaryLinks]="true"
           >
           </ngb-pagination>
         </div>
