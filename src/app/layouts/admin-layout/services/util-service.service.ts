@@ -1,9 +1,12 @@
 import { Injectable, QueryList } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import * as _ from 'lodash';
 import { SortEvent } from 'src/app/shared/sort.model';
-import { SortableDirective } from 'src/app/shared/ngbd-sortable-header.directive';
+import { SortableDirective } from 'src/app/shared/sortable.directive';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root'
+})
 export class UtilServiceService {
   constructor() {}
 
@@ -20,31 +23,38 @@ export class UtilServiceService {
   }
 
   getSortQuery(
-    { sortDesc, sortBy }: SortEvent,
+    { order, orderBy }: SortEvent,
     headers: QueryList<SortableDirective>
   ): SortEvent {
     headers.forEach(header => {
-      if (header.sortable !== sortBy) {
+      if (header.sortable !== orderBy) {
         header.direction = '';
       }
     });
     return {
-      sortBy: sortDesc && sortBy,
-      sortDesc: sortDesc === '' ? null : sortDesc === 'desc' ? true : false
+      orderBy: order && orderBy,
+      order: order === '' ? null : orderBy === 'desc' ? true : false
     };
   }
 
   updateSortHeaders(sort: SortEvent, headers: QueryList<SortableDirective>) {
     headers.forEach(header => {
-      if (header.sortable === sort.sortBy) {
-        header.direction =
-          sort.sortDesc === 'true'
-            ? 'desc'
-            : sort.sortDesc === 'false'
-            ? 'asc'
-            : '';
+      if (header.sortable === sort.orderBy) {
+        header.direction = sort.order > 0 ? 'desc' : 'asc';
       }
     });
+  }
+
+  formatDate(date: Date | string, format: string = 'yyyy-MM-dd'): string {
+    if (!date || !this.isValidDate(date)) {
+      return '';
+    }
+    const datePipe = new DatePipe('en-US');
+    return datePipe.transform(date, format);
+  }
+
+  isValidDate(d) {
+    return d instanceof Date && !isNaN(d.getTime());
   }
 
   formatQuery<T>(query: T): T {

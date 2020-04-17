@@ -11,10 +11,10 @@ import { TableQuery } from '../models/tableQuery.model';
 import { Staff } from '../models/staff.model';
 import { Page } from '../models/page.model';
 import { Router, ActivatedRoute } from '@angular/router';
-import { UtilServiceService } from '../services/util-service.service';
-import { SortableDirective } from 'src/app/shared/ngbd-sortable-header.directive';
 import { SortEvent } from 'src/app/shared/sort.model';
 import * as _ from 'lodash';
+import { UtilServiceService } from '../services/util-service.service';
+import { SortableDirective } from 'src/app/shared/sortable.directive';
 
 @Component({
   selector: 'app-tables',
@@ -90,7 +90,6 @@ export class TablesComponent implements OnInit {
   }
 
   onSort(sort: SortEvent) {
-    console.log(sort);
     this.paging.pageNumber = 1;
     this.changeQuery({
       ...this.utilService.getSortQuery(sort, this.headers),
