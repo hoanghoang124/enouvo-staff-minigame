@@ -137,7 +137,8 @@ export function staffReducer(
     case staffActions.StaffActionsType.GET_CAMPAIGN_SUCCESS:
       return {
         ...state,
-        campaigns: action.payload,
+        campaigns: action.payload.campaigns,
+        // total: action.payload.total,
         isGtAllCmpLoading: false
       };
     case staffActions.StaffActionsType.GET_CAMPAIGN_FAILURE:

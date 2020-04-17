@@ -81,10 +81,11 @@ export class StaffEffects {
   @Effect()
   getCampaigns$ = this.actions.pipe(
     ofType(StaffActionsType.GET_CAMPAIGN),
-    switchMap(() => {
-      return this.staffservice.getCampaigns().pipe(
+    map((action: StaffActions.GetCampaign) => action.payload),
+    switchMap(query => {
+      return this.staffservice.getCampaigns(query).pipe(
         map(res => {
-          return new StaffActions.GetCampaignSuccess(res.campaigns);
+          return new StaffActions.GetCampaignSuccess(res);
         }),
         catchError(res => [new StaffActions.GetCampaignFail(res.error.message)])
       );
