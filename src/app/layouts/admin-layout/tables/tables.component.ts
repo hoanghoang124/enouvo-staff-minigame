@@ -9,8 +9,12 @@ import { pageSizes } from '../models/pagination.model';
 import * as fromStaff from '../store';
 import { TableQuery } from '../models/tableQuery.model';
 import { Staff } from '../models/staff.model';
-import { NgbdSortableHeaderDirective } from 'src/app/shared/ngbd-sortable-header.directive';
+import { Page } from '../models/page.model';
+import { Router, ActivatedRoute } from '@angular/router';
+import { UtilServiceService } from '../services/util-service.service';
+import { SortableDirective } from 'src/app/shared/ngbd-sortable-header.directive';
 import { SortEvent } from 'src/app/shared/sort.model';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-tables',
@@ -18,6 +22,8 @@ import { SortEvent } from 'src/app/shared/sort.model';
   styleUrls: ['./tables.component.scss']
 })
 export class TablesComponent implements OnInit {
+  @ViewChildren(SortableDirective) headers: QueryList<SortableDirective>;
+
   staffs$: Observable<Staff[]>;
   isStaffLoading$: Observable<boolean>;
   isLoadingResults$: Observable<boolean>;
@@ -25,31 +31,29 @@ export class TablesComponent implements OnInit {
   editProfileForm: FormGroup;
   resetPasswordForm: FormGroup;
   model: NgbDateStruct;
+  paging: Page;
   pageSizes = pageSizes;
+  defaultQuery = { limit: 5, offset: 1 };
   tableQuery: TableQuery;
   totalItems$: Observable<number>;
   searchText: string;
-  defaultQuery = { limit: 10, offset: 1 };
-  @ViewChildren(NgbdSortableHeaderDirective) headers: QueryList<
-    NgbdSortableHeaderDirective
-  >;
-
   constructor(
     private store: Store<State>,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private utilService: UtilServiceService
   ) {}
 
   ngOnInit() {
     this.tableQuery = this.defaultQuery;
-    // this.fetchTableData(this.tableQuery);
-
     // get staffs from api
-    this.store.dispatch(new fromStaff.GetStaffs());
     this.staffs$ = this.store.select(fromStaff.getAllStaffs);
-    this.totalItems$ = this.store.select(fromStaff.getTotalQuestions);
+    this.totalItems$ = this.store.select(fromStaff.getTotalStaffs);
     this.errorMessage$ = this.store.select(fromStaff.getErrorGtAllStfMessage);
     this.isStaffLoading$ = this.store.select(fromStaff.getIsGtAllStfLoading);
     this.isLoadingResults$ = this.store.select(fromStaff.getIsCrtAccLoading);
+    this.fetchTableData(this.tableQuery);
   }
 
   openUploadCSVFileDialog() {
@@ -85,38 +89,21 @@ export class TablesComponent implements OnInit {
     this.dialogService.createAccout();
   }
 
-  onSort({ column, direction }: SortEvent) {
-    // resetting other headers
-    this.headers.forEach(header => {
-      if (header.sortable !== column) {
-        header.direction = '';
-      }
+  onSort(sort: SortEvent) {
+    console.log(sort);
+    this.paging.pageNumber = 1;
+    this.changeQuery({
+      ...this.utilService.getSortQuery(sort, this.headers),
+      pageNumber: 1
     });
-    switch (direction) {
-      case 'asc':
-        this.tableQuery = {
-          ...this.tableQuery,
-          ...this.defaultQuery,
-          orderBy: column
-        };
-        break;
-      case 'desc':
-        this.tableQuery = {
-          ...this.tableQuery,
-          ...this.defaultQuery,
-          orderBy: '-' + column
-        };
-        break;
-      default:
-        this.tableQuery = { ...this.tableQuery, ...this.defaultQuery };
-        break;
-    }
-    this.fetchTableData(this.tableQuery);
   }
 
-  changeQuery(query: TableQuery = {}) {
-    this.tableQuery = { ...this.defaultQuery, ...query };
-    this.fetchTableData(this.tableQuery);
+  changeQuery(query: any = {}) {
+    let { queryParams } = this.route.snapshot;
+    queryParams = { ...queryParams, ...query };
+    this.router.navigate(['admin'], {
+      queryParams: _.pickBy(queryParams, _.identity)
+    });
   }
 
   changePageSize(event) {
@@ -132,6 +119,6 @@ export class TablesComponent implements OnInit {
 
   fetchTableData(query: TableQuery) {
     query = { ...query, offset: (query.offset - 1) * query.limit };
-    this.store.dispatch(new fromStaff.GetStaffsQuery(query));
+    this.store.dispatch(new fromStaff.GetStaffs(query));
   }
 }

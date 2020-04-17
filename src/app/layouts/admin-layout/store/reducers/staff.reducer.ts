@@ -2,14 +2,13 @@ import { Staff } from '../../models/staff.model';
 import { Campaign } from '../../models/campaign.model';
 import * as staffActions from '../actions/staff.action';
 import * as _ from 'lodash';
-import { EntityAdapter, createEntityAdapter, EntityState } from '@ngrx/entity';
 
-export interface StaffState extends EntityState<Staff> {
+export interface StaffState {
   staffs: Staff[];
   selectedStaff: Staff;
   campaigns: Campaign[];
   selectedCampaign: Campaign;
-  total: number;
+  totalProfiles: number;
   isGtStfLoading: boolean;
   isGtAllStfLoading: boolean;
   isUpdStfLoading: boolean;
@@ -28,14 +27,12 @@ export interface StaffState extends EntityState<Staff> {
   errorDltStfMessage: any;
 }
 
-const adapter: EntityAdapter<Staff> = createEntityAdapter<Staff>();
-
-const initialState: StaffState = adapter.getInitialState({
+const initialState: StaffState = {
   staffs: [],
   selectedStaff: null,
   campaigns: [],
   selectedCampaign: null,
-  total: 0,
+  totalProfiles: 0,
   isGtStfLoading: false,
   isGtAllStfLoading: false,
   isUpdStfLoading: false,
@@ -52,7 +49,7 @@ const initialState: StaffState = adapter.getInitialState({
   errorGtAllCmpMessage: null,
   errorUpdCmpMessage: null,
   errorDltStfMessage: null
-});
+};
 
 export function staffReducer(
   state = initialState,
@@ -68,7 +65,8 @@ export function staffReducer(
     case staffActions.StaffActionsType.GET_STAFFS_SUCCESS:
       return {
         ...state,
-        staffs: action.payload,
+        staffs: action.payload.profiles,
+        totalProfiles: action.payload.totalProfiles,
         isGtAllStfLoading: false
       };
     case staffActions.StaffActionsType.GET_STAFFS_FAILURE:
@@ -76,19 +74,6 @@ export function staffReducer(
         ...state,
         isGtAllStfLoading: false,
         errorGtAllStfMessage: action.payload
-      };
-    case staffActions.StaffActionsType.GET_STAFFS_QUERY:
-      return { ...state, isGtAllStfLoading: true };
-    case staffActions.StaffActionsType.GET_STAFFS_QUERY_SUCCESS:
-      return adapter.addAll(action.payload.results, {
-        ...state,
-        total: action.payload.total,
-        isGtAllStfLoading: false
-      });
-    case staffActions.StaffActionsType.GET_STAFFS_QUERY_FAILURE:
-      return {
-        ...state,
-        isGtAllStfLoading: false
       };
     case staffActions.StaffActionsType.GET_STAFF:
       return {
@@ -228,9 +213,3 @@ export function staffReducer(
       return state;
   }
 }
-export const {
-  selectAll,
-  selectEntities,
-  selectIds,
-  selectTotal
-} = adapter.getSelectors();
