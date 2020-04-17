@@ -17,6 +17,10 @@ export class DashboardComponent implements OnInit {
   errorMessage = null;
   currentUser: any;
   userFromApi: any;
+  campaigns$: Observable<any>;
+  isCampaginLoading$: Observable<boolean>;
+  isLoadingResults$: Observable<boolean>;
+  errorMessage$: Observable<string>;
   staffs: any[];
   stafflist$: Observable<any>;
   isStaffLoading$: Observable<any>;
@@ -27,6 +31,12 @@ export class DashboardComponent implements OnInit {
   constructor(private store: Store<State>) {}
 
   ngOnInit() {
+    this.store.dispatch(new fromStaff.GetCampaign());
+    this.campaigns$ = this.store.select(fromStaff.getAllCampaigns);
+    this.errorMessage$ = this.store.select(fromStaff.getErrorGtAllCmpMessage);
+    this.isLoadingResults$ = this.store.select(fromStaff.getIsCrtCmpLoading);
+    this.isCampaginLoading$ = this.store.select(fromStaff.getIsGtAllCmpLoading);
+
     this.store.dispatch(new fromStaff.GetStaffs());
     this.isStaffLoading$ = this.store.select(fromStaff.getIsGtAllStfLoading);
     this.stafflist$ = this.store.pipe(select(fromStaff.getAllStaffs));

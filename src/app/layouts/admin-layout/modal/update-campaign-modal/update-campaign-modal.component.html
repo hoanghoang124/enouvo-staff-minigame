@@ -13,18 +13,6 @@
               {{ errorMessage$ | async }}
             </span>
           </div>
-          <div class="col text-right">
-            <button type="button" (click)="close()" class="btn btn-secondary ">
-              Cancel
-            </button>
-            <button (click)="onSubmit()" class="btn btn-primary">
-              Submit
-              <i
-                class="fas fa-spinner fa-pulse spinner"
-                *ngIf="isLoadingResults$ | async"
-              ></i>
-            </button>
-          </div>
         </div>
       </div>
       <div class="card-body">
@@ -137,6 +125,22 @@
             </div>
           </div>
         </form>
+      </div>
+      <div class="card-header  border-0">
+        <div class="row align-items-center">
+          <div class="col text-right">
+            <button type="button" (click)="close()" class="btn btn-secondary ">
+              Cancel
+            </button>
+            <button (click)="onSubmit()" class="btn btn-primary">
+              Submit
+              <i
+                class="fas fa-spinner fa-pulse spinner"
+                *ngIf="isLoadingResults$ | async"
+              ></i>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>

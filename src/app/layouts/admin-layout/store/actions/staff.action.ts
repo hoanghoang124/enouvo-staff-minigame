@@ -1,5 +1,6 @@
 import { Action } from '@ngrx/store';
 import { Staff } from '../../models/staff.model';
+import { Campaign } from '../../models/campaign.model';
 
 export enum StaffActionsType {
   GET_STAFFS = '[Staff] Get Staffs',
@@ -28,19 +29,7 @@ export enum StaffActionsType {
 
   UPDATE_CAMPAIGN = '[Campaign] Update Campaign',
   UPDATE_CAMPAIGN_SUCCESS = '[Campaign] Update Campaign Success',
-  UPDATE_CAMPAIGN_FAILURE = '[Campaign] Update Campaign Failure',
-
-  DELETE_STAFF = '[Staff] Deletes Staff',
-  DELETE_STAFF_SUCCESS = '[Staff] Deletes Staff Success',
-  DELETE_STAFF_FAILURE = '[Staff] Deletes Staff Failure',
-
-  UPDATE_STAFF = '[Staff] Updates Staff',
-  UPDATE_STAFF_SUCCESS = '[Staff] Updates Staff Success',
-  UPDATE_STAFF_FAILURE = '[Staff] Updates Staff Failure',
-
-  UPLOAD_IMAGE = '[Image] Upload Image',
-  UPLOAD_IMAGE_SUCCESS = '[Image] Upload Image Success',
-  UPLOAD_IMAGE_FAILURE = '[Image] Upload Image Failure'
+  UPDATE_CAMPAIGN_FAILURE = '[Campaign] Update Campaign Failure'
 }
 
 export class GetStaffs implements Action {
@@ -126,7 +115,7 @@ export class GetCampaignFail implements Action {
 
 export class UpdateCampaign implements Action {
   public readonly type = StaffActionsType.UPDATE_CAMPAIGN;
-  constructor(public payload: any) {}
+  constructor(public payload: { id: number; campaign: Campaign }) {}
 }
 export class UpdateCampaignSuccess implements Action {
   public readonly type = StaffActionsType.UPDATE_CAMPAIGN_SUCCESS;
@@ -137,35 +126,20 @@ export class UpdateCampaignFail implements Action {
   constructor(public payload: any) {}
 }
 
-export class DeleteStaff implements Action {
-  public readonly type = StaffActionsType.DELETE_STAFF;
-  constructor(public payload: Staff) {}
-}
+// export class UpdateStaff implements Action {
+//   public readonly type = StaffActionsType.UPDATE_STAFF;
+//   constructor(public payload: Staff) {}
+// }
 
-export class DeleteStaffSuccess implements Action {
-  public readonly type = StaffActionsType.DELETE_STAFF_SUCCESS;
-  constructor(public payload: Staff) {}
-}
+// export class UpdateStaffSuccess implements Action {
+//   public readonly type = StaffActionsType.UPDATE_STAFF_SUCCESS;
+//   constructor(public payload: Staff) {}
+// }
 
-export class DeleteStaffFail implements Action {
-  public readonly type = StaffActionsType.DELETE_STAFF_FAILURE;
-  constructor(public payload: Error) {}
-}
-
-export class UpdateStaff implements Action {
-  public readonly type = StaffActionsType.UPDATE_STAFF;
-  constructor(public payload: Staff) {}
-}
-
-export class UpdateStaffSuccess implements Action {
-  public readonly type = StaffActionsType.UPDATE_STAFF_SUCCESS;
-  constructor(public payload: Staff) {}
-}
-
-export class UpdateStaffFail implements Action {
-  public readonly type = StaffActionsType.UPDATE_STAFF_FAILURE;
-  constructor(public payload: Error) {}
-}
+// export class UpdateStaffFail implements Action {
+//   public readonly type = StaffActionsType.UPDATE_STAFF_FAILURE;
+//   constructor(public payload: Error) {}
+// }
 
 export type StaffActions =
   | GetStaffs
@@ -174,9 +148,6 @@ export type StaffActions =
   | GetStaffsQuery
   | GetStaffsQuerySuccess
   | GetStaffsQueryFail
-  | DeleteStaff
-  | DeleteStaffSuccess
-  | DeleteStaffFail
   | GetStaff
   | GetStaffSuccess
   | GetStaffFail
@@ -191,7 +162,4 @@ export type StaffActions =
   | GetCampaignFail
   | UpdateCampaign
   | UpdateCampaignSuccess
-  | UpdateCampaignFail
-  | UpdateStaff
-  | UpdateStaffSuccess
-  | UpdateStaffFail;
+  | UpdateCampaignFail;

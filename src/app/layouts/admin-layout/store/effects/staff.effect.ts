@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Effect, ofType, Actions } from '@ngrx/effects';
-import { map, catchError, switchMap, tap } from 'rxjs/operators';
-import { of, Observable } from 'rxjs';
+import { map, catchError, switchMap } from 'rxjs/operators';
+import { of } from 'rxjs';
 import { StaffService } from '../../services/staff.service';
 import { Router } from '@angular/router';
 import * as StaffActions from '../actions/staff.action';
@@ -60,9 +60,9 @@ export class StaffEffects {
     map((action: StaffActions.CreateAccount) => action.payload),
     switchMap(payload => {
       return this.staffservice.create(payload).pipe(
-        map(user => {
+        map(() => {
           this.route.navigateByUrl('/tables');
-          return new StaffActions.CreateAccountSuccess(user);
+          return new StaffActions.CreateAccountSuccess(payload);
         }),
         catchError(res =>
           of(new StaffActions.CreateAccountFailure(res.error.message))
@@ -100,56 +100,18 @@ export class StaffEffects {
     })
   );
 
-  @Effect({ dispatch: false })
-  CreateCampaignSuccess$: Observable<any> = this.actions.pipe(
-    ofType(StaffActionsType.CREATE_CAMPAIGN_SUCCESS),
-    tap(campaign => {
-      localStorage.setItem('campaignId', campaign.payload.campaignId);
-    })
-  );
-
-  @Effect()
-  updateStaff$ = this.actions.pipe(
-    ofType(StaffActionsType.UPDATE_STAFF),
-    map((action: StaffActions.UpdateStaff) => action.payload),
-    switchMap(staff => {
-      return this.staffservice.updateStaff(staff).pipe(
-        map(() => {
-          this.route.navigate(['/admin/' + staff.id + '/detail']);
-          return new StaffActions.UpdateStaffSuccess(staff);
-        }),
-        catchError(res => [new StaffActions.UpdateStaffFail(res.error.message)])
-      );
-    })
-  );
-
   @Effect()
   updateCampaign$ = this.actions.pipe(
     ofType(StaffActionsType.UPDATE_CAMPAIGN),
     map((action: StaffActions.UpdateCampaign) => action.payload),
-    switchMap(id => {
-      return this.staffservice.updateCampaign(id).pipe(
-        map(res => {
+    switchMap(res => {
+      return this.staffservice.updateCampaign(res.id, res.campaign).pipe(
+        map(() => {
           return new StaffActions.UpdateCampaignSuccess(res);
         }),
         catchError(res => [
           new StaffActions.UpdateCampaignFail(res.error.message)
         ])
-      );
-    })
-  );
-
-  @Effect()
-  removeStaff$ = this.actions.pipe(
-    ofType(StaffActionsType.DELETE_STAFF),
-    map((action: StaffActions.DeleteStaff) => action.payload),
-    switchMap(staff => {
-      return this.staffservice.deleteStaff(staff).pipe(
-        map(res => {
-          this.route.navigate(['admin']);
-          return new StaffActions.DeleteStaffSuccess(res);
-        }),
-        catchError(res => [new StaffActions.DeleteStaffFail(res.error.message)])
       );
     })
   );

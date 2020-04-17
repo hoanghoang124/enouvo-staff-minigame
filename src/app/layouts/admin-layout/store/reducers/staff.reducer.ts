@@ -1,8 +1,8 @@
 import { Staff } from '../../models/staff.model';
 import { Campaign } from '../../models/campaign.model';
+import { EntityAdapter, createEntityAdapter, EntityState } from '@ngrx/entity';
 import * as staffActions from '../actions/staff.action';
 import * as _ from 'lodash';
-import { EntityAdapter, createEntityAdapter, EntityState } from '@ngrx/entity';
 
 export interface StaffState extends EntityState<Staff> {
   staffs: Staff[];
@@ -12,20 +12,16 @@ export interface StaffState extends EntityState<Staff> {
   total: number;
   isGtStfLoading: boolean;
   isGtAllStfLoading: boolean;
-  isUpdStfLoading: boolean;
   isCrtAccLoading: boolean;
   isCrtCmpLoading: boolean;
   isGtAllCmpLoading: boolean;
   isUpdCmpLoading: boolean;
-  isDltStfLoading: boolean;
   errorGtAllStfMessage: any;
   errorGtStfMessage: any;
-  errorUpdStfMessage: any;
   errorCrtAccMessage: any;
   errorGtAllCmpMessage: any;
   errorCrtCmpMessage: any;
   errorUpdCmpMessage: any;
-  errorDltStfMessage: any;
 }
 
 const adapter: EntityAdapter<Staff> = createEntityAdapter<Staff>();
@@ -38,20 +34,16 @@ const initialState: StaffState = adapter.getInitialState({
   total: 0,
   isGtStfLoading: false,
   isGtAllStfLoading: false,
-  isUpdStfLoading: false,
   isCrtAccLoading: false,
   isCrtCmpLoading: false,
   isGtAllCmpLoading: false,
   isUpdCmpLoading: false,
-  isDltStfLoading: false,
   errorGtStfMessage: null,
   errorGtAllStfMessage: null,
-  errorUpdStfMessage: null,
   errorCrtAccMessage: null,
   errorCrtCmpMessage: null,
   errorGtAllCmpMessage: null,
-  errorUpdCmpMessage: null,
-  errorDltStfMessage: null
+  errorUpdCmpMessage: null
 });
 
 export function staffReducer(
@@ -119,7 +111,8 @@ export function staffReducer(
     case staffActions.StaffActionsType.CREATE_ACCOUNT_SUCCESS: {
       return {
         ...state,
-        isCrtAccLoading: false
+        isCrtAccLoading: false,
+        staffs: [...state.staffs, action.payload]
       };
     }
     case staffActions.StaffActionsType.CREATE_ACCOUNT_FAILURE: {
@@ -139,7 +132,8 @@ export function staffReducer(
     case staffActions.StaffActionsType.CREATE_CAMPAIGN_SUCCESS: {
       return {
         ...state,
-        isCrtCmpLoading: false
+        isCrtCmpLoading: false,
+        campaigns: [...state.campaigns, action.payload]
       };
     }
     case staffActions.StaffActionsType.CREATE_CAMPAIGN_FAILURE: {
@@ -167,24 +161,6 @@ export function staffReducer(
         isGtAllCmpLoading: false,
         errorGtAllCmpMessage: action.payload
       };
-    case staffActions.StaffActionsType.UPDATE_STAFF:
-      return {
-        ...state,
-        isGtAllStfLoading: true,
-        errorUpdStfMessage: null
-      };
-    case staffActions.StaffActionsType.UPDATE_STAFF_SUCCESS:
-      return {
-        ...state,
-        selectedStaff: action.payload,
-        isGtAllStfLoading: false
-      };
-    case staffActions.StaffActionsType.UPDATE_STAFF_FAILURE:
-      return {
-        ...state,
-        isGtAllStfLoading: false,
-        errorUpdStfMessage: action.payload
-      };
     case staffActions.StaffActionsType.UPDATE_CAMPAIGN:
       return {
         ...state,
@@ -192,6 +168,13 @@ export function staffReducer(
         errorUpdCmpMessage: null
       };
     case staffActions.StaffActionsType.UPDATE_CAMPAIGN_SUCCESS:
+      // console.log(action.payload);
+      // _.forEach(state.campaigns, item => {
+      //   if (item.id === action.payload.id) {
+      //     item === action.payload;
+      //   }
+      // });
+
       return {
         ...state,
         isUpdCmpLoading: false,
@@ -202,27 +185,6 @@ export function staffReducer(
         ...state,
         isUpdCmpLoading: false,
         errorUpdCmpMessage: action.payload
-      };
-    case staffActions.StaffActionsType.DELETE_STAFF: {
-      return {
-        ...state,
-        isGtAllStfLoading: true,
-        errorDltStfMessage: null
-      };
-    }
-    case staffActions.StaffActionsType.DELETE_STAFF_SUCCESS: {
-      return {
-        ...state,
-        staffs: _.filter(state.staffs, staff => staff.id !== action.payload.id),
-        selectedStaff: null,
-        isGtAllStfLoading: false
-      };
-    }
-    case staffActions.StaffActionsType.DELETE_STAFF_FAILURE:
-      return {
-        ...state,
-        isGtAllStfLoading: false,
-        errorDltStfMessage: action.payload
       };
     default:
       return state;

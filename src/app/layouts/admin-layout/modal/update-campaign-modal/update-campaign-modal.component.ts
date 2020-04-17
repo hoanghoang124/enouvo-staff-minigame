@@ -43,7 +43,10 @@ export class UpdateCampaignModalComponent implements OnInit {
       return;
     } else {
       this.store.dispatch(
-        new fromStaff.UpdateCampaign(this.updateCampaignForm.value)
+        new fromStaff.UpdateCampaign({
+          id: this.campaignId,
+          campaign: this.updateCampaignForm.value
+        })
       );
       this.activeModal.dismiss();
     }
