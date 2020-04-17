@@ -22,7 +22,7 @@ import { SortableDirective } from 'src/app/shared/sortable.directive';
   styleUrls: ['./tables.component.scss']
 })
 export class TablesComponent implements OnInit {
-  @ViewChildren(SortableDirective) headers: QueryList<SortableDirective>;
+  @ViewChildren(SortableDirective) headers1: QueryList<SortableDirective>;
 
   staffs$: Observable<Staff[]>;
   isStaffLoading$: Observable<boolean>;
@@ -92,7 +92,7 @@ export class TablesComponent implements OnInit {
   onSort(sort: SortEvent) {
     this.paging.pageNumber = 1;
     this.changeQuery({
-      ...this.utilService.getSortQuery(sort, this.headers),
+      ...this.utilService.getSortQuery(sort, this.headers1),
       pageNumber: 1
     });
   }

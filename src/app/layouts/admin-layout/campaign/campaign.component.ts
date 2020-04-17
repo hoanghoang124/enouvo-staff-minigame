@@ -1,9 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
 import { State } from '../../auth-layout/store';
 import { Store } from '@ngrx/store';
 import { DialogService } from '../services/dialog.service';
 import { Observable } from 'rxjs';
 import * as fromStaff from '../store';
+import { pageSizes } from '../models/pagination.model';
+import { TableQuery } from '../models/tableQuery.model';
+import { UtilServiceService } from '../services/util-service.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { SortEvent } from 'src/app/shared/sort.model';
+import * as _ from 'lodash';
+import { SortableDirective } from 'src/app/shared/sortable.directive';
+import { Page } from '../models/page.model';
+import { Campaign } from '../models/campaign.model';
 
 @Component({
   selector: 'app-campaign',
@@ -11,21 +20,34 @@ import * as fromStaff from '../store';
   styleUrls: ['./campaign.component.scss']
 })
 export class CampaignComponent implements OnInit {
-  campaigns$: Observable<any>;
+  @ViewChildren(SortableDirective) headers2: QueryList<SortableDirective>;
+
+  campaigns$: Observable<Campaign[]>;
   isCampaginLoading$: Observable<boolean>;
   isLoadingResults$: Observable<boolean>;
   errorMessage$: Observable<string>;
+  paging: Page;
+  pageSizes = pageSizes;
+  defaultQuery = { limit: 5, offset: 1 };
+  tableQuery: TableQuery;
+  // totalItems$: Observable<number>;
   constructor(
     private store: Store<State>,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private utilService: UtilServiceService,
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
-    this.store.dispatch(new fromStaff.GetCampaign());
+    this.tableQuery = this.defaultQuery;
     this.campaigns$ = this.store.select(fromStaff.getAllCampaigns);
+    // this.totalItems$ = this.store.select(fromStaff.getTotalStaffs);
+
     this.errorMessage$ = this.store.select(fromStaff.getErrorGtAllCmpMessage);
     this.isLoadingResults$ = this.store.select(fromStaff.getIsCrtCmpLoading);
     this.isCampaginLoading$ = this.store.select(fromStaff.getIsGtAllCmpLoading);
+    this.fetchTableData(this.tableQuery);
   }
 
   openCreateCampaignDialog() {
@@ -34,5 +56,37 @@ export class CampaignComponent implements OnInit {
 
   openUpdateCampaignDialog(campaignId) {
     this.dialogService.updateCampaign(campaignId);
+  }
+
+  onSort(sort: SortEvent) {
+    this.paging.pageNumber = 1;
+    this.changeQuery({
+      ...this.utilService.getSortQuery(sort, this.headers2),
+      pageNumber: 1
+    });
+  }
+
+  changeQuery(query: any = {}) {
+    let { queryParams } = this.route.snapshot;
+    queryParams = { ...queryParams, ...query };
+    this.router.navigate(['admin'], {
+      queryParams: _.pickBy(queryParams, _.identity)
+    });
+  }
+
+  changePageSize(event) {
+    const limit = parseInt(event.target.value, 10);
+    this.tableQuery = { ...this.tableQuery, limit };
+    this.fetchTableData(this.tableQuery);
+  }
+
+  changePage(event) {
+    this.tableQuery = { ...this.tableQuery, offset: event };
+    this.fetchTableData({ ...this.tableQuery, offset: event });
+  }
+
+  fetchTableData(query: TableQuery) {
+    query = { ...query, offset: (query.offset - 1) * query.limit };
+    this.store.dispatch(new fromStaff.GetCampaign(query));
   }
 }

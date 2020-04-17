@@ -21,9 +21,9 @@ export class StaffService {
     return this.apiService.get(url);
   }
 
-  getCampaigns(): Observable<any> {
+  getCampaigns(params?: any): Observable<any> {
     const url = `${this.BASE_URL}/v1/campaigns`;
-    return this.apiService.get(url);
+    return this.apiService.get(url, params);
   }
 
   create(params): Observable<any> {
