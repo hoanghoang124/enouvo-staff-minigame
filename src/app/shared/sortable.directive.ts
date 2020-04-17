@@ -6,7 +6,7 @@ import {
   HostListener,
   HostBinding
 } from '@angular/core';
-import { SortEvent, rotate, SortDirection } from '../shared/sort.model';
+import { SortDirection, SortEvent, rotate } from './sort.model';
 
 @Directive({
   selector: '[appSortable]'
@@ -23,6 +23,6 @@ export class SortableDirective {
   }
   @HostListener('click') rotate() {
     this.direction = rotate[this.direction];
-    this.sort.emit({ sortBy: this.sortable, sortDesc: this.direction });
+    this.sort.emit({ orderBy: this.sortable, order: this.direction });
   }
 }

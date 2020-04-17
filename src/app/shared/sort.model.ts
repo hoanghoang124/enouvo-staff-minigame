@@ -6,11 +6,11 @@ export const rotate: { [key: string]: SortDirection } = {
 };
 
 export class SortEvent {
-  sortBy: string;
-  sortDesc: SortDirection | boolean | string;
+  orderBy: string;
+  order: SortDirection | string | number | boolean;
 
   constructor() {
-    this.sortBy = '';
-    this.sortDesc = '';
+    this.orderBy = '';
+    this.order = '';
   }
 }
