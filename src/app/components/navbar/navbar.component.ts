@@ -54,7 +54,7 @@ export class NavbarComponent implements OnInit {
 
   openUserProfileModal(userId) {
     this.dialogService
-      .seeProfile(userId)
+      .viewProfile(userId)
       .then(confirmed => console.log('User confirmed, confirmed', confirmed))
       .catch(() => console.log('User dismissed the dialog'));
   }

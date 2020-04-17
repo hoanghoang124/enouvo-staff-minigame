@@ -81,7 +81,7 @@ export class DialogService {
     return modalRef.result;
   }
 
-  public seeProfile(userId: number): Promise<boolean> {
+  public viewProfile(userId: number): Promise<boolean> {
     const modalRef = this.modalService.open(UserProfileModalComponent, {
       windowClass: 'dialog-size-xxl',
       centered: true
@@ -100,7 +100,7 @@ export class DialogService {
     return modalRef.result;
   }
 
-  public seeCampaign(campaignId: number): Promise<boolean> {
+  public viewCampaigns(campaignId: number): Promise<boolean> {
     const modalRef = this.modalService.open(CampaignProfileModalComponent, {
       windowClass: 'dialog-size-xl',
       centered: true

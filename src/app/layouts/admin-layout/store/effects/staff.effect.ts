@@ -65,9 +65,10 @@ export class StaffEffects {
   createCampaign$ = this.actions.pipe(
     ofType(StaffActionsType.CREATE_CAMPAIGN),
     map((action: StaffActions.CreateCampaign) => action.payload),
-    switchMap(campaign => {
-      return this.staffservice.createCampaign(campaign).pipe(
-        map(campaign => {
+    switchMap(obj => {
+      return this.staffservice.createCampaign(obj).pipe(
+        map(campaignId => {
+          const campaign = { id: campaignId, ...obj };
           return new StaffActions.CreateCampaignSuccess(campaign);
         }),
         catchError(res => [

@@ -103,7 +103,9 @@
                 <td>
                   {{ staff.birthday | date: 'dd/MM/yyyy' || 'n/a' }}
                 </td>
-                <td>{{ staff.email || 'n/a' }}</td>
+                <td style="text-transform: lowercase;">
+                  {{ staff.email || 'n/a' }}
+                </td>
                 <td>{{ staff.position || 'n/a' }}</td>
                 <td class="action" (click)="openConfirmationDialog(staff.id)">
                   <button class="btn btn-sm btn-warning">Reset Password</button>
@@ -117,7 +119,7 @@
           *ngIf="(staffs$ | async).length"
         >
           <select
-            class="custom-select sm-size"
+            class="custom-select"
             style="width: auto"
             name="pageSize"
             [value]="tableQuery.limit"

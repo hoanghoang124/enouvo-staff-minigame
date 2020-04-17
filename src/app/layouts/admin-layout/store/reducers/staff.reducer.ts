@@ -153,17 +153,18 @@ export function staffReducer(
         errorUpdCmpMessage: null
       };
     case staffActions.StaffActionsType.UPDATE_CAMPAIGN_SUCCESS:
-      // console.log(action.payload);
-      // _.forEach(state.campaigns, item => {
-      //   if (item.id === action.payload.id) {
-      //     item === action.payload;
-      //   }
-      // });
+      const newCampaign = _.map(state.campaigns, item => {
+        if (item.id === action.payload.id) {
+          return { id: item.id, ...action.payload.campaign };
+        }
+        return item;
+      });
 
       return {
         ...state,
         isUpdCmpLoading: false,
-        selectedCampaign: action.payload
+        selectedCampaign: action.payload,
+        campaigns: newCampaign
       };
     case staffActions.StaffActionsType.UPDATE_CAMPAIGN_FAILURE:
       return {
