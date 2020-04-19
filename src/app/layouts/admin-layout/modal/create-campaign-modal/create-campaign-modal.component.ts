@@ -42,7 +42,6 @@ export class CreateCampaignModalComponent implements OnInit {
       this.store.dispatch(
         new fromStaff.CreateCampaign(this.createCampaignForm.value)
       );
-      this.activeModal.dismiss();
     }
   }
 

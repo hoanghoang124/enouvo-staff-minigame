@@ -52,7 +52,6 @@ export class CreateAccountModalComponent implements OnInit {
       this.store.dispatch(
         new fromStaff.CreateAccount(this.createAccountForm.value)
       );
-      this.activeModal.dismiss();
     }
   }
 

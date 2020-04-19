@@ -5,14 +5,22 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { TablesComponent } from './tables/tables.component';
 import { AdminGuard } from '../auth-layout/services/role-guard.service';
 import { AuthGuard } from '../auth-layout/services/auth-guard.service';
+import { CampaignProfileAsStaffModalComponent } from './modal/campaign-profile-as-staff-modal/campaign-profile-as-staff-modal.component';
 export const AdminLayoutRoutes: Routes = [
   {
     path: 'dashboard',
-    component: DashboardComponent
+    component: DashboardComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'campaign-staff',
+    component: CampaignProfileAsStaffModalComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'dashboard/:id',
-    component: UserProfileComponent
+    component: UserProfileComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'tables/:id',

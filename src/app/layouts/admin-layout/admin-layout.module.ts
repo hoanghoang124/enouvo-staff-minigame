@@ -25,7 +25,8 @@ import { CreateAccountModalComponent } from './modal/create-account-modal/create
 import { CreateCampaignModalComponent } from './modal/create-campaign-modal/create-campaign-modal.component';
 import { UserProfileModalComponent } from './modal/user-profile-modal/user-profile-modal.component';
 import { UpdateCampaignModalComponent } from './modal/update-campaign-modal/update-campaign-modal.component';
-import { CampaignProfileModalComponent } from './modal/campaign-profile-modal/campaign-profile-modal.component';
+import { CampaignProfileAsAdminModalComponent } from './modal/campaign-profile-as-admin-modal/campaign-profile-as-admin-modal.component';
+import { CampaignProfileAsStaffModalComponent } from './modal/campaign-profile-as-staff-modal/campaign-profile-as-staff-modal.component';
 
 // import { ToastrModule } from 'ngx-toastr';
 
@@ -57,7 +58,8 @@ import { CampaignProfileModalComponent } from './modal/campaign-profile-modal/ca
     CreateCampaignModalComponent,
     UserProfileModalComponent,
     UpdateCampaignModalComponent,
-    CampaignProfileModalComponent
+    CampaignProfileAsAdminModalComponent,
+    CampaignProfileAsStaffModalComponent
   ]
 })
 export class AdminLayoutModule {}

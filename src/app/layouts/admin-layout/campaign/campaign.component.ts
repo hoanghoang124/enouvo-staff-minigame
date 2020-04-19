@@ -3,12 +3,12 @@ import { State } from '../../auth-layout/store';
 import { Store } from '@ngrx/store';
 import { DialogService } from '../services/dialog.service';
 import { Observable } from 'rxjs';
-import * as fromStaff from '../store';
 import { pageSizes } from '../models/pagination.model';
 import { TableQuery } from '../models/tableQuery.model';
 import { UtilServiceService } from '../services/util-service.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SortEvent } from 'src/app/shared/sort.model';
+import * as fromStaff from '../store';
 import * as _ from 'lodash';
 import { SortableDirective } from 'src/app/shared/sortable.directive';
 import { Page } from '../models/page.model';
@@ -58,6 +58,9 @@ export class CampaignComponent implements OnInit {
     this.dialogService.updateCampaign(campaignId);
   }
 
+  viewCampaignAsAdminDialog() {
+    this.dialogService.viewCampaignAsAdminPosition();
+  }
   onSort(sort: SortEvent) {
     this.paging.pageNumber = 1;
     this.changeQuery({

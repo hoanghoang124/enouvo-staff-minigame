@@ -71,7 +71,7 @@
     </a>
 
     <!-- User -->
-    <ul class="nav align-items-center" *ngIf="staff$ | async; let staff">
+    <ul class="nav align-items-center">
       <li
         class="nav-item"
         ngbDropdown
@@ -84,7 +84,8 @@
               <img
                 alt="Image placeholder"
                 src="{{
-                  staff.avatarUrl || '../../../assets/img/avatar/IMG_1171.JPG'
+                  (staff$ | async)?.avatarUrl ||
+                    '../../../assets/img/avatar/IMG_1171.JPG'
                 }}"
               />
             </span>
@@ -92,7 +93,7 @@
               <span
                 class="mb-0 text-sm nav-link font-weight-bold"
                 style="text-transform: capitalize;"
-                >{{ staff.firstName }}
+                >{{ (staff$ | async)?.firstName }}
               </span>
             </div>
           </div>

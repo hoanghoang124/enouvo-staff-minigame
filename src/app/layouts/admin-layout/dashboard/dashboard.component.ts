@@ -51,4 +51,8 @@ export class DashboardComponent implements OnInit {
       .then(confirmed => console.log('User confirmed, confirmed', confirmed))
       .catch(() => console.log('User dismissed the dialog'));
   }
+
+  viewCampaignAsStaffPosition() {
+    this.dialogService.viewCampaignAsStaffPosition();
+  }
 }

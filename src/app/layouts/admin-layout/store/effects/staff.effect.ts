@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Effect, ofType, Actions } from '@ngrx/effects';
-import { map, catchError, switchMap } from 'rxjs/operators';
-import { of } from 'rxjs';
+import { map, catchError, switchMap, tap } from 'rxjs/operators';
+import { of, Observable } from 'rxjs';
 import { StaffService } from '../../services/staff.service';
 import { Router } from '@angular/router';
 import * as StaffActions from '../actions/staff.action';
+import { DialogService } from '../../services/dialog.service';
 
 const { StaffActionsType } = StaffActions;
 
@@ -13,6 +14,7 @@ export class StaffEffects {
   constructor(
     private actions: Actions,
     private staffservice: StaffService,
+    private dialogService: DialogService,
     private route: Router
   ) {}
 
@@ -61,6 +63,14 @@ export class StaffEffects {
     })
   );
 
+  @Effect({ dispatch: false })
+  CreateAccountSuccess: Observable<any> = this.actions.pipe(
+    ofType(StaffActionsType.CREATE_ACCOUNT_SUCCESS),
+    tap(() => {
+      this.dialogService.closeCreateAccount();
+    })
+  );
+
   @Effect()
   createCampaign$ = this.actions.pipe(
     ofType(StaffActionsType.CREATE_CAMPAIGN),
@@ -75,6 +85,14 @@ export class StaffEffects {
           new StaffActions.CreateCampaignFail(res.error.message)
         ])
       );
+    })
+  );
+
+  @Effect({ dispatch: false })
+  CreateCampaignSuccess: Observable<any> = this.actions.pipe(
+    ofType(StaffActionsType.CREATE_CAMPAIGN_SUCCESS),
+    tap(() => {
+      this.dialogService.closeCreateCampaign();
     })
   );
 
@@ -105,6 +123,14 @@ export class StaffEffects {
           new StaffActions.UpdateCampaignFail(res.error.message)
         ])
       );
+    })
+  );
+
+  @Effect({ dispatch: false })
+  updateCampaignSuccess: Observable<any> = this.actions.pipe(
+    ofType(StaffActionsType.UPDATE_CAMPAIGN_SUCCESS),
+    tap(() => {
+      this.dialogService.closeUpdateCampaign();
     })
   );
 }

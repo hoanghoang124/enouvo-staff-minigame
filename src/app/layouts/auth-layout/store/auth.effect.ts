@@ -69,6 +69,14 @@ export class AuthEffects {
     })
   );
 
+  @Effect({ dispatch: false })
+  ChangePasswordSuccess: Observable<any> = this.actions.pipe(
+    ofType(AuthActionTypes.CHANGE_PASSWORD_SUCCESS),
+    tap(() => {
+      this.dialogService.closeChangePassword();
+    })
+  );
+
   @Effect()
   ResetPassword$: Observable<any> = this.actions.pipe(
     ofType(AuthActionTypes.RESET_PASSWORD),

@@ -14,6 +14,11 @@ import { CampaignStates } from '../../models/campaign-states.model';
 })
 export class UpdateCampaignModalComponent implements OnInit {
   @Input() campaignId: number;
+  @Input() title: string;
+  @Input() description: string;
+  @Input() isCampaignActive: boolean;
+  @Input() startDate: Date;
+  @Input() endDate: Date;
 
   errorMessage$: Observable<string>;
   isLoadingResults$: Observable<boolean>;
@@ -48,7 +53,6 @@ export class UpdateCampaignModalComponent implements OnInit {
           campaign: this.updateCampaignForm.value
         })
       );
-      this.activeModal.dismiss();
     }
   }
 

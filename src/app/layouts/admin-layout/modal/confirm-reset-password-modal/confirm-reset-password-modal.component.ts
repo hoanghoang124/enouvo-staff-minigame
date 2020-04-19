@@ -1,15 +1,15 @@
-import { Component, OnInit, Input } from "@angular/core";
-import { Observable } from "rxjs";
-import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
-import { Store } from "@ngrx/store";
-import { State } from "src/app/layouts/auth-layout/store";
-import * as fromAuthAction from "../../../auth-layout/store/auth.action";
-import * as fromAuthSelector from "../../../auth-layout/store/auth.selector";
+import { Component, OnInit, Input } from '@angular/core';
+import { Observable } from 'rxjs';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Store } from '@ngrx/store';
+import { State } from 'src/app/layouts/auth-layout/store';
+import * as fromAuthAction from '../../../auth-layout/store/auth.action';
+import * as fromAuthSelector from '../../../auth-layout/store/auth.selector';
 
 @Component({
-  selector: "app-confirm-reset-password-modal",
-  templateUrl: "./confirm-reset-password-modal.component.html",
-  styleUrls: ["./confirm-reset-password-modal.component.scss"],
+  selector: 'app-confirm-reset-password-modal',
+  templateUrl: './confirm-reset-password-modal.component.html',
+  styleUrls: ['./confirm-reset-password-modal.component.scss']
 })
 export class ConfirmResetPasswordModalComponent implements OnInit {
   @Input() title: string;
@@ -39,7 +39,6 @@ export class ConfirmResetPasswordModalComponent implements OnInit {
     this.store.dispatch(
       new fromAuthAction.ResetPassword({ profileId: this.userId })
     );
-    this.activeModal.close(true);
   }
 
   public dismiss() {

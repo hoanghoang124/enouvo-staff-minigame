@@ -89,7 +89,6 @@ export class ChangePasswordModalComponent implements OnInit {
       this.store.dispatch(
         new fromAuthAction.ChangePassword(changePasswordValue)
       );
-      this.activeModal.close(true);
     }
   }
 

@@ -39,7 +39,6 @@ export class NavbarComponent implements OnInit {
     });
     this.store.dispatch(new fromStaff.GetStaff(this.userId));
     this.staff$ = this.store.select(fromStaff.getStaff);
-    // this.username = localStorage.getItem('username');
   }
 
   openChangePasswordDialog() {

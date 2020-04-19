@@ -18,29 +18,50 @@
                   <table class="table align-items-center table-flush">
                     <thead class="thead-light">
                       <tr>
-                        <th style="text-align: center;">#</th>
+                        <th style="text-align: center;">Id</th>
                         <th>Title</th>
                         <th>Description</th>
+                        <th>Start Time</th>
+                        <th>End Time</th>
+                        <th>Star Limitation</th>
+                        <th>Unvoted Stars</th>
+                        <th>Voted to</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr
-                        *ngFor="let campaign of campaigns$ | async; index as i"
+                        *ngFor="let campaign of campaigns$ | async"
                         style="text-transform: capitalize;"
                       >
                         <th scope="row">
                           <div class="media align-items-center">
                             <div class="media-body">
-                              <span class="mb-0 text-sm">{{ i + 1 }}</span>
+                              <span class="mb-0 text-sm">{{
+                                campaign.id
+                              }}</span>
                             </div>
                           </div>
                         </th>
-                        <td style="font-weight: bold;">
+                        <td
+                          style="font-weight: bold;"
+                          routerLink="/campaign-staff"
+                        >
                           {{ campaign.title || 'n/a' }}
                         </td>
                         <td>
                           {{ campaign.description || 'n/a' }}
                         </td>
+                        <td>
+                          {{ campaign.startDate | date: 'dd/MM/yyyy' || 'n/a' }}
+                        </td>
+                        <td>
+                          {{ campaign.endDate | date: 'dd/MM/yyyy' || 'n/a' }}
+                        </td>
+                        <td>
+                          {{ campaign.starLimitation || 'n/a' }}
+                        </td>
+                        <td>N/a</td>
+                        <td>N/a</td>
                       </tr>
                     </tbody>
                   </table>
