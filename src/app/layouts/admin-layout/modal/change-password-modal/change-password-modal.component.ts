@@ -1,19 +1,20 @@
-import { Component, OnInit, Input } from "@angular/core";
-import { Store } from "@ngrx/store";
-import { State } from "src/app/layouts/auth-layout/store";
-import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
-import { Observable } from "rxjs";
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import * as fromAuthSelector from "../../../auth-layout/store/auth.selector";
-import * as fromAuthAction from "../../../auth-layout/store/auth.action";
+import { Component, OnInit, Input } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { State } from 'src/app/layouts/auth-layout/store';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Observable } from 'rxjs';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import * as fromAuthSelector from '../../../auth-layout/store/auth.selector';
+import * as fromAuthAction from '../../../auth-layout/store/auth.action';
 
 @Component({
-  selector: "app-change-password-modal",
-  templateUrl: "./change-password-modal.component.html",
-  styleUrls: ["./change-password-modal.component.scss"]
+  selector: 'app-change-password-modal',
+  templateUrl: './change-password-modal.component.html',
+  styleUrls: ['./change-password-modal.component.scss']
 })
 export class ChangePasswordModalComponent implements OnInit {
   @Input() title: string;
+  @Input() message: string;
   @Input() btnOkText: string;
   @Input() btnCancelText: string;
 
@@ -33,12 +34,12 @@ export class ChangePasswordModalComponent implements OnInit {
   ngOnInit() {
     this.changePasswordForm = this.formBuilder.group(
       {
-        currentPassword: ["", [Validators.required, Validators.minLength(8)]],
-        newPassword: ["", [Validators.required, Validators.minLength(8)]],
-        confirmPassword: ["", [Validators.required, Validators.minLength(8)]]
+        currentPassword: ['', [Validators.required, Validators.minLength(8)]],
+        newPassword: ['', [Validators.required, Validators.minLength(8)]],
+        confirmPassword: ['', [Validators.required, Validators.minLength(8)]]
       },
       {
-        validator: this.MatchPassword("newPassword", "confirmPassword")
+        validator: this.MatchPassword('newPassword', 'confirmPassword')
       }
     );
     this.errorMessage$ = this.store.select(
@@ -82,13 +83,12 @@ export class ChangePasswordModalComponent implements OnInit {
       return;
     } else {
       const changePasswordValue = {
-        password: this.changePasswordForm.controls["currentPassword"].value,
-        newPassword: this.changePasswordForm.controls["newPassword"].value
+        password: this.changePasswordForm.controls['currentPassword'].value,
+        newPassword: this.changePasswordForm.controls['newPassword'].value
       };
       this.store.dispatch(
         new fromAuthAction.ChangePassword(changePasswordValue)
       );
-      this.activeModal.close(true);
     }
   }
 

@@ -1,1 +1,39 @@
-<p>upload-csv-modal works!</p>
+<div class="modal-header">
+  <h1 class="modal-title">{{ title }}</h1>
+  <button type="button" class="close" aria-label="Close" (click)="dismiss()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  {{ message }}
+  <br />
+  <span class="badge badge-primary">{{ note }}</span>
+</div>
+<div class="modal-footer" style="justify-content: space-between;">
+  <div style="float: inline-start;">
+    <input
+      type="file"
+      #file
+      style="display: none"
+      (change)="onFilesAdded()"
+      multiple
+    />
+    <button class="btn btn-primary" (click)="addFiles()">
+      Add Files
+    </button>
+    <i>{{ uploadingProgress }}</i>
+  </div>
+  <div style="float: inline-end;">
+    <button type="button" class="btn btn-secondary" (click)="decline()">
+      {{ btnCancelText }}
+    </button>
+    <button
+      type="button"
+      class="btn btn-success"
+      [disabled]="uploadSuccessful"
+      (click)="accept()"
+    >
+      {{ btnOkText }}
+    </button>
+  </div>
+</div>

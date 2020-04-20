@@ -2714,7 +2714,7 @@ fieldset:disabled a.btn {
 }
 
 .btn-light {
-  color: #fff;
+  color: #525f7f !important;
   border-color: #adb5bd;
   background-color: #adb5bd;
   box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
@@ -2738,7 +2738,7 @@ fieldset:disabled a.btn {
 .btn-light:not(:disabled):not(.disabled):active,
 .btn-light:not(:disabled):not(.disabled).active,
 .show > .btn-light.dropdown-toggle {
-  color: #fff;
+  color: #525f7f;
   border-color: #adb5bd;
   background-color: #919ca6;
 }

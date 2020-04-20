@@ -21,8 +21,8 @@
   td {
     .progress {
       height: 3px;
-      width: 120px;
       margin: 0;
+      text-align: center;
     }
   }
 
@@ -102,10 +102,10 @@
   .table {
     margin-bottom: 0;
 
-    td,
-    th {
-      padding-left: $card-spacer-x;
-      padding-right: $card-spacer-x;
-    }
+    // td,
+    // th {
+    //   padding-left: $card-spacer-x;
+    //   padding-right: $card-spacer-x;
+    // }
   }
 }

@@ -1,39 +1,57 @@
 import { Action } from '@ngrx/store';
 import { Staff } from '../../models/staff.model';
+import { Campaign } from '../../models/campaign.model';
 
 export enum StaffActionsType {
   GET_STAFFS = '[Staff] Get Staffs',
   GET_STAFFS_SUCCESS = '[Staff] Get Staffs Success',
   GET_STAFFS_FAILURE = '[Staff] Get Staffs Fail',
 
+  GET_STAFFS_QUERY = '[Staff] Get Staffs From Query',
+  GET_STAFFS_QUERY_SUCCESS = '[Staff] Get Staffs From Query Success',
+  GET_STAFFS_QUERY_FAILURE = '[Staff] Get Staffs From Query Fail',
+
   GET_STAFF = '[Staff] Get Staff',
   GET_STAFF_SUCCESS = '[Staff] Get Staff Success',
   GET_STAFF_FAILURE = '[Staff] Get Staff Fail',
 
-  DELETE_STAFF = '[Staff] Deletes Staff',
-  DELETE_STAFF_SUCCESS = '[Staff] Deletes Staff Success',
-  DELETE_STAFF_FAILURE = '[Staff] Deletes Staff Failure',
+  CREATE_ACCOUNT = '[Auth] CreateAccount',
+  CREATE_ACCOUNT_SUCCESS = '[Auth] CreateAccountSuccess',
+  CREATE_ACCOUNT_FAILURE = '[Auth] CreateAccountFailure',
 
-  CREATE_STAFF = '[Staff] Create Staff',
-  CREATE_STAFF_SUCCESS = '[Staff] Creates Staff Success',
-  CREATE_STAFF_FAILURE = '[Staff] Create Staff Failure',
+  CREATE_CAMPAIGN = '[Campaign] Create Campaign',
+  CREATE_CAMPAIGN_SUCCESS = '[Campaign] Create Campaign Success',
+  CREATE_CAMPAIGN_FAILURE = '[Campaign] Create Campaign Failure',
 
-  UPDATE_STAFF = '[Staff] Updates Staff',
-  UPDATE_STAFF_SUCCESS = '[Staff] Updates Staff Success',
-  UPDATE_STAFF_FAILURE = '[Staff] Updates Staff Failure',
+  GET_CAMPAIGN = '[Campaign] Get Campaign',
+  GET_CAMPAIGN_SUCCESS = '[Campaign] Get Campaign Success',
+  GET_CAMPAIGN_FAILURE = '[Campaign] Get Campaign Failure',
 
-  UPLOAD_IMAGE = '[Image] Upload Image',
-  UPLOAD_IMAGE_SUCCESS = '[Image] Upload Image Success',
-  UPLOAD_IMAGE_FAILURE = '[Image] Upload Image Failure'
+  GET_CAMPAIGN_DETAIL = '[Campaign] Get Campaign Detail',
+  GET_CAMPAIGN_DETAIL_SUCCESS = '[Campaign] Get Campaign Detail Success',
+  GET_CAMPAIGN_DETAIL_FAILURE = '[Campaign] Get Campaign Detail Failure',
+
+  GET_CAMPAIGN_LIST_STAFF = '[Campaign] Get Campaign List Staff',
+  GET_CAMPAIGN_LIST_STAFF_SUCCESS = '[Campaign] Get Campaign List Staff Success',
+  GET_CAMPAIGN_LIST_STAFF_FAILURE = '[Campaign] Get Campaign List Staff Failure',
+
+  GET_VOTING_HISTORY = '[Campaign] Get Voting History',
+  GET_VOTING_HISTORY_SUCCESS = '[Campaign] Get Voting History Success',
+  GET_VOTING_HISTORY_FAILURE = '[Campaign] Get Voting History Failure',
+
+  UPDATE_CAMPAIGN = '[Campaign] Update Campaign',
+  UPDATE_CAMPAIGN_SUCCESS = '[Campaign] Update Campaign Success',
+  UPDATE_CAMPAIGN_FAILURE = '[Campaign] Update Campaign Failure'
 }
 
 export class GetStaffs implements Action {
   public readonly type = StaffActionsType.GET_STAFFS;
+  constructor(public payload?: any) {}
 }
 
 export class GetStaffsSuccess implements Action {
   public readonly type = StaffActionsType.GET_STAFFS_SUCCESS;
-  constructor(public payload: Staff[]) {}
+  constructor(public payload: any) {}
 }
 
 export class GetStaffsFail implements Action {
@@ -56,64 +74,130 @@ export class GetStaffFail implements Action {
   constructor(public payload: Error) {}
 }
 
-export class DeleteStaff implements Action {
-  public readonly type = StaffActionsType.DELETE_STAFF;
-  constructor(public payload: Staff) {}
+export class CreateAccount implements Action {
+  readonly type = StaffActionsType.CREATE_ACCOUNT;
+  constructor(public payload: any) {}
 }
 
-export class DeleteStaffSuccess implements Action {
-  public readonly type = StaffActionsType.DELETE_STAFF_SUCCESS;
-  constructor(public payload: Staff) {}
+export class CreateAccountSuccess implements Action {
+  readonly type = StaffActionsType.CREATE_ACCOUNT_SUCCESS;
+  constructor(public payload: any) {}
 }
 
-export class DeleteStaffFail implements Action {
-  public readonly type = StaffActionsType.DELETE_STAFF_FAILURE;
+export class CreateAccountFailure implements Action {
+  readonly type = StaffActionsType.CREATE_ACCOUNT_FAILURE;
+  constructor(public payload: any) {}
+}
+
+export class CreateCampaign implements Action {
+  public readonly type = StaffActionsType.CREATE_CAMPAIGN;
+  constructor(public payload: any) {}
+}
+export class CreateCampaignSuccess implements Action {
+  public readonly type = StaffActionsType.CREATE_CAMPAIGN_SUCCESS;
+  constructor(public payload: any) {}
+}
+export class CreateCampaignFail implements Action {
+  public readonly type = StaffActionsType.CREATE_CAMPAIGN_FAILURE;
+  constructor(public payload: any) {}
+}
+
+export class GetCampaign implements Action {
+  public readonly type = StaffActionsType.GET_CAMPAIGN;
+  constructor(public payload?: any) {}
+}
+export class GetCampaignSuccess implements Action {
+  public readonly type = StaffActionsType.GET_CAMPAIGN_SUCCESS;
+  constructor(public payload: any) {}
+}
+export class GetCampaignFail implements Action {
+  public readonly type = StaffActionsType.GET_CAMPAIGN_FAILURE;
+  constructor(public payload: any) {}
+}
+
+export class GetCampaignDetail implements Action {
+  public readonly type = StaffActionsType.GET_CAMPAIGN_DETAIL;
+  constructor(public payload: any) {}
+}
+
+export class GetCampaignDetailSuccess implements Action {
+  public readonly type = StaffActionsType.GET_CAMPAIGN_DETAIL_SUCCESS;
+  constructor(public payload: any) {}
+}
+
+export class GetCampaignDetailFailure implements Action {
+  public readonly type = StaffActionsType.GET_CAMPAIGN_DETAIL_FAILURE;
+  constructor(public payload: any) {}
+}
+
+export class GetCampaignListStaff implements Action {
+  public readonly type = StaffActionsType.GET_CAMPAIGN_LIST_STAFF;
+  constructor(public payload: any) {}
+}
+
+export class GetCampaignListStaffSuccess implements Action {
+  public readonly type = StaffActionsType.GET_CAMPAIGN_LIST_STAFF_SUCCESS;
+  constructor(public payload: any) {}
+}
+
+export class GetCampaignListStaffFailure implements Action {
+  public readonly type = StaffActionsType.GET_CAMPAIGN_LIST_STAFF_FAILURE;
   constructor(public payload: Error) {}
 }
 
-export class CreateStaff implements Action {
-  public readonly type = StaffActionsType.CREATE_STAFF;
-  constructor(public payload: Staff) {}
+export class GetVotingHistory implements Action {
+  public readonly type = StaffActionsType.GET_VOTING_HISTORY;
+  constructor(public payload: { id: number; userId: number }) {}
 }
 
-export class CreateStaffSuccess implements Action {
-  public readonly type = StaffActionsType.CREATE_STAFF_SUCCESS;
-  constructor(public payload: Staff) {}
+export class GetVotingHistorySuccess implements Action {
+  public readonly type = StaffActionsType.GET_VOTING_HISTORY_SUCCESS;
+  constructor(public payload: any) {}
 }
 
-export class CreateStaffFail implements Action {
-  public readonly type = StaffActionsType.CREATE_STAFF_FAILURE;
-  constructor(public payload: Error) {}
+export class GetVotingHistoryFailure implements Action {
+  public readonly type = StaffActionsType.GET_VOTING_HISTORY_FAILURE;
+  constructor(public payload: any) {}
 }
 
-export class UpdateStaff implements Action {
-  public readonly type = StaffActionsType.UPDATE_STAFF;
-  constructor(public payload: Staff) {}
+export class UpdateCampaign implements Action {
+  public readonly type = StaffActionsType.UPDATE_CAMPAIGN;
+  constructor(public payload: { id: number; campaign: Campaign }) {}
 }
-
-export class UpdateStaffSuccess implements Action {
-  public readonly type = StaffActionsType.UPDATE_STAFF_SUCCESS;
-  constructor(public payload: Staff) {}
+export class UpdateCampaignSuccess implements Action {
+  public readonly type = StaffActionsType.UPDATE_CAMPAIGN_SUCCESS;
+  constructor(public payload: any) {}
 }
-
-export class UpdateStaffFail implements Action {
-  public readonly type = StaffActionsType.UPDATE_STAFF_FAILURE;
-  constructor(public payload: Error) {}
+export class UpdateCampaignFail implements Action {
+  public readonly type = StaffActionsType.UPDATE_CAMPAIGN_FAILURE;
+  constructor(public payload: any) {}
 }
 
 export type StaffActions =
   | GetStaffs
   | GetStaffsSuccess
   | GetStaffsFail
-  | DeleteStaff
-  | DeleteStaffSuccess
-  | DeleteStaffFail
-  | CreateStaff
-  | CreateStaffSuccess
-  | CreateStaffFail
   | GetStaff
   | GetStaffSuccess
   | GetStaffFail
-  | UpdateStaff
-  | UpdateStaffSuccess
-  | UpdateStaffFail;
+  | CreateAccount
+  | CreateAccountSuccess
+  | CreateAccountFailure
+  | CreateCampaign
+  | CreateCampaignSuccess
+  | CreateCampaignFail
+  | GetCampaign
+  | GetCampaignSuccess
+  | GetCampaignFail
+  | GetCampaignDetail
+  | GetCampaignDetailSuccess
+  | GetCampaignDetailFailure
+  | GetCampaignListStaff
+  | GetCampaignListStaffSuccess
+  | GetCampaignListStaffFailure
+  | GetVotingHistory
+  | GetVotingHistorySuccess
+  | GetVotingHistoryFailure
+  | UpdateCampaign
+  | UpdateCampaignSuccess
+  | UpdateCampaignFail;

@@ -1,6 +1,10 @@
+.container-fluid {
+  padding-top: 160px;
+}
+
 .card-header,
 .card-body {
-  background-color: #fefdf8 !important;
+  background-color: #ffffff !important;
   border-radius: inherit;
 }
 
@@ -13,5 +17,5 @@
 }
 
 input {
-  text-transform: capitalize;
+  color: #1c5382 !important;
 }
