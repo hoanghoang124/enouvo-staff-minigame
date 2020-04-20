@@ -1,25 +1,24 @@
 import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
 import { State } from 'src/app/layouts/auth-layout/store';
+import { pageSizes } from '../../models/pagination.model';
+import { Page } from '../../models/page.model';
+import { SortEvent } from 'src/app/shared/sort.model';
 import { SortableDirective } from 'src/app/shared/sortable.directive';
 import { Observable } from 'rxjs';
 import { Staff } from '../../models/staff.model';
 import { NgbDateStruct, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { pageSizes, Page } from '../../models/pagination.model';
 import { TableQuery } from '../../models/tableQuery.model';
 import { Store } from '@ngrx/store';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UtilServiceService } from '../../services/util-service.service';
-import { SortEvent } from 'src/app/shared/sort.model';
-import { DialogService } from '../../services/dialog.service';
 import * as fromStaff from '../../store';
 import * as _ from 'lodash';
-
 @Component({
-  selector: 'app-campaign-profile-as-admin-modal',
-  templateUrl: './campaign-profile-as-admin-modal.component.html',
-  styleUrls: ['./campaign-profile-as-admin-modal.component.scss']
+  selector: 'app-history-of-voting-modal',
+  templateUrl: './history-of-voting-modal.component.html',
+  styleUrls: ['./history-of-voting-modal.component.scss']
 })
-export class CampaignProfileAsAdminModalComponent implements OnInit {
+export class HistoryOfVotingModalComponent implements OnInit {
   @ViewChildren(SortableDirective) headers1: QueryList<SortableDirective>;
 
   staffs$: Observable<Staff[]>;
@@ -38,8 +37,7 @@ export class CampaignProfileAsAdminModalComponent implements OnInit {
     private activeModal: NgbActiveModal,
     private router: Router,
     private route: ActivatedRoute,
-    private utilService: UtilServiceService,
-    private dialogService: DialogService
+    private utilService: UtilServiceService
   ) {}
 
   ngOnInit() {
@@ -87,9 +85,5 @@ export class CampaignProfileAsAdminModalComponent implements OnInit {
   fetchTableData(query: TableQuery) {
     query = { ...query, offset: (query.offset - 1) * query.limit };
     this.store.dispatch(new fromStaff.GetStaffs(query));
-  }
-
-  viewHistoryOfCampaign() {
-    this.dialogService.viewHistoryOfVoting();
   }
 }

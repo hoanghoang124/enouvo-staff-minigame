@@ -1,19 +1,5 @@
-<!-- <div class="input-group mx-5 mt-5">
-  <input
-    type="text"
-    class="form-control bg-light large"
-    placeholder="Search for..."
-    aria-label="Search"
-  />
-  <div class="input-group-append mr-7">
-    <button class="btn btn-primary" type="button">
-      <i class="fas fa-search fa-sm"></i>
-    </button>
-  </div>
-</div> -->
-<!-- Table -->
 <div class="modal-header">
-  <h1 class="modal-title">Employees participated in campaign</h1>
+  <h1 class="modal-title">History of voting</h1>
   <button type="button" class="close" aria-label="Close" (click)="dismiss()">
     <span aria-hidden="true">&times;</span>
   </button>
@@ -25,22 +11,19 @@
       <table class="table align-items-center table-flush">
         <thead class="thead-light">
           <tr>
-            <th style="text-align: center;">Id</th>
+            <th style="text-align: center;">#</th>
             <th appSortable="firstName" (sort)="onSort($event)">
-              First Name
+              Vote to
             </th>
             <th appSortable="firstName" (sort)="onSort($event)">
-              Last Name
+              Stars
             </th>
-            <th>Position</th>
-            <th appSortable="firstName" (sort)="onSort($event)">
-              Unvoted Starts
-            </th>
-            <th class="action">History</th>
+            <th>Voting time</th>
           </tr>
         </thead>
+
         <tbody>
-          <tr *ngFor="let staff of staffs$ | async">
+          <tr *ngFor="let staff of staffs$ | async; index as i">
             <th scope="row">
               <div class="media align-items-center">
                 <div class="media-body">
@@ -56,28 +39,16 @@
                   </a>
                 </div>
                 <div class="media-body">
-                  <span class="mb-0 text-sm">{{ staff.id }}</span>
+                  <span class="mb-0 text-sm">{{ i + 1 }}</span>
                 </div>
               </div>
             </th>
             <td style="font-weight: bold; text-transform: capitalize;">
               {{ staff.firstName || 'n/a' }}
             </td>
-            <td style="text-transform: capitalize;">
-              {{ staff.lastName || 'n/a' }}
-            </td>
-            <td>{{ staff.position || 'n/a' }}</td>
-
+            <td style="text-transform: capitalize;">n/a</td>
             <td style="text-transform: capitalize;">
               n/a
-            </td>
-            <td class="action">
-              <button
-                class="btn btn-sm btn-info"
-                (click)="viewHistoryOfCampaign()"
-              >
-                View History
-              </button>
             </td>
           </tr>
         </tbody>

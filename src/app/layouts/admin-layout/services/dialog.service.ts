@@ -1,3 +1,4 @@
+import { HistoryOfVotingModalComponent } from './../modal/history-of-voting-modal/history-of-voting-modal.component';
 import { Injectable } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmResetPasswordModalComponent } from '../modal/confirm-reset-password-modal/confirm-reset-password-modal.component';
@@ -167,17 +168,29 @@ export class DialogService {
   }
 
   public updateCampaign(campaignId: number): Promise<boolean> {
-    const modalRef = this.modalService.open(UpdateCampaignModalComponent, {
-      windowClass: 'dialog-size-xl',
-      centered: true
-    });
-    modalRef.componentInstance.campaignId = campaignId;
+    this.updateCampaginDialogRef = this.modalService.open(
+      UpdateCampaignModalComponent,
+      {
+        windowClass: 'dialog-size-xl',
+        centered: true
+      }
+    );
+    this.updateCampaginDialogRef.componentInstance.campaignId = campaignId;
 
-    return modalRef.result;
+    return this.updateCampaginDialogRef.result;
   }
 
   public closeUpdateCampaign() {
     this.updateCampaginDialogRef.close();
     this.updateCampaginDialogRef = null;
+  }
+
+  public viewHistoryOfVoting() {
+    const modalRef = this.modalService.open(HistoryOfVotingModalComponent, {
+      windowClass: 'dialog-size-xl',
+      centered: true
+    });
+
+    return modalRef.result;
   }
 }

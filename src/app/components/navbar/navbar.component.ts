@@ -1,5 +1,4 @@
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Staff } from 'src/app/layouts/admin-layout/models/staff.model';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { State } from 'src/app/layouts/auth-layout/store';
@@ -22,7 +21,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
   public menuItems: any[];
   public isCollapsed = true;
   isLoadingResults$: Observable<boolean>;
-  staff$: Observable<Staff>;
   userId: number = Number(localStorage.getItem('id'));
   avatarUrl: string;
   firstName: string;
@@ -42,7 +40,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
       this.isCollapsed = true;
     });
     this.store.dispatch(new fromStaff.GetStaff(this.userId));
-    this.staff$ = this.store.select(fromStaff.getStaff);
     this.avatarUrl = localStorage.getItem('avatarUrl');
     this.firstName = localStorage.getItem('firstName');
   }

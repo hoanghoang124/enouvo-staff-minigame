@@ -4,7 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { CountdownModule } from 'ngx-countdown';
 import { ClipboardModule } from 'ngx-clipboard';
 import { AdminLayoutRoutes } from './admin-layout.routing';
 import { IconsComponent } from '../../pages/icons/icons.component';
@@ -27,7 +27,7 @@ import { UpdateCampaignModalComponent } from './modal/update-campaign-modal/upda
 import { CampaignProfileAsAdminModalComponent } from './modal/campaign-profile-as-admin-modal/campaign-profile-as-admin-modal.component';
 import { CampaignProfileAsStaffModalComponent } from './modal/campaign-profile-as-staff-modal/campaign-profile-as-staff-modal.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-
+import { HistoryOfVotingModalComponent } from './modal/history-of-voting-modal/history-of-voting-modal.component';
 // import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
@@ -39,10 +39,10 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     NgbModule,
     ComponentsModule,
     ReactiveFormsModule,
+    CountdownModule,
     ClipboardModule,
     StoreModule.forFeature('page', reducers),
-    EffectsModule.forFeature(effects),
-    ReactiveFormsModule
+    EffectsModule.forFeature(effects)
   ],
   declarations: [
     dialogs,
@@ -59,7 +59,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     UserProfileModalComponent,
     UpdateCampaignModalComponent,
     CampaignProfileAsAdminModalComponent,
-    CampaignProfileAsStaffModalComponent
+    CampaignProfileAsStaffModalComponent,
+    HistoryOfVotingModalComponent
   ]
 })
 export class AdminLayoutModule {}
