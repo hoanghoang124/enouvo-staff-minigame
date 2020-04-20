@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UploadCSVComponent } from './upload-csv.component';
+import { CreateAccountModalComponent } from './create-account-modal.component';
 
-describe('UploadCSVComponent', () => {
-  let component: UploadCSVComponent;
-  let fixture: ComponentFixture<UploadCSVComponent>;
+describe('CreateAccountModalComponent', () => {
+  let component: CreateAccountModalComponent;
+  let fixture: ComponentFixture<CreateAccountModalComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UploadCSVComponent ]
+      declarations: [ CreateAccountModalComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UploadCSVComponent);
+    fixture = TestBed.createComponent(CreateAccountModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

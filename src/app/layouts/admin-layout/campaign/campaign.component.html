@@ -1,0 +1,124 @@
+<div class="container-fluid mt--7">
+  <!-- Table -->
+  <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header border-0">
+          <div class="row align-items-center">
+            <div class="col">
+              <h3 class="mb-0">
+                Campaign list
+              </h3>
+              <span
+                class="badge badge-warning"
+                id="error-message"
+                *ngIf="errorMessage$ | async"
+              >
+                {{ errorMessage$ | async }}
+              </span>
+            </div>
+            <div class="col text-right">
+              <button
+                (click)="openCreateCampaignDialog()"
+                class="btn btn-sm  btn-primary"
+              >
+                Create Campaign
+                <i
+                  class="fas fa-spinner fa-pulse spinner"
+                  *ngIf="isLoadingResults$ | async"
+                ></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <app-loading *ngIf="isCampaginLoading$ | async"></app-loading>
+        <div class="table-responsive">
+          <table class="table align-items-center table-flush">
+            <thead class="thead-light">
+              <tr>
+                <th style="text-align: center;">Id</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th class="time">Start Time</th>
+                <th class="time">End Time</th>
+                <th class="star-limit">Star Limit</th>
+                <th class="text-center">Status</th>
+                <th class="action">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                *ngFor="let campaign of campaigns$ | async"
+                style="text-transform: capitalize;"
+              >
+                <th scope="row">
+                  <div class="media align-items-center">
+                    <div class="media-body">
+                      <span class="mb-0 text-sm">{{ campaign.id }}</span>
+                    </div>
+                  </div>
+                </th>
+                <td style="font-weight: bold;" [routerLink]="[campaign.id]">
+                  {{ campaign.title || 'n/a' }}
+                </td>
+                <td>
+                  {{ campaign.description || 'n/a' }}
+                </td>
+                <td>{{ campaign.startDate | date: 'dd/MM/yyyy' || 'n/a' }}</td>
+                <td>{{ campaign.endDate | date: 'dd/MM/yyyy' || 'n/a' }}</td>
+                <td class="text-center">
+                  {{ campaign.starLimitation || 'n/a' }}
+                </td>
+                <td class="text-center">
+                  {{ campaign.isCampaignActive }}
+                </td>
+                <td class="action">
+                  <button
+                    class="btn btn-sm btn-info"
+                    (click)="
+                      openUpdateCampaignDialog(
+                        campaign.id,
+                        campaign.title,
+                        campaign.isCampaignActive,
+                        campaign.description,
+                        campaign.startDate,
+                        campaign.endDate
+                      )
+                    "
+                  >
+                    Modify
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div
+          class="d-flex justify-content-between"
+          *ngIf="(campaigns$ | async).length"
+        >
+          <select
+            class="custom-select sm-size"
+            style="width: auto"
+            name="pageSize"
+            [value]="tableQuery.limit"
+            (change)="changePageSize($event)"
+          >
+            <option *ngFor="let item of pageSizes" [ngValue]="item">
+              {{ item }}
+            </option>
+          </select>
+          <ngb-pagination
+            [pageSize]="tableQuery.limit"
+            [collectionSize]="totalItems$ | async"
+            [page]="tableQuery.offset"
+            (pageChange)="changePage($event)"
+            class="pagination-sm"
+            [boundaryLinks]="true"
+          >
+          </ngb-pagination>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,159 @@
+<div class="row">
+  <div class="col-xl-12 order-xl-1">
+    <div class="card bg-secondary shadow">
+      <div class="card-header  border-0">
+        <div class="row align-items-center">
+          <div class="col">
+            <h1 class="mb-0">
+              Update campaign
+              <button
+                type="button"
+                class="close"
+                aria-label="Close"
+                (click)="dismiss()"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </h1>
+            <span
+              class="badge badge-warning"
+              id="error-message"
+              *ngIf="errorMessage$ | async"
+            >
+              {{ errorMessage$ | async }}
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <form (ngSubmit)="onSubmit()" [formGroup]="updateCampaignForm">
+          <h6 class="heading-small text-muted mb-4">Campaign information</h6>
+          <div class="pl-lg-4">
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label class="form-control-label" for="title">Title</label>
+                  <input
+                    type="text"
+                    id="title"
+                    class="form-control form-control-alternative"
+                    placeholder="Title"
+                    formControlName="title"
+                  />
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label class="form-control-label" for="isCampaignActive"
+                    >Status</label
+                  >
+                  <select
+                    class="form-control form-control-alternative"
+                    data-toggle="select"
+                    title="Simple select"
+                    data-live-search="true"
+                    data-live-search-placeholder="Search ..."
+                    formControlName="isCampaignActive"
+                  >
+                    <option selected value="">Status</option>
+                    <option
+                      *ngFor="let state of states"
+                      [value]="state.value"
+                      >{{ state.name }}</option
+                    >
+                  </select>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label class="form-control-label" for="description"
+                    >Description</label
+                  >
+                  <input
+                    type="text"
+                    id="description"
+                    class="form-control form-control-alternative"
+                    placeholder="Description"
+                    formControlName="description"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <div class="form-group">
+                    <label class="form-control-label" for="startDate"
+                      >Start Date</label
+                    >
+                    <div class="input-group input-group-alternative">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"
+                          ><i class="ni ni-calendar-grid-58"></i
+                        ></span>
+                      </div>
+                      <input
+                        class="form-control datepicker"
+                        placeholder="{{
+                          campaignStartDate | date: 'dd/MM/yyyy'
+                        }}"
+                        id="startDate"
+                        ngbDatepicker
+                        #sd="ngbDatepicker"
+                        (click)="sd.toggle()"
+                        type="datetime"
+                        formControlName="startDate"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <div class="form-group">
+                    <label class="form-control-label" for="endDate"
+                      >End Date</label
+                    >
+                    <div class="input-group input-group-alternative">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"
+                          ><i class="ni ni-calendar-grid-58"></i
+                        ></span>
+                      </div>
+                      <input
+                        class="form-control datepicker"
+                        placeholder="{{ campaignEndDate | date: 'dd/MM/yyyy' }}"
+                        id="endDate"
+                        ngbDatepicker
+                        #ed="ngbDatepicker"
+                        (click)="ed.toggle()"
+                        type="datetime"
+                        formControlName="endDate"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="card-header  border-0">
+        <div class="row align-items-center">
+          <div class="col text-right">
+            <button type="button" (click)="close()" class="btn btn-secondary ">
+              Cancel
+            </button>
+            <button (click)="onSubmit()" class="btn btn-primary">
+              Submit
+              <i
+                class="fas fa-spinner fa-pulse spinner"
+                *ngIf="isLoadingResults$ | async"
+              ></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

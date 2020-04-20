@@ -1,6 +1,17 @@
-<div class="header pb-8 pt-5 pt-md-8"></div>
-<!-- Page content -->
-
+<div class="input-group mx-5 mt-5">
+  <input
+    type="text"
+    class="form-control bg-light large"
+    placeholder="Search for..."
+    aria-label="Search"
+    [(ngModel)]="searchText"
+  />
+  <div class="input-group-append mr-7">
+    <button class="btn btn-primary" type="button">
+      <i class="fas fa-times fa-sm"></i>
+    </button>
+  </div>
+</div>
 <div class="container-fluid mt--7">
   <!-- Table -->
   <div class="row">
@@ -8,7 +19,7 @@
       <div class="card shadow">
         <div class="card-header border-0">
           <div class="row align-items-center">
-            <div class="col-8">
+            <div class="col">
               <h3 class="mb-0">
                 Employees list
               </h3>
@@ -20,9 +31,15 @@
                 {{ errorMessage$ | async }}
               </span>
             </div>
-            <div class="col-4 text-right">
+            <div class="col text-right">
               <button
-                routerLink="/create-account"
+                (click)="openUploadCSVFileDialog()"
+                class="btn btn-sm btn-default"
+              >
+                Import CSV
+              </button>
+              <button
+                (click)="openCreateAccountDialog()"
                 class="btn btn-sm btn-primary"
               >
                 Create Account
@@ -39,87 +56,84 @@
           <table class="table align-items-center table-flush">
             <thead class="thead-light">
               <tr>
-                <th scope="col">#</th>
-                <th scope="col">First Name</th>
-                <th scope="col">Last Name</th>
-                <th scope="col">Date of Birth</th>
-                <th scope="col">Email</th>
-                <th scope="col">Position</th>
-                <th scope="col" class="action">Actions</th>
+                <th style="text-align: center;">Id</th>
+                <th (sort)="onSort($event)" appSortable="firstName">
+                  First Name
+                </th>
+                <th (sort)="onSort($event)" appSortable="lastName">
+                  Last Name
+                </th>
+                <th>
+                  Date of Birth
+                </th>
+                <th (sort)="onSort($event)" appSortable="email">Email</th>
+                <th class="action">Actions</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let staff of staffs$ | async; index as i">
-                <th scope="row">
+              <tr *ngFor="let staff of staffs$ | async">
+                <th scope="row" [routerLink]="[staff.id]">
                   <div class="media align-items-center">
                     <div class="media-body">
-                      <span class="mb-0 text-sm">{{ i + 1 }}</span>
+                      <a class="avatar avatar-sm" data-toggle="tooltip">
+                        <img
+                          alt="Avatar"
+                          src="{{
+                            staff.avatarUrl ||
+                              '../../../../../../assets/img/avatar/IMG_1171.JPG'
+                          }}"
+                          class="rounded-circle"
+                        />
+                      </a>
+                    </div>
+                    <div class="media-body">
+                      <span class="mb-0 text-sm">{{ staff.id }}</span>
                     </div>
                   </div>
                 </th>
-                <td>{{ staff.firstName || 'n/a' }}</td>
-                <td>{{ staff.lastName || 'n/a' }}</td>
-                <td>{{ staff.birthday | date: 'dd/MM/yyyy' || 'n/a' }}</td>
-                <td>{{ staff.email || 'n/a' }}</td>
-                <td>{{ staff.position || 'n/a' }}</td>
-                <td class="action">
-                  <div ngbDropdown placement="bottom-right">
-                    <a
-                      class="btn btn-sm btn-icon-only text-light"
-                      ngbDropdownToggle
-                    >
-                      <i>Edit</i>
-                    </a>
-                    <div
-                      ngbDropdownMenu
-                      class="dropdown-menu-right dropdown-menu-arrow"
-                    >
-                      <a
-                        class="dropdown-item"
-                        [routerLink]="[staff.id]"
-                        routerLinkActive="router-link-active"
-                        >Detail</a
-                      >
-                      <a
-                        class="dropdown-item"
-                        (click)="openConfirmationDialog(staff.id)"
-                        >Reset Password</a
-                      >
-                    </div>
-                  </div>
+                <td style="font-weight: bold;" [routerLink]="[staff.id]">
+                  {{ staff.firstName || 'n/a' }}
+                </td>
+                <td>
+                  {{ staff.lastName || 'n/a' }}
+                </td>
+                <td>
+                  {{ staff.birthday | date: 'dd/MM/yyyy' || 'n/a' }}
+                </td>
+                <td style="text-transform: lowercase;">
+                  {{ staff.email || 'n/a' }}
+                </td>
+                <td class="action" (click)="openConfirmationDialog(staff.id)">
+                  <button class="btn btn-sm btn-warning">Reset Password</button>
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
-        <div class="card-footer py-4">
-          <nav aria-label="...">
-            <ul class="pagination justify-content-end mb-0">
-              <li class="page-item disabled">
-                <a class="page-link" href="javascript:void(0)" tabindex="-1">
-                  <i class="fas fa-angle-left"></i>
-                  <span class="sr-only">Previous</span>
-                </a>
-              </li>
-              <li class="page-item active">
-                <a class="page-link" href="javascript:void(0)">1</a>
-              </li>
-              <li class="page-item">
-                <a class="page-link" href="javascript:void(0)"
-                  >2 <span class="sr-only">(current)</span></a
-                >
-              </li>
-              <li class="page-item">
-                <a class="page-link" href="javascript:void(0)">3</a>
-              </li>
-              <li class="page-item">
-                <a class="page-link" href="javascript:void(0)">
-                  <i class="fas fa-angle-right"></i>
-                  <span class="sr-only">Next</span>
-                </a>
-              </li>
-            </ul>
-          </nav>
+        <div
+          class="d-flex justify-content-between"
+          *ngIf="(staffs$ | async).length"
+        >
+          <select
+            class="custom-select"
+            style="width: auto"
+            name="pageSize"
+            [value]="tableQuery.limit"
+            (change)="changePageSize($event)"
+          >
+            <option *ngFor="let item of pageSizes" [ngValue]="item">
+              {{ item }}
+            </option>
+          </select>
+          <ngb-pagination
+            [pageSize]="tableQuery.limit"
+            [collectionSize]="totalItems$ | async"
+            [page]="tableQuery.offset"
+            (pageChange)="changePage($event)"
+            class="pagination-sm"
+            [boundaryLinks]="true"
+          >
+          </ngb-pagination>
         </div>
       </div>
     </div>

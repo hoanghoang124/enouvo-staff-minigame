@@ -16,5 +16,11 @@ export const ROUTES: RouteInfo[] = [
     title: 'Admin',
     icon: 'ni ni-collection text-primary',
     class: ''
+  },
+  {
+    path: '/campaign',
+    title: 'Campaign',
+    icon: 'ni-tv-2 text-primary',
+    class: ''
   }
 ];

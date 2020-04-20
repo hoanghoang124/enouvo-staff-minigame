@@ -1,0 +1,28 @@
+.container-fluid {
+  padding-top: 150px;
+}
+
+td {
+  text-transform: capitalize;
+}
+
+table,
+.card-header,
+.card-footer {
+  background-color: #ffffff;
+}
+
+th,
+td {
+  max-width: fit-content;
+}
+
+.stars {
+  max-width: 100px;
+  text-align: center;
+}
+
+.action {
+  text-align: center;
+  padding: 12px 16px;
+}

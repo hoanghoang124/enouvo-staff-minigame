@@ -1,31 +1,43 @@
+import { CampaignComponent } from './campaign/campaign.component';
 import { Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { CreateAccountComponent } from './create-account/create-account.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { TablesComponent } from './tables/tables.component';
 import { AdminGuard } from '../auth-layout/services/role-guard.service';
-import { UploadCSVComponent } from './upload-csv/upload-csv.component';
+import { AuthGuard } from '../auth-layout/services/auth-guard.service';
+import { CampaignDetailStaffComponent } from './campaign-detail-staff/campaign-detail-staff.component';
+import { CampaignDetailAdminComponent } from './campaign-detail-admin/campaign-detail-admin.component';
 export const AdminLayoutRoutes: Routes = [
   {
     path: 'dashboard',
-    component: DashboardComponent
+    component: DashboardComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'campaign-staff',
+    component: CampaignDetailStaffComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'dashboard/:id',
-    component: UserProfileComponent
+    component: UserProfileComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'tables/:id',
     component: UserProfileComponent,
     canActivate: [AdminGuard]
   },
-  { path: 'user-site', component: UserProfileComponent },
-  { path: 'tables', component: TablesComponent, canActivate: [AdminGuard] },
-  { path: 'upload', component: UploadCSVComponent, canActivate: [AdminGuard] },
-
   {
-    path: 'create-account',
-    component: CreateAccountComponent,
+    path: 'user-profile',
+    component: UserProfileComponent,
+    canActivate: [AuthGuard]
+  },
+  { path: 'tables', component: TablesComponent, canActivate: [AdminGuard] },
+  { path: 'campaign', component: CampaignComponent, canActivate: [AdminGuard] },
+  {
+    path: 'campaign/:id',
+    component: CampaignDetailAdminComponent,
     canActivate: [AdminGuard]
   }
 ];

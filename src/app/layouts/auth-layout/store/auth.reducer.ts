@@ -1,19 +1,17 @@
-import * as AuthActions from "./auth.action";
-import { RoleId } from "../models/role.model";
-import { User } from "../models/user.model";
+import * as AuthActions from './auth.action';
+import { RoleId } from '../models/role.model';
+import { User } from '../models/user.model';
 
 const { AuthActionTypes } = AuthActions;
 
 export interface AuthState {
   role: RoleId;
   id: User;
-  username: string;
+  username: User;
   isLgnLoading: boolean;
-  isCrtAccLoading: boolean;
   isChgPswLoading: boolean;
   isRstPswLoading: boolean;
   errorLgnMessage: string;
-  errorCrtAccMessage: string;
   errorChgPswMessage: string;
   errorRstPswMessage: string;
 }
@@ -22,11 +20,9 @@ export const initialState: AuthState = {
   id: null,
   username: null,
   isLgnLoading: false,
-  isCrtAccLoading: false,
   isChgPswLoading: false,
   isRstPswLoading: false,
   errorLgnMessage: null,
-  errorCrtAccMessage: null,
   errorChgPswMessage: null,
   errorRstPswMessage: null
 };
@@ -59,26 +55,7 @@ export function reducer(
         errorLgnMessage: action.payload
       };
     }
-    case AuthActionTypes.CREATE_ACCOUNT: {
-      return {
-        ...state,
-        isCrtAccLoading: true,
-        errorCrtAccMessage: null
-      };
-    }
-    case AuthActionTypes.CREATE_ACCOUNT_SUCCESS: {
-      return {
-        ...state,
-        isCrtAccLoading: false
-      };
-    }
-    case AuthActionTypes.CREATE_ACCOUNT_FAILURE: {
-      return {
-        ...state,
-        isCrtAccLoading: false,
-        errorCrtAccMessage: action.payload
-      };
-    }
+
     case AuthActionTypes.CHANGE_PASSWORD: {
       return {
         ...state,

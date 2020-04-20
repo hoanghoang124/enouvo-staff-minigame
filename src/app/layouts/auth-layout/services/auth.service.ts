@@ -17,7 +17,10 @@ export class AuthService {
 
   isAdmin(): boolean {
     this.role = localStorage.getItem('role');
-    if (this.role === this.roles.Admin && this.isLoggedIn()) {
+    if (
+      (this.role === this.roles.HR || this.role === this.roles.PM) &&
+      this.isLoggedIn()
+    ) {
       return true;
     } else {
       return false;
@@ -37,11 +40,6 @@ export class AuthService {
     return this.http.post<User>(url, params);
   }
 
-  create(params): Observable<any> {
-    const url = `${this.BASE_URL}/v1/auth/register`;
-    return this.http.post<User>(url, params);
-  }
-
   changePassword(params): Observable<any> {
     const url = `${this.BASE_URL}/v1/auth/change-password`;
     return this.http.post<User>(url, params);
@@ -50,15 +48,5 @@ export class AuthService {
   resetPassword(param): Observable<any> {
     const url = `${this.BASE_URL}/v1/auth/reset-password`;
     return this.http.post<User>(url, param);
-  }
-
-  getAll() {
-    const url = `${this.BASE_URL}/users`;
-    return this.http.get<User[]>(url);
-  }
-
-  getById(id: number) {
-    const url = `${this.BASE_URL}/users/${id}`;
-    return this.http.get<User>(url);
   }
 }

@@ -9,6 +9,47 @@ body {
 }
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
   overflow: auto;
+}
+
+.dialog-size-xl .modal-dialog {
+  max-width: 1024px;
+}
+
+.dialog-size-xxl .modal-dialog {
+  max-width: 1440px;
+}
+
+.loader:before,
+.loader:after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  border-style: solid;
+  border-top-color: #8cafd8;
+  border-right-color: #d8e4f2;
+  border-bottom-color: #6694cb;
+  border-left-color: #d8e4f2;
+  content: '';
+  transform: translate(-50%, -50%);
+  animation: rotate 1.5s infinite ease-in-out;
+}
+.loader:before {
+  border-width: 10vh;
+}
+.loader:after {
+  width: 30vh;
+  height: 30vh;
+  border-width: 2.5vh;
+  animation-direction: reverse;
+}
+@keyframes rotate {
+  0% {
+    transform: translate(-50%, -50%) rotate(0);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
 }
