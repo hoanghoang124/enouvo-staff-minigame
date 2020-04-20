@@ -48,20 +48,14 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   openChangePasswordDialog() {
-    this.dialogService
-      .changePassword(
-        'Change Password Form',
-        'Tips: A secure enough password can protect your privacy.'
-      )
-      .then(event => console.log('Execute changing password:', event))
-      .catch(() => console.log('User dismissed the dialog'));
+    this.dialogService.changePassword(
+      'Change Password Form',
+      'Tips: A secure enough password can protect your privacy.'
+    );
   }
 
   openUserProfileModal(userId) {
-    this.dialogService
-      .viewProfile(userId)
-      .then(confirmed => console.log('User confirmed, confirmed', confirmed))
-      .catch(() => console.log('User dismissed the dialog'));
+    this.dialogService.viewProfile(userId);
   }
 
   logOut(): void {

@@ -13,13 +13,13 @@ import { TableQuery } from '../models/tableQuery.model';
 import { UtilServiceService } from '../services/util-service.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SortEvent } from 'src/app/shared/sort.model';
-import * as fromStaff from '../store';
-import * as _ from 'lodash';
 import { SortableDirective } from 'src/app/shared/sortable.directive';
 import { Page } from '../models/page.model';
 import { Campaign } from '../models/campaign.model';
 import { State } from '../../auth-layout/store';
 import { DialogService } from '../services/dialog.service';
+import * as fromStaff from '../store';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-campaign',

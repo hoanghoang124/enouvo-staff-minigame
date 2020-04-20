@@ -64,32 +64,23 @@ export class TablesComponent implements OnInit, OnDestroy {
   }
 
   openUploadCSVFileDialog() {
-    this.dialogService
-      .uploadCSVFile(
-        'Register staff by CSV',
-        'Register many staffs as the same time by import CSV file.',
-        'Note: Only accecpt .csv'
-      )
-      .then(confirmed => console.log('User comfirmed:', confirmed))
-      .catch(() => console.log('User dimissed the dialog'));
+    this.dialogService.uploadCSVFile(
+      'Register staff by CSV',
+      'Register many staffs as the same time by import CSV file.',
+      'Note: Only accecpt .csv'
+    );
   }
 
   openConfirmationDialog(userId) {
-    this.dialogService
-      .confirm(
-        'Please confirm...',
-        'Are you sure you want to reset password for this account? This action can not be undone.',
-        userId
-      )
-      .then(confirmed => console.log('User confirmed:', confirmed))
-      .catch(() => console.log('User dismissed the dialog'));
+    this.dialogService.confirm(
+      'Please confirm...',
+      'Are you sure you want to reset password for this account? This action can not be undone.',
+      userId
+    );
   }
 
   openUserProfileModal(userId) {
-    this.dialogService
-      .viewProfile(userId)
-      .then(confirmed => console.log('User confirmed, confirmed', confirmed))
-      .catch(() => console.log('User dismissed the dialog'));
+    this.dialogService.viewProfile(userId);
   }
 
   openCreateAccountDialog() {
