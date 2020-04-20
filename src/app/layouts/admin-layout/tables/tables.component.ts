@@ -47,7 +47,7 @@ export class TablesComponent implements OnInit, OnDestroy {
   defaultQuery = { limit: 5, offset: 1 };
   tableQuery: TableQuery;
   totalItems$: Observable<number>;
-  searchText: string;
+  searchText = '';
   componentDestroyed$: Subject<any> = new Subject<any>();
 
   constructor(
