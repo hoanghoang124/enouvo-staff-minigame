@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
 import { State } from 'src/app/layouts/auth-layout/store';
 import { pageSizes, Page } from '../../models/pagination.model';
 import { SortEvent } from 'src/app/shared/sort.model';
-import { SortableDirective } from 'src/app/shared/sortable.directive';
+import { SortableDirective } from 'src/app/shared/directives/sortable.directive';
 import { Observable } from 'rxjs';
 import { Staff } from '../../models/staff.model';
 import { NgbDateStruct, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';

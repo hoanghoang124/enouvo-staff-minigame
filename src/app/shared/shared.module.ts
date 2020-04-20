@@ -8,11 +8,12 @@ import {
   NgbDateNativeUTCAdapter
 } from '@ng-bootstrap/ng-bootstrap';
 import { CustomDateParserFormatter } from './providers/date.adapter';
+import { directives } from './directives';
 
 @NgModule({
-  declarations: [],
+  declarations: [directives],
   imports: [CommonModule, HttpClientModule, ReactiveFormsModule, FormsModule],
-  exports: [HttpClientModule, ReactiveFormsModule, FormsModule],
+  exports: [HttpClientModule, ReactiveFormsModule, FormsModule, directives],
   providers: [
     {
       provide: NgbDateParserFormatter,

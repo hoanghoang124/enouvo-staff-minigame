@@ -28,6 +28,7 @@ import { CampaignProfileAsAdminModalComponent } from './modal/campaign-profile-a
 import { CampaignProfileAsStaffModalComponent } from './modal/campaign-profile-as-staff-modal/campaign-profile-as-staff-modal.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HistoryOfVotingModalComponent } from './modal/history-of-voting-modal/history-of-voting-modal.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 // import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
@@ -41,6 +42,7 @@ import { HistoryOfVotingModalComponent } from './modal/history-of-voting-modal/h
     ReactiveFormsModule,
     CountdownModule,
     ClipboardModule,
+    SharedModule,
     StoreModule.forFeature('page', reducers),
     EffectsModule.forFeature(effects)
   ],

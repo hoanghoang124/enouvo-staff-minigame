@@ -6,13 +6,13 @@ import { Injectable } from '@angular/core';
 export class PaginationService {
   constructor() {}
 
-  sort(arrayItems, orderBy: string, order: number) {
-    if (order === 0) {
+  sort(arrayItems, orderBy: string, order: string | boolean | number) {
+    if (order === '') {
       return arrayItems;
     } else {
       return [...arrayItems].sort((a, b) => {
         const res = this.compare(a[orderBy], b[orderBy]);
-        return order === 1 ? res : -res;
+        return order === 'asc' ? res : -res;
       });
     }
   }
