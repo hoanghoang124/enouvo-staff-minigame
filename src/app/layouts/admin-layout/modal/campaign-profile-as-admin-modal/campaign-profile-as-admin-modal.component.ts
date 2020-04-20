@@ -4,7 +4,7 @@ import { SortableDirective } from 'src/app/shared/sortable.directive';
 import { Observable } from 'rxjs';
 import { Staff } from '../../models/staff.model';
 import { NgbDateStruct, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { pageSizes } from '../../models/pagination.model';
+import { pageSizes, Page } from '../../models/pagination.model';
 import { TableQuery } from '../../models/tableQuery.model';
 import { Store } from '@ngrx/store';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -12,7 +12,6 @@ import { UtilServiceService } from '../../services/util-service.service';
 import * as fromStaff from '../../store';
 import * as _ from 'lodash';
 import { SortEvent } from 'src/app/shared/sort.model';
-import { Page } from '../../models/page.model';
 
 @Component({
   selector: 'app-campaign-profile-as-admin-modal',

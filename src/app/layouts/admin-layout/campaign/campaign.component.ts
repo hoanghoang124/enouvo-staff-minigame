@@ -8,13 +8,12 @@ import {
 } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { pageSizes } from '../models/pagination.model';
+import { pageSizes, Page } from '../models/pagination.model';
 import { TableQuery } from '../models/tableQuery.model';
 import { UtilServiceService } from '../services/util-service.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SortEvent } from 'src/app/shared/sort.model';
 import { SortableDirective } from 'src/app/shared/sortable.directive';
-import { Page } from '../models/page.model';
 import { Campaign } from '../models/campaign.model';
 import { State } from '../../auth-layout/store';
 import { DialogService } from '../services/dialog.service';

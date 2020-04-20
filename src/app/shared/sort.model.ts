@@ -1,16 +1,15 @@
-export type SortDirection = 'asc' | 'desc' | '';
+export type SortDirection = 0 | 1;
 export const rotate: { [key: string]: SortDirection } = {
-  asc: 'desc',
-  desc: '',
-  '': 'asc'
+  asc: 1,
+  desc: 0
 };
 
 export class SortEvent {
   orderBy: string;
-  order: SortDirection | string | number | boolean;
+  order: SortDirection | number;
 
   constructor() {
     this.orderBy = '';
-    this.order = '';
+    this.order = 0;
   }
 }

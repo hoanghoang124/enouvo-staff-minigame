@@ -13,13 +13,13 @@ import { SortDirection, SortEvent, rotate } from './sort.model';
 })
 export class SortableDirective {
   @Input('appSortable') sortable: string;
-  @Input() direction: SortDirection = '';
+  @Input() direction: SortDirection = 0;
   @Output() sort = new EventEmitter<SortEvent>();
   @HostBinding('class.asc') get ascClass() {
-    return this.direction === 'asc';
+    return this.direction === 1;
   }
   @HostBinding('class.desc') get descClass() {
-    return this.direction === 'desc';
+    return this.direction === 0;
   }
   @HostListener('click') rotate() {
     this.direction = rotate[this.direction];

@@ -4,9 +4,11 @@
     class="form-control bg-light large"
     placeholder="Search for..."
     aria-label="Search"
+    [(ngModel)]="searchText"
+    (ngModelChange)="onSearch()"
   />
   <div class="input-group-append mr-7">
-    <button class="btn btn-primary" type="button">
+    <button class="btn btn-primary" type="button" (click)="clearSearch()">
       <i class="fas fa-search fa-sm"></i>
     </button>
   </div>
@@ -56,13 +58,13 @@
             <thead class="thead-light">
               <tr>
                 <th style="text-align: center;">Id</th>
-                <th appSortable="firstName" (sort)="onSort($event)">
+                <th appSortable="isActive" (sort)="onSort($event)">
                   First Name
                 </th>
-                <th appSortable="firstName" (sort)="onSort($event)">
+                <th>
                   Last Name
                 </th>
-                <th appSortable="firstName" (sort)="onSort($event)">
+                <th>
                   Date of Birth
                 </th>
                 <th>Email</th>

@@ -28,19 +28,19 @@ export class UtilServiceService {
   ): SortEvent {
     headers.forEach(header => {
       if (header.sortable !== orderBy) {
-        header.direction = '';
+        header.direction = 0;
       }
     });
     return {
       orderBy: order && orderBy,
-      order: order === '' ? null : orderBy === 'desc' ? true : false
+      order: order === 0 ? 0 : 1
     };
   }
 
   updateSortHeaders(sort: SortEvent, headers: QueryList<SortableDirective>) {
     headers.forEach(header => {
       if (header.sortable === sort.orderBy) {
-        header.direction = sort.order > 0 ? 'desc' : 'asc';
+        header.direction = sort.order === 0 ? 0 : 1;
       }
     });
   }

@@ -10,17 +10,17 @@ import { Observable } from 'rxjs';
 import { NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup } from '@angular/forms';
 import { DialogService } from '../services/dialog.service';
-import { pageSizes } from '../models/pagination.model';
+import { pageSizes, Page } from '../models/pagination.model';
 import { TableQuery } from '../models/tableQuery.model';
 import { Staff } from '../models/staff.model';
-import { Page } from '../models/page.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SortEvent } from 'src/app/shared/sort.model';
-import { UtilServiceService } from '../services/util-service.service';
+// import { UtilServiceService } from '../services/util-service.service';
 import { SortableDirective } from 'src/app/shared/sortable.directive';
 import * as fromStaff from '../store';
 import * as _ from 'lodash';
 import { State } from '../../auth-layout/store';
+import { PaginationService } from '../services/pagination.service';
 
 @Component({
   selector: 'app-tables',
@@ -37,6 +37,10 @@ export class TablesComponent implements OnInit, OnDestroy {
   editProfileForm: FormGroup;
   resetPasswordForm: FormGroup;
   model: NgbDateStruct;
+  clientsData = [];
+  displayedClients = [];
+  totalItems = 0;
+  sorting: SortEvent;
   paging: Page;
   pageSizes = pageSizes;
   defaultQuery = { limit: 5, offset: 1 };
@@ -49,8 +53,12 @@ export class TablesComponent implements OnInit, OnDestroy {
     private modalService: NgbModal,
     private router: Router,
     private route: ActivatedRoute,
-    private utilService: UtilServiceService
-  ) {}
+    // private utilService: UtilServiceService,
+    private paginationService: PaginationService
+  ) {
+    this.sorting = new SortEvent();
+    this.paging = new Page();
+  }
 
   ngOnInit() {
     this.tableQuery = this.defaultQuery;
@@ -87,12 +95,72 @@ export class TablesComponent implements OnInit, OnDestroy {
     this.dialogService.createAccout();
   }
 
-  onSort(sort: SortEvent) {
-    this.paging.pageNumber = 1;
-    this.changeQuery({
-      ...this.utilService.getSortQuery(sort, this.headers1),
-      pageNumber: 1
+  onSort({ orderBy, order }: SortEvent) {
+    // resetting other headers
+    this.headers1.forEach(header => {
+      if (header.sortable !== orderBy) {
+        header.direction = 0;
+      }
     });
+
+    this.sorting.orderBy = orderBy;
+    this.sorting.order = order;
+    this.updateFilter();
+  }
+
+  updateFilter() {
+    // 1. sort
+    let clients = this.paginationService.sort(
+      this.clientsData,
+      this.sorting.orderBy,
+      this.sorting.order
+    );
+
+    // 2. filter
+    clients = clients.filter(client => this.matches(client, this.searchText));
+    this.totalItems = clients.length;
+
+    // 3. paginate
+    const { pageSize, pageNumber } = this.paging;
+    clients = this.paginationService.paginate(clients, pageSize, pageNumber);
+    this.displayedClients = clients;
+  }
+
+  matches(client, text: string) {
+    if (!client.user) {
+      return;
+    }
+    const fullName = client.user.firstName + ' ' + client.user.lastName;
+
+    let userCompany;
+    if (client.user.companies[0]) {
+      userCompany = client.user.companies[0];
+    } else {
+      userCompany = '';
+    }
+    return (
+      client.user.id.toLowerCase().includes(text.toLowerCase()) ||
+      client.user.firstName.toLowerCase().includes(text.toLowerCase()) ||
+      client.user.lastName.toLowerCase().includes(text.toLowerCase()) ||
+      client.user.email.toLowerCase().includes(text.toLowerCase()) ||
+      fullName.toLowerCase().includes(text.toLowerCase()) ||
+      (userCompany.companyName || '')
+        .toLowerCase()
+        .includes(text.toLowerCase()) ||
+      (userCompany.branchCode || '')
+        .toLowerCase()
+        .includes(text.toLowerCase()) ||
+      (userCompany.gstNo || '').toLowerCase().includes(text.toLowerCase())
+    );
+  }
+
+  onSearch() {
+    this.updateFilter();
+  }
+
+  clearSearch() {
+    this.searchText = '';
+    this.updateFilter();
   }
 
   changeQuery(query: any = {}) {

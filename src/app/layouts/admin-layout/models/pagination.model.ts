@@ -1,6 +1,10 @@
 export const pageSizes = [5, 10, 15];
-export interface Page {
+export class Page {
   pageNumber: number;
-  page: number;
-  itemsPerPage: number;
+  pageSize: number;
+
+  constructor() {
+    this.pageNumber = 1;
+    this.pageSize = 5;
+  }
 }
