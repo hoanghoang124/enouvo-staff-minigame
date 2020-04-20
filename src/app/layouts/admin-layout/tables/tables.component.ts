@@ -115,29 +115,11 @@ export class TablesComponent implements OnInit, OnDestroy {
     }
   }
 
-  matches(staff, text: string) {
-    if (!staff) {
-      return;
-    }
-    return (
-      staff.id
-        .toString()
-        .toLowerCase()
-        .includes(text.toLowerCase()) ||
-      staff.firstName.toLowerCase().includes(text.toLowerCase()) ||
-      staff.lastName.toLowerCase().includes(text.toLowerCase()) ||
-      staff.email.toLowerCase().includes(text.toLowerCase())
-    );
+  onSearch() {}
+
+  clearSearch() {
+    this.searchText = '';
   }
-
-  // onSearch() {
-  //   this.updateFilter();
-  // }
-
-  // clearSearch() {
-  //   this.searchText = '';
-  //   this.updateFilter();
-  // }
 
   changePageSize(event) {
     const limit = parseInt(event.target.value, 10);
