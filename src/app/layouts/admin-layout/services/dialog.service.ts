@@ -168,13 +168,16 @@ export class DialogService {
   }
 
   public updateCampaign(campaignId: number): Promise<boolean> {
-    const modalRef = this.modalService.open(UpdateCampaignModalComponent, {
-      windowClass: 'dialog-size-xl',
-      centered: true
-    });
-    modalRef.componentInstance.campaignId = campaignId;
+    this.updateCampaginDialogRef = this.modalService.open(
+      UpdateCampaignModalComponent,
+      {
+        windowClass: 'dialog-size-xl',
+        centered: true
+      }
+    );
+    this.updateCampaginDialogRef.componentInstance.campaignId = campaignId;
 
-    return modalRef.result;
+    return this.updateCampaginDialogRef.result;
   }
 
   public closeUpdateCampaign() {
