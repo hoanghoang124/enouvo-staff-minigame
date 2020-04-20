@@ -13,12 +13,12 @@ import { TableQuery } from '../models/tableQuery.model';
 import { UtilServiceService } from '../services/util-service.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SortEvent } from 'src/app/shared/sort.model';
-import { SortableDirective } from 'src/app/shared/directives/sortable.directive';
 import { Campaign } from '../models/campaign.model';
 import { State } from '../../auth-layout/store';
 import { DialogService } from '../services/dialog.service';
 import * as fromStaff from '../store';
 import * as _ from 'lodash';
+import { SortableDirective } from 'src/app/shared/directives';
 
 @Component({
   selector: 'app-campaign',
@@ -36,7 +36,7 @@ export class CampaignComponent implements OnInit, OnDestroy {
   pageSizes = pageSizes;
   defaultQuery = { limit: 5, offset: 1 };
   tableQuery: TableQuery;
-  // totalItems$: Observable<number>;
+  totalItems$: Observable<number>;
   constructor(
     private store: Store<State>,
     private dialogService: DialogService,
@@ -65,8 +65,8 @@ export class CampaignComponent implements OnInit, OnDestroy {
     this.dialogService.updateCampaign(campaignId);
   }
 
-  viewCampaignAsAdminDialog() {
-    this.dialogService.viewCampaignAsAdminPosition();
+  viewCampaignAsAdminDialog(campaignId) {
+    this.dialogService.viewCampaignAsAdminPosition(campaignId);
   }
   onSort(sort: SortEvent) {
     this.paging.pageNumber = 1;

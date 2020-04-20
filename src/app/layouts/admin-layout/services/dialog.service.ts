@@ -155,7 +155,7 @@ export class DialogService {
     return modalRef.result;
   }
 
-  public viewCampaignAsAdminPosition(): Promise<boolean> {
+  public viewCampaignAsAdminPosition(campaignId: number): Promise<boolean> {
     const modalRef = this.modalService.open(
       CampaignProfileAsAdminModalComponent,
       {
@@ -163,7 +163,7 @@ export class DialogService {
         centered: true
       }
     );
-
+    modalRef.componentInstance.campaignId = campaignId;
     return modalRef.result;
   }
 

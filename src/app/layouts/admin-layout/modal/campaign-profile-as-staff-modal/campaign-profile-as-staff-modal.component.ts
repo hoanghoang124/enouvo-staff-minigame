@@ -8,10 +8,10 @@ import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { pageSizes, Page } from '../../models/pagination.model';
 import { TableQuery } from '../../models/tableQuery.model';
 import { Store } from '@ngrx/store';
+import { SortableDirective } from 'src/app/shared/directives';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UtilServiceService } from '../../services/util-service.service';
 import { SortEvent } from 'src/app/shared/sort.model';
-import { SortableDirective } from 'src/app/shared/directives/sortable.directive';
 
 @Component({
   selector: 'app-campaign-profile-as-staff-modal',
@@ -41,12 +41,10 @@ export class CampaignProfileAsStaffModalComponent implements OnInit {
 
   ngOnInit() {
     this.tableQuery = this.defaultQuery;
-    // get staffs from api
-    this.staffs$ = this.store.select(fromStaff.getAllStaffs);
+    this.staffs$ = this.store.select(fromStaff.getCampaignListStaff);
     this.totalItems$ = this.store.select(fromStaff.getTotalStaffs);
-    this.errorMessage$ = this.store.select(fromStaff.getErrorGtAllStfMessage);
-    this.isStaffLoading$ = this.store.select(fromStaff.getIsGtAllStfLoading);
-    this.isLoadingResults$ = this.store.select(fromStaff.getIsCrtAccLoading);
+    this.errorMessage$ = this.store.select(fromStaff.getErrorGtCmpLstStf);
+    this.isStaffLoading$ = this.store.select(fromStaff.getIsCmpLstStfLoading);
     this.fetchTableData(this.tableQuery);
   }
 
@@ -61,7 +59,7 @@ export class CampaignProfileAsStaffModalComponent implements OnInit {
   changeQuery(query: any = {}) {
     let { queryParams } = this.route.snapshot;
     queryParams = { ...queryParams, ...query };
-    this.router.navigate(['admin'], {
+    this.router.navigate(['campaign'], {
       queryParams: _.pickBy(queryParams, _.identity)
     });
   }

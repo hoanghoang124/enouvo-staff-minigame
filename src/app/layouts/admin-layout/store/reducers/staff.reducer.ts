@@ -14,11 +14,17 @@ export interface StaffState {
   isCrtAccLoading: boolean;
   isCrtCmpLoading: boolean;
   isGtAllCmpLoading: boolean;
+  isGtCmpDtlLoading: boolean;
+  isGtCmpLstStfLoading: boolean;
+  isGtVtgHsrLoading: boolean;
   isUpdCmpLoading: boolean;
   errorGtAllStfMessage: any;
   errorGtStfMessage: any;
   errorCrtAccMessage: any;
   errorGtAllCmpMessage: any;
+  errorGtCmpDtlMessage: any;
+  errorGtCmpLstStfMessage: any;
+  errorGtVtgHsrMessage: any;
   errorCrtCmpMessage: any;
   errorUpdCmpMessage: any;
 }
@@ -34,12 +40,18 @@ const initialState: StaffState = {
   isCrtAccLoading: false,
   isCrtCmpLoading: false,
   isGtAllCmpLoading: false,
+  isGtCmpDtlLoading: false,
+  isGtCmpLstStfLoading: false,
+  isGtVtgHsrLoading: false,
   isUpdCmpLoading: false,
   errorGtStfMessage: null,
   errorGtAllStfMessage: null,
   errorCrtAccMessage: null,
   errorCrtCmpMessage: null,
   errorGtAllCmpMessage: null,
+  errorGtCmpDtlMessage: null,
+  errorGtCmpLstStfMessage: null,
+  errorGtVtgHsrMessage: null,
   errorUpdCmpMessage: null
 };
 
@@ -147,6 +159,63 @@ export function staffReducer(
         ...state,
         isGtAllCmpLoading: false,
         errorGtAllCmpMessage: action.payload
+      };
+    case staffActions.StaffActionsType.GET_CAMPAIGN_DETAIL:
+      return {
+        ...state,
+        isGtCmpDtlLoading: true,
+        selectedCampaign: null
+      };
+    case staffActions.StaffActionsType.GET_CAMPAIGN_DETAIL_SUCCESS:
+      return {
+        ...state,
+        campaigns: action.payload.campaigns,
+        // total: action.payload.total,
+        isGtCmpDtlLoading: false
+      };
+    case staffActions.StaffActionsType.GET_CAMPAIGN_DETAIL_FAILURE:
+      return {
+        ...state,
+        isGtCmpDtlLoading: false,
+        errorGtCmpDtlMessage: action.payload
+      };
+    case staffActions.StaffActionsType.GET_CAMPAIGN_LIST_STAFF:
+      return {
+        ...state,
+        isGtCmpLstStfLoading: true,
+        selectedStaff: null,
+        errorGtCmpLstStfMessage: null
+      };
+    case staffActions.StaffActionsType.GET_CAMPAIGN_LIST_STAFF_SUCCESS:
+      return {
+        ...state,
+        selectedStaff: action.payload,
+        isGtCmpLstStfLoading: false
+      };
+    case staffActions.StaffActionsType.GET_CAMPAIGN_LIST_STAFF_FAILURE:
+      return {
+        ...state,
+        isGtCmpLstStfLoading: false,
+        errorGtCmpLstStfMessage: action.payload
+      };
+    case staffActions.StaffActionsType.GET_VOTING_HISTORY:
+      return {
+        ...state,
+        isGtVtgHsrLoading: true,
+        selectedStaff: null,
+        errorGtVtgHsrMessage: null
+      };
+    case staffActions.StaffActionsType.GET_VOTING_HISTORY_SUCCESS:
+      return {
+        ...state,
+        selectedStaff: action.payload,
+        isGtVtgHsrLoading: false
+      };
+    case staffActions.StaffActionsType.GET_VOTING_HISTORY_FAILURE:
+      return {
+        ...state,
+        isGtVtgHsrLoading: false,
+        errorGtVtgHsrMessage: action.payload
       };
     case staffActions.StaffActionsType.UPDATE_CAMPAIGN:
       return {

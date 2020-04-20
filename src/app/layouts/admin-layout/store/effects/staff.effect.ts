@@ -86,9 +86,9 @@ export class StaffEffects {
     map((action: StaffActions.CreateCampaign) => action.payload),
     switchMap(obj => {
       return this.staffservice.createCampaign(obj).pipe(
-        map(campaignId => {
-          const campaign = { id: campaignId, ...obj };
-          return new StaffActions.CreateCampaignSuccess(campaign);
+        map(res => {
+          this.dialogService.closeCreateCampaign();
+          return new StaffActions.CreateCampaignSuccess(res);
         }),
         catchError(res => [
           new StaffActions.CreateCampaignFail(res.error.message)
@@ -97,13 +97,11 @@ export class StaffEffects {
     })
   );
 
-  @Effect({ dispatch: false })
-  CreateCampaignSuccess: Observable<any> = this.actions.pipe(
-    ofType(StaffActionsType.CREATE_CAMPAIGN_SUCCESS),
-    tap(() => {
-      this.dialogService.closeCreateCampaign();
-    })
-  );
+  // @Effect({ dispatch: false })
+  // CreateCampaignSuccess: Observable<any> = this.actions.pipe(
+  //   ofType(StaffActionsType.CREATE_CAMPAIGN_SUCCESS),
+  //   tap(() => {})
+  // );
 
   @Effect()
   getCampaigns$ = this.actions.pipe(
@@ -126,7 +124,7 @@ export class StaffEffects {
     switchMap(id => {
       return this.staffservice.getCampaignDetail(id).pipe(
         map(res => {
-          return new StaffActions.GetCampaignDetailSuccess(res.campaign);
+          return new StaffActions.GetCampaignDetailSuccess(res);
         }),
         catchError(res => [
           new StaffActions.GetCampaignDetailFailure(res.error.message)
@@ -151,21 +149,21 @@ export class StaffEffects {
     })
   );
 
-  // @Effect()
-  // getVotingHistory$ = this.actions.pipe(
-  //   ofType(StaffActionsType.GET_VOTING_HISTORY),
-  //   map((action: StaffActions.GetVotingHistory) => action.payload),
-  //   switchMap(id, userId => {
-  //     return this.staffservice.getVotingHistory(id, userId).pipe(
-  //       map(res => {
-  //         return new StaffActions.GetVotingHistorySuccess(res.staffs);
-  //       }),
-  //       catchError(res => [
-  //         new StaffActions.GetVotingHistoryFailure(res.error.message)
-  //       ])
-  //     );
-  //   })
-  // );
+  @Effect()
+  getVotingHistory$ = this.actions.pipe(
+    ofType(StaffActionsType.GET_VOTING_HISTORY),
+    map((action: StaffActions.GetVotingHistory) => action.payload),
+    switchMap(res => {
+      return this.staffservice.getVotingHistory(res.id, res.userId).pipe(
+        map(res => {
+          return new StaffActions.GetVotingHistorySuccess(res.staffs);
+        }),
+        catchError(res => [
+          new StaffActions.GetVotingHistoryFailure(res.error.message)
+        ])
+      );
+    })
+  );
 
   @Effect()
   updateCampaign$ = this.actions.pipe(

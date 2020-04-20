@@ -1,4 +1,10 @@
-import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChildren,
+  QueryList,
+  Input
+} from '@angular/core';
 import { State } from 'src/app/layouts/auth-layout/store';
 import { SortableDirective } from 'src/app/shared/directives/sortable.directive';
 import { Observable } from 'rxjs';
@@ -20,6 +26,7 @@ import * as _ from 'lodash';
   styleUrls: ['./campaign-profile-as-admin-modal.component.scss']
 })
 export class CampaignProfileAsAdminModalComponent implements OnInit {
+  @Input() campaignId: number;
   @ViewChildren(SortableDirective) headers1: QueryList<SortableDirective>;
 
   staffs$: Observable<Staff[]>;
@@ -44,13 +51,13 @@ export class CampaignProfileAsAdminModalComponent implements OnInit {
 
   ngOnInit() {
     this.tableQuery = this.defaultQuery;
-    // get campaign detail from api
-    this.staffs$ = this.store.select(fromStaff.getAllStaffs);
-    this.totalItems$ = this.store.select(fromStaff.getTotalStaffs);
-    this.errorMessage$ = this.store.select(fromStaff.getErrorGtAllStfMessage);
-    this.isStaffLoading$ = this.store.select(fromStaff.getIsGtAllStfLoading);
+    this.store.dispatch(new fromStaff.GetCampaignDetail(this.campaignId));
+    this.staffs$ = this.store.select(fromStaff.getCampaignDetail);
+    // this.totalItems$ = this.store.select(fromStaff.getTotalStaffs);
+    this.errorMessage$ = this.store.select(fromStaff.getErrorGtCmpDtlMessage);
+    this.isStaffLoading$ = this.store.select(fromStaff.getIsCmpDtlLoading);
     this.isLoadingResults$ = this.store.select(fromStaff.getIsCrtAccLoading);
-    this.fetchTableData(this.tableQuery);
+    // this.fetchTableData(this.tableQuery);
   }
 
   public dismiss() {
@@ -68,26 +75,26 @@ export class CampaignProfileAsAdminModalComponent implements OnInit {
   changeQuery(query: any = {}) {
     let { queryParams } = this.route.snapshot;
     queryParams = { ...queryParams, ...query };
-    this.router.navigate(['admin'], {
+    this.router.navigate(['campaign'], {
       queryParams: _.pickBy(queryParams, _.identity)
     });
   }
 
-  changePageSize(event) {
-    const limit = parseInt(event.target.value, 10);
-    this.tableQuery = { ...this.tableQuery, limit };
-    this.fetchTableData(this.tableQuery);
-  }
+  // changePageSize(event) {
+  //   const limit = parseInt(event.target.value, 10);
+  //   this.tableQuery = { ...this.tableQuery, limit };
+  //   this.fetchTableData(this.tableQuery);
+  // }
 
-  changePage(event) {
-    this.tableQuery = { ...this.tableQuery, offset: event };
-    this.fetchTableData({ ...this.tableQuery, offset: event });
-  }
+  // changePage(event) {
+  //   this.tableQuery = { ...this.tableQuery, offset: event };
+  //   this.fetchTableData({ ...this.tableQuery, offset: event });
+  // }
 
-  fetchTableData(query: TableQuery) {
-    query = { ...query, offset: (query.offset - 1) * query.limit };
-    this.store.dispatch(new fromStaff.GetStaffs(query));
-  }
+  // fetchTableData(query: TableQuery) {
+  //   query = { ...query, offset: (query.offset - 1) * query.limit };
+  //   this.store.dispatch(new fromStaff.GetCampaignDetail(query));
+  // }
 
   viewHistoryOfCampaign() {
     this.dialogService.viewHistoryOfVoting();
