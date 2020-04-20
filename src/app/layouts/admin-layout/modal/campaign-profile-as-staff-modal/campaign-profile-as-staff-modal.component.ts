@@ -42,11 +42,11 @@ export class CampaignProfileAsStaffModalComponent implements OnInit {
   ngOnInit() {
     this.tableQuery = this.defaultQuery;
     // get staffs from api
-    this.staffs$ = this.store.select(fromStaff.getAllStaffs);
+    this.store.dispatch(new fromStaff.GetCampaignListStaff(campaign.id));
+    this.staffs$ = this.store.select(fromStaff.getCampaignListStaff);
     this.totalItems$ = this.store.select(fromStaff.getTotalStaffs);
-    this.errorMessage$ = this.store.select(fromStaff.getErrorGtAllStfMessage);
-    this.isStaffLoading$ = this.store.select(fromStaff.getIsGtAllStfLoading);
-    this.isLoadingResults$ = this.store.select(fromStaff.getIsCrtAccLoading);
+    this.errorMessage$ = this.store.select(fromStaff.getErrorGtCmpLstStf);
+    this.isStaffLoading$ = this.store.select(fromStaff.getIsCmpLstStfLoading);
     this.fetchTableData(this.tableQuery);
   }
 

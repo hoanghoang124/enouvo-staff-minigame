@@ -1,4 +1,10 @@
-import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChildren,
+  QueryList,
+  Input
+} from '@angular/core';
 import { State } from 'src/app/layouts/auth-layout/store';
 import { SortableDirective } from 'src/app/shared/sortable.directive';
 import { Observable } from 'rxjs';
@@ -20,6 +26,7 @@ import * as _ from 'lodash';
   styleUrls: ['./campaign-profile-as-admin-modal.component.scss']
 })
 export class CampaignProfileAsAdminModalComponent implements OnInit {
+  @Input() campaignId: number;
   @ViewChildren(SortableDirective) headers1: QueryList<SortableDirective>;
 
   staffs$: Observable<Staff[]>;
@@ -44,8 +51,8 @@ export class CampaignProfileAsAdminModalComponent implements OnInit {
 
   ngOnInit() {
     this.tableQuery = this.defaultQuery;
-    // get campaign detail from api
-    this.staffs$ = this.store.select(fromStaff.getAllStaffs);
+    this.store.dispatch(new fromStaff.GetCampaignDetail(this.campaignId));
+    this.staffs$ = this.store.select(fromStaff.getCampaignDetail);
     this.totalItems$ = this.store.select(fromStaff.getTotalStaffs);
     this.errorMessage$ = this.store.select(fromStaff.getErrorGtAllStfMessage);
     this.isStaffLoading$ = this.store.select(fromStaff.getIsGtAllStfLoading);

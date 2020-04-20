@@ -21,6 +21,16 @@ export const getAllCampaigns = createSelector(
   state => state.campaigns
 );
 
+export const getCampaignDetail = createSelector(
+  selectStaffState,
+  state => state.staffs
+);
+
+export const getCampaignListStaff = createSelector(
+  selectStaffState,
+  state => state.staffs
+);
+
 export const getStaff = createSelector(
   selectStaffState,
   state => state.selectedStaff
@@ -51,6 +61,21 @@ export const getIsGtAllCmpLoading = createSelector(
   state => state.isGtAllCmpLoading
 );
 
+export const getIsCmpDtlLoading = createSelector(
+  selectStaffState,
+  state => state.isGtCmpDtlLoading
+);
+
+export const getIsCmpLstStfLoading = createSelector(
+  selectStaffState,
+  state => state.isGtCmpLstStfLoading
+);
+
+export const getIsVtgHsrLoading = createSelector(
+  selectStaffState,
+  state => state.isGtVtgHsrLoading
+);
+
 export const getIsUpdCmpLoading = createSelector(
   selectStaffState,
   state => state.isUpdCmpLoading
@@ -79,6 +104,21 @@ export const getErrorCrtCmpMessage = createSelector(
 export const getErrorGtAllCmpMessage = createSelector(
   selectStaffState,
   state => state.errorGtAllCmpMessage
+);
+
+export const getErrorGtCmpDtlMessage = createSelector(
+  selectStaffState,
+  state => state.errorGtCmpDtlMessage
+);
+
+export const getErrorGtCmpLstStf = createSelector(
+  selectStaffState,
+  state => state.errorGtCmpLstStfMessage
+);
+
+export const getErrorVtgHsrMessage = createSelector(
+  selectStaffState,
+  state => state.errorGtVtgHsrMessage
 );
 
 export const getErrorUpdCmpMessage = createSelector(

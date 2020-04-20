@@ -65,8 +65,8 @@ export class CampaignComponent implements OnInit, OnDestroy {
     this.dialogService.updateCampaign(campaignId);
   }
 
-  viewCampaignAsAdminDialog() {
-    this.dialogService.viewCampaignAsAdminPosition();
+  viewCampaignAsAdminDialog(campaignId) {
+    this.dialogService.viewCampaignAsAdminPosition(campaignId);
   }
   onSort(sort: SortEvent) {
     this.paging.pageNumber = 1;
