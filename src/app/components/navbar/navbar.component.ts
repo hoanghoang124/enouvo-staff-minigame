@@ -34,12 +34,12 @@ export class NavbarComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    this.store.dispatch(new fromStaff.GetStaff(this.userId));
     this.listTitles = ROUTES.filter(listTitle => listTitle);
     this.menuItems = ROUTES.filter(menuItem => menuItem);
     this.router.events.subscribe(() => {
       this.isCollapsed = true;
     });
-    this.store.dispatch(new fromStaff.GetStaff(this.userId));
     this.avatarUrl = localStorage.getItem('avatarUrl');
     this.firstName = localStorage.getItem('firstName');
   }

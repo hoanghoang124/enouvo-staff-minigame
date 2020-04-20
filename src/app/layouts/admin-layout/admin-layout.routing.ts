@@ -5,7 +5,8 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { TablesComponent } from './tables/tables.component';
 import { AdminGuard } from '../auth-layout/services/role-guard.service';
 import { AuthGuard } from '../auth-layout/services/auth-guard.service';
-import { CampaignProfileAsStaffModalComponent } from './modal/campaign-profile-as-staff-modal/campaign-profile-as-staff-modal.component';
+import { CampaignDetailStaffComponent } from './campaign-detail-staff/campaign-detail-staff.component';
+import { CampaignDetailAdminComponent } from './campaign-detail-admin/campaign-detail-admin.component';
 export const AdminLayoutRoutes: Routes = [
   {
     path: 'dashboard',
@@ -14,7 +15,7 @@ export const AdminLayoutRoutes: Routes = [
   },
   {
     path: 'campaign-staff',
-    component: CampaignProfileAsStaffModalComponent,
+    component: CampaignDetailStaffComponent,
     canActivate: [AuthGuard]
   },
   {
@@ -33,5 +34,10 @@ export const AdminLayoutRoutes: Routes = [
     canActivate: [AuthGuard]
   },
   { path: 'tables', component: TablesComponent, canActivate: [AdminGuard] },
-  { path: 'campaign', component: CampaignComponent, canActivate: [AdminGuard] }
+  { path: 'campaign', component: CampaignComponent, canActivate: [AdminGuard] },
+  {
+    path: 'campaign/:id',
+    component: CampaignDetailAdminComponent,
+    canActivate: [AdminGuard]
+  }
 ];

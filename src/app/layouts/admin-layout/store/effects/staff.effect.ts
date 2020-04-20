@@ -3,7 +3,7 @@ import { Effect, ofType, Actions } from '@ngrx/effects';
 import { map, catchError, switchMap, tap } from 'rxjs/operators';
 import { of, Observable } from 'rxjs';
 import { StaffService } from '../../services/staff.service';
-import { Router } from '@angular/router';
+// import { Router } from '@angular/router';
 import { DialogService } from '../../services/dialog.service';
 import * as StaffActions from '../actions/staff.action';
 
@@ -14,8 +14,7 @@ export class StaffEffects {
   constructor(
     private actions: Actions,
     private staffservice: StaffService,
-    private dialogService: DialogService,
-    private route: Router
+    private dialogService: DialogService // private route: Router
   ) {}
 
   @Effect()
@@ -62,21 +61,13 @@ export class StaffEffects {
     switchMap(payload => {
       return this.staffservice.create(payload).pipe(
         map(() => {
-          this.route.navigateByUrl('/tables');
+          this.dialogService.closeCreateAccount();
           return new StaffActions.CreateAccountSuccess(payload);
         }),
         catchError(res =>
           of(new StaffActions.CreateAccountFailure(res.error.message))
         )
       );
-    })
-  );
-
-  @Effect({ dispatch: false })
-  CreateAccountSuccess: Observable<any> = this.actions.pipe(
-    ofType(StaffActionsType.CREATE_ACCOUNT_SUCCESS),
-    tap(() => {
-      this.dialogService.closeCreateAccount();
     })
   );
 
@@ -96,12 +87,6 @@ export class StaffEffects {
       );
     })
   );
-
-  // @Effect({ dispatch: false })
-  // CreateCampaignSuccess: Observable<any> = this.actions.pipe(
-  //   ofType(StaffActionsType.CREATE_CAMPAIGN_SUCCESS),
-  //   tap(() => {})
-  // );
 
   @Effect()
   getCampaigns$ = this.actions.pipe(
@@ -156,7 +141,7 @@ export class StaffEffects {
     switchMap(res => {
       return this.staffservice.getVotingHistory(res.id, res.userId).pipe(
         map(res => {
-          return new StaffActions.GetVotingHistorySuccess(res.staffs);
+          return new StaffActions.GetVotingHistorySuccess(res.votingHistory);
         }),
         catchError(res => [
           new StaffActions.GetVotingHistoryFailure(res.error.message)
@@ -172,20 +157,13 @@ export class StaffEffects {
     switchMap(res => {
       return this.staffservice.updateCampaign(res.id, res.campaign).pipe(
         map(() => {
+          this.dialogService.closeUpdateCampaign();
           return new StaffActions.UpdateCampaignSuccess(res);
         }),
         catchError(res => [
           new StaffActions.UpdateCampaignFail(res.error.message)
         ])
       );
-    })
-  );
-
-  @Effect({ dispatch: false })
-  updateCampaignSuccess: Observable<any> = this.actions.pipe(
-    ofType(StaffActionsType.UPDATE_CAMPAIGN_SUCCESS),
-    tap(() => {
-      this.dialogService.closeUpdateCampaign();
     })
   );
 }

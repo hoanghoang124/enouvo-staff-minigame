@@ -11,29 +11,26 @@
     </button>
   </div>
 </div> -->
+<!-- Table -->
 <div class="container-fluid mt--7">
-  <!-- Table -->
   <div class="row">
     <div class="col">
-      <div class="card shadow">
-        <div class="card-header border-0">
-          <div class="row align-items-center">
-            <div class="col">
-              <h3 class="mb-0">
-                Employees list
-              </h3>
-              <span
-                class="badge badge-warning"
-                id="error-message"
-                *ngIf="errorMessage$ | async"
-              >
-                {{ errorMessage$ | async }}
-              </span>
-            </div>
+      <div class="card shadow" *ngIf="campaign$ | async as campaign">
+        <div class="card-header boder-0">
+          <div class="col">
+            <h3 class="mb-0">
+              Participated employee list
+            </h3>
+            <span
+              class="badge badge-warning"
+              id="error-message"
+              *ngIf="errorMessage$ | async"
+              >{{ errorMessage$ | async }}</span
+            >
           </div>
         </div>
-        <app-loading *ngIf="isStaffLoading$ | async"></app-loading>
-        <div class="table-responsive">
+        <app-loading *ngIf="isCampaignDetailLoading$ | async"></app-loading>
+        <div class="table-responsive ">
           <table class="table align-items-center table-flush">
             <thead class="thead-light">
               <tr>
@@ -44,13 +41,19 @@
                 <th appSortable="firstName" (sort)="onSort($event)">
                   Last Name
                 </th>
-                <th class="position">Position</th>
-                <th class="voting">Voting</th>
-                <th class="action">Action</th>
+                <th>Position</th>
+                <th
+                  class="stars"
+                  appSortable="firstName"
+                  (sort)="onSort($event)"
+                >
+                  Voted/Received
+                </th>
+                <th class="action">History</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let staff of staffs$ | async">
+              <tr *ngFor="let staff of campaign.staffs">
                 <th scope="row">
                   <div class="media align-items-center">
                     <div class="media-body">
@@ -66,26 +69,34 @@
                       </a>
                     </div>
                     <div class="media-body">
-                      <span class="mb-0 text-sm">{{ staff.id }}</span>
+                      <span class="mb-0 text-sm">{{ staff.userId }}</span>
                     </div>
                   </div>
                 </th>
                 <td style="font-weight: bold; text-transform: capitalize;">
                   {{ staff.firstName || 'n/a' }}
                 </td>
-                <td style="text-transform: capitalize">
+                <td style="text-transform: capitalize;">
                   {{ staff.lastName || 'n/a' }}
                 </td>
-                <td class="position">{{ staff.position || 'n/a' }}</td>
-                <td class="voting">
-                  <input
-                    type="number"
-                    class="form-control form-control-alternative"
-                    placeholder="Enter stars here"
-                  />
+                <td style="text-transform: capitalize;">
+                  {{ staff.scope || 'n/a' }}
+                </td>
+                <td
+                  class="text-center stars"
+                  style="text-transform: capitalize;"
+                >
+                  {{ staff.votedStars }}/{{ staff.totalStarsReceived }}
                 </td>
                 <td class="action">
-                  <button class="btn btn-sm btn-primary">Submit</button>
+                  <button
+                    class="btn btn-sm btn-info"
+                    (click)="
+                      viewHistoryOfCampaign(campaign.campaign.id, staff.userId)
+                    "
+                  >
+                    View History
+                  </button>
                 </td>
               </tr>
             </tbody>
@@ -93,7 +104,7 @@
         </div>
         <div
           class="d-flex justify-content-between"
-          *ngIf="(staffs$ | async).length"
+          *ngIf="campaign.staffs.length"
         >
           <select
             class="custom-select"

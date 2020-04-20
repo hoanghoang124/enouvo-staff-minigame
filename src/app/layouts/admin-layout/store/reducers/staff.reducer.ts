@@ -208,8 +208,8 @@ export function staffReducer(
     case staffActions.StaffActionsType.GET_VOTING_HISTORY_SUCCESS:
       return {
         ...state,
-        selectedStaff: action.payload,
-        isGtVtgHsrLoading: false
+        isGtVtgHsrLoading: false,
+        selectedStaff: action.payload
       };
     case staffActions.StaffActionsType.GET_VOTING_HISTORY_FAILURE:
       return {

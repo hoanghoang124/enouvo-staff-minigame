@@ -60,20 +60,13 @@ export class AuthEffects {
     switchMap(payload => {
       return this.authService.changePassword(payload).pipe(
         map(user => {
+          this.dialogService.closeChangePassword();
           return new AuthActions.ChangePasswordSuccess(user);
         }),
         catchError(res =>
           of(new AuthActions.ChangePasswordFailure(res.error.message))
         )
       );
-    })
-  );
-
-  @Effect({ dispatch: false })
-  ChangePasswordSuccess: Observable<any> = this.actions.pipe(
-    ofType(AuthActionTypes.CHANGE_PASSWORD_SUCCESS),
-    tap(() => {
-      this.dialogService.closeChangePassword();
     })
   );
 

@@ -3,35 +3,31 @@ import {
   OnInit,
   ViewChildren,
   QueryList,
-  Input
+  OnDestroy
 } from '@angular/core';
-import { State } from 'src/app/layouts/auth-layout/store';
-import { SortableDirective } from 'src/app/shared/directives/sortable.directive';
+import * as fromStaff from '../store';
+import * as _ from 'lodash';
+import { Page, pageSizes } from '../models/pagination.model';
+import { State } from '../../auth-layout/store';
+import { SortableDirective } from 'src/app/shared/directives';
 import { Observable } from 'rxjs';
-// import { Staff } from '../../models/staff.model';
-import { NgbDateStruct, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { pageSizes, Page } from '../../models/pagination.model';
-import { TableQuery } from '../../models/tableQuery.model';
+import { NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TableQuery } from '../models/tableQuery.model';
 import { Store } from '@ngrx/store';
 import { Router, ActivatedRoute } from '@angular/router';
-import { UtilServiceService } from '../../services/util-service.service';
+import { UtilServiceService } from '../services/util-service.service';
+import { DialogService } from '../services/dialog.service';
 import { SortEvent } from 'src/app/shared/sort.model';
-import { DialogService } from '../../services/dialog.service';
-import * as fromStaff from '../../store';
-import * as _ from 'lodash';
-
 @Component({
-  selector: 'app-campaign-profile-as-admin-modal',
-  templateUrl: './campaign-profile-as-admin-modal.component.html',
-  styleUrls: ['./campaign-profile-as-admin-modal.component.scss']
+  selector: 'app-campaign-detail-admin',
+  templateUrl: './campaign-detail-admin.component.html',
+  styleUrls: ['./campaign-detail-admin.component.scss']
 })
-export class CampaignProfileAsAdminModalComponent implements OnInit {
-  @Input() campaignId: number;
+export class CampaignDetailAdminComponent implements OnInit, OnDestroy {
   @ViewChildren(SortableDirective) headers1: QueryList<SortableDirective>;
 
   campaign$: Observable<any>;
-  isStaffLoading$: Observable<boolean>;
-  isLoadingResults$: Observable<boolean>;
+  isCampaignDetailLoading$: Observable<boolean>;
   errorMessage$: Observable<string>;
   model: NgbDateStruct;
   paging: Page;
@@ -42,26 +38,25 @@ export class CampaignProfileAsAdminModalComponent implements OnInit {
   searchText: string;
   constructor(
     private store: Store<State>,
-    private activeModal: NgbActiveModal,
     private router: Router,
     private route: ActivatedRoute,
     private utilService: UtilServiceService,
+    private modalService: NgbModal,
     private dialogService: DialogService
   ) {}
 
   ngOnInit() {
     this.tableQuery = this.defaultQuery;
-    this.store.dispatch(new fromStaff.GetCampaignDetail(this.campaignId));
+    this.route.params.subscribe(params => {
+      this.store.dispatch(new fromStaff.GetCampaignDetail(params.id));
+    });
     this.campaign$ = this.store.select(fromStaff.getCampaignDetail);
     // this.totalItems$ = this.store.select(fromStaff.getTotalStaffs);
     this.errorMessage$ = this.store.select(fromStaff.getErrorGtCmpDtlMessage);
-    this.isStaffLoading$ = this.store.select(fromStaff.getIsCmpDtlLoading);
-    this.isLoadingResults$ = this.store.select(fromStaff.getIsCrtAccLoading);
+    this.isCampaignDetailLoading$ = this.store.select(
+      fromStaff.getIsCmpDtlLoading
+    );
     // this.fetchTableData(this.tableQuery);
-  }
-
-  public dismiss() {
-    this.activeModal.dismiss();
   }
 
   onSort(sort: SortEvent) {
@@ -96,7 +91,11 @@ export class CampaignProfileAsAdminModalComponent implements OnInit {
     this.store.dispatch(new fromStaff.GetCampaignDetail(query));
   }
 
-  viewHistoryOfCampaign() {
-    this.dialogService.viewHistoryOfVoting();
+  viewHistoryOfCampaign(id, userId) {
+    this.dialogService.viewHistoryOfVoting(id, userId);
+  }
+
+  ngOnDestroy() {
+    this.modalService.dismissAll();
   }
 }

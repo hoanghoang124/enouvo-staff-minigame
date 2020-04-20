@@ -44,7 +44,6 @@ export class CreateAccountModalComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.createAccountForm.value);
     if (this.createAccountForm.invalid) {
       console.log('Form invalid');
       return;
@@ -55,7 +54,11 @@ export class CreateAccountModalComponent implements OnInit {
     }
   }
 
-  close() {
+  public dismiss() {
     this.activeModal.dismiss();
+  }
+
+  close() {
+    this.activeModal.close();
   }
 }

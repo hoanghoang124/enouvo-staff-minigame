@@ -31,6 +31,11 @@ export const getCampaignListStaff = createSelector(
   state => state.staffs
 );
 
+export const getVotingHistory = createSelector(
+  selectStaffState,
+  state => state.selectedStaff
+);
+
 export const getStaff = createSelector(
   selectStaffState,
   state => state.selectedStaff

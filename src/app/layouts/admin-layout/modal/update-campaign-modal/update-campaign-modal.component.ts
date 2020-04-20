@@ -14,11 +14,11 @@ import { CampaignStates } from '../../models/campaign-states.model';
 })
 export class UpdateCampaignModalComponent implements OnInit {
   @Input() campaignId: number;
-  @Input() title: string;
-  @Input() description: string;
-  @Input() isCampaignActive: boolean;
-  @Input() startDate: Date;
-  @Input() endDate: Date;
+  @Input() campaignTitle: string;
+  @Input() campaignIsCampaignActive: boolean;
+  @Input() campaignDescription: string;
+  @Input() campaignStartDate: Date;
+  @Input() campaignEndDate: Date;
 
   errorMessage$: Observable<string>;
   isLoadingResults$: Observable<boolean>;
@@ -38,13 +38,29 @@ export class UpdateCampaignModalComponent implements OnInit {
       startDate: ['', Validators.required],
       endDate: ['', Validators.required]
     });
+
+    this.updateCampaignForm.controls['title'].patchValue(this.campaignTitle);
+    this.updateCampaignForm.controls['description'].patchValue(
+      this.campaignDescription
+    );
+    this.updateCampaignForm.controls['isCampaignActive'].patchValue(
+      this.campaignIsCampaignActive
+    );
+    this.updateCampaignForm.controls['startDate'].patchValue(
+      this.campaignStartDate
+    );
+    this.updateCampaignForm.controls['endDate'].patchValue(
+      this.campaignEndDate
+    );
+
+    console.log(this.campaignEndDate);
+
     this.errorMessage$ = this.store.select(fromStaff.getErrorUpdCmpMessage);
     this.isLoadingResults$ = this.store.select(fromStaff.getIsUpdCmpLoading);
   }
 
   onSubmit() {
     if (this.updateCampaignForm.invalid) {
-      console.log('Form invalid');
       return;
     } else {
       this.store.dispatch(
@@ -56,7 +72,11 @@ export class UpdateCampaignModalComponent implements OnInit {
     }
   }
 
-  close() {
+  public dismiss() {
     this.activeModal.dismiss();
+  }
+
+  close() {
+    this.activeModal.close();
   }
 }
