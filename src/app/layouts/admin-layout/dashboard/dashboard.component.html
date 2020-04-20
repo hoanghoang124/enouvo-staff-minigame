@@ -7,73 +7,64 @@
       <div class="col-xl col-lg ">
         <div class="card card-stats mb-4 mb-xl-0 shadow">
           <div class="card-body">
-            <div class="row">
-              <div class="col">
-                <h5 class="card-title text-uppercase text-muted mb-0 ">
-                  Hot event
-                </h5>
-                <br />
-                <app-loading *ngIf="isCampaginLoading$ | async"></app-loading>
-                <div class="table-responsive">
-                  <table class="table align-items-center table-flush">
-                    <thead class="thead-light">
-                      <tr>
-                        <th style="text-align: center;">Id</th>
-                        <th>Title</th>
-                        <th>Description</th>
-                        <th>Start Time</th>
-                        <th>End Time</th>
-                        <th>Star Limitation</th>
-                        <th>Unvoted Stars</th>
-                        <th>Voted to</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr
-                        *ngFor="let campaign of campaigns$ | async"
-                        style="text-transform: capitalize;"
-                      >
-                        <th scope="row">
-                          <div class="media align-items-center">
-                            <div class="media-body">
-                              <span class="mb-0 text-sm">{{
-                                campaign.id
-                              }}</span>
-                            </div>
-                          </div>
-                        </th>
-                        <td
-                          style="font-weight: bold;"
-                          routerLink="/campaign-staff"
-                        >
-                          {{ campaign.title || 'n/a' }}
-                        </td>
-                        <td>
-                          {{ campaign.description || 'n/a' }}
-                        </td>
-                        <td>
-                          {{ campaign.startDate | date: 'dd/MM/yyyy' || 'n/a' }}
-                        </td>
-                        <td>
-                          {{ campaign.endDate | date: 'dd/MM/yyyy' || 'n/a' }}
-                        </td>
-                        <td>
-                          {{ campaign.starLimitation || 'n/a' }}
-                        </td>
-                        <td>N/a</td>
-                        <td>N/a</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
+            <h5 class="card-title text-uppercase text-muted mb-0 ">
+              Hot event
+            </h5>
+            <br />
+            <app-loading *ngIf="isCampaginLoading$ | async"></app-loading>
+            <div class="table-responsive">
+              <table class="table align-items-center table-flush">
+                <thead class="thead-light">
+                  <tr>
+                    <th style="text-align: center;">Id</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Star Limitation</th>
+                    <th>Unvoted Stars</th>
+                    <th>Voted to</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    *ngFor="let campaign of campaigns$ | async"
+                    style="text-transform: capitalize;"
+                  >
+                    <th scope="row">
+                      <div class="media align-items-center">
+                        <div class="media-body">
+                          <span class="mb-0 text-sm">{{ campaign.id }}</span>
+                        </div>
+                      </div>
+                    </th>
+                    <td style="font-weight: bold;" routerLink="/campaign-staff">
+                      {{ campaign.title || 'n/a' }}
+                    </td>
+                    <td>
+                      {{ campaign.description || 'n/a' }}
+                    </td>
+                    <td>
+                      {{ campaign.startDate | date: 'dd/MM/yyyy' || 'n/a' }}
+                    </td>
+                    <td>
+                      {{ campaign.endDate | date: 'dd/MM/yyyy' || 'n/a' }}
+                    </td>
+                    <td class="text-center">
+                      {{ campaign.starLimitation || 'n/a' }}
+                    </td>
+                    <td class="text-center">N/a</td>
+                    <td>N/a</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
-            <p class="mt-3 mb-0 text-muted text-sm">
-              <span class="text-success mr-2"> Time left: </span>
-              <span class="text-nowrap">Duration</span>
-            </p>
           </div>
         </div>
+        <p class="mt-3 mb-0 text-muted text-sm">
+          <span class="text-success mr-2"> Time left: </span>
+          <span class="text-nowrap">Duration</span>
+        </p>
       </div>
     </div>
   </div>

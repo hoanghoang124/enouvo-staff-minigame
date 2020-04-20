@@ -6,10 +6,18 @@
   margin-bottom: 3rem !important;
 }
 
-.card-header,
 .card-body {
   border-radius: inherit;
   background-color: #ffffff;
+  padding: 16px 0;
+
+  h5 {
+    padding-left: 16px;
+  }
+
+  p {
+    padding-left: 16px;
+  }
 }
 
 .container-fluid {

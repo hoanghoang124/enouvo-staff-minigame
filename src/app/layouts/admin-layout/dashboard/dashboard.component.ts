@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
-import { Staff } from '../models/staff.model';
 import { State } from '../store/reducers';
 import * as fromStaff from '../store';
 import { DialogService } from '../services/dialog.service';
+import { Staff } from '../models/staff.model';
 
 @Component({
   selector: 'app-dashboard',

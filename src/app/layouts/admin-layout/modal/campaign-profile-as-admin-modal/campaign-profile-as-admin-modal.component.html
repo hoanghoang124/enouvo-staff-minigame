@@ -20,90 +20,88 @@
 </div>
 <div class="row">
   <div class="col">
-    <div class="card shadow">
-      <app-loading *ngIf="isStaffLoading$ | async"></app-loading>
-      <div class="table-responsive card-body">
-        <table class="table align-items-center table-flush">
-          <thead class="thead-light">
-            <tr>
-              <th style="text-align: center;">Id</th>
-              <th appSortable="firstName" (sort)="onSort($event)">
-                First Name
-              </th>
-              <th appSortable="firstName" (sort)="onSort($event)">
-                Last Name
-              </th>
-              <th>Position</th>
-              <th appSortable="firstName" (sort)="onSort($event)">
-                Unvoted Starts
-              </th>
-              <th class="action">History</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let staff of staffs$ | async">
-              <th scope="row">
-                <div class="media align-items-center">
-                  <div class="media-body">
-                    <a class="avatar avatar-sm" data-toggle="tooltip">
-                      <img
-                        alt="Avatar"
-                        src="{{
-                          staff.avatarUrl ||
-                            '../../../../../../assets/img/avatar/IMG_1171.JPG'
-                        }}"
-                        class="rounded-circle"
-                      />
-                    </a>
-                  </div>
-                  <div class="media-body">
-                    <span class="mb-0 text-sm">{{ staff.id }}</span>
-                  </div>
+    <app-loading *ngIf="isStaffLoading$ | async"></app-loading>
+    <div class="table-responsive modal-body">
+      <table class="table align-items-center table-flush">
+        <thead class="thead-light">
+          <tr>
+            <th style="text-align: center;">Id</th>
+            <th appSortable="firstName" (sort)="onSort($event)">
+              First Name
+            </th>
+            <th appSortable="firstName" (sort)="onSort($event)">
+              Last Name
+            </th>
+            <th>Position</th>
+            <th appSortable="firstName" (sort)="onSort($event)">
+              Unvoted Starts
+            </th>
+            <th class="action">History</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let staff of staffs$ | async">
+            <th scope="row">
+              <div class="media align-items-center">
+                <div class="media-body">
+                  <a class="avatar avatar-sm" data-toggle="tooltip">
+                    <img
+                      alt="Avatar"
+                      src="{{
+                        staff.avatarUrl ||
+                          '../../../../../../assets/img/avatar/IMG_1171.JPG'
+                      }}"
+                      class="rounded-circle"
+                    />
+                  </a>
                 </div>
-              </th>
-              <td style="font-weight: bold; text-transform: capitalize;">
-                {{ staff.firstName || 'n/a' }}
-              </td>
-              <td style="text-transform: capitalize;">
-                {{ staff.lastName || 'n/a' }}
-              </td>
-              <td>{{ staff.position || 'n/a' }}</td>
+                <div class="media-body">
+                  <span class="mb-0 text-sm">{{ staff.id }}</span>
+                </div>
+              </div>
+            </th>
+            <td style="font-weight: bold; text-transform: capitalize;">
+              {{ staff.firstName || 'n/a' }}
+            </td>
+            <td style="text-transform: capitalize;">
+              {{ staff.lastName || 'n/a' }}
+            </td>
+            <td>{{ staff.position || 'n/a' }}</td>
 
-              <td style="text-transform: capitalize;">
-                n/a
-              </td>
-              <td class="action">
-                <button class="btn btn-sm btn-info">View History</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div
-        class="d-flex justify-content-between"
-        *ngIf="(staffs$ | async).length"
+            <td style="text-transform: capitalize;">
+              n/a
+            </td>
+            <td class="action">
+              <button class="btn btn-sm btn-info">View History</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div
+      class="d-flex justify-content-between modal-footer"
+      *ngIf="(staffs$ | async).length"
+    >
+      <select
+        class="custom-select"
+        style="width: auto"
+        name="pageSize"
+        [value]="tableQuery.limit"
+        (change)="changePageSize($event)"
       >
-        <select
-          class="custom-select"
-          style="width: auto"
-          name="pageSize"
-          [value]="tableQuery.limit"
-          (change)="changePageSize($event)"
-        >
-          <option *ngFor="let item of pageSizes" [ngValue]="item">
-            {{ item }}
-          </option>
-        </select>
-        <ngb-pagination
-          [pageSize]="tableQuery.limit"
-          [collectionSize]="totalItems$ | async"
-          [page]="tableQuery.offset"
-          (pageChange)="changePage($event)"
-          class="pagination-sm"
-          [boundaryLinks]="true"
-        >
-        </ngb-pagination>
-      </div>
+        <option *ngFor="let item of pageSizes" [ngValue]="item">
+          {{ item }}
+        </option>
+      </select>
+      <ngb-pagination
+        [pageSize]="tableQuery.limit"
+        [collectionSize]="totalItems$ | async"
+        [page]="tableQuery.offset"
+        (pageChange)="changePage($event)"
+        class="pagination-sm"
+        [boundaryLinks]="true"
+      >
+      </ngb-pagination>
     </div>
   </div>
 </div>

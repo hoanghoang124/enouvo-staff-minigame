@@ -1,7 +1,12 @@
-import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
-import { State } from '../../auth-layout/store';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {
+  Component,
+  OnInit,
+  ViewChildren,
+  QueryList,
+  OnDestroy
+} from '@angular/core';
 import { Store } from '@ngrx/store';
-import { DialogService } from '../services/dialog.service';
 import { Observable } from 'rxjs';
 import { pageSizes } from '../models/pagination.model';
 import { TableQuery } from '../models/tableQuery.model';
@@ -13,13 +18,15 @@ import * as _ from 'lodash';
 import { SortableDirective } from 'src/app/shared/sortable.directive';
 import { Page } from '../models/page.model';
 import { Campaign } from '../models/campaign.model';
+import { State } from '../../auth-layout/store';
+import { DialogService } from '../services/dialog.service';
 
 @Component({
   selector: 'app-campaign',
   templateUrl: './campaign.component.html',
   styleUrls: ['./campaign.component.scss']
 })
-export class CampaignComponent implements OnInit {
+export class CampaignComponent implements OnInit, OnDestroy {
   @ViewChildren(SortableDirective) headers2: QueryList<SortableDirective>;
 
   campaigns$: Observable<Campaign[]>;
@@ -34,6 +41,7 @@ export class CampaignComponent implements OnInit {
   constructor(
     private store: Store<State>,
     private dialogService: DialogService,
+    private modalService: NgbModal,
     private utilService: UtilServiceService,
     private router: Router,
     private route: ActivatedRoute
@@ -91,5 +99,9 @@ export class CampaignComponent implements OnInit {
   fetchTableData(query: TableQuery) {
     query = { ...query, offset: (query.offset - 1) * query.limit };
     this.store.dispatch(new fromStaff.GetCampaign(query));
+  }
+
+  ngOnDestroy() {
+    this.modalService.dismissAll();
   }
 }

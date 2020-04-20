@@ -84,8 +84,7 @@
               <img
                 alt="Image placeholder"
                 src="{{
-                  (staff$ | async)?.avatarUrl ||
-                    '../../../assets/img/avatar/IMG_1171.JPG'
+                  avatarUrl || '../../../assets/img/avatar/IMG_1171.JPG'
                 }}"
               />
             </span>
@@ -93,7 +92,7 @@
               <span
                 class="mb-0 text-sm nav-link font-weight-bold"
                 style="text-transform: capitalize;"
-                >{{ (staff$ | async)?.firstName }}
+                >{{ firstName }}
               </span>
             </div>
           </div>

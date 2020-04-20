@@ -1,27 +1,33 @@
-import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChildren,
+  QueryList,
+  OnDestroy
+} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { State } from '../store/reducers';
-import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup } from '@angular/forms';
 import { DialogService } from '../services/dialog.service';
 import { pageSizes } from '../models/pagination.model';
-import * as fromStaff from '../store';
 import { TableQuery } from '../models/tableQuery.model';
 import { Staff } from '../models/staff.model';
 import { Page } from '../models/page.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SortEvent } from 'src/app/shared/sort.model';
-import * as _ from 'lodash';
 import { UtilServiceService } from '../services/util-service.service';
 import { SortableDirective } from 'src/app/shared/sortable.directive';
+import * as fromStaff from '../store';
+import * as _ from 'lodash';
+import { State } from '../../auth-layout/store';
 
 @Component({
   selector: 'app-tables',
   templateUrl: './tables.component.html',
   styleUrls: ['./tables.component.scss']
 })
-export class TablesComponent implements OnInit {
+export class TablesComponent implements OnInit, OnDestroy {
   @ViewChildren(SortableDirective) headers1: QueryList<SortableDirective>;
 
   staffs$: Observable<Staff[]>;
@@ -40,6 +46,7 @@ export class TablesComponent implements OnInit {
   constructor(
     private store: Store<State>,
     private dialogService: DialogService,
+    private modalService: NgbModal,
     private router: Router,
     private route: ActivatedRoute,
     private utilService: UtilServiceService
@@ -119,5 +126,9 @@ export class TablesComponent implements OnInit {
   fetchTableData(query: TableQuery) {
     query = { ...query, offset: (query.offset - 1) * query.limit };
     this.store.dispatch(new fromStaff.GetStaffs(query));
+  }
+
+  ngOnDestroy() {
+    this.modalService.dismissAll();
   }
 }

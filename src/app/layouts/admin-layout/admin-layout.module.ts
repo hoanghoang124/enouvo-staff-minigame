@@ -7,7 +7,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ClipboardModule } from 'ngx-clipboard';
 import { AdminLayoutRoutes } from './admin-layout.routing';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { IconsComponent } from '../../pages/icons/icons.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { TablesComponent } from './tables/tables.component';
@@ -27,6 +26,7 @@ import { UserProfileModalComponent } from './modal/user-profile-modal/user-profi
 import { UpdateCampaignModalComponent } from './modal/update-campaign-modal/update-campaign-modal.component';
 import { CampaignProfileAsAdminModalComponent } from './modal/campaign-profile-as-admin-modal/campaign-profile-as-admin-modal.component';
 import { CampaignProfileAsStaffModalComponent } from './modal/campaign-profile-as-staff-modal/campaign-profile-as-staff-modal.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 // import { ToastrModule } from 'ngx-toastr';
 

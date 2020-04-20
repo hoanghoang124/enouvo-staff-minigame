@@ -44,7 +44,7 @@
                 <th class="star-limit">Star Limit</th>
                 <th>Voted / Total</th>
                 <th>Winner</th>
-                <th>Status</th>
+                <th class="text-center">Status</th>
                 <th class="action">Actions</th>
               </tr>
             </thead>
@@ -71,10 +71,14 @@
                 </td>
                 <td>{{ campaign.startDate | date: 'dd/MM/yyyy' || 'n/a' }}</td>
                 <td>{{ campaign.endDate | date: 'dd/MM/yyyy' || 'n/a' }}</td>
-                <td>{{ campaign.starLimitation || 'n/a' }}</td>
+                <td class="text-center">
+                  {{ campaign.starLimitation || 'n/a' }}
+                </td>
+                <td class="text-center">n/a</td>
                 <td>n/a</td>
-                <td>n/a</td>
-                <td>{{ campaign.isCampaignActive || 'n/a' }}</td>
+                <td class="text-center">
+                  {{ campaign.isCampaignActive || 'n/a' }}
+                </td>
                 <td class="action">
                   <button
                     class="btn btn-sm btn-info"

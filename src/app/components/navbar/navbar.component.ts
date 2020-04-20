@@ -1,5 +1,6 @@
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Staff } from 'src/app/layouts/admin-layout/models/staff.model';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { State } from 'src/app/layouts/auth-layout/store';
 import { AuthService } from 'src/app/layouts/auth-layout/services/auth.service';
@@ -15,7 +16,7 @@ import * as fromStaff from '../../layouts/admin-layout/store';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit, OnDestroy {
   public focus;
   public listTitles: any[];
   public menuItems: any[];
@@ -23,12 +24,15 @@ export class NavbarComponent implements OnInit {
   isLoadingResults$: Observable<boolean>;
   staff$: Observable<Staff>;
   userId: number = Number(localStorage.getItem('id'));
+  avatarUrl: string;
+  firstName: string;
 
   constructor(
     private store: Store<State>,
     private router: Router,
     public authService: AuthService,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private modalService: NgbModal
   ) {}
 
   ngOnInit() {
@@ -39,6 +43,8 @@ export class NavbarComponent implements OnInit {
     });
     this.store.dispatch(new fromStaff.GetStaff(this.userId));
     this.staff$ = this.store.select(fromStaff.getStaff);
+    this.avatarUrl = localStorage.getItem('avatarUrl');
+    this.firstName = localStorage.getItem('firstName');
   }
 
   openChangePasswordDialog() {
@@ -60,5 +66,9 @@ export class NavbarComponent implements OnInit {
 
   logOut(): void {
     this.store.dispatch(new LogOut());
+  }
+
+  ngOnDestroy() {
+    this.modalService.dismissAll();
   }
 }

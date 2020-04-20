@@ -4,8 +4,8 @@ import { map, catchError, switchMap, tap } from 'rxjs/operators';
 import { of, Observable } from 'rxjs';
 import { StaffService } from '../../services/staff.service';
 import { Router } from '@angular/router';
-import * as StaffActions from '../actions/staff.action';
 import { DialogService } from '../../services/dialog.service';
+import * as StaffActions from '../actions/staff.action';
 
 const { StaffActionsType } = StaffActions;
 
@@ -43,6 +43,15 @@ export class StaffEffects {
         }),
         catchError(res => [new StaffActions.GetStaffFail(res.error.message)])
       );
+    })
+  );
+
+  @Effect({ dispatch: false })
+  GetStaffSuccess: Observable<any> = this.actions.pipe(
+    ofType(StaffActionsType.GET_STAFF_SUCCESS),
+    tap(staff => {
+      localStorage.setItem('firstName', staff.payload.firstName);
+      localStorage.setItem('avatarUrl', staff.payload.avatarUrl);
     })
   );
 
