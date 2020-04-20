@@ -13,15 +13,11 @@ import { DialogService } from '../services/dialog.service';
 import { pageSizes, Page } from '../models/pagination.model';
 import { TableQuery } from '../models/tableQuery.model';
 import { Staff } from '../models/staff.model';
-import { Router, ActivatedRoute } from '@angular/router';
 import { SortEvent } from 'src/app/shared/sort.model';
-// import { UtilServiceService } from '../services/util-service.service';
 import { SortableDirective } from 'src/app/shared/directives/sortable.directive';
 import * as fromStaff from '../store';
 import * as _ from 'lodash';
 import { State } from '../../auth-layout/store';
-import { PaginationService } from '../services/pagination.service';
-import { takeUntil, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-tables',
@@ -53,10 +49,7 @@ export class TablesComponent implements OnInit, OnDestroy {
   constructor(
     private store: Store<State>,
     private dialogService: DialogService,
-    private modalService: NgbModal,
-    private router: Router,
-    private route: ActivatedRoute,
-    private paginationService: PaginationService
+    private modalService: NgbModal
   ) {
     this.sorting = new SortEvent();
     this.paging = new Page();
@@ -66,15 +59,7 @@ export class TablesComponent implements OnInit, OnDestroy {
     this.tableQuery = this.defaultQuery;
     // get staffs from api
     this.staffs$ = this.store.select(fromStaff.getAllStaffs);
-    this.staffs$
-      .pipe(
-        takeUntil(this.componentDestroyed$),
-        tap(staffs => {
-          this.staffsData = staffs;
-          this.updateFilter();
-        })
-      )
-      .subscribe();
+
     this.totalItems$ = this.store.select(fromStaff.getTotalStaffs);
     this.errorMessage$ = this.store.select(fromStaff.getErrorGtAllStfMessage);
     this.isStaffLoading$ = this.store.select(fromStaff.getIsGtAllStfLoading);
@@ -114,26 +99,20 @@ export class TablesComponent implements OnInit, OnDestroy {
       }
     });
     console.log(order, orderBy);
-    this.sorting.orderBy = orderBy;
-    this.sorting.order = order;
-  }
-
-  updateFilter() {
-    // 1. sort
-    let staffs = this.paginationService.sort(
-      this.staffsData,
-      this.sorting.orderBy,
-      this.sorting.order
-    );
-
-    // 2. filter
-    staffs = staffs.filter(staff => this.matches(staff, this.searchText));
-    this.totalItems = staffs.length;
-
-    // 3. paginate
-    const { pageSize, pageNumber } = this.paging;
-    staffs = this.paginationService.paginate(staffs, pageSize, pageNumber);
-    this.displayedClients = staffs;
+    if (order === '') {
+      this.tableQuery = {
+        ...this.tableQuery,
+        orderBy: null,
+        order: null
+      };
+      this.fetchTableData(_.pickBy(this.tableQuery, _.identity));
+    } else {
+      this.fetchTableData({
+        ...this.tableQuery,
+        orderBy: orderBy,
+        order: +order
+      });
+    }
   }
 
   matches(staff, text: string) {
@@ -151,22 +130,14 @@ export class TablesComponent implements OnInit, OnDestroy {
     );
   }
 
-  onSearch() {
-    this.updateFilter();
-  }
+  // onSearch() {
+  //   this.updateFilter();
+  // }
 
-  clearSearch() {
-    this.searchText = '';
-    this.updateFilter();
-  }
-
-  changeQuery(query: any = {}) {
-    let { queryParams } = this.route.snapshot;
-    queryParams = { ...queryParams, ...query };
-    this.router.navigate(['admin'], {
-      queryParams: _.pickBy(queryParams, _.identity)
-    });
-  }
+  // clearSearch() {
+  //   this.searchText = '';
+  //   this.updateFilter();
+  // }
 
   changePageSize(event) {
     const limit = parseInt(event.target.value, 10);
@@ -181,6 +152,7 @@ export class TablesComponent implements OnInit, OnDestroy {
 
   fetchTableData(query: TableQuery) {
     query = { ...query, offset: (query.offset - 1) * query.limit };
+    // query: _.pickBy(query, _.identity);
     this.store.dispatch(new fromStaff.GetStaffs(query));
   }
 

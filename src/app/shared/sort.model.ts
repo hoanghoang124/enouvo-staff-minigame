@@ -1,8 +1,8 @@
-export type SortDirection = 'desc' | 'asc' | '';
+export type SortDirection = '0' | '1' | '';
 export const rotate: { [key: string]: SortDirection } = {
-  asc: 'desc',
-  desc: '',
-  '': 'asc'
+  1: '0',
+  0: '',
+  '': '1'
 };
 
 export class SortEvent {

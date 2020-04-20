@@ -41,7 +41,7 @@ export class UtilServiceService {
     headers.forEach(header => {
       if (header.sortable === sort.orderBy) {
         header.direction =
-          sort.order === 'true' ? 'desc' : sort.order === 'false' ? 'asc' : '';
+          sort.order === 'true' ? '0' : sort.order === 'false' ? '1' : '';
       }
     });
   }

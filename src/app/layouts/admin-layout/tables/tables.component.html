@@ -61,20 +61,19 @@
                 <th (sort)="onSort($event)" appSortable="firstName">
                   First Name
                 </th>
-                <th>
+                <th (sort)="onSort($event)" appSortable="lastName">
                   Last Name
                 </th>
                 <th>
                   Date of Birth
                 </th>
-                <th>Email</th>
-                <th>Position</th>
+                <th (sort)="onSort($event)" appSortable="email">Email</th>
                 <th class="action">Actions</th>
               </tr>
             </thead>
             <tbody>
               <tr
-                *ngFor="let staff of displayedClients"
+                *ngFor="let staff of staffs$ | async"
                 [routerLink]="[staff.id]"
               >
                 <th scope="row">
@@ -108,7 +107,6 @@
                 <td style="text-transform: lowercase;">
                   {{ staff.email || 'n/a' }}
                 </td>
-                <td>{{ staff.position || 'n/a' }}</td>
                 <td class="action" (click)="openConfirmationDialog(staff.id)">
                   <button class="btn btn-sm btn-warning">Reset Password</button>
                 </td>
