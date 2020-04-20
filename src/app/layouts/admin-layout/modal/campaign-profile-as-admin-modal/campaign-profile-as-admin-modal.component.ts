@@ -80,21 +80,21 @@ export class CampaignProfileAsAdminModalComponent implements OnInit {
     });
   }
 
-  // changePageSize(event) {
-  //   const limit = parseInt(event.target.value, 10);
-  //   this.tableQuery = { ...this.tableQuery, limit };
-  //   this.fetchTableData(this.tableQuery);
-  // }
+  changePageSize(event) {
+    const limit = parseInt(event.target.value, 10);
+    this.tableQuery = { ...this.tableQuery, limit };
+    this.fetchTableData(this.tableQuery);
+  }
 
-  // changePage(event) {
-  //   this.tableQuery = { ...this.tableQuery, offset: event };
-  //   this.fetchTableData({ ...this.tableQuery, offset: event });
-  // }
+  changePage(event) {
+    this.tableQuery = { ...this.tableQuery, offset: event };
+    this.fetchTableData({ ...this.tableQuery, offset: event });
+  }
 
-  // fetchTableData(query: TableQuery) {
-  //   query = { ...query, offset: (query.offset - 1) * query.limit };
-  //   this.store.dispatch(new fromStaff.GetCampaignDetail(query));
-  // }
+  fetchTableData(query: TableQuery) {
+    query = { ...query, offset: (query.offset - 1) * query.limit };
+    this.store.dispatch(new fromStaff.GetCampaignDetail(query));
+  }
 
   viewHistoryOfCampaign() {
     this.dialogService.viewHistoryOfVoting();
