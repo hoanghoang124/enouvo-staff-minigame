@@ -44,7 +44,7 @@ export class CampaignProfileAsAdminModalComponent implements OnInit {
 
   ngOnInit() {
     this.tableQuery = this.defaultQuery;
-    // get staffs from api
+    // get campaign detail from api
     this.staffs$ = this.store.select(fromStaff.getAllStaffs);
     this.totalItems$ = this.store.select(fromStaff.getTotalStaffs);
     this.errorMessage$ = this.store.select(fromStaff.getErrorGtAllStfMessage);

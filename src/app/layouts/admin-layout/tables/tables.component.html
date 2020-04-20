@@ -73,7 +73,10 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let staff of displayedClients">
+              <tr
+                *ngFor="let staff of displayedClients"
+                [routerLink]="[staff.id]"
+              >
                 <th scope="row">
                   <div class="media align-items-center">
                     <div class="media-body">
@@ -93,7 +96,7 @@
                     </div>
                   </div>
                 </th>
-                <td style="font-weight: bold;" [routerLink]="[staff.id]">
+                <td style="font-weight: bold;">
                   {{ staff.firstName || 'n/a' }}
                 </td>
                 <td>

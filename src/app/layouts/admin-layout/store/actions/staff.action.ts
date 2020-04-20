@@ -27,6 +27,18 @@ export enum StaffActionsType {
   GET_CAMPAIGN_SUCCESS = '[Campaign] Get Campaign Success',
   GET_CAMPAIGN_FAILURE = '[Campaign] Get Campaign Failure',
 
+  GET_CAMPAIGN_DETAIL = '[Campaign] Get Campaign Detail',
+  GET_CAMPAIGN_DETAIL_SUCCESS = '[Campaign] Get Campaign Detail Success',
+  GET_CAMPAIGN_DETAIL_FAILURE = '[Campaign] Get Campaign Detail Failure',
+
+  GET_CAMPAIGN_LIST_STAFF = '[Campaign] Get Campaign List Staff',
+  GET_CAMPAIGN_LIST_STAFF_SUCCESS = '[Campaign] Get Campaign List Staff Success',
+  GET_CAMPAIGN_LIST_STAFF_FAILURE = '[Campaign] Get Campaign List Staff Failure',
+
+  GET_VOTING_HISTORY = '[Campaign] Get Voting History',
+  GET_VOTING_HISTORY_SUCCESS = '[Campaign] Get Voting History Success',
+  GET_VOTING_HISTORY_FAILURE = '[Campaign] Get Voting History Failure',
+
   UPDATE_CAMPAIGN = '[Campaign] Update Campaign',
   UPDATE_CAMPAIGN_SUCCESS = '[Campaign] Update Campaign Success',
   UPDATE_CAMPAIGN_FAILURE = '[Campaign] Update Campaign Failure'
@@ -103,6 +115,51 @@ export class GetCampaignFail implements Action {
   constructor(public payload: any) {}
 }
 
+export class GetCampaignDetail implements Action {
+  public readonly type = StaffActionsType.GET_CAMPAIGN_DETAIL;
+  constructor(public payload: any) {}
+}
+
+export class GetCampaignDetailSuccess implements Action {
+  public readonly type = StaffActionsType.GET_CAMPAIGN_DETAIL_SUCCESS;
+  constructor(public payload: any) {}
+}
+
+export class GetCampaignDetailFailure implements Action {
+  public readonly type = StaffActionsType.GET_CAMPAIGN_FAILURE;
+  constructor(public payload: any) {}
+}
+
+export class GetCampaignListStaff implements Action {
+  public readonly type = StaffActionsType.GET_CAMPAIGN_LIST_STAFF;
+  constructor(public payload: any) {}
+}
+
+export class GetCampaignListStaffSuccess implements Action {
+  public readonly type = StaffActionsType.GET_CAMPAIGN_LIST_STAFF_SUCCESS;
+  constructor(public payload: any) {}
+}
+
+export class GetCampaignListStaffFailure implements Action {
+  public readonly type = StaffActionsType.GET_CAMPAIGN_LIST_STAFF_FAILURE;
+  constructor(public payload: any) {}
+}
+
+export class GetVotingHistory implements Action {
+  public readonly type = StaffActionsType.GET_VOTING_HISTORY;
+  constructor(public payload: any) {}
+}
+
+export class GetVotingHistorySuccess implements Action {
+  public readonly type = StaffActionsType.GET_VOTING_HISTORY_SUCCESS;
+  constructor(public payload: any) {}
+}
+
+export class GetVotingHistoryFailure implements Action {
+  public readonly type = StaffActionsType.GET_VOTING_HISTORY_FAILURE;
+  constructor(public payload: any) {}
+}
+
 export class UpdateCampaign implements Action {
   public readonly type = StaffActionsType.UPDATE_CAMPAIGN;
   constructor(public payload: { id: number; campaign: Campaign }) {}
@@ -132,6 +189,15 @@ export type StaffActions =
   | GetCampaign
   | GetCampaignSuccess
   | GetCampaignFail
+  | GetCampaignDetail
+  | GetCampaignDetailSuccess
+  | GetCampaignDetailFailure
+  | GetCampaignListStaff
+  | GetCampaignListStaffSuccess
+  | GetCampaignListStaffFailure
+  | GetVotingHistory
+  | GetVotingHistorySuccess
+  | GetVotingHistoryFailure
   | UpdateCampaign
   | UpdateCampaignSuccess
   | UpdateCampaignFail;

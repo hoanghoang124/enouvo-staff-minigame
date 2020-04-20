@@ -44,7 +44,7 @@
                 <th appSortable="firstName" (sort)="onSort($event)">
                   Last Name
                 </th>
-                <th>Position</th>
+                <th class="position">Position</th>
                 <th class="voting">Voting</th>
                 <th class="action">Action</th>
               </tr>
@@ -76,7 +76,7 @@
                 <td style="text-transform: capitalize">
                   {{ staff.lastName || 'n/a' }}
                 </td>
-                <td>{{ staff.position || 'n/a' }}</td>
+                <td class="position">{{ staff.position || 'n/a' }}</td>
                 <td class="voting">
                   <input
                     type="number"

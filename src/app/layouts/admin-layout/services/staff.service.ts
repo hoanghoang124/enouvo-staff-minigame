@@ -26,6 +26,21 @@ export class StaffService {
     return this.apiService.get(url, params);
   }
 
+  getCampaignDetail(id: number): Observable<any> {
+    const url = `${this.BASE_URL}/v1/campaigns/${id}`;
+    return this.apiService.get(url);
+  }
+
+  getCampaignListStaff(id: number): Observable<any> {
+    const url = `${this.BASE_URL}/v1/campaigns/${id}/staffs`;
+    return this.apiService.get(url);
+  }
+
+  getVotingHistory(id: number, userId: number): Observable<any> {
+    const url = `${this.BASE_URL}/v1/campaigns/${id}/staffs/${userId}/voting-history`;
+    return this.apiService.get(url);
+  }
+
   create(params): Observable<any> {
     const url = `${this.BASE_URL}/v1/auth/register`;
     return this.apiService.post(url, params);

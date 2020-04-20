@@ -120,6 +120,54 @@ export class StaffEffects {
   );
 
   @Effect()
+  getCampaginDetail$ = this.actions.pipe(
+    ofType(StaffActionsType.GET_CAMPAIGN_DETAIL),
+    map((action: StaffActions.GetCampaignDetail) => action.payload),
+    switchMap(id => {
+      return this.staffservice.getCampaignDetail(id).pipe(
+        map(res => {
+          return new StaffActions.GetCampaignDetailSuccess(res.campaign);
+        }),
+        catchError(res => [
+          new StaffActions.GetCampaignDetailFailure(res.error.message)
+        ])
+      );
+    })
+  );
+
+  @Effect()
+  getCampaginListStaff$ = this.actions.pipe(
+    ofType(StaffActionsType.GET_CAMPAIGN_LIST_STAFF),
+    map((action: StaffActions.GetCampaignListStaff) => action.payload),
+    switchMap(id => {
+      return this.staffservice.getCampaignListStaff(id).pipe(
+        map(res => {
+          return new StaffActions.GetCampaignListStaffSuccess(res.staffs);
+        }),
+        catchError(res => [
+          new StaffActions.GetCampaignListStaffFailure(res.error.message)
+        ])
+      );
+    })
+  );
+
+  // @Effect()
+  // getVotingHistory$ = this.actions.pipe(
+  //   ofType(StaffActionsType.GET_VOTING_HISTORY),
+  //   map((action: StaffActions.GetVotingHistory) => action.payload),
+  //   switchMap(id, userId => {
+  //     return this.staffservice.getVotingHistory(id, userId).pipe(
+  //       map(res => {
+  //         return new StaffActions.GetVotingHistorySuccess(res.staffs);
+  //       }),
+  //       catchError(res => [
+  //         new StaffActions.GetVotingHistoryFailure(res.error.message)
+  //       ])
+  //     );
+  //   })
+  // );
+
+  @Effect()
   updateCampaign$ = this.actions.pipe(
     ofType(StaffActionsType.UPDATE_CAMPAIGN),
     map((action: StaffActions.UpdateCampaign) => action.payload),
