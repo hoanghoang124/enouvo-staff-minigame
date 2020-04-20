@@ -28,7 +28,6 @@ export class DashboardComponent implements OnInit {
   constructor(private store: Store<State>) {}
 
   ngOnInit() {
-    this.store.dispatch(new fromStaff.GetCampaign());
     this.campaigns$ = this.store.select(fromStaff.getAllCampaigns);
     this.errorMessage$ = this.store.select(fromStaff.getErrorGtAllCmpMessage);
     this.isLoadingResults$ = this.store.select(fromStaff.getIsCrtCmpLoading);

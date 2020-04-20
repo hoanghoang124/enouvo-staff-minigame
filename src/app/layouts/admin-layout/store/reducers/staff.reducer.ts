@@ -172,12 +172,12 @@ export function staffReducer(
         // total: action.payload.total,
         isGtCmpDtlLoading: false
       };
-    // case staffActions.StaffActionsType.GET_CAMPAIGN_DETAIL_FAILURE:
-    //   return {
-    //     ...state,
-    //     isGtCmpDtlLoading: false
-    //     errorGtCmpDtlMessage: action.payload
-    //   };
+    case staffActions.StaffActionsType.GET_CAMPAIGN_DETAIL_FAILURE:
+      return {
+        ...state,
+        isGtCmpDtlLoading: false,
+        errorGtCmpDtlMessage: action.payload
+      };
     case staffActions.StaffActionsType.GET_CAMPAIGN_LIST_STAFF:
       return {
         ...state,
