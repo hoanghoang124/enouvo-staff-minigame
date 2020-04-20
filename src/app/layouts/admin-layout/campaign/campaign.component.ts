@@ -13,7 +13,7 @@ import { TableQuery } from '../models/tableQuery.model';
 import { UtilServiceService } from '../services/util-service.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SortEvent } from 'src/app/shared/sort.model';
-import { SortableDirective } from 'src/app/shared/sortable.directive';
+import { SortableDirective } from 'src/app/shared/directives/sortable.directive';
 import { Campaign } from '../models/campaign.model';
 import { State } from '../../auth-layout/store';
 import { DialogService } from '../services/dialog.service';

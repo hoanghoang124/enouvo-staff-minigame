@@ -6,7 +6,7 @@ import {
   OnDestroy
 } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup } from '@angular/forms';
 import { DialogService } from '../services/dialog.service';
@@ -16,11 +16,12 @@ import { Staff } from '../models/staff.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SortEvent } from 'src/app/shared/sort.model';
 // import { UtilServiceService } from '../services/util-service.service';
-import { SortableDirective } from 'src/app/shared/sortable.directive';
+import { SortableDirective } from 'src/app/shared/directives/sortable.directive';
 import * as fromStaff from '../store';
 import * as _ from 'lodash';
 import { State } from '../../auth-layout/store';
 import { PaginationService } from '../services/pagination.service';
+import { takeUntil, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-tables',
@@ -37,7 +38,7 @@ export class TablesComponent implements OnInit, OnDestroy {
   editProfileForm: FormGroup;
   resetPasswordForm: FormGroup;
   model: NgbDateStruct;
-  clientsData = [];
+  staffsData = [];
   displayedClients = [];
   totalItems = 0;
   sorting: SortEvent;
@@ -47,13 +48,14 @@ export class TablesComponent implements OnInit, OnDestroy {
   tableQuery: TableQuery;
   totalItems$: Observable<number>;
   searchText: string;
+  componentDestroyed$: Subject<any> = new Subject<any>();
+
   constructor(
     private store: Store<State>,
     private dialogService: DialogService,
     private modalService: NgbModal,
     private router: Router,
     private route: ActivatedRoute,
-    // private utilService: UtilServiceService,
     private paginationService: PaginationService
   ) {
     this.sorting = new SortEvent();
@@ -64,6 +66,15 @@ export class TablesComponent implements OnInit, OnDestroy {
     this.tableQuery = this.defaultQuery;
     // get staffs from api
     this.staffs$ = this.store.select(fromStaff.getAllStaffs);
+    this.staffs$
+      .pipe(
+        takeUntil(this.componentDestroyed$),
+        tap(staffs => {
+          this.staffsData = staffs;
+          this.updateFilter();
+        })
+      )
+      .subscribe();
     this.totalItems$ = this.store.select(fromStaff.getTotalStaffs);
     this.errorMessage$ = this.store.select(fromStaff.getErrorGtAllStfMessage);
     this.isStaffLoading$ = this.store.select(fromStaff.getIsGtAllStfLoading);
@@ -99,58 +110,45 @@ export class TablesComponent implements OnInit, OnDestroy {
     // resetting other headers
     this.headers1.forEach(header => {
       if (header.sortable !== orderBy) {
-        header.direction = 0;
+        header.direction = '';
       }
     });
-
+    console.log(order, orderBy);
     this.sorting.orderBy = orderBy;
     this.sorting.order = order;
-    this.updateFilter();
   }
 
   updateFilter() {
     // 1. sort
-    let clients = this.paginationService.sort(
-      this.clientsData,
+    let staffs = this.paginationService.sort(
+      this.staffsData,
       this.sorting.orderBy,
       this.sorting.order
     );
 
     // 2. filter
-    clients = clients.filter(client => this.matches(client, this.searchText));
-    this.totalItems = clients.length;
+    staffs = staffs.filter(staff => this.matches(staff, this.searchText));
+    this.totalItems = staffs.length;
 
     // 3. paginate
     const { pageSize, pageNumber } = this.paging;
-    clients = this.paginationService.paginate(clients, pageSize, pageNumber);
-    this.displayedClients = clients;
+    staffs = this.paginationService.paginate(staffs, pageSize, pageNumber);
+    this.displayedClients = staffs;
   }
 
-  matches(client, text: string) {
-    if (!client.user) {
+  matches(staff, text: string) {
+    if (!staff) {
       return;
     }
-    const fullName = client.user.firstName + ' ' + client.user.lastName;
-
-    let userCompany;
-    if (client.user.companies[0]) {
-      userCompany = client.user.companies[0];
-    } else {
-      userCompany = '';
-    }
+    console.log(staff);
     return (
-      client.user.id.toLowerCase().includes(text.toLowerCase()) ||
-      client.user.firstName.toLowerCase().includes(text.toLowerCase()) ||
-      client.user.lastName.toLowerCase().includes(text.toLowerCase()) ||
-      client.user.email.toLowerCase().includes(text.toLowerCase()) ||
-      fullName.toLowerCase().includes(text.toLowerCase()) ||
-      (userCompany.companyName || '')
+      staff.id
+        .toString()
         .toLowerCase()
         .includes(text.toLowerCase()) ||
-      (userCompany.branchCode || '')
-        .toLowerCase()
-        .includes(text.toLowerCase()) ||
-      (userCompany.gstNo || '').toLowerCase().includes(text.toLowerCase())
+      staff.firstName.toLowerCase().includes(text.toLowerCase()) ||
+      staff.lastName.toLowerCase().includes(text.toLowerCase()) ||
+      staff.email.toLowerCase().includes(text.toLowerCase())
     );
   }
 
@@ -189,5 +187,7 @@ export class TablesComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.modalService.dismissAll();
+    this.componentDestroyed$.next();
+    this.componentDestroyed$.complete();
   }
 }

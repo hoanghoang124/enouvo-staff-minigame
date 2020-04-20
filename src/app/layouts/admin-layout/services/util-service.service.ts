@@ -2,7 +2,7 @@ import { Injectable, QueryList } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import * as _ from 'lodash';
 import { SortEvent } from 'src/app/shared/sort.model';
-import { SortableDirective } from 'src/app/shared/sortable.directive';
+import { SortableDirective } from 'src/app/shared/directives/sortable.directive';
 
 @Injectable({
   providedIn: 'root'
@@ -28,19 +28,20 @@ export class UtilServiceService {
   ): SortEvent {
     headers.forEach(header => {
       if (header.sortable !== orderBy) {
-        header.direction = 0;
+        header.direction = '';
       }
     });
     return {
       orderBy: order && orderBy,
-      order: order === 0 ? 0 : 1
+      order: order === '' ? null : order === 'desc' ? true : false
     };
   }
 
   updateSortHeaders(sort: SortEvent, headers: QueryList<SortableDirective>) {
     headers.forEach(header => {
       if (header.sortable === sort.orderBy) {
-        header.direction = sort.order === 0 ? 0 : 1;
+        header.direction =
+          sort.order === 'true' ? 'desc' : sort.order === 'false' ? 'asc' : '';
       }
     });
   }

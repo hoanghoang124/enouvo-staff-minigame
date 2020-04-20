@@ -11,7 +11,7 @@ import { Store } from '@ngrx/store';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UtilServiceService } from '../../services/util-service.service';
 import { SortEvent } from 'src/app/shared/sort.model';
-import { SortableDirective } from 'src/app/shared/sortable.directive';
+import { SortableDirective } from 'src/app/shared/directives/sortable.directive';
 
 @Component({
   selector: 'app-campaign-profile-as-staff-modal',
