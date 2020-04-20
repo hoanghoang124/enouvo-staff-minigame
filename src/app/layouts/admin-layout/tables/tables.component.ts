@@ -140,7 +140,6 @@ export class TablesComponent implements OnInit, OnDestroy {
     if (!staff) {
       return;
     }
-    console.log(staff);
     return (
       staff.id
         .toString()
