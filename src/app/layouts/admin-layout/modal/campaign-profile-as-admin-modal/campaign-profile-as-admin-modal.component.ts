@@ -8,7 +8,7 @@ import {
 import { State } from 'src/app/layouts/auth-layout/store';
 import { SortableDirective } from 'src/app/shared/directives/sortable.directive';
 import { Observable } from 'rxjs';
-import { Staff } from '../../models/staff.model';
+// import { Staff } from '../../models/staff.model';
 import { NgbDateStruct, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { pageSizes, Page } from '../../models/pagination.model';
 import { TableQuery } from '../../models/tableQuery.model';
@@ -29,7 +29,7 @@ export class CampaignProfileAsAdminModalComponent implements OnInit {
   @Input() campaignId: number;
   @ViewChildren(SortableDirective) headers1: QueryList<SortableDirective>;
 
-  staffs$: Observable<Staff[]>;
+  campaign$: Observable<any>;
   isStaffLoading$: Observable<boolean>;
   isLoadingResults$: Observable<boolean>;
   errorMessage$: Observable<string>;
@@ -52,7 +52,7 @@ export class CampaignProfileAsAdminModalComponent implements OnInit {
   ngOnInit() {
     this.tableQuery = this.defaultQuery;
     this.store.dispatch(new fromStaff.GetCampaignDetail(this.campaignId));
-    this.staffs$ = this.store.select(fromStaff.getCampaignDetail);
+    this.campaign$ = this.store.select(fromStaff.getCampaignDetail);
     // this.totalItems$ = this.store.select(fromStaff.getTotalStaffs);
     this.errorMessage$ = this.store.select(fromStaff.getErrorGtCmpDtlMessage);
     this.isStaffLoading$ = this.store.select(fromStaff.getIsCmpDtlLoading);

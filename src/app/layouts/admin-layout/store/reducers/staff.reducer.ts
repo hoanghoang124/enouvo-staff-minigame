@@ -169,7 +169,7 @@ export function staffReducer(
     case staffActions.StaffActionsType.GET_CAMPAIGN_DETAIL_SUCCESS:
       return {
         ...state,
-        campaigns: action.payload.campaigns,
+        selectedCampaign: action.payload,
         // total: action.payload.total,
         isGtCmpDtlLoading: false
       };
