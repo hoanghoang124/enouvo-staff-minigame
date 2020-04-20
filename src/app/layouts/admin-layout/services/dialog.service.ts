@@ -1,3 +1,4 @@
+import { HistoryOfVotingModalComponent } from './../modal/history-of-voting-modal/history-of-voting-modal.component';
 import { Injectable } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmResetPasswordModalComponent } from '../modal/confirm-reset-password-modal/confirm-reset-password-modal.component';
@@ -179,5 +180,14 @@ export class DialogService {
   public closeUpdateCampaign() {
     this.updateCampaginDialogRef.close();
     this.updateCampaginDialogRef = null;
+  }
+
+  public viewHistoryOfVoting() {
+    const modalRef = this.modalService.open(HistoryOfVotingModalComponent, {
+      windowClass: 'dialog-size-xl',
+      centered: true
+    });
+
+    return modalRef.result;
   }
 }

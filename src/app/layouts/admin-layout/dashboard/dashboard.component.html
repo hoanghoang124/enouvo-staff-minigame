@@ -22,6 +22,7 @@
                     <th>Start Time</th>
                     <th>End Time</th>
                     <th>Star Limitation</th>
+                    <th>Duration</th>
                     <th>Unvoted Stars</th>
                     <th>Voted to</th>
                   </tr>
@@ -49,6 +50,9 @@
                     </td>
                     <td>
                       {{ campaign.endDate | date: 'dd/MM/yyyy' || 'n/a' }}
+                    </td>
+                    <td class="text-center">
+                      <countdown [config]="{ leftTime: 30 }"></countdown>
                     </td>
                     <td class="text-center">
                       {{ campaign.starLimitation || 'n/a' }}
