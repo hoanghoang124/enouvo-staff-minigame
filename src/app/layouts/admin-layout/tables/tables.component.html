@@ -1,15 +1,71 @@
-<div class="input-group mx-5 mt-5">
-  <input
-    type="text"
-    class="form-control bg-light large"
-    placeholder="Search for..."
-    aria-label="Search"
-    [(ngModel)]="searchText"
-  />
-  <div class="input-group-append mr-7">
-    <button class="btn btn-primary" type="button">
-      <i class="fas fa-times fa-sm"></i>
-    </button>
+<div class="row mx-4 my-4" [formGroup]="searchForm">
+  <div class="col-md-3">
+    <div class="form-group">
+      <div class="input-group mb-4">
+        <div class="input-group-prepend">
+          <span class="input-group-text"
+            ><i class="ni ni-zoom-split-in" (click)="search()"></i
+          ></span>
+        </div>
+        <input
+          class="form-control"
+          placeholder="Search for first name..."
+          type="text"
+          formControlName="firstname"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="form-group">
+      <div class="input-group mb-4">
+        <div class="input-group-prepend">
+          <span class="input-group-text"
+            ><i class="ni ni-zoom-split-in" (click)="search()"></i
+          ></span>
+        </div>
+        <input
+          class="form-control"
+          placeholder="Search for last name..."
+          type="text"
+          formControlName="lastname"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="form-group">
+      <div class="input-group mb-4">
+        <div class="input-group-prepend">
+          <span class="input-group-text"
+            ><i class="ni ni-zoom-split-in" (click)="search()"></i
+          ></span>
+        </div>
+        <input
+          class="form-control"
+          placeholder="Search birthday from..."
+          type="text"
+          formControlName="fromdate"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="form-group">
+      <div class="input-group mb-4">
+        <div class="input-group-prepend">
+          <span class="input-group-text"
+            ><i class="ni ni-zoom-split-in" (click)="search()"></i
+          ></span>
+        </div>
+        <input
+          class="form-control"
+          placeholder="Search birthday to..."
+          type="text"
+          formControlName="todate"
+        />
+      </div>
+    </div>
   </div>
 </div>
 <div class="container-fluid mt--7">
@@ -56,14 +112,18 @@
           <table class="table align-items-center table-flush">
             <thead class="thead-light">
               <tr>
-                <th style="text-align: center;">Id</th>
+                <th class="text-center">Id</th>
                 <th (sort)="onSort($event)" appSortable="firstName">
                   First Name
                 </th>
                 <th (sort)="onSort($event)" appSortable="lastName">
                   Last Name
                 </th>
-                <th>
+                <th
+                  class="text-center"
+                  (sort)="onSort($event)"
+                  appSortable="birthday"
+                >
                   Date of Birth
                 </th>
                 <th (sort)="onSort($event)" appSortable="email">Email</th>
@@ -72,7 +132,7 @@
             </thead>
             <tbody>
               <tr *ngFor="let staff of staffs$ | async">
-                <th scope="row" [routerLink]="[staff.id]">
+                <td class="text-center" scope="row" [routerLink]="[staff.id]">
                   <div class="media align-items-center">
                     <div class="media-body">
                       <a class="avatar avatar-sm" data-toggle="tooltip">
@@ -90,17 +150,20 @@
                       <span class="mb-0 text-sm">{{ staff.id }}</span>
                     </div>
                   </div>
-                </th>
+                </td>
                 <td style="font-weight: bold;" [routerLink]="[staff.id]">
                   {{ staff.firstName || 'n/a' }}
                 </td>
-                <td>
+                <td [routerLink]="[staff.id]">
                   {{ staff.lastName || 'n/a' }}
                 </td>
-                <td>
+                <td class="text-center" [routerLink]="[staff.id]">
                   {{ staff.birthday | date: 'dd/MM/yyyy' || 'n/a' }}
                 </td>
-                <td style="text-transform: lowercase;">
+                <td
+                  style="text-transform: lowercase;"
+                  [routerLink]="[staff.id]"
+                >
                   {{ staff.email || 'n/a' }}
                 </td>
                 <td class="action" (click)="openConfirmationDialog(staff.id)">

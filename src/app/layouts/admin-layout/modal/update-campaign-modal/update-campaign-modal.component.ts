@@ -47,14 +47,11 @@ export class UpdateCampaignModalComponent implements OnInit {
       this.campaignIsCampaignActive
     );
     this.updateCampaignForm.controls['startDate'].patchValue(
-      this.campaignStartDate
+      new Date(this.campaignStartDate)
     );
     this.updateCampaignForm.controls['endDate'].patchValue(
-      this.campaignEndDate
+      new Date(this.campaignEndDate)
     );
-
-    console.log(this.campaignEndDate);
-
     this.errorMessage$ = this.store.select(fromStaff.getErrorUpdCmpMessage);
     this.isLoadingResults$ = this.store.select(fromStaff.getIsUpdCmpLoading);
   }

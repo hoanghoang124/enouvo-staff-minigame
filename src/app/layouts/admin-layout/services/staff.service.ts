@@ -61,6 +61,11 @@ export class StaffService {
     return this.apiService.put(url, campaign);
   }
 
+  deleteCampagin(id: number): Observable<any> {
+    const url = `${this.BASE_URL}/v1/campaigns/${id}`;
+    return this.apiService.delete(url);
+  }
+
   deleteStaff(id): Observable<any> {
     const url = `${this.BASE_URL}/${id}`;
     return this.apiService.delete(url);

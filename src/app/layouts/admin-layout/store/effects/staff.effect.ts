@@ -166,4 +166,21 @@ export class StaffEffects {
       );
     })
   );
+
+  @Effect()
+  deleteCampagin$ = this.actions.pipe(
+    ofType(StaffActionsType.DELETE_CAMPAIGN),
+    map((action: StaffActions.DeleteCampaign) => action.payload),
+    switchMap(id => {
+      return this.staffservice.deleteCampagin(id).pipe(
+        map(res => {
+          this.dialogService.closeConfirm();
+          return new StaffActions.DeleteCampaignSuccess(res);
+        }),
+        catchError(res => [
+          new StaffActions.DeleteCampaignFailure(res.error.message)
+        ])
+      );
+    })
+  );
 }

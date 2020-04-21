@@ -9,6 +9,7 @@ export interface StaffState {
   campaigns: Campaign[];
   selectedCampaign: Campaign;
   totalProfiles: number;
+  totalCampaigns: number;
   isGtStfLoading: boolean;
   isGtAllStfLoading: boolean;
   isCrtAccLoading: boolean;
@@ -35,6 +36,7 @@ const initialState: StaffState = {
   campaigns: [],
   selectedCampaign: null,
   totalProfiles: 0,
+  totalCampaigns: 0,
   isGtStfLoading: false,
   isGtAllStfLoading: false,
   isCrtAccLoading: false,
@@ -67,7 +69,6 @@ export function staffReducer(
         selectedStaff: null
       };
     case staffActions.StaffActionsType.GET_STAFFS_SUCCESS:
-      console.log(action.payload);
       return {
         ...state,
         staffs: action.payload.profiles,
@@ -151,7 +152,7 @@ export function staffReducer(
       return {
         ...state,
         campaigns: action.payload.campaigns,
-        // total: action.payload.total,
+        totalCampaigns: action.payload.totalCampaigns,
         isGtAllCmpLoading: false
       };
     case staffActions.StaffActionsType.GET_CAMPAIGN_FAILURE:
@@ -170,7 +171,7 @@ export function staffReducer(
       return {
         ...state,
         selectedCampaign: action.payload,
-        // total: action.payload.total,
+        totalCampaigns: action.payload.total,
         isGtCmpDtlLoading: false
       };
     case staffActions.StaffActionsType.GET_CAMPAIGN_DETAIL_FAILURE:

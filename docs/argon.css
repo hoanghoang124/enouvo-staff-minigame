@@ -1990,7 +1990,7 @@ pre code {
 .form-control:disabled,
 .form-control[readonly] {
   opacity: 1;
-  background-color: #e9ecef;
+  background-color: #fff;
 }
 
 select.form-control:focus::-ms-value {
@@ -2731,7 +2731,7 @@ fieldset:disabled a.btn {
 }
 .btn-light.disabled,
 .btn-light:disabled {
-  color: #fff;
+  color: #525f7f;
   border-color: #adb5bd;
   background-color: #adb5bd;
 }
@@ -14700,9 +14700,6 @@ textarea[resize='horizontal'] {
 .icon-xl svg {
   font-size: 4.25rem;
 }
-.icon-xl + .icon-text {
-  width: calc(100% - $icon-size-xl - 1);
-}
 
 .icon-lg {
   width: 4rem;
@@ -14712,9 +14709,6 @@ textarea[resize='horizontal'] {
 .icon-lg svg {
   font-size: 3.25rem;
 }
-.icon-lg + .icon-text {
-  width: calc(100% - $icon-size-lg - 1);
-}
 
 .icon-sm {
   width: 2rem;
@@ -14723,9 +14717,6 @@ textarea[resize='horizontal'] {
 .icon-sm i,
 .icon-sm svg {
   font-size: 1.25rem;
-}
-.icon-sm + .icon-text {
-  width: calc(100% - $icon-size-sm - 1);
 }
 
 .icon-shape {
