@@ -77,6 +77,7 @@ export class AuthEffects {
     switchMap(payload => {
       return this.authService.resetPassword(payload).pipe(
         map(user => {
+          this.dialogService.closeConfirm();
           return new AuthActions.ResetPasswordSuccess(user);
         }),
         catchError(res =>

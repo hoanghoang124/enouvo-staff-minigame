@@ -66,6 +66,14 @@ export class CampaignComponent implements OnInit, OnDestroy {
     );
   }
 
+  openConfirmDeleteCampaign(campaignId) {
+    this.dialogService.confirmDeleteCampaign(
+      'Please confirm ...',
+      'Are you sure want to delete this campaign? This action can not be undone.',
+      campaignId
+    );
+  }
+
   changePageSize(event) {
     const limit = parseInt(event.target.value, 10);
     this.tableQuery = { ...this.tableQuery, limit };

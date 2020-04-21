@@ -29,6 +29,7 @@ import { HistoryOfVotingModalComponent } from './modal/history-of-voting-modal/h
 import { SharedModule } from 'src/app/shared/shared.module';
 import { CampaignDetailAdminComponent } from './campaign-detail-admin/campaign-detail-admin.component';
 import { CampaignDetailStaffComponent } from './campaign-detail-staff/campaign-detail-staff.component';
+import { ConfirmDeleteCampaignModalComponent } from './modal/confirm-delete-campaign-modal/confirm-delete-campaign-modal.component';
 // import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
@@ -62,7 +63,8 @@ import { CampaignDetailStaffComponent } from './campaign-detail-staff/campaign-d
     UpdateCampaignModalComponent,
     HistoryOfVotingModalComponent,
     CampaignDetailAdminComponent,
-    CampaignDetailStaffComponent
+    CampaignDetailStaffComponent,
+    ConfirmDeleteCampaignModalComponent
   ]
 })
 export class AdminLayoutModule {}

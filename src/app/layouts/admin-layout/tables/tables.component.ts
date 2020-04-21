@@ -76,9 +76,9 @@ export class TablesComponent implements OnInit, OnDestroy {
   }
 
   openConfirmationDialog(userId) {
-    this.dialogService.confirm(
+    this.dialogService.confirmResetPassword(
       'Please confirm...',
-      'Are you sure you want to reset password for this account? This action can not be undone.',
+      'Are you sure want to reset password for this account? This action can not be undone.',
       userId
     );
   }

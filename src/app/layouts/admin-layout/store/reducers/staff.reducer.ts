@@ -19,6 +19,7 @@ export interface StaffState {
   isGtCmpLstStfLoading: boolean;
   isGtVtgHsrLoading: boolean;
   isUpdCmpLoading: boolean;
+  isDltCmpLoading: boolean;
   errorGtAllStfMessage: any;
   errorGtStfMessage: any;
   errorCrtAccMessage: any;
@@ -28,6 +29,7 @@ export interface StaffState {
   errorGtVtgHsrMessage: any;
   errorCrtCmpMessage: any;
   errorUpdCmpMessage: any;
+  errorDltCmpMessage: any;
 }
 
 const initialState: StaffState = {
@@ -46,6 +48,7 @@ const initialState: StaffState = {
   isGtCmpLstStfLoading: false,
   isGtVtgHsrLoading: false,
   isUpdCmpLoading: false,
+  isDltCmpLoading: false,
   errorGtStfMessage: null,
   errorGtAllStfMessage: null,
   errorCrtAccMessage: null,
@@ -54,7 +57,8 @@ const initialState: StaffState = {
   errorGtCmpDtlMessage: null,
   errorGtCmpLstStfMessage: null,
   errorGtVtgHsrMessage: null,
-  errorUpdCmpMessage: null
+  errorUpdCmpMessage: null,
+  errorDltCmpMessage: null
 };
 
 export function staffReducer(
@@ -243,6 +247,24 @@ export function staffReducer(
         ...state,
         isUpdCmpLoading: false,
         errorUpdCmpMessage: action.payload
+      };
+    case staffActions.StaffActionsType.DELETE_CAMPAIGN:
+      return {
+        ...state,
+        isDltCmpLoading: true,
+        errorDltCmpMessage: null
+      };
+    case staffActions.StaffActionsType.DELETE_CAMPAIGN_SUCCESS:
+      return {
+        ...state,
+        isDltCmpLoading: false,
+        campaigns: [...state.campaigns, action.payload]
+      };
+    case staffActions.StaffActionsType.DELETE_CAMPAIGN_FAILURE:
+      return {
+        ...state,
+        isDltCmpLoading: false,
+        errorDltCmpMessage: action.payload
       };
     default:
       return state;

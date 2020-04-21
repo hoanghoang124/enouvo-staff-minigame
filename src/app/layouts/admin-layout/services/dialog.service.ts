@@ -13,7 +13,8 @@ import { CampaignDetailStaffComponent } from '../campaign-detail-staff/campaign-
   providedIn: 'root'
 })
 export class DialogService {
-  private confirmDialogRef: NgbModalRef;
+  private confirmResetPasswordDialogRef: NgbModalRef;
+  private confirmDeleteCampaignDialogRef: NgbModalRef;
   private changePasswordDialogRef: NgbModalRef;
   private uploadCSVDialogRef: NgbModalRef;
   private createAccountDialogRef: NgbModalRef;
@@ -22,29 +23,29 @@ export class DialogService {
 
   constructor(private modalService: NgbModal) {}
 
-  public confirm(
+  public confirmResetPassword(
     title: string,
     message: string,
     userId: number,
     btnOkText: string = 'Confirm',
     btnCancelText: string = 'Cancel'
   ): Promise<boolean> {
-    this.confirmDialogRef = this.modalService.open(
+    this.confirmResetPasswordDialogRef = this.modalService.open(
       ConfirmResetPasswordModalComponent,
       { size: 'md', centered: true }
     );
-    this.confirmDialogRef.componentInstance.title = title;
-    this.confirmDialogRef.componentInstance.message = message;
-    this.confirmDialogRef.componentInstance.userId = userId;
-    this.confirmDialogRef.componentInstance.btnOkText = btnOkText;
-    this.confirmDialogRef.componentInstance.btnCancelText = btnCancelText;
+    this.confirmResetPasswordDialogRef.componentInstance.title = title;
+    this.confirmResetPasswordDialogRef.componentInstance.message = message;
+    this.confirmResetPasswordDialogRef.componentInstance.userId = userId;
+    this.confirmResetPasswordDialogRef.componentInstance.btnOkText = btnOkText;
+    this.confirmResetPasswordDialogRef.componentInstance.btnCancelText = btnCancelText;
 
-    return this.confirmDialogRef.result;
+    return this.confirmResetPasswordDialogRef.result;
   }
 
   public closeConfirm() {
-    this.confirmDialogRef.close();
-    this.confirmDialogRef = null;
+    this.confirmResetPasswordDialogRef.close();
+    this.confirmResetPasswordDialogRef = null;
   }
 
   public changePassword(
@@ -170,6 +171,27 @@ export class DialogService {
   public closeUpdateCampaign() {
     this.updateCampaginDialogRef.close();
     this.updateCampaginDialogRef = null;
+  }
+
+  public confirmDeleteCampaign(
+    title: string,
+    message: string,
+    campaignId: number,
+    btnOkText: string = 'Confirm',
+    btnCancelText: string = 'Cancel'
+  ): Promise<boolean> {
+    this.confirmDeleteCampaignDialogRef.componentInstance.title = title;
+    this.confirmDeleteCampaignDialogRef.componentInstance.message = message;
+    this.confirmDeleteCampaignDialogRef.componentInstance.campaignId = campaignId;
+    this.confirmDeleteCampaignDialogRef.componentInstance.btnOkText = btnOkText;
+    this.confirmDeleteCampaignDialogRef.componentInstance.btnCancelText = btnCancelText;
+
+    return this.confirmDeleteCampaignDialogRef.result;
+  }
+
+  public closeDeleteCampaign() {
+    this.confirmDeleteCampaignDialogRef.close();
+    this.confirmDeleteCampaignDialogRef = null;
   }
 
   public viewCampaignStaffList(campaignId: number) {

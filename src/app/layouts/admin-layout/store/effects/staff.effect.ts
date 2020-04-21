@@ -174,7 +174,7 @@ export class StaffEffects {
     switchMap(id => {
       return this.staffservice.deleteCampagin(id).pipe(
         map(res => {
-          this.dialogService.closeConfirm();
+          this.dialogService.closeDeleteCampaign();
           return new StaffActions.DeleteCampaignSuccess(res);
         }),
         catchError(res => [
