@@ -152,7 +152,7 @@ export function staffReducer(
       return {
         ...state,
         campaigns: action.payload.campaigns,
-        totalCampaigns: action.payload.total,
+        totalCampaigns: action.payload.totalCampaigns,
         isGtAllCmpLoading: false
       };
     case staffActions.StaffActionsType.GET_CAMPAIGN_FAILURE:
