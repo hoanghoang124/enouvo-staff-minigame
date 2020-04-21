@@ -1990,7 +1990,7 @@ pre code {
 .form-control:disabled,
 .form-control[readonly] {
   opacity: 1;
-  background-color: #e9ecef;
+  background-color: #fff;
 }
 
 select.form-control:focus::-ms-value {
@@ -14701,7 +14701,6 @@ textarea[resize='horizontal'] {
   font-size: 4.25rem;
 }
 
-
 .icon-lg {
   width: 4rem;
   height: 4rem;
@@ -14711,7 +14710,6 @@ textarea[resize='horizontal'] {
   font-size: 3.25rem;
 }
 
-
 .icon-sm {
   width: 2rem;
   height: 2rem;
@@ -14720,7 +14718,6 @@ textarea[resize='horizontal'] {
 .icon-sm svg {
   font-size: 1.25rem;
 }
-
 
 .icon-shape {
   display: inline-flex;
