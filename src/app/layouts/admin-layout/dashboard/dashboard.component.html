@@ -14,7 +14,7 @@
               <table class="table align-items-center table-flush">
                 <thead class="thead-light">
                   <tr>
-                    <th class="text-center">Id</th>
+                    <th class="text-center">Campaign Id</th>
                     <th>Title</th>
                     <th>Description</th>
                     <th class="text-center">Start Time</th>
@@ -27,18 +27,16 @@
                   <tr
                     style="text-transform: capitalize;"
                     *ngIf="campaign.isCampaignActive === true"
+                    (click)="openCampaignDetailStaff(campaign.id)"
                   >
-                    <th scope="row">
-                      <div class="media align-items-center">
-                        <div class="media-body">
-                          <span class="mb-0 text-sm">{{ campaign.id }}</span>
-                        </div>
-                      </div>
-                    </th>
                     <td
+                      scope="row"
+                      class="text-center"
                       style="font-weight: bold;"
-                      (click)="openCampaignDetailStaff(campaign.id)"
                     >
+                      {{ campaign.id }}
+                    </td>
+                    <td style="font-weight: bold;">
                       {{ campaign.title || 'n/a' }}
                     </td>
                     <td>
