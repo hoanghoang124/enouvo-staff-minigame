@@ -11,6 +11,11 @@ export const getTotalStaffs = createSelector(
   state => state.totalProfiles
 );
 
+export const getTotalCampaigns = createSelector(
+  selectStaffState,
+  state => state.totalCampaigns
+);
+
 export const getAllStaffs = createSelector(
   selectStaffState,
   state => state.staffs

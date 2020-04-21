@@ -114,7 +114,7 @@
           </select>
           <ngb-pagination
             [pageSize]="tableQuery.limit"
-            [collectionSize]="totalItems$ | async"
+            [collectionSize]="totalCampaigns$ | async"
             [page]="tableQuery.offset"
             (pageChange)="changePage($event)"
             class="pagination-sm"

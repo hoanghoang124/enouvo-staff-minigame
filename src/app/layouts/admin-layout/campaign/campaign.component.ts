@@ -36,7 +36,7 @@ export class CampaignComponent implements OnInit, OnDestroy {
   pageSizes = pageSizes;
   defaultQuery = { limit: 5, offset: 1 };
   tableQuery: TableQuery;
-  totalItems$: Observable<number>;
+  totalCampaigns$: Observable<number>;
   constructor(
     private store: Store<State>,
     private dialogService: DialogService,
@@ -49,7 +49,7 @@ export class CampaignComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.tableQuery = this.defaultQuery;
     this.campaigns$ = this.store.select(fromStaff.getAllCampaigns);
-    // this.totalItems$ = this.store.select(fromStaff.getTotalStaffs);
+    this.totalCampaigns$ = this.store.select(fromStaff.getTotalCampaigns);
     this.errorMessage$ = this.store.select(fromStaff.getErrorGtAllCmpMessage);
     this.isLoadingResults$ = this.store.select(fromStaff.getIsCrtCmpLoading);
     this.isCampaginLoading$ = this.store.select(fromStaff.getIsGtAllCmpLoading);

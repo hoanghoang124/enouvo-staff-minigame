@@ -3,10 +3,10 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { State } from 'src/app/layouts/auth-layout/store';
 import {
-  HttpClient
-  // HttpEventType,
-  // HttpRequest,
-  // HttpResponse
+  HttpClient,
+  HttpEventType,
+  HttpRequest,
+  HttpResponse
 } from '@angular/common/http';
 
 @Component({
@@ -56,22 +56,23 @@ export class UploadCsvModalComponent implements OnInit {
     files.forEach(file => {
       const formData: FormData = new FormData();
       formData.append('file', file);
-      // const req = new HttpRequest('POST', this.url, formData, {
-      //   reportProgress: true
-      // });
-      // // send the http-request and subscribe for progress-updates
-      // this.http.request(req).subscribe(event => {
-      //   if (event.type === HttpEventType.UploadProgress) {
-      //     const percentDone = Math.round((100 * event.loaded) / event.total);
-      //     return (this.uploadingProgress = percentDone);
-      //   } else if (event instanceof HttpResponse) {
-      //     this.uploadSuccessful = true;
-      //   }
-      // });
-      this.http.post(this.url, formData).subscribe(
-        response => console.log(response),
-        error => console.log(error)
-      );
+      const req = new HttpRequest('POST', this.url, formData, {
+        reportProgress: true
+      });
+      // send the http-request and subscribe for progress-updates
+      this.http.request(req).subscribe(event => {
+        if (event.type === HttpEventType.UploadProgress) {
+          const percentDone = Math.round((100 * event.loaded) / event.total);
+          return (this.uploadingProgress = percentDone);
+        } else if (event instanceof HttpResponse) {
+          this.uploadSuccessful = true;
+          this.activeModal.close(true);
+        }
+      });
+      // this.http.post(this.url, formData).subscribe(
+      //   response => console.log(response),
+      //   error => console.log(error)
+      // );
     });
   }
   public decline() {
