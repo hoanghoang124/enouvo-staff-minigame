@@ -67,7 +67,6 @@ export function staffReducer(
         selectedStaff: null
       };
     case staffActions.StaffActionsType.GET_STAFFS_SUCCESS:
-      console.log(action.payload);
       return {
         ...state,
         staffs: action.payload.profiles,
