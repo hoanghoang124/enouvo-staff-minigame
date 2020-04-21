@@ -116,7 +116,7 @@ export class GetCampaignSuccess implements Action {
 }
 export class GetCampaignFail implements Action {
   public readonly type = StaffActionsType.GET_CAMPAIGN_FAILURE;
-  constructor(public payload: any) {}
+  constructor(public payload: Error) {}
 }
 
 export class GetCampaignDetail implements Action {

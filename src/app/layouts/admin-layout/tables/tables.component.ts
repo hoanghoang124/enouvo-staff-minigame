@@ -6,9 +6,9 @@ import {
   OnDestroy
 } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 import { DialogService } from '../services/dialog.service';
 import { pageSizes, Page } from '../models/pagination.model';
 import { TableQuery } from '../models/tableQuery.model';
@@ -34,8 +34,6 @@ export class TablesComponent implements OnInit, OnDestroy {
   editProfileForm: FormGroup;
   resetPasswordForm: FormGroup;
   model: NgbDateStruct;
-  staffsData = [];
-  displayedClients = [];
   totalItems = 0;
   sorting: SortEvent;
   paging: Page;
@@ -43,8 +41,12 @@ export class TablesComponent implements OnInit, OnDestroy {
   defaultQuery = { limit: 5, offset: 1 };
   tableQuery: TableQuery;
   totalItems$: Observable<number>;
-  searchText = '';
-  componentDestroyed$: Subject<any> = new Subject<any>();
+  searchForm = new FormGroup({
+    firstname: new FormControl(''),
+    lastname: new FormControl(''),
+    fromdate: new FormControl(''),
+    todate: new FormControl('')
+  });
 
   constructor(
     private store: Store<State>,
@@ -90,7 +92,6 @@ export class TablesComponent implements OnInit, OnDestroy {
   }
 
   onSort({ orderBy, order }: SortEvent) {
-    // resetting other headers
     this.headers1.forEach(header => {
       if (header.sortable !== orderBy) {
         header.direction = '';
@@ -113,10 +114,25 @@ export class TablesComponent implements OnInit, OnDestroy {
     }
   }
 
-  onSearch() {}
-
-  clearSearch() {
-    this.searchText = '';
+  search() {
+    if (
+      this.searchForm.get('firstname').value === '' &&
+      this.searchForm.get('lastname').value === ''
+    ) {
+      this.fetchTableData(this.tableQuery);
+    }
+    if (this.searchForm.get('firstname').value !== '') {
+      this.fetchTableData({
+        ...this.tableQuery,
+        firstName: this.searchForm.get('firstname').value
+      });
+    }
+    if (this.searchForm.get('lastname').value !== '') {
+      this.fetchTableData({
+        ...this.tableQuery,
+        lastName: this.searchForm.get('lastname').value
+      });
+    }
   }
 
   changePageSize(event) {
@@ -132,13 +148,10 @@ export class TablesComponent implements OnInit, OnDestroy {
 
   fetchTableData(query: TableQuery) {
     query = { ...query, offset: (query.offset - 1) * query.limit };
-    // query: _.pickBy(query, _.identity);
     this.store.dispatch(new fromStaff.GetStaffs(query));
   }
 
   ngOnDestroy() {
     this.modalService.dismissAll();
-    this.componentDestroyed$.next();
-    this.componentDestroyed$.complete();
   }
 }

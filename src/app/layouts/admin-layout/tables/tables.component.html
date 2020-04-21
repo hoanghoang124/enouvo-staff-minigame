@@ -1,15 +1,71 @@
-<div class="input-group mx-5 mt-5">
-  <input
-    type="text"
-    class="form-control bg-light large"
-    placeholder="Search for..."
-    aria-label="Search"
-    [(ngModel)]="searchText"
-  />
-  <div class="input-group-append mr-7">
-    <button class="btn btn-primary" type="button">
-      <i class="fas fa-times fa-sm"></i>
-    </button>
+<div class="row mx-4 my-2" [formGroup]="searchForm">
+  <div class="col-md-3">
+    <div class="form-group">
+      <div class="input-group mb-4">
+        <div class="input-group-prepend">
+          <span class="input-group-text"
+            ><i class="ni ni-zoom-split-in" (click)="search()"></i
+          ></span>
+        </div>
+        <input
+          class="form-control"
+          placeholder="Search for first name..."
+          type="text"
+          formControlName="firstname"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="form-group">
+      <div class="input-group mb-4">
+        <div class="input-group-prepend">
+          <span class="input-group-text"
+            ><i class="ni ni-zoom-split-in" (click)="search()"></i
+          ></span>
+        </div>
+        <input
+          class="form-control"
+          placeholder="Search for last name..."
+          type="text"
+          formControlName="lastname"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="form-group">
+      <div class="input-group mb-4">
+        <div class="input-group-prepend">
+          <span class="input-group-text"
+            ><i class="ni ni-zoom-split-in" (click)="search()"></i
+          ></span>
+        </div>
+        <input
+          class="form-control"
+          placeholder="Search birthday from..."
+          type="text"
+          formControlName="fromdate"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="form-group">
+      <div class="input-group mb-4">
+        <div class="input-group-prepend">
+          <span class="input-group-text"
+            ><i class="ni ni-zoom-split-in" (click)="search()"></i
+          ></span>
+        </div>
+        <input
+          class="form-control"
+          placeholder="Search birthday to..."
+          type="text"
+          formControlName="todate"
+        />
+      </div>
+    </div>
   </div>
 </div>
 <div class="container-fluid mt--7">
@@ -63,7 +119,7 @@
                 <th (sort)="onSort($event)" appSortable="lastName">
                   Last Name
                 </th>
-                <th class="text-center">
+                <th (sort)="onSort($event)" appSortable="birthday">
                   Date of Birth
                 </th>
                 <th (sort)="onSort($event)" appSortable="email">Email</th>
