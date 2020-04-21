@@ -24,11 +24,11 @@ import { CreateAccountModalComponent } from './modal/create-account-modal/create
 import { CreateCampaignModalComponent } from './modal/create-campaign-modal/create-campaign-modal.component';
 import { UserProfileModalComponent } from './modal/user-profile-modal/user-profile-modal.component';
 import { UpdateCampaignModalComponent } from './modal/update-campaign-modal/update-campaign-modal.component';
-import { CampaignProfileAsAdminModalComponent } from './modal/campaign-profile-as-admin-modal/campaign-profile-as-admin-modal.component';
-import { CampaignProfileAsStaffModalComponent } from './modal/campaign-profile-as-staff-modal/campaign-profile-as-staff-modal.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HistoryOfVotingModalComponent } from './modal/history-of-voting-modal/history-of-voting-modal.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { CampaignDetailAdminComponent } from './campaign-detail-admin/campaign-detail-admin.component';
+import { CampaignDetailStaffComponent } from './campaign-detail-staff/campaign-detail-staff.component';
 // import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
@@ -60,9 +60,9 @@ import { SharedModule } from 'src/app/shared/shared.module';
     CreateCampaignModalComponent,
     UserProfileModalComponent,
     UpdateCampaignModalComponent,
-    CampaignProfileAsAdminModalComponent,
-    CampaignProfileAsStaffModalComponent,
-    HistoryOfVotingModalComponent
+    HistoryOfVotingModalComponent,
+    CampaignDetailAdminComponent,
+    CampaignDetailStaffComponent
   ]
 })
 export class AdminLayoutModule {}

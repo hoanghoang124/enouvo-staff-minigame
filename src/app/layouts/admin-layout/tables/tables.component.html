@@ -5,10 +5,9 @@
     placeholder="Search for..."
     aria-label="Search"
     [(ngModel)]="searchText"
-    (ngModelChange)="onSearch()"
   />
   <div class="input-group-append mr-7">
-    <button class="btn btn-primary" type="button" (click)="clearSearch()">
+    <button class="btn btn-primary" type="button">
       <i class="fas fa-times fa-sm"></i>
     </button>
   </div>
@@ -72,11 +71,8 @@
               </tr>
             </thead>
             <tbody>
-              <tr
-                *ngFor="let staff of staffs$ | async"
-                [routerLink]="[staff.id]"
-              >
-                <th scope="row">
+              <tr *ngFor="let staff of staffs$ | async">
+                <th scope="row" [routerLink]="[staff.id]">
                   <div class="media align-items-center">
                     <div class="media-body">
                       <a class="avatar avatar-sm" data-toggle="tooltip">
@@ -95,7 +91,7 @@
                     </div>
                   </div>
                 </th>
-                <td style="font-weight: bold;">
+                <td style="font-weight: bold;" [routerLink]="[staff.id]">
                   {{ staff.firstName || 'n/a' }}
                 </td>
                 <td>

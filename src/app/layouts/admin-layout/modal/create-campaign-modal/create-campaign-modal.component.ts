@@ -27,7 +27,7 @@ export class CreateCampaignModalComponent implements OnInit {
       description: ['', Validators.required],
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
-      isCampaignActive: [true],
+      isCampaignActive: [false],
       starLimitation: ['', Validators.required]
     });
     this.errorMessage$ = this.store.select(fromStaff.getErrorCrtCmpMessage);
@@ -45,7 +45,11 @@ export class CreateCampaignModalComponent implements OnInit {
     }
   }
 
-  close() {
+  public dismiss() {
     this.activeModal.dismiss();
+  }
+
+  close() {
+    this.activeModal.close();
   }
 }

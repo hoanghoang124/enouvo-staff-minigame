@@ -42,8 +42,6 @@
                 <th class="time">Start Time</th>
                 <th class="time">End Time</th>
                 <th class="star-limit">Star Limit</th>
-                <th>Voted / Total</th>
-                <th class="winner">Winner</th>
                 <th class="text-center">Status</th>
                 <th class="action">Actions</th>
               </tr>
@@ -60,10 +58,7 @@
                     </div>
                   </div>
                 </th>
-                <td
-                  style="font-weight: bold;"
-                  (click)="viewCampaignAsAdminDialog(campaign.id)"
-                >
+                <td style="font-weight: bold;" [routerLink]="[campaign.id]">
                   {{ campaign.title || 'n/a' }}
                 </td>
                 <td>
@@ -74,15 +69,22 @@
                 <td class="text-center">
                   {{ campaign.starLimitation || 'n/a' }}
                 </td>
-                <td class="text-center">n/a</td>
-                <td>n/a</td>
                 <td class="text-center">
-                  {{ campaign.isCampaignActive || 'n/a' }}
+                  {{ campaign.isCampaignActive }}
                 </td>
                 <td class="action">
                   <button
                     class="btn btn-sm btn-info"
-                    (click)="openUpdateCampaignDialog(campaign.id)"
+                    (click)="
+                      openUpdateCampaignDialog(
+                        campaign.id,
+                        campaign.title,
+                        campaign.isCampaignActive,
+                        campaign.description,
+                        campaign.startDate,
+                        campaign.endDate
+                      )
+                    "
                   >
                     Modify
                   </button>

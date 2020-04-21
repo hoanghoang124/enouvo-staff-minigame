@@ -50,7 +50,6 @@ export class CampaignComponent implements OnInit, OnDestroy {
     this.tableQuery = this.defaultQuery;
     this.campaigns$ = this.store.select(fromStaff.getAllCampaigns);
     // this.totalItems$ = this.store.select(fromStaff.getTotalStaffs);
-
     this.errorMessage$ = this.store.select(fromStaff.getErrorGtAllCmpMessage);
     this.isLoadingResults$ = this.store.select(fromStaff.getIsCrtCmpLoading);
     this.isCampaginLoading$ = this.store.select(fromStaff.getIsGtAllCmpLoading);
@@ -61,13 +60,24 @@ export class CampaignComponent implements OnInit, OnDestroy {
     this.dialogService.createCampaign();
   }
 
-  openUpdateCampaignDialog(campaignId) {
-    this.dialogService.updateCampaign(campaignId);
+  openUpdateCampaignDialog(
+    campaignId,
+    campaignTitle,
+    campaignIsCampaignActive,
+    campaignDescription,
+    campaignStartDate,
+    campaginEndDate
+  ) {
+    this.dialogService.updateCampaign(
+      campaignId,
+      campaignTitle,
+      campaignIsCampaignActive,
+      campaignDescription,
+      campaignStartDate,
+      campaginEndDate
+    );
   }
 
-  viewCampaignAsAdminDialog(campaignId) {
-    this.dialogService.viewCampaignAsAdminPosition(campaignId);
-  }
   onSort(sort: SortEvent) {
     this.paging.pageNumber = 1;
     this.changeQuery({

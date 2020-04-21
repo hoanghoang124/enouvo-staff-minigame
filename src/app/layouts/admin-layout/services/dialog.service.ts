@@ -8,8 +8,7 @@ import { CreateAccountModalComponent } from '../modal/create-account-modal/creat
 import { CreateCampaignModalComponent } from '../modal/create-campaign-modal/create-campaign-modal.component';
 import { UserProfileModalComponent } from '../modal/user-profile-modal/user-profile-modal.component';
 import { UpdateCampaignModalComponent } from '../modal/update-campaign-modal/update-campaign-modal.component';
-import { CampaignProfileAsAdminModalComponent } from '../modal/campaign-profile-as-admin-modal/campaign-profile-as-admin-modal.component';
-import { CampaignProfileAsStaffModalComponent } from '../modal/campaign-profile-as-staff-modal/campaign-profile-as-staff-modal.component';
+import { CampaignDetailStaffComponent } from '../campaign-detail-staff/campaign-detail-staff.component';
 @Injectable({
   providedIn: 'root'
 })
@@ -143,31 +142,14 @@ export class DialogService {
     this.createCampaignDialogRef = null;
   }
 
-  public viewCampaignAsStaffPosition(): Promise<boolean> {
-    const modalRef = this.modalService.open(
-      CampaignProfileAsStaffModalComponent,
-      {
-        windowClass: 'dialog-size-xl',
-        centered: true
-      }
-    );
-
-    return modalRef.result;
-  }
-
-  public viewCampaignAsAdminPosition(campaignId: number): Promise<boolean> {
-    const modalRef = this.modalService.open(
-      CampaignProfileAsAdminModalComponent,
-      {
-        windowClass: 'dialog-size-xl',
-        centered: true
-      }
-    );
-    modalRef.componentInstance.campaignId = campaignId;
-    return modalRef.result;
-  }
-
-  public updateCampaign(campaignId: number): Promise<boolean> {
+  public updateCampaign(
+    campaignId: number,
+    campaignTitle: string,
+    campaignIsCampaignActive: boolean,
+    campaignDescription: string,
+    campaignStartDate: Date,
+    campaignEndDate: Date
+  ): Promise<boolean> {
     this.updateCampaginDialogRef = this.modalService.open(
       UpdateCampaignModalComponent,
       {
@@ -176,6 +158,11 @@ export class DialogService {
       }
     );
     this.updateCampaginDialogRef.componentInstance.campaignId = campaignId;
+    this.updateCampaginDialogRef.componentInstance.campaignTitle = campaignTitle;
+    this.updateCampaginDialogRef.componentInstance.campaignIsCampaignActive = campaignIsCampaignActive;
+    this.updateCampaginDialogRef.componentInstance.campaignDescription = campaignDescription;
+    this.updateCampaginDialogRef.componentInstance.campaignStartDate = campaignStartDate;
+    this.updateCampaginDialogRef.componentInstance.campaignEndDate = campaignEndDate;
 
     return this.updateCampaginDialogRef.result;
   }
@@ -185,11 +172,21 @@ export class DialogService {
     this.updateCampaginDialogRef = null;
   }
 
-  public viewHistoryOfVoting() {
+  public viewCampaignStaffList(campaignId: number) {
+    const modalRef = this.modalService.open(CampaignDetailStaffComponent, {
+      windowClass: 'dialog-size-xl',
+      centered: true
+    });
+    modalRef.componentInstance.campaignId = campaignId;
+  }
+
+  public viewHistoryOfVoting(id: number, userId: number) {
     const modalRef = this.modalService.open(HistoryOfVotingModalComponent, {
       windowClass: 'dialog-size-xl',
       centered: true
     });
+    modalRef.componentInstance.id = id;
+    modalRef.componentInstance.userId = userId;
 
     return modalRef.result;
   }

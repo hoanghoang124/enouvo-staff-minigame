@@ -4,7 +4,17 @@
       <div class="card-header  border-0">
         <div class="row align-items-center">
           <div class="col">
-            <h1 class="mb-0">Update campaign</h1>
+            <h1 class="mb-0">
+              Update campaign
+              <button
+                type="button"
+                class="close"
+                aria-label="Close"
+                (click)="dismiss()"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </h1>
             <span
               class="badge badge-warning"
               id="error-message"
@@ -84,7 +94,9 @@
                       </div>
                       <input
                         class="form-control datepicker"
-                        placeholder="Select date"
+                        placeholder="{{
+                          campaignStartDate | date: 'dd/MM/yyyy'
+                        }}"
                         id="startDate"
                         ngbDatepicker
                         #sd="ngbDatepicker"
@@ -110,7 +122,7 @@
                       </div>
                       <input
                         class="form-control datepicker"
-                        placeholder="Select date"
+                        placeholder="{{ campaignEndDate | date: 'dd/MM/yyyy' }}"
                         id="endDate"
                         ngbDatepicker
                         #ed="ngbDatepicker"

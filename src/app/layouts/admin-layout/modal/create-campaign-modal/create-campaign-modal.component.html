@@ -4,7 +4,17 @@
       <div class="card-header  border-0">
         <div class="row align-items-center">
           <div class="col">
-            <h1 class="mb-0">Create campaign</h1>
+            <h1 class="mb-0">
+              Create campaign
+              <button
+                type="button"
+                class="close"
+                aria-label="Close"
+                (click)="dismiss()"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </h1>
             <span
               class="badge badge-warning"
               id="error-message"
