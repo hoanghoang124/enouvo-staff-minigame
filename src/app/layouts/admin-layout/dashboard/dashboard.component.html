@@ -14,13 +14,13 @@
               <table class="table align-items-center table-flush">
                 <thead class="thead-light">
                   <tr>
-                    <th style="text-align: center;">Id</th>
+                    <th class="text-center">Id</th>
                     <th>Title</th>
                     <th>Description</th>
-                    <th>Start Time</th>
-                    <th>End Time</th>
+                    <th class="text-center">Start Time</th>
+                    <th class="text-center">End Time</th>
                     <th class="text-center">Duration</th>
-                    <th>Star Limitation</th>
+                    <th class="text-center">Star Limitation</th>
                   </tr>
                 </thead>
                 <tbody *ngFor="let campaign of campaigns$ | async">
@@ -44,10 +44,10 @@
                     <td>
                       {{ campaign.description || 'n/a' }}
                     </td>
-                    <td>
+                    <td class="text-center">
                       {{ campaign.startDate | date: 'dd/MM/yyyy' || 'n/a' }}
                     </td>
-                    <td>
+                    <td class="text-center">
                       {{ campaign.endDate | date: 'dd/MM/yyyy' || 'n/a' }}
                     </td>
                     <td class="text-center">

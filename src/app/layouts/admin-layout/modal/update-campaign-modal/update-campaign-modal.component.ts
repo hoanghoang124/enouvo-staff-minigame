@@ -53,8 +53,6 @@ export class UpdateCampaignModalComponent implements OnInit {
       this.campaignEndDate
     );
 
-    console.log(this.campaignEndDate);
-
     this.errorMessage$ = this.store.select(fromStaff.getErrorUpdCmpMessage);
     this.isLoadingResults$ = this.store.select(fromStaff.getIsUpdCmpLoading);
   }
