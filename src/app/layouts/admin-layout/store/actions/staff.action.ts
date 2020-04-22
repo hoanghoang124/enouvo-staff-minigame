@@ -179,7 +179,7 @@ export class UpdateCampaignFail implements Action {
 
 export class DeleteCampaign implements Action {
   public readonly type = StaffActionsType.DELETE_CAMPAIGN;
-  constructor(public payload: number) {}
+  constructor(public payload: { id: number }) {}
 }
 
 export class DeleteCampaignSuccess implements Action {

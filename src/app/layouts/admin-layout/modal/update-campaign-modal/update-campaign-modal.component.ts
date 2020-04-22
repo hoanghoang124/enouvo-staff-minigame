@@ -4,8 +4,12 @@ import { State } from 'src/app/layouts/auth-layout/store';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import * as fromStaff from '../../store/index';
 import { CampaignStates } from '../../models/campaign-states.model';
+import {
+  getErrorUpdCmpMessage,
+  getIsUpdCmpLoading
+} from '../../store/selectors/staff.selector';
+import { UpdateCampaign } from '../../store/actions/staff.action';
 
 @Component({
   selector: 'app-update-campaign-modal',
@@ -52,8 +56,8 @@ export class UpdateCampaignModalComponent implements OnInit {
     this.updateCampaignForm.controls['endDate'].patchValue(
       new Date(this.campaignEndDate)
     );
-    this.errorMessage$ = this.store.select(fromStaff.getErrorUpdCmpMessage);
-    this.isLoadingResults$ = this.store.select(fromStaff.getIsUpdCmpLoading);
+    this.errorMessage$ = this.store.select(getErrorUpdCmpMessage);
+    this.isLoadingResults$ = this.store.select(getIsUpdCmpLoading);
   }
 
   onSubmit() {
@@ -61,7 +65,7 @@ export class UpdateCampaignModalComponent implements OnInit {
       return;
     } else {
       this.store.dispatch(
-        new fromStaff.UpdateCampaign({
+        new UpdateCampaign({
           id: this.campaignId,
           campaign: this.updateCampaignForm.value
         })

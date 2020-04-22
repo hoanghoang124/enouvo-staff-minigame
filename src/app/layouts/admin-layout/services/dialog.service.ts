@@ -1,5 +1,5 @@
-import { HistoryOfVotingModalComponent } from './../modal/history-of-voting-modal/history-of-voting-modal.component';
 import { Injectable } from '@angular/core';
+import { HistoryOfVotingModalComponent } from '../modal/history-of-voting-modal/history-of-voting-modal.component';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmResetPasswordModalComponent } from '../modal/confirm-reset-password-modal/confirm-reset-password-modal.component';
 import { ChangePasswordModalComponent } from '../modal/change-password-modal/change-password-modal.component';
@@ -9,6 +9,7 @@ import { CreateCampaignModalComponent } from '../modal/create-campaign-modal/cre
 import { UserProfileModalComponent } from '../modal/user-profile-modal/user-profile-modal.component';
 import { UpdateCampaignModalComponent } from '../modal/update-campaign-modal/update-campaign-modal.component';
 import { CampaignDetailStaffComponent } from '../campaign-detail-staff/campaign-detail-staff.component';
+import { ConfirmDeleteCampaignModalComponent } from '../modal/confirm-delete-campaign-modal/confirm-delete-campaign-modal.component';
 @Injectable({
   providedIn: 'root'
 })
@@ -180,6 +181,13 @@ export class DialogService {
     btnOkText: string = 'Confirm',
     btnCancelText: string = 'Cancel'
   ): Promise<boolean> {
+    this.confirmDeleteCampaignDialogRef = this.modalService.open(
+      ConfirmDeleteCampaignModalComponent,
+      {
+        size: 'md',
+        centered: true
+      }
+    );
     this.confirmDeleteCampaignDialogRef.componentInstance.title = title;
     this.confirmDeleteCampaignDialogRef.componentInstance.message = message;
     this.confirmDeleteCampaignDialogRef.componentInstance.campaignId = campaignId;

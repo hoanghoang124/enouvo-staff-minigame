@@ -171,9 +171,9 @@ export class StaffEffects {
   deleteCampagin$ = this.actions.pipe(
     ofType(StaffActionsType.DELETE_CAMPAIGN),
     map((action: StaffActions.DeleteCampaign) => action.payload),
-    switchMap(id => {
-      return this.staffservice.deleteCampagin(id).pipe(
-        map(res => {
+    switchMap(res => {
+      return this.staffservice.deleteCampagin(res.id).pipe(
+        map(() => {
           this.dialogService.closeDeleteCampaign();
           return new StaffActions.DeleteCampaignSuccess(res);
         }),

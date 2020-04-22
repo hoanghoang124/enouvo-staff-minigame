@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { Staff } from '../models/staff.model';
 import { Page, pageSizes } from '../models/pagination.model';
-import { State } from '../../auth-layout/store';
+// import { State } from '../../auth-layout/store';
 import { SortableDirective } from 'src/app/shared/directives';
 import { Observable } from 'rxjs';
 import { NgbDateStruct, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -16,8 +16,15 @@ import { Store } from '@ngrx/store';
 // import { ActivatedRoute } from '@angular/router';
 // import { UtilServiceService } from '../services/util-service.service';
 // import { SortEvent } from 'src/app/shared/sort.model';
-import * as fromStaff from '../store';
 import * as _ from 'lodash';
+import { State } from '../store/reducers';
+import { GetCampaignListStaff } from '../store/actions/staff.action';
+import {
+  getErrorGtCmpLstStf,
+  getCampaignListStaff,
+  getTotalStaffs,
+  getIsCmpLstStfLoading
+} from '../store/selectors/staff.selector';
 
 @Component({
   selector: 'app-campaign-detail-staff',
@@ -47,11 +54,11 @@ export class CampaignDetailStaffComponent implements OnInit {
 
   ngOnInit() {
     // this.tableQuery = this.defaultQuery;
-    this.store.dispatch(new fromStaff.GetCampaignListStaff(this.campaignId));
-    this.staffs$ = this.store.select(fromStaff.getCampaignListStaff);
-    this.totalItems$ = this.store.select(fromStaff.getTotalStaffs);
-    this.errorMessage$ = this.store.select(fromStaff.getErrorGtCmpLstStf);
-    this.isStaffLoading$ = this.store.select(fromStaff.getIsCmpLstStfLoading);
+    this.store.dispatch(new GetCampaignListStaff(this.campaignId));
+    this.staffs$ = this.store.select(getCampaignListStaff);
+    this.totalItems$ = this.store.select(getTotalStaffs);
+    this.errorMessage$ = this.store.select(getErrorGtCmpLstStf);
+    this.isStaffLoading$ = this.store.select(getIsCmpLstStfLoading);
     // this.fetchTableData(this.tableQuery);
   }
 

@@ -3,11 +3,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { State } from 'src/app/layouts/auth-layout/store';
 import { Store } from '@ngrx/store';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-// import { getIsDltCmpLoading } from '../../store/selectors/staff.selector';
 import { DeleteCampaign } from '../../store/actions/staff.action';
 import { getIsDltCmpLoading } from '../../store/selectors/staff.selector';
-
-// import * as fromStaff from '../../store';
 
 @Component({
   selector: 'app-confirm-delete-campaign-modal',
@@ -37,7 +34,7 @@ export class ConfirmDeleteCampaignModalComponent implements OnInit {
   }
 
   public accept() {
-    this.store.dispatch(new DeleteCampaign(this.campaignId));
+    this.store.dispatch(new DeleteCampaign({ id: this.campaignId }));
   }
 
   public dismiss() {

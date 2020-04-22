@@ -65,6 +65,7 @@ import { ConfirmDeleteCampaignModalComponent } from './modal/confirm-delete-camp
     CampaignDetailAdminComponent,
     CampaignDetailStaffComponent,
     ConfirmDeleteCampaignModalComponent
-  ]
+  ],
+  exports: [dialogs]
 })
 export class AdminLayoutModule {}

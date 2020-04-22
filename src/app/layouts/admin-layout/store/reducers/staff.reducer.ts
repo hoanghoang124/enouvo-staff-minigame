@@ -229,7 +229,7 @@ export function staffReducer(
         errorUpdCmpMessage: null
       };
     case staffActions.StaffActionsType.UPDATE_CAMPAIGN_SUCCESS:
-      const newCampaign = _.map(state.campaigns, item => {
+      const updateCampaign = _.map(state.campaigns, item => {
         if (item.id === action.payload.id) {
           return { id: item.id, ...action.payload.campaign };
         }
@@ -240,7 +240,7 @@ export function staffReducer(
         ...state,
         isUpdCmpLoading: false,
         selectedCampaign: action.payload,
-        campaigns: newCampaign
+        campaigns: updateCampaign
       };
     case staffActions.StaffActionsType.UPDATE_CAMPAIGN_FAILURE:
       return {
@@ -255,10 +255,17 @@ export function staffReducer(
         errorDltCmpMessage: null
       };
     case staffActions.StaffActionsType.DELETE_CAMPAIGN_SUCCESS:
+      const deleteCampaigns = _.remove(state.campaigns, function(ojb) {
+        return ojb.id !== action.payload.id;
+      });
+
+      console.log(action.payload.id);
+      console.log(deleteCampaigns);
+
       return {
         ...state,
         isDltCmpLoading: false,
-        campaigns: [...state.campaigns, action.payload]
+        campaigns: deleteCampaigns
       };
     case staffActions.StaffActionsType.DELETE_CAMPAIGN_FAILURE:
       return {

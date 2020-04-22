@@ -6,9 +6,11 @@ import { UploadCsvModalComponent } from './upload-csv-modal/upload-csv-modal.com
 import { ConfirmResetPasswordModalComponent } from './confirm-reset-password-modal/confirm-reset-password-modal.component';
 import { CreateCampaignModalComponent } from './create-campaign-modal/create-campaign-modal.component';
 import { UpdateCampaignModalComponent } from './update-campaign-modal/update-campaign-modal.component';
+import { ConfirmDeleteCampaignModalComponent } from './confirm-delete-campaign-modal/confirm-delete-campaign-modal.component';
 
 export const dialogs = [
   ChangePasswordModalComponent,
+  ConfirmDeleteCampaignModalComponent,
   ConfirmResetPasswordModalComponent,
   CreateAccountModalComponent,
   CreateCampaignModalComponent,

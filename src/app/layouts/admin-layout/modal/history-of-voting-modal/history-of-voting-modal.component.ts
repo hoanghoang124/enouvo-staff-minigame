@@ -15,8 +15,13 @@ import { TableQuery } from '../../models/tableQuery.model';
 import { Store } from '@ngrx/store';
 // import { Router, ActivatedRoute } from '@angular/router';
 // import { UtilServiceService } from '../../services/util-service.service';
-import * as fromStaff from '../../store';
 import * as _ from 'lodash';
+import { GetVotingHistory } from '../../store/actions/staff.action';
+import {
+  getVotingHistory,
+  getErrorVtgHsrMessage,
+  getIsVtgHsrLoading
+} from '../../store/selectors/staff.selector';
 @Component({
   selector: 'app-history-of-voting-modal',
   templateUrl: './history-of-voting-modal.component.html',
@@ -46,14 +51,12 @@ export class HistoryOfVotingModalComponent implements OnInit {
   ngOnInit() {
     this.tableQuery = this.defaultQuery;
     this.store.dispatch(
-      new fromStaff.GetVotingHistory({ id: this.id, userId: this.userId })
+      new GetVotingHistory({ id: this.id, userId: this.userId })
     );
-    this.votingHistory$ = this.store.select(fromStaff.getVotingHistory);
-    // this.totalItems$ = this.store.select(fromStaff.getTotalStaffs);
-    this.errorMessage$ = this.store.select(fromStaff.getErrorVtgHsrMessage);
-    this.isVotingHistoryLoading$ = this.store.select(
-      fromStaff.getIsVtgHsrLoading
-    );
+    this.votingHistory$ = this.store.select(getVotingHistory);
+    // this.totalItems$ = this.store.select(getTotalStaffs);
+    this.errorMessage$ = this.store.select(getErrorVtgHsrMessage);
+    this.isVotingHistoryLoading$ = this.store.select(getIsVtgHsrLoading);
     // this.fetchTableData(this.tableQuery);
   }
 

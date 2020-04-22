@@ -4,7 +4,11 @@ import { Observable } from 'rxjs';
 import { Staff } from '../../models/staff.model';
 import { Store } from '@ngrx/store';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import * as fromStaff from '../../store/index';
+import { GetStaff } from '../../store/actions/staff.action';
+import {
+  getStaff,
+  getIsGtStfLoading
+} from '../../store/selectors/staff.selector';
 
 @Component({
   selector: 'app-user-profile-modal',
@@ -22,9 +26,9 @@ export class UserProfileModalComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.store.dispatch(new fromStaff.GetStaff(this.userId));
-    this.staff$ = this.store.select(fromStaff.getStaff);
-    this.isProfileLoading$ = this.store.select(fromStaff.getIsGtStfLoading);
+    this.store.dispatch(new GetStaff(this.userId));
+    this.staff$ = this.store.select(getStaff);
+    this.isProfileLoading$ = this.store.select(getIsGtStfLoading);
   }
 
   public dismiss() {
