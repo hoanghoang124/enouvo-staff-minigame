@@ -2,9 +2,10 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
+
 import { State } from 'src/app/layouts/auth-layout/store';
-import * as fromAuthAction from '../../../auth-layout/store/auth.action';
-import * as fromAuthSelector from '../../../auth-layout/store/auth.selector';
+import { getIsRstPswLoading } from 'src/app/layouts/auth-layout/store/auth.selector';
+import { ResetPassword } from 'src/app/layouts/auth-layout/store/auth.action';
 
 @Component({
   selector: 'app-confirm-reset-password-modal',
@@ -26,9 +27,7 @@ export class ConfirmResetPasswordModalComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.isLoadingResults$ = this.store.select(
-      fromAuthSelector.getIsRstPswLoading
-    );
+    this.isLoadingResults$ = this.store.select(getIsRstPswLoading);
   }
 
   public decline() {
@@ -36,9 +35,7 @@ export class ConfirmResetPasswordModalComponent implements OnInit {
   }
 
   public accept() {
-    this.store.dispatch(
-      new fromAuthAction.ResetPassword({ profileId: this.userId })
-    );
+    this.store.dispatch(new ResetPassword({ profileId: this.userId }));
   }
 
   public dismiss() {

@@ -37,9 +37,11 @@
                   <span class="heading"
                     >{{ staff.firstName }} {{ staff.lastName }}</span
                   >
-                  <span class="description">{{
-                    staff.position || 'Position'
-                  }}</span>
+                  <span
+                    class="description"
+                    style="text-transform: capitalize;"
+                    >{{ staff.scope || 'Position' }}</span
+                  >
                 </div>
               </div>
             </div>
@@ -161,9 +163,10 @@
                   type="text"
                   id="roleId"
                   class="form-control form-control-alternative"
-                  placeholder="{{ staff.position }}"
+                  placeholder="{{ staff.scope }}"
                   aria-readonly="true"
                   disabled
+                  style="text-transform: capitalize;"
                 />
               </div>
             </div>

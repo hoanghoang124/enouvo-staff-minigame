@@ -9,15 +9,23 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormControl } from '@angular/forms';
+
 import { DialogService } from '../services/dialog.service';
 import { pageSizes, Page } from '../models/pagination.model';
 import { TableQuery } from '../models/tableQuery.model';
 import { Staff } from '../models/staff.model';
 import { SortEvent } from 'src/app/shared/sort.model';
 import { SortableDirective } from 'src/app/shared/directives/sortable.directive';
-import * as fromStaff from '../store';
-import * as _ from 'lodash';
 import { State } from '../../auth-layout/store';
+import {
+  getErrorGtAllStfMessage,
+  getAllStaffs,
+  getTotalStaffs,
+  getIsGtAllStfLoading,
+  getIsCrtAccLoading
+} from '../store/selectors/staff.selector';
+import { GetStaffs } from '../store/actions/staff.action';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-tables',
@@ -60,11 +68,11 @@ export class TablesComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.tableQuery = this.defaultQuery;
-    this.staffs$ = this.store.select(fromStaff.getAllStaffs);
-    this.totalItems$ = this.store.select(fromStaff.getTotalStaffs);
-    this.errorMessage$ = this.store.select(fromStaff.getErrorGtAllStfMessage);
-    this.isStaffLoading$ = this.store.select(fromStaff.getIsGtAllStfLoading);
-    this.isLoadingResults$ = this.store.select(fromStaff.getIsCrtAccLoading);
+    this.staffs$ = this.store.select(getAllStaffs);
+    this.totalItems$ = this.store.select(getTotalStaffs);
+    this.errorMessage$ = this.store.select(getErrorGtAllStfMessage);
+    this.isStaffLoading$ = this.store.select(getIsGtAllStfLoading);
+    this.isLoadingResults$ = this.store.select(getIsCrtAccLoading);
     this.fetchTableData(this.tableQuery);
   }
 
@@ -159,7 +167,7 @@ export class TablesComponent implements OnInit, OnDestroy {
 
   fetchTableData(query: TableQuery) {
     query = { ...query, offset: (query.offset - 1) * query.limit };
-    this.store.dispatch(new fromStaff.GetStaffs(query));
+    this.store.dispatch(new GetStaffs(query));
   }
 
   ngOnDestroy() {

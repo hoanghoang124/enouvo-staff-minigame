@@ -258,10 +258,6 @@ export function staffReducer(
       const deleteCampaigns = _.remove(state.campaigns, function(ojb) {
         return ojb.id !== action.payload.id;
       });
-
-      console.log(action.payload.id);
-      console.log(deleteCampaigns);
-
       return {
         ...state,
         isDltCmpLoading: false,

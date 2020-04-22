@@ -1,10 +1,12 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Staff } from '../models/staff.model';
-import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
+
+import { Staff } from '../models/staff.model';
 import { State } from '../store/reducers';
-import * as fromStaff from '../store';
+import { GetStaff } from '../store/actions/staff.action';
+import { getStaff, getIsGtStfLoading } from '../store/selectors/staff.selector';
 
 @Component({
   selector: 'app-user-profile',
@@ -19,9 +21,9 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.store.dispatch(new fromStaff.GetStaff(params.id));
+      this.store.dispatch(new GetStaff(params.id));
     });
-    this.staff$ = this.store.select(fromStaff.getStaff);
-    this.isLoadingResults$ = this.store.select(fromStaff.getIsGtStfLoading);
+    this.staff$ = this.store.select(getStaff);
+    this.isLoadingResults$ = this.store.select(getIsGtStfLoading);
   }
 }

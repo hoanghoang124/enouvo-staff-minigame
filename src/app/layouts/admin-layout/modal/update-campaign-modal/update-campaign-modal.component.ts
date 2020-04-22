@@ -1,9 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { State } from 'src/app/layouts/auth-layout/store';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+
+import { State } from 'src/app/layouts/auth-layout/store';
 import { CampaignStates } from '../../models/campaign-states.model';
 import {
   getErrorUpdCmpMessage,
@@ -28,6 +29,7 @@ export class UpdateCampaignModalComponent implements OnInit {
   isLoadingResults$: Observable<boolean>;
   updateCampaignForm: FormGroup;
   states = CampaignStates;
+
   constructor(
     private store: Store<State>,
     private formBuilder: FormBuilder,
