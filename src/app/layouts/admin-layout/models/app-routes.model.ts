@@ -13,13 +13,13 @@ export const ROUTES: RouteInfo[] = [
   },
   {
     path: '/tables',
-    title: 'Admin',
+    title: 'Emplyees',
     icon: 'ni ni-collection text-primary',
     class: ''
   },
   {
     path: '/campaign',
-    title: 'Campaign',
+    title: 'Campaigns',
     icon: 'ni-tv-2 text-primary',
     class: ''
   }

@@ -33,7 +33,8 @@ export class TablesComponent implements OnInit, OnDestroy {
   errorMessage$: Observable<string>;
   editProfileForm: FormGroup;
   resetPasswordForm: FormGroup;
-  model: NgbDateStruct;
+  model1: NgbDateStruct;
+  model2: NgbDateStruct;
   totalItems = 0;
   sorting: SortEvent;
   paging: Page;
@@ -131,6 +132,16 @@ export class TablesComponent implements OnInit, OnDestroy {
       this.fetchTableData({
         ...this.tableQuery,
         lastName: this.searchForm.get('lastname').value
+      });
+    }
+    if (
+      this.searchForm.get('fromdate').value !== '' &&
+      this.searchForm.get('todate').value !== ''
+    ) {
+      this.fetchTableData({
+        ...this.tableQuery,
+        fromDate: this.searchForm.get('fromdate').value.toString(),
+        toDate: this.searchForm.get('todate').value.toString()
       });
     }
   }

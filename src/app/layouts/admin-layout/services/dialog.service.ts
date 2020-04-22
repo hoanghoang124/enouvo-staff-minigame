@@ -193,7 +193,6 @@ export class DialogService {
     this.confirmDeleteCampaignDialogRef.componentInstance.campaignId = campaignId;
     this.confirmDeleteCampaignDialogRef.componentInstance.btnOkText = btnOkText;
     this.confirmDeleteCampaignDialogRef.componentInstance.btnCancelText = btnCancelText;
-
     return this.confirmDeleteCampaignDialogRef.result;
   }
 
