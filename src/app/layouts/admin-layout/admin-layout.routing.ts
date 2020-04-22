@@ -5,17 +5,11 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { TablesComponent } from './tables/tables.component';
 import { AdminGuard } from '../auth-layout/services/role-guard.service';
 import { AuthGuard } from '../auth-layout/services/auth-guard.service';
-import { CampaignDetailStaffComponent } from './campaign-detail-staff/campaign-detail-staff.component';
 import { CampaignDetailAdminComponent } from './campaign-detail-admin/campaign-detail-admin.component';
 export const AdminLayoutRoutes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'campaign-staff',
-    component: CampaignDetailStaffComponent,
     canActivate: [AuthGuard]
   },
   {

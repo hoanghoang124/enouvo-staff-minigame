@@ -6,18 +6,26 @@ import {
   OnDestroy
 } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
+
 import { DialogService } from '../services/dialog.service';
 import { pageSizes, Page } from '../models/pagination.model';
 import { TableQuery } from '../models/tableQuery.model';
 import { Staff } from '../models/staff.model';
 import { SortEvent } from 'src/app/shared/sort.model';
 import { SortableDirective } from 'src/app/shared/directives/sortable.directive';
-import * as fromStaff from '../store';
-import * as _ from 'lodash';
 import { State } from '../../auth-layout/store';
+import {
+  getErrorGtAllStfMessage,
+  getAllStaffs,
+  getTotalStaffs,
+  getIsGtAllStfLoading,
+  getIsCrtAccLoading
+} from '../store/selectors/staff.selector';
+import { GetStaffs } from '../store/actions/staff.action';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-tables',
@@ -25,7 +33,7 @@ import { State } from '../../auth-layout/store';
   styleUrls: ['./tables.component.scss']
 })
 export class TablesComponent implements OnInit, OnDestroy {
-  @ViewChildren(SortableDirective) headers1: QueryList<SortableDirective>;
+  @ViewChildren(SortableDirective) headers: QueryList<SortableDirective>;
 
   staffs$: Observable<Staff[]>;
   isStaffLoading$: Observable<boolean>;
@@ -33,9 +41,8 @@ export class TablesComponent implements OnInit, OnDestroy {
   errorMessage$: Observable<string>;
   editProfileForm: FormGroup;
   resetPasswordForm: FormGroup;
-  model: NgbDateStruct;
-  staffsData = [];
-  displayedClients = [];
+  model1: NgbDateStruct;
+  model2: NgbDateStruct;
   totalItems = 0;
   sorting: SortEvent;
   paging: Page;
@@ -43,8 +50,12 @@ export class TablesComponent implements OnInit, OnDestroy {
   defaultQuery = { limit: 5, offset: 1 };
   tableQuery: TableQuery;
   totalItems$: Observable<number>;
-  searchText = '';
-  componentDestroyed$: Subject<any> = new Subject<any>();
+  searchForm = new FormGroup({
+    firstname: new FormControl(''),
+    lastname: new FormControl(''),
+    fromdate: new FormControl(''),
+    todate: new FormControl('')
+  });
 
   constructor(
     private store: Store<State>,
@@ -57,11 +68,11 @@ export class TablesComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.tableQuery = this.defaultQuery;
-    this.staffs$ = this.store.select(fromStaff.getAllStaffs);
-    this.totalItems$ = this.store.select(fromStaff.getTotalStaffs);
-    this.errorMessage$ = this.store.select(fromStaff.getErrorGtAllStfMessage);
-    this.isStaffLoading$ = this.store.select(fromStaff.getIsGtAllStfLoading);
-    this.isLoadingResults$ = this.store.select(fromStaff.getIsCrtAccLoading);
+    this.staffs$ = this.store.select(getAllStaffs);
+    this.totalItems$ = this.store.select(getTotalStaffs);
+    this.errorMessage$ = this.store.select(getErrorGtAllStfMessage);
+    this.isStaffLoading$ = this.store.select(getIsGtAllStfLoading);
+    this.isLoadingResults$ = this.store.select(getIsCrtAccLoading);
     this.fetchTableData(this.tableQuery);
   }
 
@@ -74,9 +85,9 @@ export class TablesComponent implements OnInit, OnDestroy {
   }
 
   openConfirmationDialog(userId) {
-    this.dialogService.confirm(
+    this.dialogService.confirmResetPassword(
       'Please confirm...',
-      'Are you sure you want to reset password for this account? This action can not be undone.',
+      'Are you sure want to reset password for this account? This action can not be undone.',
       userId
     );
   }
@@ -90,8 +101,7 @@ export class TablesComponent implements OnInit, OnDestroy {
   }
 
   onSort({ orderBy, order }: SortEvent) {
-    // resetting other headers
-    this.headers1.forEach(header => {
+    this.headers.forEach(header => {
       if (header.sortable !== orderBy) {
         header.direction = '';
       }
@@ -113,29 +123,36 @@ export class TablesComponent implements OnInit, OnDestroy {
     }
   }
 
-  matches(staff, text: string) {
-    if (!staff) {
-      return;
+  search() {
+    if (
+      this.searchForm.get('firstname').value === '' &&
+      this.searchForm.get('lastname').value === ''
+    ) {
+      this.fetchTableData(this.tableQuery);
     }
-    return (
-      staff.id
-        .toString()
-        .toLowerCase()
-        .includes(text.toLowerCase()) ||
-      staff.firstName.toLowerCase().includes(text.toLowerCase()) ||
-      staff.lastName.toLowerCase().includes(text.toLowerCase()) ||
-      staff.email.toLowerCase().includes(text.toLowerCase())
-    );
+    if (this.searchForm.get('firstname').value !== '') {
+      this.fetchTableData({
+        ...this.tableQuery,
+        firstName: this.searchForm.get('firstname').value
+      });
+    }
+    if (this.searchForm.get('lastname').value !== '') {
+      this.fetchTableData({
+        ...this.tableQuery,
+        lastName: this.searchForm.get('lastname').value
+      });
+    }
+    if (
+      this.searchForm.get('fromdate').value !== '' &&
+      this.searchForm.get('todate').value !== ''
+    ) {
+      this.fetchTableData({
+        ...this.tableQuery,
+        fromDate: this.searchForm.get('fromdate').value.toString(),
+        toDate: this.searchForm.get('todate').value.toString()
+      });
+    }
   }
-
-  // onSearch() {
-  //   this.updateFilter();
-  // }
-
-  // clearSearch() {
-  //   this.searchText = '';
-  //   this.updateFilter();
-  // }
 
   changePageSize(event) {
     const limit = parseInt(event.target.value, 10);
@@ -150,13 +167,10 @@ export class TablesComponent implements OnInit, OnDestroy {
 
   fetchTableData(query: TableQuery) {
     query = { ...query, offset: (query.offset - 1) * query.limit };
-    // query: _.pickBy(query, _.identity);
-    this.store.dispatch(new fromStaff.GetStaffs(query));
+    this.store.dispatch(new GetStaffs(query));
   }
 
   ngOnDestroy() {
     this.modalService.dismissAll();
-    this.componentDestroyed$.next();
-    this.componentDestroyed$.complete();
   }
 }

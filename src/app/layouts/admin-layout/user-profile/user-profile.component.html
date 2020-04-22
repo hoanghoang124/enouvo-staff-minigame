@@ -30,9 +30,11 @@
                   <span class="heading"
                     >{{ staff.firstName }} {{ staff.lastName }}</span
                   >
-                  <span class="description">{{
-                    staff.position || 'Position'
-                  }}</span>
+                  <span
+                    class="description"
+                    style="text-transform: capitalize;"
+                    >{{ staff.scope || 'Position' }}</span
+                  >
                 </div>
               </div>
             </div>
@@ -165,8 +167,9 @@
                   type="text"
                   id="roleId"
                   class="form-control form-control-alternative"
-                  placeholder="{{ staff.position }}"
+                  placeholder="{{ staff.scope }}"
                   aria-readonly="true"
+                  style="text-transform: capitalize;"
                   disabled
                 />
                 <!-- <select
@@ -226,21 +229,6 @@
               </div>
             </div>
           </div>
-          <!-- <hr class="my-4" /> -->
-          <!-- Description -->
-          <!-- <h6 class="heading-small text-muted mb-4">About me</h6>
-            <div class="pl-lg-4">
-              <div class="form-group">
-                <label>About Me</label>
-                <textarea
-                  rows="4"
-                  class="form-control form-control-alternative"
-                  placeholder="A few words about you ..."
-                >
-A beautiful Dashboard for Bootstrap 4. It is Free and Open Source.</textarea
-                >
-              </div>
-            </div> -->
         </div>
       </div>
     </div>

@@ -4,18 +4,18 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
 
 import { State } from 'src/app/layouts/auth-layout/store';
-import { getIsRstPswLoading } from 'src/app/layouts/auth-layout/store/auth.selector';
-import { ResetPassword } from 'src/app/layouts/auth-layout/store/auth.action';
+import { DeleteCampaign } from '../../store/actions/staff.action';
+import { getIsDltCmpLoading } from '../../store/selectors/staff.selector';
 
 @Component({
-  selector: 'app-confirm-reset-password-modal',
-  templateUrl: './confirm-reset-password-modal.component.html',
-  styleUrls: ['./confirm-reset-password-modal.component.scss']
+  selector: 'app-confirm-delete-campaign-modal',
+  templateUrl: './confirm-delete-campaign-modal.component.html',
+  styleUrls: ['./confirm-delete-campaign-modal.component.scss']
 })
-export class ConfirmResetPasswordModalComponent implements OnInit {
+export class ConfirmDeleteCampaignModalComponent implements OnInit {
   @Input() title: string;
   @Input() message: string;
-  @Input() userId: number;
+  @Input() campaignId: number;
   @Input() btnOkText: string;
   @Input() btnCancelText: string;
 
@@ -27,7 +27,7 @@ export class ConfirmResetPasswordModalComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.isLoadingResults$ = this.store.select(getIsRstPswLoading);
+    this.isLoadingResults$ = this.store.select(getIsDltCmpLoading);
   }
 
   public decline() {
@@ -35,7 +35,7 @@ export class ConfirmResetPasswordModalComponent implements OnInit {
   }
 
   public accept() {
-    this.store.dispatch(new ResetPassword({ profileId: this.userId }));
+    this.store.dispatch(new DeleteCampaign({ id: this.campaignId }));
   }
 
   public dismiss() {

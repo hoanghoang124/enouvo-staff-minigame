@@ -1,10 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { State } from 'src/app/layouts/auth-layout/store';
 import { Observable } from 'rxjs';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import * as fromStaff from '../../store/index';
+
+import { State } from 'src/app/layouts/auth-layout/store';
+import {
+  getErrorCrtCmpMessage,
+  getIsCrtCmpLoading
+} from '../../store/selectors/staff.selector';
+import { CreateCampaign } from '../../store/actions/staff.action';
 
 @Component({
   selector: 'app-create-campaign-modal',
@@ -15,6 +20,7 @@ export class CreateCampaignModalComponent implements OnInit {
   errorMessage$: Observable<string>;
   isLoadingResults$: Observable<boolean>;
   createCampaignForm: FormGroup;
+
   constructor(
     private store: Store<State>,
     private formBuilder: FormBuilder,
@@ -30,8 +36,8 @@ export class CreateCampaignModalComponent implements OnInit {
       isCampaignActive: [false],
       starLimitation: ['', Validators.required]
     });
-    this.errorMessage$ = this.store.select(fromStaff.getErrorCrtCmpMessage);
-    this.isLoadingResults$ = this.store.select(fromStaff.getIsCrtCmpLoading);
+    this.errorMessage$ = this.store.select(getErrorCrtCmpMessage);
+    this.isLoadingResults$ = this.store.select(getIsCrtCmpLoading);
   }
 
   onSubmit() {
@@ -39,9 +45,7 @@ export class CreateCampaignModalComponent implements OnInit {
       console.log('Form invalid');
       return;
     } else {
-      this.store.dispatch(
-        new fromStaff.CreateCampaign(this.createCampaignForm.value)
-      );
+      this.store.dispatch(new CreateCampaign(this.createCampaignForm.value));
     }
   }
 

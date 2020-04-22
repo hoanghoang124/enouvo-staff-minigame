@@ -1,24 +1,31 @@
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import {
   Component,
   OnInit,
+  OnDestroy,
   ViewChildren,
-  QueryList,
-  OnDestroy
+  QueryList
 } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+
 import { pageSizes, Page } from '../models/pagination.model';
 import { TableQuery } from '../models/tableQuery.model';
-import { UtilServiceService } from '../services/util-service.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { SortEvent } from 'src/app/shared/sort.model';
 import { Campaign } from '../models/campaign.model';
 import { State } from '../../auth-layout/store';
 import { DialogService } from '../services/dialog.service';
-import * as fromStaff from '../store';
 import * as _ from 'lodash';
+import { FormGroup, FormControl } from '@angular/forms';
 import { SortableDirective } from 'src/app/shared/directives';
+import { SortEvent } from 'src/app/shared/sort.model';
+import {
+  getErrorGtAllCmpMessage,
+  getAllCampaigns,
+  getTotalCampaigns,
+  getIsCrtCmpLoading,
+  getIsGtAllCmpLoading
+} from '../store/selectors/staff.selector';
+import { GetCampaign } from '../store/actions/staff.action';
 
 @Component({
   selector: 'app-campaign',
@@ -26,33 +33,38 @@ import { SortableDirective } from 'src/app/shared/directives';
   styleUrls: ['./campaign.component.scss']
 })
 export class CampaignComponent implements OnInit, OnDestroy {
-  @ViewChildren(SortableDirective) headers2: QueryList<SortableDirective>;
+  @ViewChildren(SortableDirective) headers: QueryList<SortableDirective>;
 
   campaigns$: Observable<Campaign[]>;
   isCampaginLoading$: Observable<boolean>;
   isLoadingResults$: Observable<boolean>;
   errorMessage$: Observable<string>;
+  totalCampaigns = 0;
   paging: Page;
   pageSizes = pageSizes;
   defaultQuery = { limit: 5, offset: 1 };
   tableQuery: TableQuery;
-  totalItems$: Observable<number>;
+  model: NgbDateStruct;
+  totalCampaigns$: Observable<number>;
+  searchForm1 = new FormGroup({
+    fromdate: new FormControl(''),
+    status: new FormControl('')
+  });
   constructor(
     private store: Store<State>,
     private dialogService: DialogService,
-    private modalService: NgbModal,
-    private utilService: UtilServiceService,
-    private router: Router,
-    private route: ActivatedRoute
-  ) {}
+    private modalService: NgbModal
+  ) {
+    this.paging = new Page();
+  }
 
   ngOnInit() {
     this.tableQuery = this.defaultQuery;
-    this.campaigns$ = this.store.select(fromStaff.getAllCampaigns);
-    // this.totalItems$ = this.store.select(fromStaff.getTotalStaffs);
-    this.errorMessage$ = this.store.select(fromStaff.getErrorGtAllCmpMessage);
-    this.isLoadingResults$ = this.store.select(fromStaff.getIsCrtCmpLoading);
-    this.isCampaginLoading$ = this.store.select(fromStaff.getIsGtAllCmpLoading);
+    this.campaigns$ = this.store.select(getAllCampaigns);
+    this.totalCampaigns$ = this.store.select(getTotalCampaigns);
+    this.errorMessage$ = this.store.select(getErrorGtAllCmpMessage);
+    this.isLoadingResults$ = this.store.select(getIsCrtCmpLoading);
+    this.isCampaginLoading$ = this.store.select(getIsGtAllCmpLoading);
     this.fetchTableData(this.tableQuery);
   }
 
@@ -78,20 +90,49 @@ export class CampaignComponent implements OnInit, OnDestroy {
     );
   }
 
-  onSort(sort: SortEvent) {
-    this.paging.pageNumber = 1;
-    this.changeQuery({
-      ...this.utilService.getSortQuery(sort, this.headers2),
-      pageNumber: 1
+  openConfirmDeleteCampaign(campaignId) {
+    this.dialogService.confirmDeleteCampaign(
+      'Please confirm ...',
+      'Are you sure want to delete this campaign? This action can not be undone.',
+      campaignId
+    );
+  }
+  onSort({ orderBy, order }: SortEvent) {
+    this.headers.forEach(header => {
+      if (header.sortable !== orderBy) {
+        header.direction = '';
+      }
     });
+    console.log(order, orderBy);
+    if (order === '') {
+      this.tableQuery = {
+        ...this.tableQuery,
+        orderBy: null,
+        order: null
+      };
+      this.fetchTableData(_.pickBy(this.tableQuery, _.identity));
+    } else {
+      this.fetchTableData({
+        ...this.tableQuery,
+        orderBy: orderBy,
+        order: +order
+      });
+    }
   }
 
-  changeQuery(query: any = {}) {
-    let { queryParams } = this.route.snapshot;
-    queryParams = { ...queryParams, ...query };
-    this.router.navigate(['admin'], {
-      queryParams: _.pickBy(queryParams, _.identity)
-    });
+  search() {
+    if (this.searchForm1.get('fromdate').value !== '') {
+      this.fetchTableData({
+        ...this.tableQuery,
+        fromDate: this.searchForm1.get('fromdate').value.toString()
+      });
+    }
+    if (this.searchForm1.get('status').value !== '') {
+      this.fetchTableData({
+        ...this.tableQuery,
+        isCampaignActive: this.searchForm1.get('status').value
+      });
+    }
   }
 
   changePageSize(event) {
@@ -107,7 +148,7 @@ export class CampaignComponent implements OnInit, OnDestroy {
 
   fetchTableData(query: TableQuery) {
     query = { ...query, offset: (query.offset - 1) * query.limit };
-    this.store.dispatch(new fromStaff.GetCampaign(query));
+    this.store.dispatch(new GetCampaign(query));
   }
 
   ngOnDestroy() {

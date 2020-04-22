@@ -1,17 +1,3 @@
-<div class="input-group mx-5 mt-5">
-  <input
-    type="text"
-    class="form-control bg-light large"
-    placeholder="Search for..."
-    aria-label="Search"
-    [(ngModel)]="searchText"
-  />
-  <div class="input-group-append mr-7">
-    <button class="btn btn-primary" type="button">
-      <i class="fas fa-times fa-sm"></i>
-    </button>
-  </div>
-</div>
 <div class="container-fluid mt--7">
   <!-- Table -->
   <div class="row">
@@ -56,14 +42,18 @@
           <table class="table align-items-center table-flush">
             <thead class="thead-light">
               <tr>
-                <th style="text-align: center;">Id</th>
+                <th class="text-center">Id</th>
                 <th (sort)="onSort($event)" appSortable="firstName">
                   First Name
                 </th>
                 <th (sort)="onSort($event)" appSortable="lastName">
                   Last Name
                 </th>
-                <th>
+                <th
+                  class="text-center"
+                  (sort)="onSort($event)"
+                  appSortable="birthday"
+                >
                   Date of Birth
                 </th>
                 <th (sort)="onSort($event)" appSortable="email">Email</th>
@@ -71,9 +61,113 @@
               </tr>
             </thead>
             <tbody>
+              <tr [formGroup]="searchForm">
+                <td>Search :</td>
+                <td>
+                  <div class="input-group ">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"
+                        ><i
+                          class="ni ni-zoom-split-in"
+                          style="cursor: pointer;"
+                          (click)="search()"
+                        ></i
+                      ></span>
+                    </div>
+                    <input
+                      class="form-control"
+                      placeholder="First name ..."
+                      type="text"
+                      formControlName="firstname"
+                    />
+                  </div>
+                </td>
+                <td>
+                  <div class="input-group ">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"
+                        ><i
+                          class="ni ni-zoom-split-in"
+                          style="cursor: pointer;"
+                          (click)="search()"
+                        ></i
+                      ></span>
+                    </div>
+                    <input
+                      class="form-control"
+                      placeholder="Last name ..."
+                      type="text"
+                      formControlName="lastname"
+                    />
+                  </div>
+                </td>
+                <td>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"
+                        ><i
+                          class="ni ni-zoom-split-in"
+                          style="cursor: pointer;"
+                          (click)="search()"
+                        ></i
+                      ></span>
+                    </div>
+                    <input
+                      class="form-control"
+                      placeholder="From ... "
+                      name="fromdate"
+                      [(ngModel)]="model1"
+                      ngbDatepicker
+                      #d1="ngbDatepicker"
+                      formControlName="fromdate"
+                    />
+                    <div class="input-group-append">
+                      <button
+                        class="btn btn-outline fa fa-calendar"
+                        (click)="d1.toggle()"
+                        type="button"
+                      ></button>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"
+                        ><i
+                          class="ni ni-zoom-split-in"
+                          style="cursor: pointer;"
+                          (click)="search()"
+                        ></i
+                      ></span>
+                    </div>
+                    <input
+                      class="form-control"
+                      placeholder="To ..."
+                      name="todate"
+                      [(ngModel)]="model2"
+                      ngbDatepicker
+                      #d2="ngbDatepicker"
+                      formControlName="todate"
+                    />
+                    <div class="input-group-append">
+                      <button
+                        class="btn btn-outline fa fa-calendar"
+                        (click)="d2.toggle()"
+                        type="button"
+                      ></button>
+                    </div>
+                  </div>
+                </td>
+                <td></td>
+              </tr>
               <tr *ngFor="let staff of staffs$ | async">
-                <th scope="row" [routerLink]="[staff.id]">
-                  <div class="media align-items-center">
+                <td class="text-center" scope="row">
+                  <div
+                    class="media align-items-center"
+                    [routerLink]="[staff.id]"
+                    style="cursor: pointer;"
+                  >
                     <div class="media-body">
                       <a class="avatar avatar-sm" data-toggle="tooltip">
                         <img
@@ -90,14 +184,14 @@
                       <span class="mb-0 text-sm">{{ staff.id }}</span>
                     </div>
                   </div>
-                </th>
-                <td style="font-weight: bold;" [routerLink]="[staff.id]">
+                </td>
+                <td style="font-weight: bold;">
                   {{ staff.firstName || 'n/a' }}
                 </td>
-                <td>
+                <td [routerLink]="[staff.id]">
                   {{ staff.lastName || 'n/a' }}
                 </td>
-                <td>
+                <td class="text-center">
                   {{ staff.birthday | date: 'dd/MM/yyyy' || 'n/a' }}
                 </td>
                 <td style="text-transform: lowercase;">

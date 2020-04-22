@@ -13,28 +13,84 @@
 </div> -->
 <!-- Table -->
 <div class="container-fluid mt--7">
-  <div class="row">
-    <div class="col">
-      <div class="card shadow" *ngIf="campaign$ | async as campaign">
+  <div class="row" *ngIf="campaign$ | async as campaign">
+    <div class="col-xl-6 order-xl-1 mb-5 mb-xl-0">
+      <div class="card shadow">
         <div class="card-header boder-0">
-          <div class="col">
-            <h3 class="mb-0">
-              Participated employee list
-            </h3>
-            <span
-              class="badge badge-warning"
-              id="error-message"
-              *ngIf="errorMessage$ | async"
-              >{{ errorMessage$ | async }}</span
-            >
-          </div>
+          <h3>
+            Campaign information
+          </h3>
+          <span
+            class="badge badge-warning"
+            id="error-message"
+            *ngIf="errorMessage$ | async"
+            >{{ errorMessage$ | async }}</span
+          >
         </div>
         <app-loading *ngIf="isCampaignDetailLoading$ | async"></app-loading>
         <div class="table-responsive ">
           <table class="table align-items-center table-flush">
             <thead class="thead-light">
               <tr>
-                <th style="text-align: center;">Id</th>
+                <th class="text-center">Campaign Id</th>
+                <th class="text-center">Participants</th>
+                <th class="text-center">Voted</th>
+                <th class="text-center">Total</th>
+                <th class="text-center">Stars Limit</th>
+                <th class="text-center">Start Date</th>
+                <th class="text-center">End Date</th>
+                <th class="text-center">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-center">
+                  {{ campaign.campaign.id }}
+                </td>
+                <td class="text-center">{{ campaign.staffs.length }}</td>
+                <td class="text-center">
+                  {{ campaign.votedStars }}
+                </td>
+                <td class="text-center">
+                  {{ campaign.totalStars }}
+                </td>
+                <td class="text-center">
+                  {{ campaign.campaign.starLimitation }}
+                </td>
+                <td class="text-center">
+                  {{ campaign.campaign.startDate | date: 'dd/MM/yyyy' }}
+                </td>
+                <td class="text-center">
+                  {{ campaign.campaign.endDate | date: 'dd/MM/yyyy' }}
+                </td>
+                <td class="text-center">
+                  {{ campaign.campaign.isCampaignActive }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-6 order-xl-2 mb-5 mb-xl-0">
+      <div class="card shadow">
+        <div class="card-header boder-0">
+          <h3>
+            Participated employee list
+          </h3>
+          <span
+            class="badge badge-warning"
+            id="error-message"
+            *ngIf="errorMessage$ | async"
+            >{{ errorMessage$ | async }}</span
+          >
+        </div>
+        <app-loading *ngIf="isCampaignDetailLoading$ | async"></app-loading>
+        <div class="table-responsive ">
+          <table class="table align-items-center table-flush">
+            <thead class="thead-light">
+              <tr>
+                <th class="text-center">Staff Id</th>
                 <th appSortable="firstName" (sort)="onSort($event)">
                   First Name
                 </th>
@@ -43,18 +99,25 @@
                 </th>
                 <th>Position</th>
                 <th
-                  class="stars"
+                  class="text-center"
                   appSortable="firstName"
                   (sort)="onSort($event)"
                 >
-                  Voted/Received
+                  Voted
+                </th>
+                <th
+                  class="text-center"
+                  appSortable="firstName"
+                  (sort)="onSort($event)"
+                >
+                  Received
                 </th>
                 <th class="action">History</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let staff of campaign.staffs">
-                <th scope="row">
+                <td class="text-center">
                   <div class="media align-items-center">
                     <div class="media-body">
                       <a class="avatar avatar-sm" data-toggle="tooltip">
@@ -72,7 +135,7 @@
                       <span class="mb-0 text-sm">{{ staff.userId }}</span>
                     </div>
                   </div>
-                </th>
+                </td>
                 <td style="font-weight: bold; text-transform: capitalize;">
                   {{ staff.firstName || 'n/a' }}
                 </td>
@@ -86,7 +149,13 @@
                   class="text-center stars"
                   style="text-transform: capitalize;"
                 >
-                  {{ staff.votedStars }}/{{ staff.totalStarsReceived }}
+                  {{ staff.votedStars }}
+                </td>
+                <td
+                  class="text-center stars"
+                  style="text-transform: capitalize;"
+                >
+                  {{ staff.totalStarsReceived }}
                 </td>
                 <td class="action">
                   <button
@@ -102,7 +171,7 @@
             </tbody>
           </table>
         </div>
-        <div
+        <!-- <div
           class="d-flex justify-content-between"
           *ngIf="campaign.staffs.length"
         >
@@ -126,7 +195,7 @@
             [boundaryLinks]="true"
           >
           </ngb-pagination>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>

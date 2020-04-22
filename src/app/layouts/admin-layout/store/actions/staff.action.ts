@@ -41,7 +41,11 @@ export enum StaffActionsType {
 
   UPDATE_CAMPAIGN = '[Campaign] Update Campaign',
   UPDATE_CAMPAIGN_SUCCESS = '[Campaign] Update Campaign Success',
-  UPDATE_CAMPAIGN_FAILURE = '[Campaign] Update Campaign Failure'
+  UPDATE_CAMPAIGN_FAILURE = '[Campaign] Update Campaign Failure',
+
+  DELETE_CAMPAIGN = '[Campaign] Delete Campaign',
+  DELETE_CAMPAIGN_SUCCESS = '[Campaign] Delete Campaign Success',
+  DELETE_CAMPAIGN_FAILURE = '[Campaign] Delete Campaign Failure'
 }
 
 export class GetStaffs implements Action {
@@ -112,7 +116,7 @@ export class GetCampaignSuccess implements Action {
 }
 export class GetCampaignFail implements Action {
   public readonly type = StaffActionsType.GET_CAMPAIGN_FAILURE;
-  constructor(public payload: any) {}
+  constructor(public payload: Error) {}
 }
 
 export class GetCampaignDetail implements Action {
@@ -173,6 +177,21 @@ export class UpdateCampaignFail implements Action {
   constructor(public payload: any) {}
 }
 
+export class DeleteCampaign implements Action {
+  public readonly type = StaffActionsType.DELETE_CAMPAIGN;
+  constructor(public payload: { id: number }) {}
+}
+
+export class DeleteCampaignSuccess implements Action {
+  public readonly type = StaffActionsType.DELETE_CAMPAIGN_SUCCESS;
+  constructor(public payload: any) {}
+}
+
+export class DeleteCampaignFailure implements Action {
+  public readonly type = StaffActionsType.DELETE_CAMPAIGN_FAILURE;
+  constructor(public payload: any) {}
+}
+
 export type StaffActions =
   | GetStaffs
   | GetStaffsSuccess
@@ -200,4 +219,7 @@ export type StaffActions =
   | GetVotingHistoryFailure
   | UpdateCampaign
   | UpdateCampaignSuccess
-  | UpdateCampaignFail;
+  | UpdateCampaignFail
+  | DeleteCampaign
+  | DeleteCampaignSuccess
+  | DeleteCampaignFailure;

@@ -9,6 +9,7 @@ export interface StaffState {
   campaigns: Campaign[];
   selectedCampaign: Campaign;
   totalProfiles: number;
+  totalCampaigns: number;
   isGtStfLoading: boolean;
   isGtAllStfLoading: boolean;
   isCrtAccLoading: boolean;
@@ -18,6 +19,7 @@ export interface StaffState {
   isGtCmpLstStfLoading: boolean;
   isGtVtgHsrLoading: boolean;
   isUpdCmpLoading: boolean;
+  isDltCmpLoading: boolean;
   errorGtAllStfMessage: any;
   errorGtStfMessage: any;
   errorCrtAccMessage: any;
@@ -27,6 +29,7 @@ export interface StaffState {
   errorGtVtgHsrMessage: any;
   errorCrtCmpMessage: any;
   errorUpdCmpMessage: any;
+  errorDltCmpMessage: any;
 }
 
 const initialState: StaffState = {
@@ -35,6 +38,7 @@ const initialState: StaffState = {
   campaigns: [],
   selectedCampaign: null,
   totalProfiles: 0,
+  totalCampaigns: 0,
   isGtStfLoading: false,
   isGtAllStfLoading: false,
   isCrtAccLoading: false,
@@ -44,6 +48,7 @@ const initialState: StaffState = {
   isGtCmpLstStfLoading: false,
   isGtVtgHsrLoading: false,
   isUpdCmpLoading: false,
+  isDltCmpLoading: false,
   errorGtStfMessage: null,
   errorGtAllStfMessage: null,
   errorCrtAccMessage: null,
@@ -52,7 +57,8 @@ const initialState: StaffState = {
   errorGtCmpDtlMessage: null,
   errorGtCmpLstStfMessage: null,
   errorGtVtgHsrMessage: null,
-  errorUpdCmpMessage: null
+  errorUpdCmpMessage: null,
+  errorDltCmpMessage: null
 };
 
 export function staffReducer(
@@ -67,7 +73,6 @@ export function staffReducer(
         selectedStaff: null
       };
     case staffActions.StaffActionsType.GET_STAFFS_SUCCESS:
-      console.log(action.payload);
       return {
         ...state,
         staffs: action.payload.profiles,
@@ -151,7 +156,7 @@ export function staffReducer(
       return {
         ...state,
         campaigns: action.payload.campaigns,
-        // total: action.payload.total,
+        totalCampaigns: action.payload.totalCampaigns,
         isGtAllCmpLoading: false
       };
     case staffActions.StaffActionsType.GET_CAMPAIGN_FAILURE:
@@ -170,7 +175,7 @@ export function staffReducer(
       return {
         ...state,
         selectedCampaign: action.payload,
-        // total: action.payload.total,
+        totalCampaigns: action.payload.total,
         isGtCmpDtlLoading: false
       };
     case staffActions.StaffActionsType.GET_CAMPAIGN_DETAIL_FAILURE:
@@ -224,7 +229,7 @@ export function staffReducer(
         errorUpdCmpMessage: null
       };
     case staffActions.StaffActionsType.UPDATE_CAMPAIGN_SUCCESS:
-      const newCampaign = _.map(state.campaigns, item => {
+      const updateCampaign = _.map(state.campaigns, item => {
         if (item.id === action.payload.id) {
           return { id: item.id, ...action.payload.campaign };
         }
@@ -235,13 +240,34 @@ export function staffReducer(
         ...state,
         isUpdCmpLoading: false,
         selectedCampaign: action.payload,
-        campaigns: newCampaign
+        campaigns: updateCampaign
       };
     case staffActions.StaffActionsType.UPDATE_CAMPAIGN_FAILURE:
       return {
         ...state,
         isUpdCmpLoading: false,
         errorUpdCmpMessage: action.payload
+      };
+    case staffActions.StaffActionsType.DELETE_CAMPAIGN:
+      return {
+        ...state,
+        isDltCmpLoading: true,
+        errorDltCmpMessage: null
+      };
+    case staffActions.StaffActionsType.DELETE_CAMPAIGN_SUCCESS:
+      const deleteCampaigns = _.remove(state.campaigns, function(ojb) {
+        return ojb.id !== action.payload.id;
+      });
+      return {
+        ...state,
+        isDltCmpLoading: false,
+        campaigns: deleteCampaigns
+      };
+    case staffActions.StaffActionsType.DELETE_CAMPAIGN_FAILURE:
+      return {
+        ...state,
+        isDltCmpLoading: false,
+        errorDltCmpMessage: action.payload
       };
     default:
       return state;

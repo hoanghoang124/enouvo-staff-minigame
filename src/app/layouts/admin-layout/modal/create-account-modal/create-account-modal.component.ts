@@ -6,7 +6,11 @@ import { PositionTypes } from 'src/app/layouts/auth-layout/models/role.model';
 import { Cities } from 'src/app/layouts/auth-layout/models/city.model';
 import { Store } from '@ngrx/store';
 import { State } from 'src/app/layouts/auth-layout/store';
-import * as fromStaff from '../../store/index';
+import {
+  getErrorCrtAccMessage,
+  getIsCrtAccLoading
+} from '../../store/selectors/staff.selector';
+import { CreateAccount } from '../../store/actions/staff.action';
 
 @Component({
   selector: 'app-create-account-modal',
@@ -39,8 +43,8 @@ export class CreateAccountModalComponent implements OnInit {
       addressCity: ['', Validators.required],
       addressStreet: ['', Validators.required]
     });
-    this.errorMessage$ = this.store.select(fromStaff.getErrorCrtAccMessage);
-    this.isLoadingResults$ = this.store.select(fromStaff.getIsCrtAccLoading);
+    this.errorMessage$ = this.store.select(getErrorCrtAccMessage);
+    this.isLoadingResults$ = this.store.select(getIsCrtAccLoading);
   }
 
   onSubmit() {
@@ -48,9 +52,7 @@ export class CreateAccountModalComponent implements OnInit {
       console.log('Form invalid');
       return;
     } else {
-      this.store.dispatch(
-        new fromStaff.CreateAccount(this.createAccountForm.value)
-      );
+      this.store.dispatch(new CreateAccount(this.createAccountForm.value));
     }
   }
 

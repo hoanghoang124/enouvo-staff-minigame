@@ -11,6 +11,11 @@ export const getTotalStaffs = createSelector(
   state => state.totalProfiles
 );
 
+export const getTotalCampaigns = createSelector(
+  selectStaffState,
+  state => state.totalCampaigns
+);
+
 export const getAllStaffs = createSelector(
   selectStaffState,
   state => state.staffs
@@ -86,6 +91,11 @@ export const getIsUpdCmpLoading = createSelector(
   state => state.isUpdCmpLoading
 );
 
+export const getIsDltCmpLoading = createSelector(
+  selectStaffState,
+  state => state.isDltCmpLoading
+);
+
 export const getErrorGtAllStfMessage = createSelector(
   selectStaffState,
   state => state.errorGtAllStfMessage
@@ -129,4 +139,9 @@ export const getErrorVtgHsrMessage = createSelector(
 export const getErrorUpdCmpMessage = createSelector(
   selectStaffState,
   state => state.errorUpdCmpMessage
+);
+
+export const getErrorDltCmpMessage = createSelector(
+  selectStaffState,
+  state => state.errorDltCmpMessage
 );

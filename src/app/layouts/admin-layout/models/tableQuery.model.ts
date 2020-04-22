@@ -3,8 +3,11 @@ export interface TableQuery {
   offset?: number;
   orderBy?: any;
   order?: any;
-  filter?: any;
-  q?: any;
   page?: number;
-  perPage?: number;
+  firstName?: string;
+  lastName?: string;
+  fromDate?: string;
+  toDate?: string;
+  votedStars?: number;
+  isCampaignActive?: boolean;
 }

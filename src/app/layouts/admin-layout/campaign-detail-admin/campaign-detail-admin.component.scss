@@ -2,6 +2,10 @@
   padding-top: 150px;
 }
 
+th {
+  cursor: pointer;
+}
+
 td {
   text-transform: capitalize;
 }
@@ -10,6 +14,7 @@ table,
 .card-header,
 .card-footer {
   background-color: #ffffff;
+  border-radius: 5px;
 }
 
 th,

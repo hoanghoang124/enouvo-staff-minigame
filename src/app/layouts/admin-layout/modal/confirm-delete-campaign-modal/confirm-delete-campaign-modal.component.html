@@ -1,0 +1,21 @@
+<div class="modal-header">
+  <h1 class="modal-title">{{ title }}</h1>
+  <button type="button" class="close" aria-label="Close" (click)="dismiss()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  {{ message }}
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" (click)="decline()">
+    {{ btnCancelText }}
+  </button>
+  <button type="button" class="btn btn-danger" (click)="accept()">
+    {{ btnOkText }}
+    <i
+      class="fas fa-spinner fa-pulse spinner"
+      *ngIf="isLoadingResults$ | async"
+    ></i>
+  </button>
+</div>
