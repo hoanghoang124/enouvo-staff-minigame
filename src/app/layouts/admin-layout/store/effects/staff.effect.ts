@@ -177,8 +177,8 @@ export class StaffEffects {
           this.dialogService.closeDeleteCampaign();
           return new StaffActions.DeleteCampaignSuccess(res);
         }),
-        catchError(res => [
-          new StaffActions.DeleteCampaignFailure(res.error.message)
+        catchError(res1 => [
+          new StaffActions.DeleteCampaignFailure(res1.error.message)
         ])
       );
     })
