@@ -11,7 +11,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import { State } from '../../auth-layout/store';
-import { Campaign } from './../models/campaign.model';
 import { Page, pageSizes } from '../models/pagination.model';
 import { SortableDirective } from 'src/app/shared/directives';
 import { TableQuery } from '../models/tableQuery.model';
@@ -33,7 +32,7 @@ import * as _ from 'lodash';
 export class CampaignDetailAdminComponent implements OnInit, OnDestroy {
   @ViewChildren(SortableDirective) headers1: QueryList<SortableDirective>;
 
-  campaign$: Observable<Campaign>;
+  campaign$: Observable<any>;
   isCampaignDetailLoading$: Observable<boolean>;
   errorMessage$: Observable<string>;
   model: NgbDateStruct;
