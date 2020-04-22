@@ -6,18 +6,27 @@ import {
   OnDestroy
 } from '@angular/core';
 import { Observable } from 'rxjs';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store, select } from '@ngrx/store';
+
 import { State } from '../store/reducers';
 import { DialogService } from '../services/dialog.service';
 import { Staff } from '../models/staff.model';
+import { Campaign } from './../models/campaign.model';
 import { Page, pageSizes } from '../models/pagination.model';
 import { TableQuery } from '../models/tableQuery.model';
 import { SortableDirective } from 'src/app/shared/directives';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 // import { SortEvent } from 'src/app/shared/sort.model';
 // import { UtilServiceService } from '../services/util-service.service';
 // import { Router, ActivatedRoute } from '@angular/router';
-import * as fromStaff from '../store';
+import { GetCampaign, GetStaffs } from '../store/actions/staff.action';
+import {
+  getIsGtAllCmpLoading,
+  getAllCampaigns,
+  getErrorGtAllCmpMessage,
+  getIsGtAllStfLoading,
+  getAllStaffs
+} from '../store/selectors/staff.selector';
 import * as _ from 'lodash';
 
 @Component({
@@ -30,7 +39,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   getState: Observable<any>;
   errorMessage = null;
-  campaigns$: Observable<any>;
+  campaigns$: Observable<Campaign[]>;
   isCampaginLoading$: Observable<boolean>;
   errorMessage$: Observable<string>;
   paging: Page;
@@ -49,14 +58,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.store.dispatch(new fromStaff.GetCampaign());
-    this.campaigns$ = this.store.select(fromStaff.getAllCampaigns);
-    this.errorMessage$ = this.store.select(fromStaff.getErrorGtAllCmpMessage);
-    this.isCampaginLoading$ = this.store.select(fromStaff.getIsGtAllCmpLoading);
+    this.store.dispatch(new GetCampaign());
+    this.campaigns$ = this.store.select(getAllCampaigns);
+    this.errorMessage$ = this.store.select(getErrorGtAllCmpMessage);
+    this.isCampaginLoading$ = this.store.select(getIsGtAllCmpLoading);
 
-    this.store.dispatch(new fromStaff.GetStaffs());
-    this.isStaffLoading$ = this.store.select(fromStaff.getIsGtAllStfLoading);
-    this.stafflist$ = this.store.pipe(select(fromStaff.getAllStaffs));
+    this.store.dispatch(new GetStaffs());
+    this.isStaffLoading$ = this.store.select(getIsGtAllStfLoading);
+    this.stafflist$ = this.store.pipe(select(getAllStaffs));
     this.stafflist$.subscribe(res => {
       this.staffs = res as Staff[];
     });
@@ -102,7 +111,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   // fetchTableData(query: TableQuery) {
   //   query = { ...query, offset: (query.offset - 1) * query.limit };
-  //   this.store.dispatch(new fromStaff.GetCampaign(query));
+  //   this.store.dispatch(new  GetCampaign(query));
   // }
 
   ngOnDestroy() {

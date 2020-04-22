@@ -1,8 +1,9 @@
-import { Observable } from 'rxjs';
 import { Component, OnInit, Input } from '@angular/core';
-import { State } from 'src/app/layouts/auth-layout/store';
-import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Store } from '@ngrx/store';
+
+import { State } from 'src/app/layouts/auth-layout/store';
 import { DeleteCampaign } from '../../store/actions/staff.action';
 import { getIsDltCmpLoading } from '../../store/selectors/staff.selector';
 

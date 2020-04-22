@@ -5,10 +5,10 @@ export interface Staff {
   lastName: string;
   avatarUrl: string;
   email: string;
+  scope: string;
   quote: string;
   birthday: string;
   phone: number;
   addressStreet: string;
   addressCity: string;
-  position: string;
 }

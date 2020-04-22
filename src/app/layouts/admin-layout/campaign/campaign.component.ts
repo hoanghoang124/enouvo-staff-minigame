@@ -1,14 +1,22 @@
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Store } from '@ngrx/store';
+
 import { pageSizes, Page } from '../models/pagination.model';
 import { TableQuery } from '../models/tableQuery.model';
 import { Campaign } from '../models/campaign.model';
 import { State } from '../../auth-layout/store';
 import { DialogService } from '../services/dialog.service';
-import * as fromStaff from '../store';
 import * as _ from 'lodash';
+import {
+  getErrorGtAllCmpMessage,
+  getAllCampaigns,
+  getTotalCampaigns,
+  getIsCrtCmpLoading,
+  getIsGtAllCmpLoading
+} from '../store/selectors/staff.selector';
+import { GetCampaign } from '../store/actions/staff.action';
 
 @Component({
   selector: 'app-campaign',
@@ -26,6 +34,7 @@ export class CampaignComponent implements OnInit, OnDestroy {
   defaultQuery = { limit: 5, offset: 1 };
   tableQuery: TableQuery;
   totalCampaigns$: Observable<number>;
+
   constructor(
     private store: Store<State>,
     private dialogService: DialogService,
@@ -36,11 +45,11 @@ export class CampaignComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.tableQuery = this.defaultQuery;
-    this.campaigns$ = this.store.select(fromStaff.getAllCampaigns);
-    this.totalCampaigns$ = this.store.select(fromStaff.getTotalCampaigns);
-    this.errorMessage$ = this.store.select(fromStaff.getErrorGtAllCmpMessage);
-    this.isLoadingResults$ = this.store.select(fromStaff.getIsCrtCmpLoading);
-    this.isCampaginLoading$ = this.store.select(fromStaff.getIsGtAllCmpLoading);
+    this.campaigns$ = this.store.select(getAllCampaigns);
+    this.totalCampaigns$ = this.store.select(getTotalCampaigns);
+    this.errorMessage$ = this.store.select(getErrorGtAllCmpMessage);
+    this.isLoadingResults$ = this.store.select(getIsCrtCmpLoading);
+    this.isCampaginLoading$ = this.store.select(getIsGtAllCmpLoading);
     this.fetchTableData(this.tableQuery);
   }
 
@@ -87,7 +96,7 @@ export class CampaignComponent implements OnInit, OnDestroy {
 
   fetchTableData(query: TableQuery) {
     query = { ...query, offset: (query.offset - 1) * query.limit };
-    this.store.dispatch(new fromStaff.GetCampaign(query));
+    this.store.dispatch(new GetCampaign(query));
   }
 
   ngOnDestroy() {

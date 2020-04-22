@@ -1,13 +1,13 @@
 import { Store } from '@ngrx/store';
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { State } from 'src/app/layouts/auth-layout/store';
 import {
   HttpClient,
   HttpEventType,
   HttpRequest,
   HttpResponse
 } from '@angular/common/http';
+import { State } from 'src/app/layouts/auth-layout/store';
 
 @Component({
   selector: 'app-upload-csv-modal',

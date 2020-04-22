@@ -64,7 +64,9 @@
         <td style="text-transform: capitalize">
           {{ staff.lastName || 'n/a' }}
         </td>
-        <td class="position text-center">{{ staff.position || 'n/a' }}</td>
+        <td class="position text-center" style="text-transform: capitalize;">
+          {{ staff.scope || 'n/a' }}
+        </td>
         <td class="voting">
           <input
             type="number"

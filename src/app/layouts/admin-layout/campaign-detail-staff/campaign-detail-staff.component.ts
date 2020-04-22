@@ -5,18 +5,18 @@ import {
   QueryList,
   Input
 } from '@angular/core';
-import { Staff } from '../models/staff.model';
-import { Page, pageSizes } from '../models/pagination.model';
-// import { State } from '../../auth-layout/store';
-import { SortableDirective } from 'src/app/shared/directives';
 import { Observable } from 'rxjs';
 import { NgbDateStruct, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { TableQuery } from '../models/tableQuery.model';
 import { Store } from '@ngrx/store';
 // import { ActivatedRoute } from '@angular/router';
-// import { UtilServiceService } from '../services/util-service.service';
+
+// import { State } from '../../auth-layout/store';
 // import { SortEvent } from 'src/app/shared/sort.model';
-import * as _ from 'lodash';
+// import { UtilServiceService } from '../services/util-service.service';
+import { Staff } from '../models/staff.model';
+import { Page, pageSizes } from '../models/pagination.model';
+import { SortableDirective } from 'src/app/shared/directives';
+import { TableQuery } from '../models/tableQuery.model';
 import { State } from '../store/reducers';
 import { GetCampaignListStaff } from '../store/actions/staff.action';
 import {
@@ -25,6 +25,7 @@ import {
   getTotalStaffs,
   getIsCmpLstStfLoading
 } from '../store/selectors/staff.selector';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-campaign-detail-staff',
@@ -47,6 +48,7 @@ export class CampaignDetailStaffComponent implements OnInit {
   tableQuery: TableQuery;
   totalItems$: Observable<number>;
   searchText: string;
+
   constructor(
     private store: Store<State>,
     private activeModal: NgbActiveModal // private route: ActivatedRoute // private utilService: UtilServiceService

@@ -1,9 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { State } from 'src/app/layouts/auth-layout/store';
 import { Observable } from 'rxjs';
-import { Staff } from '../../models/staff.model';
-import { Store } from '@ngrx/store';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Store } from '@ngrx/store';
+
+import { State } from 'src/app/layouts/auth-layout/store';
+import { Staff } from '../../models/staff.model';
 import { GetStaff } from '../../store/actions/staff.action';
 import {
   getStaff,
@@ -20,6 +21,7 @@ export class UserProfileModalComponent implements OnInit {
 
   staff$: Observable<Staff>;
   isProfileLoading$: Observable<boolean>;
+
   constructor(
     private store: Store<State>,
     private activeModal: NgbActiveModal

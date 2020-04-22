@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { State } from 'src/app/layouts/auth-layout/store';
 import { Observable } from 'rxjs';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+
+import { State } from 'src/app/layouts/auth-layout/store';
 import {
   getErrorCrtCmpMessage,
   getIsCrtCmpLoading
@@ -19,6 +20,7 @@ export class CreateCampaignModalComponent implements OnInit {
   errorMessage$: Observable<string>;
   isLoadingResults$: Observable<boolean>;
   createCampaignForm: FormGroup;
+
   constructor(
     private store: Store<State>,
     private formBuilder: FormBuilder,
