@@ -140,11 +140,11 @@ export class StaffEffects {
     map((action: StaffActions.GetVotingHistory) => action.payload),
     switchMap(res => {
       return this.staffservice.getVotingHistory(res.id, res.userId).pipe(
-        map(res => {
-          return new StaffActions.GetVotingHistorySuccess(res.votingHistory);
+        map(res1 => {
+          return new StaffActions.GetVotingHistorySuccess(res1.votingHistory);
         }),
-        catchError(res => [
-          new StaffActions.GetVotingHistoryFailure(res.error.message)
+        catchError(res2 => [
+          new StaffActions.GetVotingHistoryFailure(res2.error.message)
         ])
       );
     })
@@ -160,8 +160,8 @@ export class StaffEffects {
           this.dialogService.closeUpdateCampaign();
           return new StaffActions.UpdateCampaignSuccess(res);
         }),
-        catchError(res => [
-          new StaffActions.UpdateCampaignFail(res.error.message)
+        catchError(res1 => [
+          new StaffActions.UpdateCampaignFail(res1.error.message)
         ])
       );
     })

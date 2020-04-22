@@ -1,73 +1,3 @@
-<div class="row mx-4 my-4" [formGroup]="searchForm">
-  <div class="col-md-3">
-    <div class="form-group">
-      <div class="input-group mb-4">
-        <div class="input-group-prepend">
-          <span class="input-group-text"
-            ><i class="ni ni-zoom-split-in" (click)="search()"></i
-          ></span>
-        </div>
-        <input
-          class="form-control"
-          placeholder="Search for first name..."
-          type="text"
-          formControlName="firstname"
-        />
-      </div>
-    </div>
-  </div>
-  <div class="col-md-3">
-    <div class="form-group">
-      <div class="input-group mb-4">
-        <div class="input-group-prepend">
-          <span class="input-group-text"
-            ><i class="ni ni-zoom-split-in" (click)="search()"></i
-          ></span>
-        </div>
-        <input
-          class="form-control"
-          placeholder="Search for last name..."
-          type="text"
-          formControlName="lastname"
-        />
-      </div>
-    </div>
-  </div>
-  <div class="col-md-3">
-    <div class="form-group">
-      <div class="input-group mb-4">
-        <div class="input-group-prepend">
-          <span class="input-group-text"
-            ><i class="ni ni-zoom-split-in" (click)="search()"></i
-          ></span>
-        </div>
-        <input
-          class="form-control"
-          placeholder="Search birthday from..."
-          type="text"
-          formControlName="fromdate"
-        />
-      </div>
-    </div>
-  </div>
-  <div class="col-md-3">
-    <div class="form-group">
-      <div class="input-group mb-4">
-        <div class="input-group-prepend">
-          <span class="input-group-text"
-            ><i class="ni ni-zoom-split-in" (click)="search()"></i
-          ></span>
-        </div>
-        <input
-          class="form-control"
-          placeholder="Search birthday to..."
-          type="text"
-          formControlName="todate"
-        />
-      </div>
-    </div>
-  </div>
-</div>
 <div class="container-fluid mt--7">
   <!-- Table -->
   <div class="row">
@@ -131,9 +61,113 @@
               </tr>
             </thead>
             <tbody>
+              <tr [formGroup]="searchForm">
+                <td>Search :</td>
+                <td>
+                  <div class="input-group ">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"
+                        ><i
+                          class="ni ni-zoom-split-in"
+                          style="cursor: pointer;"
+                          (click)="search()"
+                        ></i
+                      ></span>
+                    </div>
+                    <input
+                      class="form-control"
+                      placeholder="First name ..."
+                      type="text"
+                      formControlName="firstname"
+                    />
+                  </div>
+                </td>
+                <td>
+                  <div class="input-group ">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"
+                        ><i
+                          class="ni ni-zoom-split-in"
+                          style="cursor: pointer;"
+                          (click)="search()"
+                        ></i
+                      ></span>
+                    </div>
+                    <input
+                      class="form-control"
+                      placeholder="Last name ..."
+                      type="text"
+                      formControlName="lastname"
+                    />
+                  </div>
+                </td>
+                <td>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"
+                        ><i
+                          class="ni ni-zoom-split-in"
+                          style="cursor: pointer;"
+                          (click)="search()"
+                        ></i
+                      ></span>
+                    </div>
+                    <input
+                      class="form-control"
+                      placeholder="From ... "
+                      name="fromdate"
+                      [(ngModel)]="model1"
+                      ngbDatepicker
+                      #d1="ngbDatepicker"
+                      formControlName="fromdate"
+                    />
+                    <div class="input-group-append">
+                      <button
+                        class="btn btn-outline fa fa-calendar"
+                        (click)="d1.toggle()"
+                        type="button"
+                      ></button>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"
+                        ><i
+                          class="ni ni-zoom-split-in"
+                          style="cursor: pointer;"
+                          (click)="search()"
+                        ></i
+                      ></span>
+                    </div>
+                    <input
+                      class="form-control"
+                      placeholder="To ..."
+                      name="todate"
+                      [(ngModel)]="model2"
+                      ngbDatepicker
+                      #d2="ngbDatepicker"
+                      formControlName="todate"
+                    />
+                    <div class="input-group-append">
+                      <button
+                        class="btn btn-outline fa fa-calendar"
+                        (click)="d2.toggle()"
+                        type="button"
+                      ></button>
+                    </div>
+                  </div>
+                </td>
+                <td></td>
+              </tr>
               <tr *ngFor="let staff of staffs$ | async">
-                <td class="text-center" scope="row" [routerLink]="[staff.id]">
-                  <div class="media align-items-center">
+                <td class="text-center" scope="row">
+                  <div
+                    class="media align-items-center"
+                    [routerLink]="[staff.id]"
+                    style="cursor: pointer;"
+                  >
                     <div class="media-body">
                       <a class="avatar avatar-sm" data-toggle="tooltip">
                         <img
@@ -151,19 +185,16 @@
                     </div>
                   </div>
                 </td>
-                <td style="font-weight: bold;" [routerLink]="[staff.id]">
+                <td style="font-weight: bold;">
                   {{ staff.firstName || 'n/a' }}
                 </td>
                 <td [routerLink]="[staff.id]">
                   {{ staff.lastName || 'n/a' }}
                 </td>
-                <td class="text-center" [routerLink]="[staff.id]">
+                <td class="text-center">
                   {{ staff.birthday | date: 'dd/MM/yyyy' || 'n/a' }}
                 </td>
-                <td
-                  style="text-transform: lowercase;"
-                  [routerLink]="[staff.id]"
-                >
+                <td style="text-transform: lowercase;">
                   {{ staff.email || 'n/a' }}
                 </td>
                 <td class="action" (click)="openConfirmationDialog(staff.id)">
