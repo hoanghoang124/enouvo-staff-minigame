@@ -34,7 +34,8 @@
               <tr>
                 <th class="text-center">Campaign Id</th>
                 <th class="text-center">Participants</th>
-                <th class="text-center">Voted / Total</th>
+                <th class="text-center">Voted</th>
+                <th class="text-center">Total</th>
                 <th class="text-center">Stars Limit</th>
                 <th class="text-center">Start Date</th>
                 <th class="text-center">End Date</th>
@@ -48,7 +49,10 @@
                 </td>
                 <td class="text-center">{{ campaign.staffs.length }}</td>
                 <td class="text-center">
-                  {{ campaign.votedStars }} / {{ campaign.totalStars }}
+                  {{ campaign.votedStars }}
+                </td>
+                <td class="text-center">
+                  {{ campaign.totalStars }}
                 </td>
                 <td class="text-center">
                   {{ campaign.campaign.starLimitation }}
@@ -99,7 +103,14 @@
                   appSortable="firstName"
                   (sort)="onSort($event)"
                 >
-                  Voted / Received
+                  Voted
+                </th>
+                <th
+                  class="text-center"
+                  appSortable="firstName"
+                  (sort)="onSort($event)"
+                >
+                  Received
                 </th>
                 <th class="action">History</th>
               </tr>
@@ -138,7 +149,12 @@
                   class="text-center stars"
                   style="text-transform: capitalize;"
                 >
-                  {{ staff.votedStars }} /
+                  {{ staff.votedStars }}
+                </td>
+                <td
+                  class="text-center stars"
+                  style="text-transform: capitalize;"
+                >
                   {{ staff.totalStarsReceived }}
                 </td>
                 <td class="action">
