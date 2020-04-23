@@ -33,7 +33,7 @@ import * as _ from 'lodash';
   styleUrls: ['./tables.component.scss']
 })
 export class TablesComponent implements OnInit, OnDestroy {
-  @ViewChildren(SortableDirective) headers1: QueryList<SortableDirective>;
+  @ViewChildren(SortableDirective) headers: QueryList<SortableDirective>;
 
   staffs$: Observable<Staff[]>;
   isStaffLoading$: Observable<boolean>;
@@ -101,7 +101,7 @@ export class TablesComponent implements OnInit, OnDestroy {
   }
 
   onSort({ orderBy, order }: SortEvent) {
-    this.headers1.forEach(header => {
+    this.headers.forEach(header => {
       if (header.sortable !== orderBy) {
         header.direction = '';
       }

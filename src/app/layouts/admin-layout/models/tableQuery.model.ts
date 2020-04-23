@@ -8,4 +8,6 @@ export interface TableQuery {
   lastName?: string;
   fromDate?: string;
   toDate?: string;
+  votedStars?: number;
+  isCampaignActive?: boolean;
 }
