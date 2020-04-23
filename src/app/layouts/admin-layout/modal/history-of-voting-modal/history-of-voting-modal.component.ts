@@ -16,13 +16,14 @@ import { pageSizes, Page } from '../../models/pagination.model';
 import { SortableDirective } from 'src/app/shared/directives/sortable.directive';
 import { Observable } from 'rxjs';
 import { TableQuery } from '../../models/tableQuery.model';
-import { GetVotingHistory } from '../../store/actions/staff.action';
-import {
-  getVotingHistory,
-  getErrorVtgHsrMessage,
-  getIsVtgHsrLoading
-} from '../../store/selectors/staff.selector';
+
 import * as _ from 'lodash';
+import { GetVotingHistory } from '../../store/actions/campaign.action';
+import {
+  getErrorVtgHsrMessage,
+  getIsVtgHsrLoading,
+  getVotingHistory
+} from '../../store/selectors/campaign.selector';
 @Component({
   selector: 'app-history-of-voting-modal',
   templateUrl: './history-of-voting-modal.component.html',

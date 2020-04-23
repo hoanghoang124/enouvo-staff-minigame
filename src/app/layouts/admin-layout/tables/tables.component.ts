@@ -22,7 +22,7 @@ import {
   getAllStaffs,
   getTotalStaffs,
   getIsGtAllStfLoading,
-  getIsCrtAccLoading
+  getIsCrtStfLoading
 } from '../store/selectors/staff.selector';
 import { GetStaffs } from '../store/actions/staff.action';
 import * as _ from 'lodash';
@@ -72,7 +72,7 @@ export class TablesComponent implements OnInit, OnDestroy {
     this.totalItems$ = this.store.select(getTotalStaffs);
     this.errorMessage$ = this.store.select(getErrorGtAllStfMessage);
     this.isStaffLoading$ = this.store.select(getIsGtAllStfLoading);
-    this.isLoadingResults$ = this.store.select(getIsCrtAccLoading);
+    this.isLoadingResults$ = this.store.select(getIsCrtStfLoading);
     this.fetchTableData(this.tableQuery);
   }
 

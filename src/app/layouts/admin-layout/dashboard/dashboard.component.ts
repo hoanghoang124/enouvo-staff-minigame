@@ -19,15 +19,19 @@ import { SortableDirective } from 'src/app/shared/directives';
 // import { SortEvent } from 'src/app/shared/sort.model';
 // import { UtilServiceService } from '../services/util-service.service';
 // import { Router, ActivatedRoute } from '@angular/router';
-import { GetCampaign, GetStaffs } from '../store/actions/staff.action';
+
+import * as _ from 'lodash';
+import { GetCampaign } from '../store/actions/campaign.action';
 import {
-  getIsGtAllCmpLoading,
-  getAllCampaigns,
   getErrorGtAllCmpMessage,
+  getAllCampaigns,
+  getIsGtAllCmpLoading
+} from '../store/selectors/campaign.selector';
+import { GetStaffs } from '../store/actions/staff.action';
+import {
   getIsGtAllStfLoading,
   getAllStaffs
 } from '../store/selectors/staff.selector';
-import * as _ from 'lodash';
 
 @Component({
   selector: 'app-dashboard',

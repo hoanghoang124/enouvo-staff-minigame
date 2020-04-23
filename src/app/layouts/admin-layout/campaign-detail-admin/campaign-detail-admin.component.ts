@@ -7,24 +7,22 @@ import {
 } from '@angular/core';
 import { Observable } from 'rxjs';
 import { NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import { State } from '../../auth-layout/store';
-import { Campaign } from './../models/campaign.model';
 import { Page, pageSizes } from '../models/pagination.model';
 import { SortableDirective } from 'src/app/shared/directives';
 import { TableQuery } from '../models/tableQuery.model';
-import { UtilServiceService } from '../services/util-service.service';
 import { DialogService } from '../services/dialog.service';
-import { SortEvent } from 'src/app/shared/sort.model';
-import { GetCampaignDetail } from '../store/actions/staff.action';
+
+import * as _ from 'lodash';
+import { GetCampaignDetail } from '../store/actions/campaign.action';
 import {
   getIsCmpDtlLoading,
   getCampaignDetail,
   getErrorGtCmpDtlMessage
-} from '../store/selectors/staff.selector';
-import * as _ from 'lodash';
+} from '../store/selectors/campaign.selector';
 @Component({
   selector: 'app-campaign-detail-admin',
   templateUrl: './campaign-detail-admin.component.html',
@@ -33,7 +31,7 @@ import * as _ from 'lodash';
 export class CampaignDetailAdminComponent implements OnInit, OnDestroy {
   @ViewChildren(SortableDirective) headers1: QueryList<SortableDirective>;
 
-  campaign$: Observable<Campaign>;
+  campaign$: Observable<any>;
   isCampaignDetailLoading$: Observable<boolean>;
   errorMessage$: Observable<string>;
   model: NgbDateStruct;
@@ -46,9 +44,7 @@ export class CampaignDetailAdminComponent implements OnInit, OnDestroy {
 
   constructor(
     private store: Store<State>,
-    private router: Router,
     private route: ActivatedRoute,
-    private utilService: UtilServiceService,
     private modalService: NgbModal,
     private dialogService: DialogService
   ) {}
@@ -59,26 +55,11 @@ export class CampaignDetailAdminComponent implements OnInit, OnDestroy {
       this.store.dispatch(new GetCampaignDetail(params.id));
     });
     this.campaign$ = this.store.select(getCampaignDetail);
+
     // this.totalItems$ = this.store.select(  getTotalStaffs);
     this.errorMessage$ = this.store.select(getErrorGtCmpDtlMessage);
     this.isCampaignDetailLoading$ = this.store.select(getIsCmpDtlLoading);
     // this.fetchTableData(this.tableQuery);
-  }
-
-  onSort(sort: SortEvent) {
-    this.paging.pageNumber = 1;
-    this.changeQuery({
-      ...this.utilService.getSortQuery(sort, this.headers1),
-      pageNumber: 1
-    });
-  }
-
-  changeQuery(query: any = {}) {
-    let { queryParams } = this.route.snapshot;
-    queryParams = { ...queryParams, ...query };
-    this.router.navigate(['campaign'], {
-      queryParams: _.pickBy(queryParams, _.identity)
-    });
   }
 
   changePageSize(event) {

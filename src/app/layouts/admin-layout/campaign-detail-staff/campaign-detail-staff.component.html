@@ -1,13 +1,23 @@
-<!-- Table -->
-<div class="modal-header border-0">
-  <h3 class="modal-title">
-    Employees list
-  </h3>
-  <button type="button" class="close" aria-label="Close" (click)="dismiss()">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-<div class="input-group mx-5 my-4">
+<div class="row" *ngIf="campaign$ | async as campaign">
+  <div class="col">
+    <div class="modal-header border-0">
+      <h3 class="modal-title">
+        Employees list
+      </h3>
+      <button
+        type="button"
+        class="close"
+        aria-label="Close"
+        (click)="dismiss()"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-header">
+      <h4 class="modal-title">Star Limit: {{ starLimit$ | async }}</h4>
+      <h4 class="modal-title">Star Left: {{ starLeft$ | async }}</h4>
+    </div>
+    <!-- <div class="input-group mx-5 my-4">
   <input
     type="text"
     class="form-control bg-light large"
@@ -19,91 +29,96 @@
       <i class="fas fa-search fa-sm"></i>
     </button>
   </div>
+</div> -->
+    <app-loading *ngIf="isCampaignLoading$ | async"></app-loading>
+    <div class="table-responsive">
+      <table class="table align-items-center table-flush">
+        <thead class="thead-light">
+          <tr>
+            <th style="text-align: center;">Id</th>
+            <th>
+              First Name
+            </th>
+            <th>
+              Last Name
+            </th>
+            <th class="text-center">Position</th>
+            <th class="text-center">Voted Star</th>
+            <th class="action text-center">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let staff of campaign.staffs">
+            <td scope="row">
+              <div class="media align-items-center">
+                <div class="media-body">
+                  <a class="avatar avatar-sm" data-toggle="tooltip">
+                    <img
+                      alt="Avatar"
+                      src="{{
+                        staff.avatarUrl ||
+                          '../../../../../../assets/img/avatar/IMG_1171.JPG'
+                      }}"
+                      class="rounded-circle"
+                    />
+                  </a>
+                </div>
+                <div class="media-body">
+                  <span class="mb-0 text-sm">{{ staff.id }}</span>
+                </div>
+              </div>
+            </td>
+            <td style="font-weight: bold; text-transform: capitalize;">
+              {{ staff.firstName || 'n/a' }}
+            </td>
+            <td style="text-transform: capitalize">
+              {{ staff.lastName || 'n/a' }}
+            </td>
+            <td
+              class="position text-center"
+              style="text-transform: capitalize;"
+            >
+              {{ staff.scope || 'n/a' }}
+            </td>
+            <td class="text-center">
+              {{ staff.votedStars }}
+            </td>
+            <td class="action  text-center">
+              <button class="btn btn-sm btn-success" (click)="Vote(staff.id)">
+                Vote
+              </button>
+              <button
+                class="btn btn-sm btn-secondary"
+                (click)="Devote(staff.id)"
+              >
+                Devote
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- <div class="d-flex justify-content-between" *ngIf="(staffs$ | async).length">
+  <select
+    class="custom-select"
+    style="width: auto"
+    name="pageSize"
+    [value]="tableQuery.limit"
+    (change)="changePageSize($event)"
+  >
+    <option *ngFor="let item of pageSizes" [ngValue]="item">
+      {{ item }}
+    </option>
+  </select>
+  <ngb-pagination
+    [pageSize]="tableQuery.limit"
+    [collectionSize]="totalItems$ | async"
+    [page]="tableQuery.offset"
+    (pageChange)="changePage($event)"
+    class="pagination-sm"
+    [boundaryLinks]="true"
+  >
+  </ngb-pagination>
+</div> -->
+  </div>
 </div>
-<app-loading *ngIf="isStaffLoading$ | async"></app-loading>
-<div class="table-responsive">
-  <table class="table align-items-center table-flush">
-    <thead class="thead-light">
-      <tr>
-        <th style="text-align: center;">Id</th>
-        <th appSortable="firstName">
-          First Name
-        </th>
-        <th appSortable="firstName">
-          Last Name
-        </th>
-        <th class="text-center">Position</th>
-        <th class="text-center">Voting</th>
-        <th class="action text-center">Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let staff of staffs$ | async">
-        <td scope="row">
-          <div class="media align-items-center">
-            <div class="media-body">
-              <a class="avatar avatar-sm" data-toggle="tooltip">
-                <img
-                  alt="Avatar"
-                  src="{{
-                    staff.avatarUrl ||
-                      '../../../../../../assets/img/avatar/IMG_1171.JPG'
-                  }}"
-                  class="rounded-circle"
-                />
-              </a>
-            </div>
-            <div class="media-body">
-              <span class="mb-0 text-sm">{{ staff.id }}</span>
-            </div>
-          </div>
-        </td>
-        <td style="font-weight: bold; text-transform: capitalize;">
-          {{ staff.firstName || 'n/a' }}
-        </td>
-        <td style="text-transform: capitalize">
-          {{ staff.lastName || 'n/a' }}
-        </td>
-        <td class="position text-center" style="text-transform: capitalize;">
-          {{ staff.scope || 'n/a' }}
-        </td>
-        <td class="voting">
-          <input
-            type="number"
-            min="0"
-            class="form-control form-control-alternative"
-            placeholder="Enter stars here"
-          />
-        </td>
-        <td class="action  text-center">
-          <button class="btn btn-sm btn-primary">Submit</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-<!-- <div
-          class="d-flex justify-content-between"
-          *ngIf="(staffs$ | async).length"
-        >
-          <select
-            class="custom-select"
-            style="width: auto"
-            name="pageSize"
-            [value]="tableQuery.limit"
-            (change)="changePageSize($event)"
-          >
-            <option *ngFor="let item of pageSizes" [ngValue]="item">
-              {{ item }}
-            </option>
-          </select>
-          <ngb-pagination
-            [pageSize]="tableQuery.limit"
-            [collectionSize]="totalItems$ | async"
-            [page]="tableQuery.offset"
-            (pageChange)="changePage($event)"
-            class="pagination-sm"
-            [boundaryLinks]="true"
-          >
-          </ngb-pagination>
-        </div> -->

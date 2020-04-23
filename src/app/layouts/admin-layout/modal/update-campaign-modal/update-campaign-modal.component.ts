@@ -9,8 +9,8 @@ import { CampaignStates } from '../../models/campaign-states.model';
 import {
   getErrorUpdCmpMessage,
   getIsUpdCmpLoading
-} from '../../store/selectors/staff.selector';
-import { UpdateCampaign } from '../../store/actions/staff.action';
+} from '../../store/selectors/campaign.selector';
+import { UpdateCampaign } from '../../store/actions/campaign.action';
 
 @Component({
   selector: 'app-update-campaign-modal',

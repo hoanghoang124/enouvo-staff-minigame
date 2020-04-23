@@ -15,8 +15,8 @@ import {
   getTotalCampaigns,
   getIsCrtCmpLoading,
   getIsGtAllCmpLoading
-} from '../store/selectors/staff.selector';
-import { GetCampaign } from '../store/actions/staff.action';
+} from '../store/selectors/campaign.selector';
+import { GetCampaign } from '../store/actions/campaign.action';
 
 @Component({
   selector: 'app-campaign',

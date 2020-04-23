@@ -8,8 +8,8 @@ import { State } from 'src/app/layouts/auth-layout/store';
 import {
   getErrorCrtCmpMessage,
   getIsCrtCmpLoading
-} from '../../store/selectors/staff.selector';
-import { CreateCampaign } from '../../store/actions/staff.action';
+} from '../../store/selectors/campaign.selector';
+import { CreateCampaign } from '../../store/actions/campaign.action';
 
 @Component({
   selector: 'app-create-campaign-modal',
