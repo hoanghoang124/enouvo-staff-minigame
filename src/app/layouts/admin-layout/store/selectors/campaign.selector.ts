@@ -71,6 +71,11 @@ export const getIsCmpDtlLoading = createSelector(
   state => state.isGtCmpDtlLoading
 );
 
+export const getIsCmpDtlVtgLoading = createSelector(
+  selectCampaignState,
+  state => state.isGtCmpDtlVtgLoading
+);
+
 export const getIsCmpLstStfLoading = createSelector(
   selectCampaignState,
   state => state.isGtCmpLstStfLoading
@@ -114,6 +119,11 @@ export const getErrorGtAllCmpMessage = createSelector(
 export const getErrorGtCmpDtlMessage = createSelector(
   selectCampaignState,
   state => state.errorGtCmpDtlMessage
+);
+
+export const getErrorGtCmpDtlVtgMessage = createSelector(
+  selectCampaignState,
+  state => state.errorGtCmdDtlVtgMessage
 );
 
 export const getErrorGtCmpLstStf = createSelector(

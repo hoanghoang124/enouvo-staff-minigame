@@ -14,8 +14,10 @@
       </button>
     </div>
     <div class="modal-header">
-      <h4 class="modal-title">Star Limit: {{ starLimit$ | async }}</h4>
-      <h4 class="modal-title">Star Left: {{ starLeft$ | async }}</h4>
+      <h4 class="modal-title ">
+        Star Limit: {{ starLimit$ | async }} | Star Left:
+        {{ starLeft$ | async }}
+      </h4>
     </div>
     <!-- <div class="input-group mx-5 my-4">
   <input
@@ -81,15 +83,18 @@
               {{ staff.scope || 'n/a' }}
             </td>
             <td class="text-center">
-              {{ staff.votedStars }}
+              {{ votedStar$ | async }}
             </td>
             <td class="action  text-center">
-              <button class="btn btn-sm btn-success" (click)="Vote(staff.id)">
+              <button
+                class="btn btn-sm btn-success"
+                (click)="Vote(staff.userId)"
+              >
                 Vote
               </button>
               <button
                 class="btn btn-sm btn-secondary"
-                (click)="Devote(staff.id)"
+                (click)="Devote(staff.userId)"
               >
                 Devote
               </button>

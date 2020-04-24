@@ -15,6 +15,7 @@ export interface CampaignState {
   isCrtCmpLoading: boolean;
   isGtAllCmpLoading: boolean;
   isGtCmpDtlLoading: boolean;
+  isGtCmpDtlVtgLoading: boolean;
   isGtCmpLstStfLoading: boolean;
   isGtVtgHsrLoading: boolean;
   isUpdCmpLoading: boolean;
@@ -23,6 +24,7 @@ export interface CampaignState {
   isDvtgLoading: boolean;
   errorGtAllCmpMessage: any;
   errorGtCmpDtlMessage: any;
+  errorGtCmdDtlVtgMessage: any;
   errorGtCmpLstStfMessage: any;
   errorGtVtgHsrMessage: any;
   errorCrtCmpMessage: any;
@@ -44,6 +46,7 @@ const initialState: CampaignState = {
   isCrtCmpLoading: false,
   isGtAllCmpLoading: false,
   isGtCmpDtlLoading: false,
+  isGtCmpDtlVtgLoading: false,
   isGtCmpLstStfLoading: false,
   isGtVtgHsrLoading: false,
   isUpdCmpLoading: false,
@@ -53,6 +56,7 @@ const initialState: CampaignState = {
   errorCrtCmpMessage: null,
   errorGtAllCmpMessage: null,
   errorGtCmpDtlMessage: null,
+  errorGtCmdDtlVtgMessage: null,
   errorGtCmpLstStfMessage: null,
   errorGtVtgHsrMessage: null,
   errorUpdCmpMessage: null,
@@ -117,12 +121,32 @@ export function campaignReducer(
       return {
         ...state,
         selectedCampaign: action.payload,
-        starLimit: action.payload.campaign.starLimitation,
-        starLeft:
-          action.payload.campaign.starLimitation - action.payload.votedStars,
         isGtCmpDtlLoading: false
       };
     case campaignActions.CampaignActionsType.GET_CAMPAIGN_DETAIL_FAILURE:
+      return {
+        ...state,
+        isGtCmpDtlLoading: false,
+        errorGtCmpDtlMessage: action.payload
+      };
+    case campaignActions.CampaignActionsType.GET_CAMPAIGN_DETAIL_FOR_VOTING:
+      return {
+        ...state,
+        isGtCmpDtlLoading: true,
+        selectedCampaign: null
+      };
+    case campaignActions.CampaignActionsType
+      .GET_CAMPAIGN_DETAIL_FOR_VOTING_SUCCESS:
+      console.log(action.payload);
+      return {
+        ...state,
+        selectedCampaign: action.payload,
+        starLimit: action.payload.campaign.starLimitation,
+        starLeft: action.payload.campaign.starLimitation,
+        isGtCmpDtlLoading: false
+      };
+    case campaignActions.CampaignActionsType
+      .GET_CAMPAIGN_DETAIL_FOR_VOTING_FAILURE:
       return {
         ...state,
         isGtCmpDtlLoading: false,

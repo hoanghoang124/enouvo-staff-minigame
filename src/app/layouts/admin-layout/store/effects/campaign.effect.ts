@@ -65,6 +65,24 @@ export class CampaignEffects {
   );
 
   @Effect()
+  getCampaignDetailForVoting$ = this.actions.pipe(
+    ofType(CampaignActionsType.GET_CAMPAIGN_DETAIL_FOR_VOTING),
+    map((action: CampaignActions.GetCampaignDetail) => action.payload),
+    switchMap(id => {
+      return this.campaignService.getCampaignDetailForVoting(id).pipe(
+        map(res => {
+          return new CampaignActions.GetCampaignDetailForVotingSuccess(res);
+        }),
+        catchError(res => [
+          new CampaignActions.GetCampaignDetailForVotingFailure(
+            res.error.message
+          )
+        ])
+      );
+    })
+  );
+
+  @Effect()
   getCampaignListStaff$ = this.actions.pipe(
     ofType(CampaignActionsType.GET_CAMPAIGN_LIST_STAFF),
     map((action: CampaignActions.GetCampaignListStaff) => action.payload),

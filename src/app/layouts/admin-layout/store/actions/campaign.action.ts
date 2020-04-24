@@ -15,6 +15,10 @@ export enum CampaignActionsType {
   GET_CAMPAIGN_DETAIL_SUCCESS = '[Campaign] Get Campaign Detail Success',
   GET_CAMPAIGN_DETAIL_FAILURE = '[Campaign] Get Campaign Detail Failure',
 
+  GET_CAMPAIGN_DETAIL_FOR_VOTING = '[Campaign] Get Campaign Detail For Voting',
+  GET_CAMPAIGN_DETAIL_FOR_VOTING_SUCCESS = '[Campaign] Get Campaign Detail For Voting Success',
+  GET_CAMPAIGN_DETAIL_FOR_VOTING_FAILURE = '[Campaign] Get Campaign Detail For Voting Failure',
+
   GET_CAMPAIGN_LIST_STAFF = '[Campaign] Get Campaign List Staff',
   GET_CAMPAIGN_LIST_STAFF_SUCCESS = '[Campaign] Get Campaign List Staff Success',
   GET_CAMPAIGN_LIST_STAFF_FAILURE = '[Campaign] Get Campaign List Staff Failure',
@@ -78,6 +82,23 @@ export class GetCampaignDetailSuccess implements Action {
 
 export class GetCampaignDetailFailure implements Action {
   public readonly type = CampaignActionsType.GET_CAMPAIGN_DETAIL_FAILURE;
+  constructor(public payload: any) {}
+}
+
+export class GetCampaignDetailForVoting implements Action {
+  public readonly type = CampaignActionsType.GET_CAMPAIGN_DETAIL_FOR_VOTING;
+  constructor(public payload: any) {}
+}
+
+export class GetCampaignDetailForVotingSuccess implements Action {
+  public readonly type =
+    CampaignActionsType.GET_CAMPAIGN_DETAIL_FOR_VOTING_SUCCESS;
+  constructor(public payload: any) {}
+}
+
+export class GetCampaignDetailForVotingFailure implements Action {
+  public readonly type =
+    CampaignActionsType.GET_CAMPAIGN_DETAIL_FOR_VOTING_FAILURE;
   constructor(public payload: any) {}
 }
 
@@ -179,6 +200,9 @@ export type CampaignActions =
   | GetCampaignDetail
   | GetCampaignDetailSuccess
   | GetCampaignDetailFailure
+  | GetCampaignDetailForVoting
+  | GetCampaignDetailForVotingSuccess
+  | GetCampaignDetailForVotingFailure
   | GetCampaignListStaff
   | GetCampaignListStaffSuccess
   | GetCampaignListStaffFailure

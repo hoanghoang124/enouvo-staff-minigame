@@ -36,6 +36,11 @@ export class CampaignService {
     return this.apiService.get(url);
   }
 
+  getCampaignDetailForVoting(id: number): Observable<any> {
+    const url = `${this.BASE_URL}/v1/campaigns/${id}`;
+    return this.apiService.get(url);
+  }
+
   getCampaignListStaff(id: number): Observable<any> {
     const url = `${this.BASE_URL}/v1/campaigns/${id}/staffs`;
     return this.apiService.get(url);

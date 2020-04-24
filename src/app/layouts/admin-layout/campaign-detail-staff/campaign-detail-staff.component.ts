@@ -19,19 +19,19 @@ import { State } from '../store/reducers';
 
 import * as _ from 'lodash';
 import {
-  getErrorGtCmpDtlMessage,
   getStarLimit,
   getStarLeft,
   getVotedStar,
-  getIsCmpDtlLoading,
-  getCampaignDetail
+  getCampaignDetailForVoting,
+  getIsCmpDtlVtgLoading,
+  getErrorGtCmpDtlVtgMessage
 } from '../store/selectors/campaign.selector';
-
 import {
-  GetCampaignDetail,
   Vote,
-  Devote
+  Devote,
+  GetCampaignDetailForVoting
 } from '../store/actions/campaign.action';
+
 @Component({
   selector: 'app-campaign-detail-staff',
   templateUrl: './campaign-detail-staff.component.html',
@@ -64,30 +64,30 @@ export class CampaignDetailStaffComponent implements OnInit {
     // this.tableQuery = this.defaultQuery;
     // this.totalItems$ = this.store.select(getTotalStaffs);
     // this.fetchTableData(this.tableQuery);
-    this.store.dispatch(new GetCampaignDetail(this.campaignId));
-    this.campaign$ = this.store.select(getCampaignDetail);
+    this.store.dispatch(new GetCampaignDetailForVoting(this.campaignId));
+    this.campaign$ = this.store.select(getCampaignDetailForVoting);
     this.starLimit$ = this.store.select(getStarLimit);
     this.votedStar$ = this.store.select(getVotedStar);
     this.starLeft$ = this.store.select(getStarLeft);
-    this.isCampaignLoading$ = this.store.select(getIsCmpDtlLoading);
-    this.errorMessage$ = this.store.select(getErrorGtCmpDtlMessage);
+    this.isCampaignLoading$ = this.store.select(getIsCmpDtlVtgLoading);
+    this.errorMessage$ = this.store.select(getErrorGtCmpDtlVtgMessage);
   }
 
-  Vote(staffId) {
+  Vote(receiverId) {
     this.store.dispatch(
       new Vote({
         id: this.campaignId,
-        voting: { receiverId: staffId, numberOfStars: 1 }
+        voting: { receiverId: receiverId, numberOfStars: 1 }
       })
     );
   }
 
-  Devote(staffId) {
+  Devote(receiverId) {
     this.store.dispatch(
       new Devote({
         id: this.campaignId,
         voting: {
-          receiverId: staffId,
+          receiverId: receiverId,
           numberOfStars: -1
         }
       })
