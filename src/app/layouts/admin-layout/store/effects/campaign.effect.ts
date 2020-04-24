@@ -89,7 +89,7 @@ export class CampaignEffects {
     switchMap(res => {
       return this.campaignService.getCampaignListStaff(res.id).pipe(
         map(res => {
-          return new CampaignActions.GetCampaignListStaffSuccess(res.staffs);
+          return new CampaignActions.GetCampaignListStaffSuccess(res);
         }),
         catchError(res => [
           new CampaignActions.GetCampaignListStaffFailure(res.error.message)

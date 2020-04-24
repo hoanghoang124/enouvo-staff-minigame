@@ -22,6 +22,7 @@ import {
   getStarLimit,
   getStarLeft,
   getVotedStar,
+  getCampaignListStaff,
   getCampaignDetailForVoting,
   getIsCmpDtlVtgLoading,
   getErrorGtCmpDtlVtgMessage
@@ -29,7 +30,8 @@ import {
 import {
   Vote,
   Devote,
-  GetCampaignDetailForVoting
+  GetCampaignDetailForVoting,
+  GetCampaignListStaff
 } from '../store/actions/campaign.action';
 
 @Component({
@@ -41,6 +43,7 @@ export class CampaignDetailStaffComponent implements OnInit {
   @Input() campaignId: number;
 
   @ViewChildren(SortableDirective) headers1: QueryList<SortableDirective>;
+  staffs$: Observable<any>;
   campaign$: Observable<any>;
   isCampaignLoading$: Observable<boolean>;
   errorMessage$: Observable<string>;
@@ -54,6 +57,7 @@ export class CampaignDetailStaffComponent implements OnInit {
   starLimit$: Observable<number>;
   votedStar$: Observable<number>;
   starLeft$: Observable<number>;
+  currentUserId: number;
 
   constructor(
     private store: Store<State>,
@@ -65,12 +69,15 @@ export class CampaignDetailStaffComponent implements OnInit {
     // this.totalItems$ = this.store.select(getTotalStaffs);
     // this.fetchTableData(this.tableQuery);
     this.store.dispatch(new GetCampaignDetailForVoting(this.campaignId));
+    this.store.dispatch(new GetCampaignListStaff({ id: this.campaignId }));
     this.campaign$ = this.store.select(getCampaignDetailForVoting);
+    this.staffs$ = this.store.select(getCampaignListStaff);
     this.starLimit$ = this.store.select(getStarLimit);
     this.votedStar$ = this.store.select(getVotedStar);
     this.starLeft$ = this.store.select(getStarLeft);
     this.isCampaignLoading$ = this.store.select(getIsCmpDtlVtgLoading);
     this.errorMessage$ = this.store.select(getErrorGtCmpDtlVtgMessage);
+    this.currentUserId = +localStorage.getItem('id');
   }
 
   Vote(receiverId) {

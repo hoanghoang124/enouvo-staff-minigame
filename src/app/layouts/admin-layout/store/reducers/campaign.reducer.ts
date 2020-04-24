@@ -117,7 +117,6 @@ export function campaignReducer(
         selectedCampaign: null
       };
     case campaignActions.CampaignActionsType.GET_CAMPAIGN_DETAIL_SUCCESS:
-      console.log(action.payload);
       return {
         ...state,
         selectedCampaign: action.payload,
@@ -137,7 +136,6 @@ export function campaignReducer(
       };
     case campaignActions.CampaignActionsType
       .GET_CAMPAIGN_DETAIL_FOR_VOTING_SUCCESS:
-      console.log(action.payload);
       return {
         ...state,
         selectedCampaign: action.payload,
@@ -162,8 +160,7 @@ export function campaignReducer(
       return {
         ...state,
         isGtCmpLstStfLoading: false,
-        selectedStaff: action.payload,
-        votedStar: action.payload.votedStars
+        staffs: action.payload.staffs
       };
     case campaignActions.CampaignActionsType.GET_CAMPAIGN_LIST_STAFF_FAILURE:
       return {
@@ -244,11 +241,12 @@ export function campaignReducer(
         isVtgLoading: true
       };
     case campaignActions.CampaignActionsType.VOTE_SUCCESS:
+      const votedStar = state.votedStar + 1;
       return {
         ...state,
         isVtgLoading: false,
-        starLimit: state.starLimit - 1,
-        votedStar: state.votedStar + 1
+        votedStar: votedStar,
+        starLeft: state.starLimit - votedStar
       };
     case campaignActions.CampaignActionsType.VOTE_FAILURE:
       return {
@@ -262,11 +260,12 @@ export function campaignReducer(
         isDvtgLoading: true
       };
     case campaignActions.CampaignActionsType.DEVOTE_SUCCESS:
+      const devotedStar = state.votedStar - 1;
       return {
         ...state,
         isDvtgLoading: false,
-        starLimit: state.starLimit + 1,
-        votedStar: state.votedStar - 1
+        votedStar: devotedStar,
+        starLeft: state.starLimit + 1
       };
     case campaignActions.CampaignActionsType.DEVOTE_FAILURE:
       return {
