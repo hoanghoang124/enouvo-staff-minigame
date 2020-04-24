@@ -48,7 +48,8 @@ export class CampaignComponent implements OnInit, OnDestroy {
   totalCampaigns$: Observable<number>;
   searchForm1 = new FormGroup({
     fromdate: new FormControl(''),
-    status: new FormControl('')
+    status: new FormControl(''),
+    title: new FormControl('')
   });
   constructor(
     private store: Store<State>,
@@ -121,6 +122,7 @@ export class CampaignComponent implements OnInit, OnDestroy {
   }
 
   search() {
+    console.log(this.searchForm1.value);
     if (this.searchForm1.get('fromdate').value !== '') {
       this.fetchTableData({
         ...this.tableQuery,
@@ -131,6 +133,12 @@ export class CampaignComponent implements OnInit, OnDestroy {
       this.fetchTableData({
         ...this.tableQuery,
         isCampaignActive: this.searchForm1.get('status').value
+      });
+    }
+    if (this.searchForm1.get('title').value !== '') {
+      this.fetchTableData({
+        ...this.tableQuery,
+        title: this.searchForm1.get('title').value
       });
     }
   }

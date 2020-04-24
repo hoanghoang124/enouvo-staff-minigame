@@ -10,4 +10,5 @@ export interface TableQuery {
   toDate?: string;
   votedStars?: number;
   isCampaignActive?: boolean;
+  title?: string;
 }
