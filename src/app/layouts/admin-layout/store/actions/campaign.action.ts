@@ -37,11 +37,7 @@ export enum CampaignActionsType {
 
   VOTE = '[Campaign] Vote',
   VOTE_SUCCESS = '[Campaign] Vote Success',
-  VOTE_FAILURE = '[Campaign] Vote Failure',
-
-  DEVOTE = '[Campaign] Devote',
-  DEVOTE_SUCCESS = '[Campaign] Devote Success',
-  DEVOTE_FAILURE = '[Campaign] Devote Failure'
+  VOTE_FAILURE = '[Campaign] Vote Failure'
 }
 
 export class CreateCampaign implements Action {
@@ -175,21 +171,6 @@ export class VoteFailure implements Action {
   constructor(public payload: Error) {}
 }
 
-export class Devote implements Action {
-  public readonly type = CampaignActionsType.DEVOTE;
-  constructor(public payload: { id: number; voting: VotingStars }) {}
-}
-
-export class DevoteSuccess implements Action {
-  public readonly type = CampaignActionsType.DEVOTE_SUCCESS;
-  constructor(public payload: any) {}
-}
-
-export class DevoteFailure implements Action {
-  public readonly type = CampaignActionsType.DEVOTE_FAILURE;
-  constructor(public payload: Error) {}
-}
-
 export type CampaignActions =
   | CreateCampaign
   | CreateCampaignSuccess
@@ -217,7 +198,4 @@ export type CampaignActions =
   | DeleteCampaignFailure
   | Vote
   | VoteSuccess
-  | VoteFailure
-  | Devote
-  | DevoteSuccess
-  | DevoteFailure;
+  | VoteFailure;

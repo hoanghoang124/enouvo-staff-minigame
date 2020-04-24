@@ -211,7 +211,7 @@ export class DialogService {
 
   public viewHistoryOfVoting(id: number, userId: number) {
     const modalRef = this.modalService.open(HistoryOfVotingModalComponent, {
-      windowClass: 'dialog-size-xl',
+      size: 'lg',
       centered: true
     });
     modalRef.componentInstance.id = id;

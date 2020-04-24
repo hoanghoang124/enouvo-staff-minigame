@@ -13,8 +13,17 @@
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
-    <div class="modal-header">
-      <h4 class="modal-title ">
+    <div class="modal-header subheader">
+      <span class="badge badge-info" *ngIf="authService.isAdmin()"
+        >Admin can not vote</span
+      >
+      <span class="badge badge-info" *ngIf="!authService.isAdmin()"
+        >Give stars to who deserve
+      </span>
+      <span class="badge badge-warning" *ngIf="errorVotingMessage$">{{
+        errorVotingMessage$ | async
+      }}</span>
+      <h4 class="modal-title " *ngIf="!authService.isAdmin()">
         Star Limit: {{ starLimit$ | async }} | Star Left:
         {{ starLeft$ | async }}
       </h4>
@@ -66,7 +75,9 @@
                   </a>
                 </div>
                 <div class="media-body">
-                  <span class="mb-0 text-sm">{{ staff.userId }}</span>
+                  <span class="mb-0 text-sm" style="font-weight: bold;">{{
+                    staff.userId
+                  }}</span>
                 </div>
               </div>
             </td>
@@ -82,21 +93,21 @@
             >
               {{ staff.scope || 'n/a' }}
             </td>
-            <td class="text-center">
+            <td class="text-center" style="font-weight: bold">
               {{ votedStar$ | async }}
             </td>
             <td class="action  text-center">
               <button
                 class="btn btn-sm btn-success"
+                style="width: 70px;"
+                [disabled]="authService.isAdmin()"
                 (click)="Vote(staff.userId)"
               >
                 Vote
-              </button>
-              <button
-                class="btn btn-sm btn-secondary"
-                (click)="Devote(staff.userId)"
-              >
-                Devote
+                <i
+                  class="fas fa-spinner fa-pulse spinner"
+                  *ngIf="isVotingLoading$ | async"
+                ></i>
               </button>
             </td>
           </tr>

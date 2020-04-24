@@ -164,20 +164,4 @@ export class CampaignEffects {
       );
     })
   );
-
-  @Effect()
-  devote$ = this.actions.pipe(
-    ofType(CampaignActionsType.DEVOTE),
-    map((action: CampaignActions.Devote) => action.payload),
-    switchMap(res => {
-      return this.campaignService.devote(res.id, res.voting).pipe(
-        map(() => {
-          return new CampaignActions.DevoteSuccess(res);
-        }),
-        catchError(res => [
-          new CampaignActions.DevoteFailure(res.error.message)
-        ])
-      );
-    })
-  );
 }

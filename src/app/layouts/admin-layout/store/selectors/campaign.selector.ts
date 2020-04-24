@@ -96,11 +96,6 @@ export const getIsVtgLoading = createSelector(
   state => state.isVtgLoading
 );
 
-export const getIsDvtgLoading = createSelector(
-  selectCampaignState,
-  state => state.isDvtgLoading
-);
-
 export const getErrorCrtCmpMessage = createSelector(
   selectCampaignState,
   state => state.errorCrtCmpMessage
@@ -144,9 +139,4 @@ export const getErrorDltCmpMessage = createSelector(
 export const getErrorVtgMessage = createSelector(
   selectCampaignState,
   state => state.errorVtgMessage
-);
-
-export const getErrorDvtgMessage = createSelector(
-  selectCampaignState,
-  state => state.errorDvtgMessage
 );

@@ -21,7 +21,6 @@ export interface CampaignState {
   isUpdCmpLoading: boolean;
   isDltCmpLoading: boolean;
   isVtgLoading: boolean;
-  isDvtgLoading: boolean;
   errorGtAllCmpMessage: any;
   errorGtCmpDtlMessage: any;
   errorGtCmdDtlVtgMessage: any;
@@ -31,7 +30,6 @@ export interface CampaignState {
   errorUpdCmpMessage: any;
   errorDltCmpMessage: any;
   errorVtgMessage: any;
-  errorDvtgMessage: any;
 }
 
 const initialState: CampaignState = {
@@ -52,7 +50,6 @@ const initialState: CampaignState = {
   isUpdCmpLoading: false,
   isDltCmpLoading: false,
   isVtgLoading: false,
-  isDvtgLoading: false,
   errorCrtCmpMessage: null,
   errorGtAllCmpMessage: null,
   errorGtCmpDtlMessage: null,
@@ -61,8 +58,7 @@ const initialState: CampaignState = {
   errorGtVtgHsrMessage: null,
   errorUpdCmpMessage: null,
   errorDltCmpMessage: null,
-  errorVtgMessage: null,
-  errorDvtgMessage: null
+  errorVtgMessage: null
 };
 
 export function campaignReducer(
@@ -253,25 +249,6 @@ export function campaignReducer(
         ...state,
         isVtgLoading: false,
         errorVtgMessage: action.payload
-      };
-    case campaignActions.CampaignActionsType.DEVOTE:
-      return {
-        ...state,
-        isDvtgLoading: true
-      };
-    case campaignActions.CampaignActionsType.DEVOTE_SUCCESS:
-      const devotedStar = state.votedStar - 1;
-      return {
-        ...state,
-        isDvtgLoading: false,
-        votedStar: devotedStar,
-        starLeft: state.starLimit + 1
-      };
-    case campaignActions.CampaignActionsType.DEVOTE_FAILURE:
-      return {
-        ...state,
-        isDvtgLoading: false,
-        errorDvtgMessage: action.payload
       };
     default:
       return state;

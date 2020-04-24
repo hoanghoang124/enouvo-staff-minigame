@@ -1,12 +1,5 @@
-import {
-  Component,
-  OnInit,
-  ViewChildren,
-  QueryList,
-  OnDestroy
-} from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
 import { Observable } from 'rxjs';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store, select } from '@ngrx/store';
 
 import { State } from '../store/reducers';
@@ -32,13 +25,13 @@ import {
   getIsGtAllStfLoading,
   getAllStaffs
 } from '../store/selectors/staff.selector';
-
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit, OnDestroy {
+export class DashboardComponent implements OnInit {
   @ViewChildren(SortableDirective) headers2: QueryList<SortableDirective>;
 
   getState: Observable<any>;

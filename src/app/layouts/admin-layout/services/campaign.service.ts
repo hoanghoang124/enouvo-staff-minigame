@@ -55,9 +55,4 @@ export class CampaignService {
     const url = `${this.BASE_URL}/v1/campaigns/${id}/vote`;
     return this.apiService.put(url, voting);
   }
-
-  devote(id: number, voting) {
-    const url = `${this.BASE_URL}/v1/campaigns/${id}/vote`;
-    return this.apiService.put(url, voting);
-  }
 }

@@ -18,6 +18,7 @@ import { TableQuery } from '../models/tableQuery.model';
 import { State } from '../store/reducers';
 
 import * as _ from 'lodash';
+import { AuthService } from '../../auth-layout/services/auth.service';
 import {
   getStarLimit,
   getStarLeft,
@@ -25,15 +26,15 @@ import {
   getCampaignListStaff,
   getCampaignDetailForVoting,
   getIsCmpDtlVtgLoading,
-  getErrorGtCmpDtlVtgMessage
+  getErrorGtCmpDtlVtgMessage,
+  getIsVtgLoading,
+  getErrorVtgMessage
 } from '../store/selectors/campaign.selector';
 import {
   Vote,
-  Devote,
   GetCampaignDetailForVoting,
   GetCampaignListStaff
 } from '../store/actions/campaign.action';
-
 @Component({
   selector: 'app-campaign-detail-staff',
   templateUrl: './campaign-detail-staff.component.html',
@@ -46,7 +47,14 @@ export class CampaignDetailStaffComponent implements OnInit {
   staffs$: Observable<any>;
   campaign$: Observable<any>;
   isCampaignLoading$: Observable<boolean>;
+  isVotingLoading$: Observable<boolean>;
+  errorVotingMessage$: Observable<boolean>;
   errorMessage$: Observable<string>;
+  starLimit$: Observable<number>;
+  votedStar$: Observable<number>;
+  starLeft$: Observable<number>;
+  currentUserId: number;
+
   model: NgbDateStruct;
   paging: Page;
   pageSizes = pageSizes;
@@ -54,13 +62,10 @@ export class CampaignDetailStaffComponent implements OnInit {
   tableQuery: TableQuery;
   totalItems$: Observable<number>;
   searchText: string;
-  starLimit$: Observable<number>;
-  votedStar$: Observable<number>;
-  starLeft$: Observable<number>;
-  currentUserId: number;
 
   constructor(
     private store: Store<State>,
+    public authService: AuthService,
     private activeModal: NgbActiveModal // private router: Router, // private route: ActivatedRoute, // private utilService: UtilServiceService
   ) {}
 
@@ -78,6 +83,8 @@ export class CampaignDetailStaffComponent implements OnInit {
     this.isCampaignLoading$ = this.store.select(getIsCmpDtlVtgLoading);
     this.errorMessage$ = this.store.select(getErrorGtCmpDtlVtgMessage);
     this.currentUserId = +localStorage.getItem('id');
+    this.isVotingLoading$ = this.store.select(getIsVtgLoading);
+    this.errorVotingMessage$ = this.store.select(getErrorVtgMessage);
   }
 
   Vote(receiverId) {
@@ -85,18 +92,6 @@ export class CampaignDetailStaffComponent implements OnInit {
       new Vote({
         id: this.campaignId,
         voting: { receiverId: receiverId, numberOfStars: 1 }
-      })
-    );
-  }
-
-  Devote(receiverId) {
-    this.store.dispatch(
-      new Devote({
-        id: this.campaignId,
-        voting: {
-          receiverId: receiverId,
-          numberOfStars: -1
-        }
       })
     );
   }
