@@ -192,7 +192,7 @@ export function campaignReducer(
     case campaignActions.CampaignActionsType.UPDATE_CAMPAIGN_SUCCESS:
       const updateCampaign = _.map(state.campaigns, item => {
         if (item.id === action.payload.id) {
-          return { id: item.id, ...action.payload.campaign };
+          return { id: item.id, ...action.payload };
         }
         return item;
       });
@@ -237,12 +237,24 @@ export function campaignReducer(
         isVtgLoading: true
       };
     case campaignActions.CampaignActionsType.VOTE_SUCCESS:
-      const votedStar = state.votedStar + 1;
+      const updateVoting = _.map(state.staffs, item => {
+        if (item.id === action.payload.voting.receiverId) {
+          return {
+            id: item.id,
+            firstName: item.firstName,
+            lastName: item.lastName,
+            scope: item.scope,
+            votedStar: action.payload.voting.numberOfStars
+          }; //get list staff nen tra ve votedStars cua tung staff nua
+        }
+        return item;
+      });
       return {
         ...state,
         isVtgLoading: false,
-        votedStar: votedStar,
-        starLeft: state.starLimit - votedStar
+        staffs: updateVoting
+        // votedStar: votedStar,
+        // starLeft: state.starLimit - votedStar
       };
     case campaignActions.CampaignActionsType.VOTE_FAILURE:
       return {

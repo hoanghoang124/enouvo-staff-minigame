@@ -19,10 +19,8 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { SortableDirective } from 'src/app/shared/directives';
 import { SortEvent } from 'src/app/shared/sort.model';
 import {
-  getErrorGtAllCmpMessage,
   getAllCampaigns,
   getTotalCampaigns,
-  getIsCrtCmpLoading,
   getIsGtAllCmpLoading
 } from '../store/selectors/campaign.selector';
 import { GetCampaign } from '../store/actions/campaign.action';
@@ -37,7 +35,6 @@ export class CampaignComponent implements OnInit, OnDestroy {
 
   campaigns$: Observable<Campaign[]>;
   isCampaginLoading$: Observable<boolean>;
-  isLoadingResults$: Observable<boolean>;
   errorMessage$: Observable<string>;
   totalCampaigns = 0;
   paging: Page;
@@ -63,8 +60,6 @@ export class CampaignComponent implements OnInit, OnDestroy {
     this.tableQuery = this.defaultQuery;
     this.campaigns$ = this.store.select(getAllCampaigns);
     this.totalCampaigns$ = this.store.select(getTotalCampaigns);
-    this.errorMessage$ = this.store.select(getErrorGtAllCmpMessage);
-    this.isLoadingResults$ = this.store.select(getIsCrtCmpLoading);
     this.isCampaginLoading$ = this.store.select(getIsGtAllCmpLoading);
     this.fetchTableData(this.tableQuery);
   }

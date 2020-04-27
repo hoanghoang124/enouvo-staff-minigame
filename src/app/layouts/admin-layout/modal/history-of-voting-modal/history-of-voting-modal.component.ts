@@ -20,7 +20,6 @@ import { TableQuery } from '../../models/tableQuery.model';
 import * as _ from 'lodash';
 import { GetVotingHistory } from '../../store/actions/campaign.action';
 import {
-  getErrorVtgHsrMessage,
   getIsVtgHsrLoading,
   getVotingHistory
 } from '../../store/selectors/campaign.selector';
@@ -57,7 +56,6 @@ export class HistoryOfVotingModalComponent implements OnInit {
     );
     this.votingHistory$ = this.store.select(getVotingHistory);
     // this.totalItems$ = this.store.select(getTotalStaffs);
-    this.errorMessage$ = this.store.select(getErrorVtgHsrMessage);
     this.isVotingHistoryLoading$ = this.store.select(getIsVtgHsrLoading);
     // this.fetchTableData(this.tableQuery);
   }

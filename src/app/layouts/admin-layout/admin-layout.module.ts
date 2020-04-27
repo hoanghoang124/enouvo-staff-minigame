@@ -30,7 +30,6 @@ import { HistoryOfVotingModalComponent } from './modal/history-of-voting-modal/h
 import { ConfirmDeleteCampaignModalComponent } from './modal/confirm-delete-campaign-modal/confirm-delete-campaign-modal.component';
 
 import { dialogs } from './modal';
-// import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   imports: [

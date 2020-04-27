@@ -8,7 +8,6 @@ import { service } from './services';
   declarations: [],
   imports: [CommonModule],
   providers: [
-    service,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
@@ -18,7 +17,8 @@ import { service } from './services';
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorInterceptor,
       multi: true
-    }
+    },
+    service
   ]
 })
 export class CoreModule {}

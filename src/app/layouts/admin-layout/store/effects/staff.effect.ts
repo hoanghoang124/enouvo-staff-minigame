@@ -1,7 +1,8 @@
+import { ToastrService } from 'ngx-toastr';
 import { Injectable } from '@angular/core';
 import { Effect, ofType, Actions } from '@ngrx/effects';
-import { map, catchError, switchMap, tap } from 'rxjs/operators';
-import { of, Observable } from 'rxjs';
+import { map, catchError, switchMap } from 'rxjs/operators';
+import { of } from 'rxjs';
 import { StaffService } from '../../services/staff.service';
 import { DialogService } from '../../services/dialog.service';
 import * as StaffActions from '../actions/staff.action';
@@ -13,7 +14,8 @@ export class StaffEffects {
   constructor(
     private actions: Actions,
     private staffService: StaffService,
-    private dialogService: DialogService // private route: Router
+    private dialogService: DialogService,
+    private toastrService: ToastrService // private route: Router
   ) {}
 
   @Effect()
@@ -24,10 +26,14 @@ export class StaffEffects {
       return this.staffService.createStaff(payload).pipe(
         map(() => {
           this.dialogService.closeCreateAccount();
+          this.toastrService.success('Create Successfully', 'Success');
           return new StaffActions.CreateStaffSuccess(payload);
         }),
         catchError(res =>
-          of(new StaffActions.CreateStaffFailure(res.error.message))
+          of(
+            new StaffActions.CreateStaffFailure(res.error.message),
+            this.toastrService.error(res.error.message, 'Failure')
+          )
         )
       );
     })
@@ -42,7 +48,10 @@ export class StaffEffects {
         map(res => {
           return new StaffActions.GetStaffsSuccess(res);
         }),
-        catchError(res => [new StaffActions.GetStaffsFail(res.error.message)])
+        catchError(res => [
+          new StaffActions.GetStaffsFail(res.error.message),
+          this.toastrService.error(res.error.message, 'Failure')
+        ])
       );
     })
   );
@@ -54,19 +63,15 @@ export class StaffEffects {
     switchMap(id => {
       return this.staffService.getStaff(id).pipe(
         map(res => {
+          localStorage.setItem('firstName', res.profile.firstName);
+          localStorage.setItem('avatarUrl', res.profile.avatarUrl);
           return new StaffActions.GetStaffSuccess(res.profile);
         }),
-        catchError(res => [new StaffActions.GetStaffFail(res.error.message)])
+        catchError(res => [
+          new StaffActions.GetStaffFail(res.error.message),
+          this.toastrService.error(res.error.message, 'Failure')
+        ])
       );
-    })
-  );
-
-  @Effect({ dispatch: false })
-  getStaffSuccess: Observable<any> = this.actions.pipe(
-    ofType(StaffActionsType.GET_STAFF_SUCCESS),
-    tap(staff => {
-      localStorage.setItem('firstName', staff.payload.firstName);
-      localStorage.setItem('avatarUrl', staff.payload.avatarUrl);
     })
   );
 }

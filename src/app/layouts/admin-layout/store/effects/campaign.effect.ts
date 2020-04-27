@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { catchError, switchMap, map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
@@ -12,7 +13,8 @@ export class CampaignEffects {
   constructor(
     private actions: Actions,
     private campaignService: CampaignService,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private toastrService: ToastrService
   ) {}
 
   @Effect()
@@ -23,10 +25,12 @@ export class CampaignEffects {
       return this.campaignService.createCampaign(obj).pipe(
         map(res => {
           this.dialogService.closeCreateCampaign();
+          this.toastrService.success(res.message, 'Success');
           return new CampaignActions.CreateCampaignSuccess(res);
         }),
         catchError(res => [
-          new CampaignActions.CreateCampaignFail(res.error.message)
+          new CampaignActions.CreateCampaignFail(res.error.message),
+          this.toastrService.error(res.error.message, 'Failure')
         ])
       );
     })
@@ -42,7 +46,8 @@ export class CampaignEffects {
           return new CampaignActions.GetCampaignSuccess(res);
         }),
         catchError(res => [
-          new CampaignActions.GetCampaignFail(res.error.message)
+          new CampaignActions.GetCampaignFail(res.error.message),
+          this.toastrService.error(res.error.message, 'Failure')
         ])
       );
     })
@@ -58,7 +63,8 @@ export class CampaignEffects {
           return new CampaignActions.GetCampaignDetailSuccess(res);
         }),
         catchError(res => [
-          new CampaignActions.GetCampaignDetailFailure(res.error.message)
+          new CampaignActions.GetCampaignDetailFailure(res.error.message),
+          this.toastrService.error(res.error.message, 'Failure')
         ])
       );
     })
@@ -76,7 +82,8 @@ export class CampaignEffects {
         catchError(res => [
           new CampaignActions.GetCampaignDetailForVotingFailure(
             res.error.message
-          )
+          ),
+          this.toastrService.error(res.error.message, 'Failure')
         ])
       );
     })
@@ -92,6 +99,7 @@ export class CampaignEffects {
           return new CampaignActions.GetCampaignListStaffSuccess(res);
         }),
         catchError(res => [
+          this.toastrService.error(res.error.message, 'Failure'),
           new CampaignActions.GetCampaignListStaffFailure(res.error.message)
         ])
       );
@@ -110,7 +118,8 @@ export class CampaignEffects {
           );
         }),
         catchError(res2 => [
-          new CampaignActions.GetVotingHistoryFailure(res2.error.message)
+          new CampaignActions.GetVotingHistoryFailure(res2.error.message),
+          this.toastrService.error(res2.error.message, 'Failure')
         ])
       );
     })
@@ -122,12 +131,14 @@ export class CampaignEffects {
     map((action: CampaignActions.UpdateCampaign) => action.payload),
     switchMap(res => {
       return this.campaignService.updateCampaign(res.id, res.campaign).pipe(
-        map(() => {
+        map(res => {
           this.dialogService.closeUpdateCampaign();
+          this.toastrService.success('Update campaign successfully', 'Success');
           return new CampaignActions.UpdateCampaignSuccess(res);
         }),
         catchError(res1 => [
-          new CampaignActions.UpdateCampaignFail(res1.error.message)
+          new CampaignActions.UpdateCampaignFail(res1.error.message),
+          this.toastrService.error(res1.error.message, 'Failure')
         ])
       );
     })
@@ -139,12 +150,14 @@ export class CampaignEffects {
     map((action: CampaignActions.DeleteCampaign) => action.payload),
     switchMap(res => {
       return this.campaignService.deleteCampagin(res.id).pipe(
-        map(() => {
+        map(res => {
           this.dialogService.closeDeleteCampaign();
-          return new CampaignActions.DeleteCampaignSuccess(res);
+          this.toastrService.success(res.message, 'Success');
+          return new CampaignActions.DeleteCampaignSuccess(res.message);
         }),
         catchError(res => [
-          new CampaignActions.DeleteCampaignFailure(res.error.message)
+          new CampaignActions.DeleteCampaignFailure(res.error.message),
+          this.toastrService.error(res.error.message, 'Failure')
         ])
       );
     })
@@ -157,10 +170,21 @@ export class CampaignEffects {
 
     switchMap(res => {
       return this.campaignService.vote(res.id, res.voting).pipe(
-        map(() => {
+        map(res => {
+          this.toastrService.success(
+            'Vote to ' +
+              res.voting.receiverId +
+              '' +
+              res.voting.numberOfStars +
+              ' star',
+            'Success'
+          );
           return new CampaignActions.VoteSuccess(res);
         }),
-        catchError(res => [new CampaignActions.VoteFailure(res.error.message)])
+        catchError(res => [
+          new CampaignActions.VoteFailure(res.error.message),
+          this.toastrService.error(res.error.message, 'Failure')
+        ])
       );
     })
   );

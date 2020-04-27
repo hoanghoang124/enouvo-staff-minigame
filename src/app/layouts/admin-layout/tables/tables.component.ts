@@ -21,8 +21,7 @@ import {
   getErrorGtAllStfMessage,
   getAllStaffs,
   getTotalStaffs,
-  getIsGtAllStfLoading,
-  getIsCrtStfLoading
+  getIsGtAllStfLoading
 } from '../store/selectors/staff.selector';
 import { GetStaffs } from '../store/actions/staff.action';
 import * as _ from 'lodash';
@@ -37,7 +36,6 @@ export class TablesComponent implements OnInit, OnDestroy {
 
   staffs$: Observable<Staff[]>;
   isStaffLoading$: Observable<boolean>;
-  isLoadingResults$: Observable<boolean>;
   errorMessage$: Observable<string>;
   editProfileForm: FormGroup;
   resetPasswordForm: FormGroup;
@@ -72,7 +70,6 @@ export class TablesComponent implements OnInit, OnDestroy {
     this.totalItems$ = this.store.select(getTotalStaffs);
     this.errorMessage$ = this.store.select(getErrorGtAllStfMessage);
     this.isStaffLoading$ = this.store.select(getIsGtAllStfLoading);
-    this.isLoadingResults$ = this.store.select(getIsCrtStfLoading);
     this.fetchTableData(this.tableQuery);
   }
 

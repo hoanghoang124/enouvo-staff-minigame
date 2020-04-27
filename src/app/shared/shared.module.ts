@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
 import {
   NgbDateParserFormatter,
   NgbDateAdapter,
@@ -12,8 +13,24 @@ import { directives } from './directives';
 
 @NgModule({
   declarations: [directives],
-  imports: [CommonModule, HttpClientModule, ReactiveFormsModule, FormsModule],
-  exports: [HttpClientModule, ReactiveFormsModule, FormsModule, directives],
+  imports: [
+    CommonModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule,
+    ToastrModule.forRoot({
+      preventDuplicates: true,
+      timeOut: 3000,
+      positionClass: 'toast-top-right'
+    })
+  ],
+  exports: [
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule,
+    ToastrModule,
+    directives
+  ],
   providers: [
     {
       provide: NgbDateParserFormatter,
