@@ -23,8 +23,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   public isCollapsed = true;
   isLoadingResults$: Observable<boolean>;
   userId: number = Number(localStorage.getItem('id'));
-  avatarUrl: string;
-  firstName: string;
+  username: string = localStorage.getItem('username');
 
   constructor(
     private store: Store<State>,
@@ -41,8 +40,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.router.events.subscribe(() => {
       this.isCollapsed = true;
     });
-    this.avatarUrl = localStorage.getItem('avatarUrl');
-    this.firstName = localStorage.getItem('firstName');
   }
 
   openChangePasswordDialog() {

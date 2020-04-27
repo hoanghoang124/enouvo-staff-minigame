@@ -7,3 +7,13 @@ export interface Campaign {
   endDate: Date;
   starLimitation: number;
 }
+
+export enum CampaignStatusEnum {
+  Active = 'True',
+  Deactive = 'False'
+}
+
+// export const CampaignStatus = [
+//   { status: CampaignStatusEnum.Active, color: 'badge-success' },
+//   { status: CampaignStatusEnum.Deactive, color: 'badge-danger' }
+// ];

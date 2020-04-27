@@ -104,13 +104,11 @@ export class CampaignEffects {
     map((action: CampaignActions.GetVotingHistory) => action.payload),
     switchMap(res => {
       return this.campaignService.getVotingHistory(res.id, res.userId).pipe(
-        map(res1 => {
-          return new CampaignActions.GetVotingHistorySuccess(
-            res1.votingHistory
-          );
+        map(res => {
+          return new CampaignActions.GetVotingHistorySuccess(res.votingHistory);
         }),
-        catchError(res2 => [
-          new CampaignActions.GetVotingHistoryFailure(res2.error.message)
+        catchError(res => [
+          new CampaignActions.GetVotingHistoryFailure(res.error.message)
         ])
       );
     })
@@ -126,8 +124,8 @@ export class CampaignEffects {
           this.dialogService.closeUpdateCampaign();
           return new CampaignActions.UpdateCampaignSuccess(res);
         }),
-        catchError(res1 => [
-          new CampaignActions.UpdateCampaignFail(res1.error.message)
+        catchError(res => [
+          new CampaignActions.UpdateCampaignFail(res.error.message)
         ])
       );
     })
@@ -141,7 +139,7 @@ export class CampaignEffects {
       return this.campaignService.deleteCampagin(res.id).pipe(
         map(res => {
           this.dialogService.closeDeleteCampaign();
-          return new CampaignActions.DeleteCampaignSuccess(res.message);
+          return new CampaignActions.DeleteCampaignSuccess(res);
         }),
         catchError(res => [
           new CampaignActions.DeleteCampaignFailure(res.error.message)

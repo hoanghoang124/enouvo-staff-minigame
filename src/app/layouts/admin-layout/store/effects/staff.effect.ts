@@ -13,9 +13,8 @@ export class StaffEffects {
   constructor(
     private actions: Actions,
     private staffService: StaffService,
-    private dialogService: DialogService
-  ) // private route: Router
-  {}
+    private dialogService: DialogService // private route: Router
+  ) {}
 
   @Effect()
   createStaff$ = this.actions.pipe(
@@ -55,8 +54,6 @@ export class StaffEffects {
     switchMap(id => {
       return this.staffService.getStaff(id).pipe(
         map(res => {
-          localStorage.setItem('firstName', res.profile.firstName);
-          localStorage.setItem('avatarUrl', res.profile.avatarUrl);
           return new StaffActions.GetStaffSuccess(res.profile);
         }),
         catchError(res => [new StaffActions.GetStaffFail(res.error.message)])

@@ -65,7 +65,7 @@
                 >
                   Status
                 </th>
-                <th class="action">Actions</th>
+                <th class="text-center">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -145,7 +145,7 @@
               </tr>
               <tr
                 *ngFor="let campaign of campaigns$ | async"
-                style="text-transform: capitalize;"
+                style="text-transform: capitalize; cursor: pointer;"
               >
                 <td
                   class="text-center"
@@ -170,11 +170,20 @@
                   {{ campaign.starLimitation || 'n/a' }}
                 </td>
                 <td class="text-center" [routerLink]="[campaign.id]">
-                  {{ campaign.isCampaignActive }}
+                  <span
+                    class="badge badge-info"
+                    *ngIf="campaign.isCampaignActive === true"
+                    >Active</span
+                  >
+                  <span
+                    class="badge badge-danger"
+                    *ngIf="campaign.isCampaignActive !== true"
+                    >Deactive</span
+                  >
                 </td>
-                <td class="action">
+                <td>
                   <button
-                    class="btn btn-sm btn-info"
+                    class="btn btn-sm btn-info modal-button"
                     (click)="
                       openUpdateCampaignDialog(
                         campaign.id,
@@ -189,7 +198,7 @@
                     Modify
                   </button>
                   <button
-                    class="btn btn-sm btn-danger"
+                    class="btn btn-sm btn-danger modal-button "
                     (click)="openConfirmDeleteCampaign(campaign.id)"
                   >
                     Delete
