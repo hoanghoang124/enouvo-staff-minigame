@@ -238,7 +238,7 @@ export function campaignReducer(
       };
     case campaignActions.CampaignActionsType.VOTE_SUCCESS:
       const updateVoting = _.map(state.staffs, item => {
-        if (item.id === action.payload.voting.receiverId) {
+        if (item.id === action.payload.receiverId) {
           return {
             id: item.id,
             firstName: item.firstName,

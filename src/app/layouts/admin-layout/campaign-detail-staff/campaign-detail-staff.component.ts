@@ -27,8 +27,7 @@ import {
   getCampaignDetailForVoting,
   getIsCmpDtlVtgLoading,
   getErrorGtCmpDtlVtgMessage,
-  getIsVtgLoading,
-  getErrorVtgMessage
+  getIsVtgLoading
 } from '../store/selectors/campaign.selector';
 import {
   Vote,
@@ -48,7 +47,6 @@ export class CampaignDetailStaffComponent implements OnInit {
   campaign$: Observable<any>;
   isCampaignLoading$: Observable<boolean>;
   isVotingLoading$: Observable<boolean>;
-  errorVotingMessage$: Observable<boolean>;
   errorMessage$: Observable<string>;
   starLimit$: Observable<number>;
   votedStar$: Observable<number>;
@@ -84,7 +82,6 @@ export class CampaignDetailStaffComponent implements OnInit {
     this.errorMessage$ = this.store.select(getErrorGtCmpDtlVtgMessage);
     this.currentUserId = +localStorage.getItem('id');
     this.isVotingLoading$ = this.store.select(getIsVtgLoading);
-    this.errorVotingMessage$ = this.store.select(getErrorVtgMessage);
   }
 
   Vote(receiverId) {

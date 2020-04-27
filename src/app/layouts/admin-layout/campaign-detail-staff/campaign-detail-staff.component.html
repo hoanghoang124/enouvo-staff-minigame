@@ -20,9 +20,6 @@
       <span class="badge badge-info" *ngIf="!authService.isAdmin()"
         >Give stars to who deserve
       </span>
-      <span class="badge badge-warning" *ngIf="errorVotingMessage$">{{
-        errorVotingMessage$ | async
-      }}</span>
       <h4 class="modal-title " *ngIf="!authService.isAdmin()">
         Star Limit: {{ starLimit$ | async }} | Star Left:
         {{ starLeft$ | async }}
