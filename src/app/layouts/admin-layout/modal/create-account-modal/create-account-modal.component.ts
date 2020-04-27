@@ -2,19 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbDateStruct, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { PositionTypes } from 'src/app/layouts/auth-layout/models/role.model';
 import { Cities } from 'src/app/layouts/auth-layout/models/city.model';
 import { Store } from '@ngrx/store';
 import { State } from 'src/app/layouts/auth-layout/store';
-import * as fromStaff from '../../store/index';
+import { ToastrService } from 'ngx-toastr';
 
+import { CreateStaff } from './../../store/actions/staff.action';
+import { getIsCrtStfLoading } from './../../store/selectors/staff.selector';
+import { PositionTypes } from 'src/app/layouts/auth-layout/models/scope.model';
 @Component({
   selector: 'app-create-account-modal',
   templateUrl: './create-account-modal.component.html',
   styleUrls: ['./create-account-modal.component.scss']
 })
 export class CreateAccountModalComponent implements OnInit {
-  errorMessage$: Observable<string>;
   isLoadingResults$: Observable<boolean>;
   createAccountForm: FormGroup;
   model: NgbDateStruct;
@@ -24,7 +25,8 @@ export class CreateAccountModalComponent implements OnInit {
   constructor(
     private store: Store<State>,
     private formBuilder: FormBuilder,
-    private activeModal: NgbActiveModal
+    private activeModal: NgbActiveModal,
+    private toastrService: ToastrService
   ) {}
 
   ngOnInit() {
@@ -39,18 +41,14 @@ export class CreateAccountModalComponent implements OnInit {
       addressCity: ['', Validators.required],
       addressStreet: ['', Validators.required]
     });
-    this.errorMessage$ = this.store.select(fromStaff.getErrorCrtAccMessage);
-    this.isLoadingResults$ = this.store.select(fromStaff.getIsCrtAccLoading);
+    this.isLoadingResults$ = this.store.select(getIsCrtStfLoading);
   }
 
   onSubmit() {
     if (this.createAccountForm.invalid) {
-      console.log('Form invalid');
-      return;
+      return this.toastrService.warning('Form invalid', 'Warning');
     } else {
-      this.store.dispatch(
-        new fromStaff.CreateAccount(this.createAccountForm.value)
-      );
+      this.store.dispatch(new CreateStaff(this.createAccountForm.value));
     }
   }
 

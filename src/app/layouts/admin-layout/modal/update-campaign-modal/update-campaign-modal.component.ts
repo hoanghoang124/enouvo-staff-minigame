@@ -1,11 +1,14 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { State } from 'src/app/layouts/auth-layout/store';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import * as fromStaff from '../../store/index';
+import { ToastrService } from 'ngx-toastr';
+
+import { State } from 'src/app/layouts/auth-layout/store';
 import { CampaignStates } from '../../models/campaign-states.model';
+import { getIsUpdCmpLoading } from '../../store/selectors/campaign.selector';
+import { UpdateCampaign } from '../../store/actions/campaign.action';
 
 @Component({
   selector: 'app-update-campaign-modal',
@@ -24,10 +27,12 @@ export class UpdateCampaignModalComponent implements OnInit {
   isLoadingResults$: Observable<boolean>;
   updateCampaignForm: FormGroup;
   states = CampaignStates;
+
   constructor(
     private store: Store<State>,
     private formBuilder: FormBuilder,
-    private activeModal: NgbActiveModal
+    private activeModal: NgbActiveModal,
+    private toastrService: ToastrService
   ) {}
 
   ngOnInit() {
@@ -52,16 +57,15 @@ export class UpdateCampaignModalComponent implements OnInit {
     this.updateCampaignForm.controls['endDate'].patchValue(
       new Date(this.campaignEndDate)
     );
-    this.errorMessage$ = this.store.select(fromStaff.getErrorUpdCmpMessage);
-    this.isLoadingResults$ = this.store.select(fromStaff.getIsUpdCmpLoading);
+    this.isLoadingResults$ = this.store.select(getIsUpdCmpLoading);
   }
 
   onSubmit() {
     if (this.updateCampaignForm.invalid) {
-      return;
+      return this.toastrService.warning('Form invalid', 'Warning');
     } else {
       this.store.dispatch(
-        new fromStaff.UpdateCampaign({
+        new UpdateCampaign({
           id: this.campaignId,
           campaign: this.updateCampaignForm.value
         })

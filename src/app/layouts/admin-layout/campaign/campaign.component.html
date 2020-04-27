@@ -23,10 +23,6 @@
                 class="btn btn-sm  btn-primary"
               >
                 Create Campaign
-                <i
-                  class="fas fa-spinner fa-pulse spinner"
-                  *ngIf="isLoadingResults$ | async"
-                ></i>
               </button>
             </div>
           </div>
@@ -37,16 +33,116 @@
             <thead class="thead-light">
               <tr>
                 <th class="text-center">Id</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th class="text-center">Start Time</th>
-                <th class="text-center">End Time</th>
-                <th class="text-center">Star Limit</th>
-                <th class="text-center">Status</th>
+                <th (sort)="onSort($event)" appSortable="title">Title</th>
+                <th (sort)="onSort($event)" appSortable="description">
+                  Description
+                </th>
+                <th
+                  class="text-center"
+                  (sort)="onSort($event)"
+                  appSortable="startDate"
+                >
+                  Start Time
+                </th>
+                <th
+                  class="text-center"
+                  (sort)="onSort($event)"
+                  appSortable="endDate"
+                >
+                  End Time
+                </th>
+                <th
+                  class="text-center"
+                  (sort)="onSort($event)"
+                  appSortable="starLimitation"
+                >
+                  Star Limit
+                </th>
+                <th
+                  class="text-center"
+                  (sort)="onSort($event)"
+                  appSortable="isCampaignActive"
+                >
+                  Status
+                </th>
                 <th class="action">Actions</th>
               </tr>
             </thead>
             <tbody>
+              <tr [formGroup]="searchForm1">
+                <td>Search :</td>
+                <td>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"
+                        ><i
+                          class="ni ni-zoom-split-in"
+                          style="cursor: pointer;"
+                          (click)="search()"
+                        ></i
+                      ></span>
+                    </div>
+                    <input
+                      class="form-control"
+                      placeholder="From ... "
+                      name="fromdate"
+                      [(ngModel)]="model"
+                      ngbDatepicker
+                      #d="ngbDatepicker"
+                      formControlName="fromdate"
+                    />
+                    <div class="input-group-append">
+                      <button
+                        class="btn btn-outline fa fa-calendar"
+                        (click)="d.toggle()"
+                        type="button"
+                      ></button>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="input-group ">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"
+                        ><i
+                          class="ni ni-zoom-split-in"
+                          style="cursor: pointer;"
+                          (click)="search()"
+                        ></i
+                      ></span>
+                    </div>
+                    <input
+                      class="form-control"
+                      placeholder="Status ..."
+                      type="text"
+                      formControlName="status"
+                    />
+                  </div>
+                </td>
+                <td>
+                  <div class="input-group ">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"
+                        ><i
+                          class="ni ni-zoom-split-in"
+                          style="cursor: pointer;"
+                          (click)="search()"
+                        ></i
+                      ></span>
+                    </div>
+                    <input
+                      class="form-control"
+                      placeholder="Title ..."
+                      type="text"
+                      formControlName="title"
+                    />
+                  </div>
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
               <tr
                 *ngFor="let campaign of campaigns$ | async"
                 style="text-transform: capitalize;"
@@ -91,6 +187,12 @@
                     "
                   >
                     Modify
+                  </button>
+                  <button
+                    class="btn btn-sm btn-danger"
+                    (click)="openConfirmDeleteCampaign(campaign.id)"
+                  >
+                    Delete
                   </button>
                 </td>
               </tr>

@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { State } from 'src/app/layouts/auth-layout/store';
 import { Observable } from 'rxjs';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { ToastrService } from 'ngx-toastr';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import * as fromStaff from '../../store/index';
+
+import { State } from 'src/app/layouts/auth-layout/store';
+import { getIsCrtCmpLoading } from '../../store/selectors/campaign.selector';
+import { CreateCampaign } from '../../store/actions/campaign.action';
 
 @Component({
   selector: 'app-create-campaign-modal',
@@ -15,10 +18,12 @@ export class CreateCampaignModalComponent implements OnInit {
   errorMessage$: Observable<string>;
   isLoadingResults$: Observable<boolean>;
   createCampaignForm: FormGroup;
+
   constructor(
     private store: Store<State>,
     private formBuilder: FormBuilder,
-    private activeModal: NgbActiveModal
+    private activeModal: NgbActiveModal,
+    private toastrService: ToastrService
   ) {}
 
   ngOnInit() {
@@ -30,18 +35,14 @@ export class CreateCampaignModalComponent implements OnInit {
       isCampaignActive: [false],
       starLimitation: ['', Validators.required]
     });
-    this.errorMessage$ = this.store.select(fromStaff.getErrorCrtCmpMessage);
-    this.isLoadingResults$ = this.store.select(fromStaff.getIsCrtCmpLoading);
+    this.isLoadingResults$ = this.store.select(getIsCrtCmpLoading);
   }
 
   onSubmit() {
     if (this.createCampaignForm.invalid) {
-      console.log('Form invalid');
-      return;
+      return this.toastrService.warning('Form invalid', 'Warning');
     } else {
-      this.store.dispatch(
-        new fromStaff.CreateCampaign(this.createCampaignForm.value)
-      );
+      this.store.dispatch(new CreateCampaign(this.createCampaignForm.value));
     }
   }
 

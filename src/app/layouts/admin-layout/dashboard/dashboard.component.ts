@@ -1,36 +1,42 @@
-import {
-  Component,
-  OnInit,
-  ViewChildren,
-  QueryList,
-  OnDestroy
-} from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
+
 import { State } from '../store/reducers';
 import { DialogService } from '../services/dialog.service';
 import { Staff } from '../models/staff.model';
+import { Campaign } from './../models/campaign.model';
 import { Page, pageSizes } from '../models/pagination.model';
 import { TableQuery } from '../models/tableQuery.model';
 import { SortableDirective } from 'src/app/shared/directives';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 // import { SortEvent } from 'src/app/shared/sort.model';
 // import { UtilServiceService } from '../services/util-service.service';
 // import { Router, ActivatedRoute } from '@angular/router';
-import * as fromStaff from '../store';
-import * as _ from 'lodash';
 
+import * as _ from 'lodash';
+import { GetCampaign } from '../store/actions/campaign.action';
+import {
+  getErrorGtAllCmpMessage,
+  getAllCampaigns,
+  getIsGtAllCmpLoading
+} from '../store/selectors/campaign.selector';
+import { GetStaffs } from '../store/actions/staff.action';
+import {
+  getIsGtAllStfLoading,
+  getAllStaffs
+} from '../store/selectors/staff.selector';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit, OnDestroy {
+export class DashboardComponent implements OnInit {
   @ViewChildren(SortableDirective) headers2: QueryList<SortableDirective>;
 
   getState: Observable<any>;
   errorMessage = null;
-  campaigns$: Observable<any>;
+  campaigns$: Observable<Campaign[]>;
   isCampaginLoading$: Observable<boolean>;
   errorMessage$: Observable<string>;
   paging: Page;
@@ -49,14 +55,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.store.dispatch(new fromStaff.GetCampaign());
-    this.campaigns$ = this.store.select(fromStaff.getAllCampaigns);
-    this.errorMessage$ = this.store.select(fromStaff.getErrorGtAllCmpMessage);
-    this.isCampaginLoading$ = this.store.select(fromStaff.getIsGtAllCmpLoading);
+    this.store.dispatch(new GetCampaign());
+    this.campaigns$ = this.store.select(getAllCampaigns);
+    this.errorMessage$ = this.store.select(getErrorGtAllCmpMessage);
+    this.isCampaginLoading$ = this.store.select(getIsGtAllCmpLoading);
 
-    this.store.dispatch(new fromStaff.GetStaffs());
-    this.isStaffLoading$ = this.store.select(fromStaff.getIsGtAllStfLoading);
-    this.stafflist$ = this.store.pipe(select(fromStaff.getAllStaffs));
+    this.store.dispatch(new GetStaffs());
+    this.isStaffLoading$ = this.store.select(getIsGtAllStfLoading);
+    this.stafflist$ = this.store.pipe(select(getAllStaffs));
     this.stafflist$.subscribe(res => {
       this.staffs = res as Staff[];
     });
@@ -102,7 +108,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   // fetchTableData(query: TableQuery) {
   //   query = { ...query, offset: (query.offset - 1) * query.limit };
-  //   this.store.dispatch(new fromStaff.GetCampaign(query));
+  //   this.store.dispatch(new  GetCampaign(query));
   // }
 
   ngOnDestroy() {

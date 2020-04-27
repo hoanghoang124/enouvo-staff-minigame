@@ -47,13 +47,10 @@
         <td style="font-weight: bold; text-transform: capitalize;">
           {{ staff.firstName || 'n/a' }}
         </td>
-        <td style=" font-weight: bold; text-transform: capitalize;">
+        <td style="text-transform: capitalize;">
           {{ staff.lastName || 'n/a' }}
         </td>
-        <td
-          class="text-center"
-          style=" font-weight: bold;text-transform: capitalize;"
-        >
+        <td class="text-center" style=" text-transform: capitalize;">
           {{ staff.scope || 'n/a' }}
         </td>
         <td
@@ -66,7 +63,7 @@
           class="text-center"
           style=" font-weight: bold;text-transform: capitalize;"
         >
-          {{ staff.createdAt | date: 'dd/MM/yyyy' || 'n/a' }}
+          {{ staff.createdAt | date: 'dd/MM/yyyy h:mm:ss a' || 'n/a' }}
         </td>
       </tr>
     </tbody>

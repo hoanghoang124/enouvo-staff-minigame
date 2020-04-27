@@ -1,11 +1,16 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { State } from 'src/app/layouts/auth-layout/store';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Observable } from 'rxjs';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import * as fromAuthSelector from '../../../auth-layout/store/auth.selector';
-import * as fromAuthAction from '../../../auth-layout/store/auth.action';
+import { Observable } from 'rxjs';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Store } from '@ngrx/store';
+import { ToastrService } from 'ngx-toastr';
+
+import { State } from 'src/app/layouts/auth-layout/store';
+import {
+  getErrorChgPswMessage,
+  getIsChgPswLoading
+} from 'src/app/layouts/auth-layout/store/auth.selector';
+import { ChangePassword } from 'src/app/layouts/auth-layout/store/auth.action';
 
 @Component({
   selector: 'app-change-password-modal',
@@ -28,7 +33,8 @@ export class ChangePasswordModalComponent implements OnInit {
   constructor(
     private store: Store<State>,
     private activeModal: NgbActiveModal,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private toastrService: ToastrService
   ) {}
 
   ngOnInit() {
@@ -42,12 +48,8 @@ export class ChangePasswordModalComponent implements OnInit {
         validator: this.MatchPassword('newPassword', 'confirmPassword')
       }
     );
-    this.errorMessage$ = this.store.select(
-      fromAuthSelector.getErrorChgPswMessage
-    );
-    this.isLoadingResults$ = this.store.select(
-      fromAuthSelector.getIsChgPswLoading
-    );
+    this.errorMessage$ = this.store.select(getErrorChgPswMessage);
+    this.isLoadingResults$ = this.store.select(getIsChgPswLoading);
   }
 
   MatchPassword(newPassword: string, confirmPassword: string) {
@@ -80,15 +82,14 @@ export class ChangePasswordModalComponent implements OnInit {
 
   public accept() {
     if (this.changePasswordForm.invalid) {
+      this.toastrService.warning('Form invalid', 'Warning');
       return;
     } else {
       const changePasswordValue = {
         password: this.changePasswordForm.controls['currentPassword'].value,
         newPassword: this.changePasswordForm.controls['newPassword'].value
       };
-      this.store.dispatch(
-        new fromAuthAction.ChangePassword(changePasswordValue)
-      );
+      this.store.dispatch(new ChangePassword(changePasswordValue));
     }
   }
 

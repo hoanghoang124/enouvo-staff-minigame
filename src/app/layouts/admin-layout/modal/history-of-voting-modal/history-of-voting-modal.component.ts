@@ -5,18 +5,24 @@ import {
   QueryList,
   Input
 } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { NgbDateStruct, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+// import { Router, ActivatedRoute } from '@angular/router';
+
+// import { SortEvent } from 'src/app/shared/sort.model';
+// import { UtilServiceService } from '../../services/util-service.service';
 import { State } from 'src/app/layouts/auth-layout/store';
 import { pageSizes, Page } from '../../models/pagination.model';
-// import { SortEvent } from 'src/app/shared/sort.model';
 import { SortableDirective } from 'src/app/shared/directives/sortable.directive';
 import { Observable } from 'rxjs';
-import { NgbDateStruct, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { TableQuery } from '../../models/tableQuery.model';
-import { Store } from '@ngrx/store';
-// import { Router, ActivatedRoute } from '@angular/router';
-// import { UtilServiceService } from '../../services/util-service.service';
-import * as fromStaff from '../../store';
+
 import * as _ from 'lodash';
+import { GetVotingHistory } from '../../store/actions/campaign.action';
+import {
+  getIsVtgHsrLoading,
+  getVotingHistory
+} from '../../store/selectors/campaign.selector';
 @Component({
   selector: 'app-history-of-voting-modal',
   templateUrl: './history-of-voting-modal.component.html',
@@ -25,7 +31,6 @@ import * as _ from 'lodash';
 export class HistoryOfVotingModalComponent implements OnInit {
   @Input() id: number;
   @Input() userId: number;
-
   @ViewChildren(SortableDirective) headers1: QueryList<SortableDirective>;
 
   votingHistory$: Observable<any>;
@@ -38,6 +43,7 @@ export class HistoryOfVotingModalComponent implements OnInit {
   tableQuery: TableQuery;
   totalItems$: Observable<number>;
   searchText: string;
+
   constructor(
     private store: Store<State>,
     private activeModal: NgbActiveModal // private router: Router, // private route: ActivatedRoute, // private utilService: UtilServiceService
@@ -46,14 +52,11 @@ export class HistoryOfVotingModalComponent implements OnInit {
   ngOnInit() {
     this.tableQuery = this.defaultQuery;
     this.store.dispatch(
-      new fromStaff.GetVotingHistory({ id: this.id, userId: this.userId })
+      new GetVotingHistory({ id: this.id, userId: this.userId })
     );
-    this.votingHistory$ = this.store.select(fromStaff.getVotingHistory);
-    // this.totalItems$ = this.store.select(fromStaff.getTotalStaffs);
-    this.errorMessage$ = this.store.select(fromStaff.getErrorVtgHsrMessage);
-    this.isVotingHistoryLoading$ = this.store.select(
-      fromStaff.getIsVtgHsrLoading
-    );
+    this.votingHistory$ = this.store.select(getVotingHistory);
+    // this.totalItems$ = this.store.select(getTotalStaffs);
+    this.isVotingHistoryLoading$ = this.store.select(getIsVtgHsrLoading);
     // this.fetchTableData(this.tableQuery);
   }
 

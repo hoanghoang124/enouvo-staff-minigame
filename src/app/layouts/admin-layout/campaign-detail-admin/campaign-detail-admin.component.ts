@@ -5,19 +5,24 @@ import {
   QueryList,
   OnDestroy
 } from '@angular/core';
-import * as fromStaff from '../store';
-import * as _ from 'lodash';
-import { Page, pageSizes } from '../models/pagination.model';
-import { State } from '../../auth-layout/store';
-import { SortableDirective } from 'src/app/shared/directives';
 import { Observable } from 'rxjs';
 import { NgbDateStruct, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { TableQuery } from '../models/tableQuery.model';
+import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Router, ActivatedRoute } from '@angular/router';
-import { UtilServiceService } from '../services/util-service.service';
+
+import { State } from '../../auth-layout/store';
+import { Page, pageSizes } from '../models/pagination.model';
+import { SortableDirective } from 'src/app/shared/directives';
+import { TableQuery } from '../models/tableQuery.model';
 import { DialogService } from '../services/dialog.service';
-import { SortEvent } from 'src/app/shared/sort.model';
+
+import * as _ from 'lodash';
+import { GetCampaignDetail } from '../store/actions/campaign.action';
+import {
+  getIsCmpDtlLoading,
+  getCampaignDetail,
+  getErrorGtCmpDtlMessage
+} from '../store/selectors/campaign.selector';
 @Component({
   selector: 'app-campaign-detail-admin',
   templateUrl: './campaign-detail-admin.component.html',
@@ -36,11 +41,10 @@ export class CampaignDetailAdminComponent implements OnInit, OnDestroy {
   tableQuery: TableQuery;
   totalItems$: Observable<number>;
   searchText: string;
+
   constructor(
     private store: Store<State>,
-    private router: Router,
     private route: ActivatedRoute,
-    private utilService: UtilServiceService,
     private modalService: NgbModal,
     private dialogService: DialogService
   ) {}
@@ -48,31 +52,14 @@ export class CampaignDetailAdminComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.tableQuery = this.defaultQuery;
     this.route.params.subscribe(params => {
-      this.store.dispatch(new fromStaff.GetCampaignDetail(params.id));
+      this.store.dispatch(new GetCampaignDetail(params.id));
     });
-    this.campaign$ = this.store.select(fromStaff.getCampaignDetail);
-    // this.totalItems$ = this.store.select(fromStaff.getTotalStaffs);
-    this.errorMessage$ = this.store.select(fromStaff.getErrorGtCmpDtlMessage);
-    this.isCampaignDetailLoading$ = this.store.select(
-      fromStaff.getIsCmpDtlLoading
-    );
+    this.campaign$ = this.store.select(getCampaignDetail);
+
+    // this.totalItems$ = this.store.select(  getTotalStaffs);
+    this.errorMessage$ = this.store.select(getErrorGtCmpDtlMessage);
+    this.isCampaignDetailLoading$ = this.store.select(getIsCmpDtlLoading);
     // this.fetchTableData(this.tableQuery);
-  }
-
-  onSort(sort: SortEvent) {
-    this.paging.pageNumber = 1;
-    this.changeQuery({
-      ...this.utilService.getSortQuery(sort, this.headers1),
-      pageNumber: 1
-    });
-  }
-
-  changeQuery(query: any = {}) {
-    let { queryParams } = this.route.snapshot;
-    queryParams = { ...queryParams, ...query };
-    this.router.navigate(['campaign'], {
-      queryParams: _.pickBy(queryParams, _.identity)
-    });
   }
 
   changePageSize(event) {
@@ -88,7 +75,7 @@ export class CampaignDetailAdminComponent implements OnInit, OnDestroy {
 
   fetchTableData(query: TableQuery) {
     query = { ...query, offset: (query.offset - 1) * query.limit };
-    this.store.dispatch(new fromStaff.GetCampaignDetail(query));
+    this.store.dispatch(new GetCampaignDetail(query));
   }
 
   viewHistoryOfCampaign(id, userId) {
