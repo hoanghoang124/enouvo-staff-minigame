@@ -168,7 +168,7 @@ export class VoteSuccess implements Action {
 
 export class VoteFailure implements Action {
   public readonly type = CampaignActionsType.VOTE_FAILURE;
-  constructor(public payload: Error) {}
+  constructor(public payload: any) {}
 }
 
 export type CampaignActions =

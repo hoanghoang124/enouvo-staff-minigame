@@ -216,8 +216,8 @@ export function campaignReducer(
         errorDltCmpMessage: null
       };
     case campaignActions.CampaignActionsType.DELETE_CAMPAIGN_SUCCESS:
-      const deleteCampaigns = _.remove(state.campaigns, function(campaign) {
-        return campaign.id !== action.payload.id;
+      const deleteCampaigns = _.remove(state.campaigns, item => {
+        return item.id !== action.payload;
       });
       return {
         ...state,
