@@ -18,7 +18,6 @@ import { SortEvent } from 'src/app/shared/sort.model';
 import { SortableDirective } from 'src/app/shared/directives/sortable.directive';
 import { State } from '../../auth-layout/store';
 import {
-  getErrorGtAllStfMessage,
   getAllStaffs,
   getTotalStaffs,
   getIsGtAllStfLoading
@@ -36,7 +35,6 @@ export class TablesComponent implements OnInit, OnDestroy {
 
   staffs$: Observable<Staff[]>;
   isStaffLoading$: Observable<boolean>;
-  errorMessage$: Observable<string>;
   editProfileForm: FormGroup;
   resetPasswordForm: FormGroup;
   model1: NgbDateStruct;
@@ -68,7 +66,6 @@ export class TablesComponent implements OnInit, OnDestroy {
     this.tableQuery = this.defaultQuery;
     this.staffs$ = this.store.select(getAllStaffs);
     this.totalItems$ = this.store.select(getTotalStaffs);
-    this.errorMessage$ = this.store.select(getErrorGtAllStfMessage);
     this.isStaffLoading$ = this.store.select(getIsGtAllStfLoading);
     this.fetchTableData(this.tableQuery);
   }

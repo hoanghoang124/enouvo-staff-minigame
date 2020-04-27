@@ -63,7 +63,7 @@ export class GetCampaignSuccess implements Action {
 }
 export class GetCampaignFail implements Action {
   public readonly type = CampaignActionsType.GET_CAMPAIGN_FAILURE;
-  constructor(public payload: Error) {}
+  constructor(public payload: any) {}
 }
 
 export class GetCampaignDetail implements Action {
@@ -110,7 +110,7 @@ export class GetCampaignListStaffSuccess implements Action {
 
 export class GetCampaignListStaffFailure implements Action {
   public readonly type = CampaignActionsType.GET_CAMPAIGN_LIST_STAFF_FAILURE;
-  constructor(public payload: Error) {}
+  constructor(public payload: any) {}
 }
 
 export class GetVotingHistory implements Action {

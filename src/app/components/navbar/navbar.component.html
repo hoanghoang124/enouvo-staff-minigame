@@ -1,5 +1,5 @@
 <nav
-  class="navbar navbar-horizontal navbar-expand-md shadow bg-white"
+  class="navbar navbar-horizontal navbar-light navbar-expand-md shadow bg-white"
   id="navbar-main"
 >
   <div class="container-fluid px-0">
@@ -12,7 +12,7 @@
       *ngIf="authService.isAdmin()"
       aria-controls="sidenav-collapse-main"
     >
-      <span class="ni ni-bullet-list-67" style="color: #0f4c81;"></span>
+      <span class="navbar-toggler-icon" style="color: #0f4c81;"></span>
     </button>
     <!-- Menu -->
     <div
@@ -83,14 +83,14 @@
             <span class="avatar avatar-sm rounded-circle">
               <img
                 alt="Image placeholder"
-                src="{{ avatarUrl || '../../../assets/img/avatar/aHuan.jpg' }}"
+                src="../../../assets/img/avatar/aHuan.jpg"
               />
             </span>
             <div class="media-body ml-2" style="cursor: default;">
               <span
                 class="mb-0 text-sm nav-link font-weight-bold"
                 style="text-transform: capitalize;"
-                >{{ firstName || 'welcome' }}
+                >{{ username }}
               </span>
             </div>
           </div>

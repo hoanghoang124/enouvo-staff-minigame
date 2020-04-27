@@ -139,7 +139,7 @@ export class CampaignEffects {
       return this.campaignService.deleteCampagin(res.id).pipe(
         map(res => {
           this.dialogService.closeDeleteCampaign();
-          return new CampaignActions.DeleteCampaignSuccess(res.message);
+          return new CampaignActions.DeleteCampaignSuccess(res);
         }),
         catchError(res => [
           new CampaignActions.DeleteCampaignFailure(res.error.message)

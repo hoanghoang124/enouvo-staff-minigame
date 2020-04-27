@@ -24,7 +24,7 @@
                 </thead>
                 <tbody *ngFor="let campaign of campaigns$ | async">
                   <tr
-                    style="text-transform: capitalize;"
+                    style="text-transform: capitalize; cursor: pointer;"
                     *ngIf="campaign.isCampaignActive === true"
                     (click)="openCampaignDetailStaff(campaign.id)"
                   >

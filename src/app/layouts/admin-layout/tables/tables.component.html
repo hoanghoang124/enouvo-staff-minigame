@@ -9,24 +9,17 @@
               <h3 class="mb-0">
                 Employees list
               </h3>
-              <span
-                class="badge badge-warning"
-                id="error-message"
-                *ngIf="errorMessage$ | async"
-              >
-                {{ errorMessage$ | async }}
-              </span>
             </div>
             <div class="col text-right">
               <button
                 (click)="openUploadCSVFileDialog()"
-                class="btn btn-sm btn-default"
+                class="btn btn-sm btn-default header-button"
               >
                 Import CSV
               </button>
               <button
                 (click)="openCreateAccountDialog()"
-                class="btn btn-sm btn-primary"
+                class="btn btn-sm btn-primary header-button"
               >
                 Create Account
               </button>
@@ -157,7 +150,10 @@
                 </td>
                 <td></td>
               </tr>
-              <tr *ngFor="let staff of staffs$ | async">
+              <tr
+                *ngFor="let staff of staffs$ | async"
+                style="cursor: pointer;"
+              >
                 <td class="text-center" scope="row">
                   <div
                     class="media align-items-center"
@@ -187,10 +183,13 @@
                 <td [routerLink]="[staff.id]">
                   {{ staff.lastName || 'n/a' }}
                 </td>
-                <td class="text-center">
+                <td class="text-center" [routerLink]="[staff.id]">
                   {{ staff.birthday | date: 'dd/MM/yyyy' || 'n/a' }}
                 </td>
-                <td style="text-transform: lowercase;">
+                <td
+                  style="text-transform: lowercase;"
+                  [routerLink]="[staff.id]"
+                >
                   {{ staff.email || 'n/a' }}
                 </td>
                 <td class="action" (click)="openConfirmationDialog(staff.id)">
