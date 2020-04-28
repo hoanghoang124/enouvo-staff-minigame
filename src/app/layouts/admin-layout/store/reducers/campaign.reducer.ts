@@ -20,7 +20,7 @@ export interface CampaignState {
   isGtVtgHsrLoading: boolean;
   isUpdCmpLoading: boolean;
   isDltCmpLoading: boolean;
-  isVtgLoading: boolean;
+  isVtgLoading: Object;
   errorGtAllCmpMessage: any;
   errorGtCmpDtlMessage: any;
   errorGtCmdDtlVtgMessage: any;
@@ -49,7 +49,7 @@ const initialState: CampaignState = {
   isGtVtgHsrLoading: false,
   isUpdCmpLoading: false,
   isDltCmpLoading: false,
-  isVtgLoading: false,
+  isVtgLoading: {},
   errorCrtCmpMessage: null,
   errorGtAllCmpMessage: null,
   errorGtCmpDtlMessage: null,
@@ -235,18 +235,21 @@ export function campaignReducer(
     case campaignActions.CampaignActionsType.VOTE:
       return {
         ...state,
-        isVtgLoading: true
+        isVtgLoading: {
+          ...state.isVtgLoading,
+          [action.payload.voting.receiverId]: true
+        }
       };
     case campaignActions.CampaignActionsType.VOTE_SUCCESS:
       return {
         ...state,
-        isVtgLoading: false,
-        starLeft: state.starLimit - state.votedStar
+        isVtgLoading: _.omit(state.isVtgLoading, [action.payload.receiverId]),
+        starLeft: state.starLeft - 1
       };
     case campaignActions.CampaignActionsType.VOTE_FAILURE:
       return {
         ...state,
-        isVtgLoading: false,
+        isVtgLoading: _.omit(state.isVtgLoading, [action.payload.receiverId]),
         errorVtgMessage: action.payload
       };
     default:

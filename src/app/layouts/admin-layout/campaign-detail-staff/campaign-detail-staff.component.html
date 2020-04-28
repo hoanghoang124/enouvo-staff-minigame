@@ -18,7 +18,7 @@
         >Admin can not vote</span
       >
       <span class="badge badge-info" *ngIf="!authService.isAdmin()"
-        >Give stars to who deserve
+        >Give stars to whom deserve
       </span>
       <h4 class="modal-title " *ngIf="!authService.isAdmin()">
         Star Limit: {{ starLimit$ | async }} | Star Left:
@@ -99,7 +99,7 @@
                 Vote
                 <i
                   class="fas fa-spinner fa-pulse spinner"
-                  *ngIf="isVotingLoading$ | async"
+                  *ngIf="(isVotingLoading$ | async)[staff.userId]"
                 ></i>
               </button>
             </td>

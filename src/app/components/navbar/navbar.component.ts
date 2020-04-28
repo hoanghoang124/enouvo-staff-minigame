@@ -22,7 +22,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   public menuItems: any[];
   public isCollapsed = true;
   isLoadingResults$: Observable<boolean>;
-  userId: number = Number(localStorage.getItem('id'));
+  userId: number = +localStorage.getItem('id');
   username: string = localStorage.getItem('username');
 
   constructor(

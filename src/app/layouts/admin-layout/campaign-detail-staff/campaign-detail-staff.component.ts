@@ -43,7 +43,7 @@ export class CampaignDetailStaffComponent implements OnInit {
   staffs$: Observable<any>;
   campaign$: Observable<any>;
   isCampaignLoading$: Observable<boolean>;
-  isVotingLoading$: Observable<boolean>;
+  isVotingLoading$: Observable<Object>;
   errorMessage$: Observable<string>;
   starLimit$: Observable<number>;
   starLeft$: Observable<number>;
