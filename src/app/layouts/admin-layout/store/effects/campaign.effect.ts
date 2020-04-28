@@ -137,7 +137,7 @@ export class CampaignEffects {
     map((action: CampaignActions.DeleteCampaign) => action.payload),
     switchMap(res => {
       return this.campaignService.deleteCampagin(res.id).pipe(
-        map(res => {
+        map(() => {
           this.dialogService.closeDeleteCampaign();
           return new CampaignActions.DeleteCampaignSuccess(res);
         }),

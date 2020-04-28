@@ -64,7 +64,16 @@
                   {{ campaign.campaign.endDate | date: 'dd/MM/yyyy' }}
                 </td>
                 <td class="text-center">
-                  {{ campaign.campaign.isCampaignActive }}
+                  <span
+                    class="badge badge-info"
+                    *ngIf="campaign.isCampaignActive === true"
+                    >Active</span
+                  >
+                  <span
+                    class="badge badge-danger"
+                    *ngIf="campaign.isCampaignActive !== true"
+                    >Deactive</span
+                  >
                 </td>
               </tr>
             </tbody>

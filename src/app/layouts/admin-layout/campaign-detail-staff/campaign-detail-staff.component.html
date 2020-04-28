@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" *ngIf="campaign$ | async as campaign">
   <div class="col">
     <div class="modal-header border-0">
       <h3 class="modal-title">
@@ -51,11 +51,10 @@
               Last Name
             </th>
             <th class="text-center">Position</th>
-            <th class="text-center">Voted Star</th>
             <th class="action text-center">Action</th>
           </tr>
         </thead>
-        <tbody *ngFor="let staff of staffs$ | async">
+        <tbody *ngFor="let staff of campaign.staffs">
           <tr *ngIf="staff.userId !== currentUserId">
             <td scope="row">
               <div class="media align-items-center">
@@ -89,9 +88,6 @@
               style="text-transform: capitalize;"
             >
               {{ staff.scope || 'n/a' }}
-            </td>
-            <td class="text-center" style="font-weight: bold">
-              {{ votedStar$ | async }}
             </td>
             <td class="action  text-center">
               <button
