@@ -81,7 +81,7 @@ export class DashboardComponent implements OnInit {
 
   openCampaignDetailStaff(campaignId) {
     if (this.authService.isAdmin()) {
-      this.toastrService.warning('Admin can not vote', 'Warning');
+      this.toastrService.info('Admin can not vote', 'Fact:');
     } else {
       this.dialogService.viewCampaignStaffList(campaignId);
     }
