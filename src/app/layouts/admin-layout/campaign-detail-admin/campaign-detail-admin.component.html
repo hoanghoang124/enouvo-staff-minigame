@@ -66,12 +66,12 @@
                 <td class="text-center">
                   <span
                     class="badge badge-info"
-                    *ngIf="campaign.isCampaignActive === true"
+                    *ngIf="campaign.campaign.isCampaignActive === true"
                     >Active</span
                   >
                   <span
                     class="badge badge-danger"
-                    *ngIf="campaign.isCampaignActive !== true"
+                    *ngIf="campaign.campaign.isCampaignActive !== true"
                     >Deactive</span
                   >
                 </td>

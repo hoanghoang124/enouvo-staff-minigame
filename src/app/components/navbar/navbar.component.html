@@ -9,7 +9,6 @@
       type="button"
       (click)="isCollapsed = !isCollapsed"
       [attr.aria-expanded]="!isCollapsed"
-      *ngIf="authService.isAdmin()"
       aria-controls="sidenav-collapse-main"
     >
       <span class="navbar-toggler-icon" style="color: #0f4c81;"></span>
@@ -41,17 +40,29 @@
         </div>
       </div>
       <ul class="navbar-nav" style="z-index: 10;">
-        <li
-          *ngFor="let menuItem of menuItems"
-          class="{{ menuItem.class }} nav-item"
-        >
+        <li class="nav-item">
+          <a routerLinkActive="active" routerLink="/dashboard" class="nav-link">
+            Dashboard
+          </a>
+        </li>
+        <li class="nav-item">
           <a
             routerLinkActive="active"
-            [routerLink]="[menuItem.path]"
+            routerLink="/table"
             class="nav-link"
             *ngIf="authService.isAdmin()"
           >
-            {{ menuItem.title }}
+            Employees
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            routerLinkActive="active"
+            routerLink="/campaign"
+            class="nav-link"
+            *ngIf="authService.isAdmin()"
+          >
+            Campaigns
           </a>
         </li>
       </ul>

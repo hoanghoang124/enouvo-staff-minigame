@@ -7,9 +7,7 @@ import { State } from 'src/app/layouts/auth-layout/store';
 import { AuthService } from 'src/app/layouts/auth-layout/services/auth.service';
 import { DialogService } from 'src/app/layouts/admin-layout/services/dialog.service';
 import { LogOut } from './../../layouts/auth-layout/store/auth.action';
-import { ROUTES } from 'src/app/layouts/admin-layout/models/app-routes.model';
 import { Router } from '@angular/router';
-import { GetStaff } from 'src/app/layouts/admin-layout/store/actions/staff.action';
 
 @Component({
   selector: 'app-navbar',
@@ -18,8 +16,6 @@ import { GetStaff } from 'src/app/layouts/admin-layout/store/actions/staff.actio
 })
 export class NavbarComponent implements OnInit, OnDestroy {
   public focus;
-  public listTitles: any[];
-  public menuItems: any[];
   public isCollapsed = true;
   isLoadingResults$: Observable<boolean>;
   userId: number = +localStorage.getItem('id');
@@ -34,9 +30,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.store.dispatch(new GetStaff(this.userId));
-    this.listTitles = ROUTES.filter(listTitle => listTitle);
-    this.menuItems = ROUTES.filter(menuItem => menuItem);
     this.router.events.subscribe(() => {
       this.isCollapsed = true;
     });

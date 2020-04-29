@@ -10,7 +10,6 @@ export interface CampaignState {
   selectedStaff: Staff;
   starLimit: number;
   votedStar: number;
-  starLeft: number;
   totalCampaigns: number;
   isCrtCmpLoading: boolean;
   isGtAllCmpLoading: boolean;
@@ -39,7 +38,6 @@ const initialState: CampaignState = {
   selectedCampaign: null,
   starLimit: 0,
   votedStar: 0,
-  starLeft: 0,
   totalCampaigns: 0,
   isCrtCmpLoading: false,
   isGtAllCmpLoading: false,
@@ -136,8 +134,7 @@ export function campaignReducer(
         ...state,
         selectedCampaign: action.payload,
         starLimit: action.payload.campaign.starLimitation,
-        votedStar: action.payload.votingHistory.length,
-        starLeft: state.starLimit - state.votedStar,
+        votedStar: action.payload.votingHistory.length, // rac roi :3
         isGtCmpDtlLoading: false
       };
     case campaignActions.CampaignActionsType
@@ -244,12 +241,13 @@ export function campaignReducer(
       return {
         ...state,
         isVtgLoading: _.omit(state.isVtgLoading, [action.payload.receiverId]),
-        starLeft: state.starLeft - 1
+        votedStar: state.votedStar + 1
       };
     case campaignActions.CampaignActionsType.VOTE_FAILURE:
       return {
         ...state,
-        isVtgLoading: _.omit(state.isVtgLoading, [action.payload.receiverId]),
+        // isVtgLoading: _.omit(state.isVtgLoading, [action.payload.receiverId]),
+        isVtgLoading: false,
         errorVtgMessage: action.payload
       };
     default:

@@ -21,8 +21,8 @@
         >Give stars to whom deserve
       </span>
       <h4 class="modal-title " *ngIf="!authService.isAdmin()">
-        Star Limit: {{ starLimit$ | async }} | Star Left:
-        {{ starLeft$ | async }}
+        Star Limit: {{ starLimit$ | async }} | Voted:
+        {{ votedStar$ | async }}
       </h4>
     </div>
     <!-- <div class="input-group mx-5 my-4">
@@ -93,7 +93,10 @@
               <button
                 class="btn btn-sm btn-success"
                 style="width: 70px;"
-                [disabled]="authService.isAdmin()"
+                [disabled]="
+                  authService.isAdmin() ||
+                  (isVotingLoading$ | async)[staff.userId]
+                "
                 (click)="Vote(staff.userId)"
               >
                 Vote

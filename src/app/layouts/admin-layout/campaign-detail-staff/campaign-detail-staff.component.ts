@@ -21,11 +21,11 @@ import * as _ from 'lodash';
 import { AuthService } from '../../auth-layout/services/auth.service';
 import {
   getStarLimit,
-  getStarLeft,
   getCampaignDetailForVoting,
   getIsCmpDtlVtgLoading,
   getErrorGtCmpDtlVtgMessage,
-  getIsVtgLoading
+  getIsVtgLoading,
+  getVotedStar
 } from '../store/selectors/campaign.selector';
 import {
   Vote,
@@ -46,7 +46,7 @@ export class CampaignDetailStaffComponent implements OnInit {
   isVotingLoading$: Observable<Object>;
   errorMessage$: Observable<string>;
   starLimit$: Observable<number>;
-  starLeft$: Observable<number>;
+  votedStar$: Observable<number>;
   currentUserId: number;
 
   model: NgbDateStruct;
@@ -70,7 +70,7 @@ export class CampaignDetailStaffComponent implements OnInit {
     this.store.dispatch(new GetCampaignDetailForVoting(this.campaignId));
     this.campaign$ = this.store.select(getCampaignDetailForVoting);
     this.starLimit$ = this.store.select(getStarLimit);
-    this.starLeft$ = this.store.select(getStarLeft);
+    this.votedStar$ = this.store.select(getVotedStar);
     this.isCampaignLoading$ = this.store.select(getIsCmpDtlVtgLoading);
     this.errorMessage$ = this.store.select(getErrorGtCmpDtlVtgMessage);
     this.currentUserId = +localStorage.getItem('id');
