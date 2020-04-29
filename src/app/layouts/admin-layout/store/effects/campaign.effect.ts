@@ -52,8 +52,8 @@ export class CampaignEffects {
   getCampaignDetail$ = this.actions.pipe(
     ofType(CampaignActionsType.GET_CAMPAIGN_DETAIL),
     map((action: CampaignActions.GetCampaignDetail) => action.payload),
-    switchMap(id => {
-      return this.campaignService.getCampaignDetail(id).pipe(
+    switchMap(res => {
+      return this.campaignService.getCampaignDetail(res.id, res.query).pipe(
         map(res => {
           return new CampaignActions.GetCampaignDetailSuccess(res);
         }),
@@ -68,8 +68,8 @@ export class CampaignEffects {
   getCampaignDetailForVoting$ = this.actions.pipe(
     ofType(CampaignActionsType.GET_CAMPAIGN_DETAIL_FOR_VOTING),
     map((action: CampaignActions.GetCampaignDetail) => action.payload),
-    switchMap(id => {
-      return this.campaignService.getCampaignDetailForVoting(id).pipe(
+    switchMap(res => {
+      return this.campaignService.getCampaignDetailForVoting(res.id).pipe(
         map(res => {
           return new CampaignActions.GetCampaignDetailForVotingSuccess(res);
         }),
