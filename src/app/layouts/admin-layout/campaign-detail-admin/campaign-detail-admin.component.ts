@@ -1,3 +1,4 @@
+import { getCampaignListStaff } from './../store/selectors/campaign.selector';
 import {
   Component,
   OnInit,
@@ -17,7 +18,10 @@ import { TableQuery } from '../models/tableQuery.model';
 import { DialogService } from '../services/dialog.service';
 
 import * as _ from 'lodash';
-import { GetCampaignDetail } from '../store/actions/campaign.action';
+import {
+  GetCampaignDetail,
+  GetCampaignListStaff
+} from '../store/actions/campaign.action';
 import {
   getIsCmpDtlLoading,
   getCampaignDetail,
@@ -34,6 +38,7 @@ export class CampaignDetailAdminComponent implements OnInit, OnDestroy {
   @ViewChildren(SortableDirective) headers: QueryList<SortableDirective>;
 
   campaign$: Observable<any>;
+  staffs$: Observable<any>;
   isCampaignDetailLoading$: Observable<boolean>;
   errorMessage$: Observable<string>;
   model: NgbDateStruct;
@@ -59,10 +64,10 @@ export class CampaignDetailAdminComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.tableQuery = this.defaultQuery;
     this.route.params.subscribe(params => {
-      this.store.dispatch(new GetCampaignDetail(params.id));
+      this.store.dispatch(new GetCampaignListStaff({ id: params.id }));
     });
     this.campaign$ = this.store.select(getCampaignDetail);
-
+    this.staffs$ = this.store.select(getCampaignListStaff);
     this.totalItems$ = this.store.select(getTotalStaffs);
     this.errorMessage$ = this.store.select(getErrorGtCmpDtlMessage);
     this.isCampaignDetailLoading$ = this.store.select(getIsCmpDtlLoading);

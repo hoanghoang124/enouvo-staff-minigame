@@ -107,7 +107,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let staff of campaign.staffs">
+              <tr *ngFor="let staff of staffs$ | async">
                 <td class="text-center">
                   <div class="media align-items-center">
                     <div class="media-body">
