@@ -67,7 +67,9 @@ export class CampaignDetailStaffComponent implements OnInit {
     // this.tableQuery = this.defaultQuery;
     // this.totalItems$ = this.store.select(getTotalStaffs);
     // this.fetchTableData(this.tableQuery);
-    this.store.dispatch(new GetCampaignDetailForVoting(this.campaignId));
+    this.store.dispatch(
+      new GetCampaignDetailForVoting({ id: this.campaignId })
+    );
     this.campaign$ = this.store.select(getCampaignDetailForVoting);
     this.starLimit$ = this.store.select(getStarLimit);
     this.votedStar$ = this.store.select(getVotedStar);

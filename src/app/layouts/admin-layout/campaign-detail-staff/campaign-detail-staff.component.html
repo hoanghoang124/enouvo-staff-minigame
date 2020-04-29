@@ -14,9 +14,6 @@
       </button>
     </div>
     <div class="modal-header subheader">
-      <span class="badge badge-info" *ngIf="authService.isAdmin()"
-        >Admin can not vote</span
-      >
       <span class="badge badge-info" *ngIf="!authService.isAdmin()"
         >Give stars to whom deserve
       </span>

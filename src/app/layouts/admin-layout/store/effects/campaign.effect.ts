@@ -67,7 +67,7 @@ export class CampaignEffects {
   @Effect()
   getCampaignDetailForVoting$ = this.actions.pipe(
     ofType(CampaignActionsType.GET_CAMPAIGN_DETAIL_FOR_VOTING),
-    map((action: CampaignActions.GetCampaignDetail) => action.payload),
+    map((action: CampaignActions.GetCampaignDetailForVoting) => action.payload),
     switchMap(res => {
       return this.campaignService.getCampaignDetailForVoting(res.id).pipe(
         map(res => {
