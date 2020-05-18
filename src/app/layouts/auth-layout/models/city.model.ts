@@ -1,6 +1,6 @@
 export const Cities = [
-  'Ba Ria - Vung Tau ',
   ' An Giang ',
+  ' Ba Ria - Vung Tau ',
   ' Bac Giang ',
   ' Bac Kan ',
   ' Bac Lieu ',
@@ -14,7 +14,8 @@ export const Cities = [
   ' Cao Bang ',
   ' Can Tho ',
   ' Da Nang ',
-  ' Dong Lam ',
+  ' Dak Lak ',
+  ' Dak Nong ',
   ' Dien Bien ',
   ' Dong Nai ',
   ' Dong Thap ',
@@ -32,7 +33,6 @@ export const Cities = [
   ' Khanh Hoa ',
   ' Kien Giang ',
   ' Kon Tum ',
-  ' Ky Dong ',
   ' Lai Chau ',
   ' Lam Dong ',
   ' Lang Son ',
@@ -42,7 +42,7 @@ export const Cities = [
   ' Nghe An ',
   ' Ninh Binh ',
   ' Ninh Thuan ',
-  ' Phu Hue ',
+  ' Phu Tho ',
   ' Phu Yen ',
   ' Quang Binh ',
   ' Quang Nam ',
@@ -61,5 +61,5 @@ export const Cities = [
   ' Tuyen Quang ',
   ' Vinh Long ',
   ' Vinh Phuc ',
-  ' Yen Ba '
+  ' Yen Bai '
 ];

@@ -8,25 +8,29 @@ import {
 import { Observable } from 'rxjs';
 import { NgbDateStruct, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
-// import { ActivatedRoute } from '@angular/router';
+// import { ActivatedRoute, Router } from '@angular/router';
 
-// import { State } from '../../auth-layout/store';
 // import { SortEvent } from 'src/app/shared/sort.model';
 // import { UtilServiceService } from '../services/util-service.service';
-import { Staff } from '../models/staff.model';
 import { Page, pageSizes } from '../models/pagination.model';
 import { SortableDirective } from 'src/app/shared/directives';
 import { TableQuery } from '../models/tableQuery.model';
 import { State } from '../store/reducers';
-import { GetCampaignListStaff } from '../store/actions/staff.action';
-import {
-  getErrorGtCmpLstStf,
-  getCampaignListStaff,
-  getTotalStaffs,
-  getIsCmpLstStfLoading
-} from '../store/selectors/staff.selector';
-import * as _ from 'lodash';
 
+import * as _ from 'lodash';
+import { AuthService } from '../../auth-layout/services/auth.service';
+import {
+  getStarLimit,
+  getCampaignDetailForVoting,
+  getIsCmpDtlVtgLoading,
+  getErrorGtCmpDtlVtgMessage,
+  getIsVtgLoading,
+  getVotedStar
+} from '../store/selectors/campaign.selector';
+import {
+  Vote,
+  GetCampaignDetailForVoting
+} from '../store/actions/campaign.action';
 @Component({
   selector: 'app-campaign-detail-staff',
   templateUrl: './campaign-detail-staff.component.html',
@@ -36,11 +40,15 @@ export class CampaignDetailStaffComponent implements OnInit {
   @Input() campaignId: number;
 
   @ViewChildren(SortableDirective) headers1: QueryList<SortableDirective>;
-
-  staffs$: Observable<Staff[]>;
-  isStaffLoading$: Observable<boolean>;
-  isLoadingResults$: Observable<boolean>;
+  staffs$: Observable<any>;
+  campaign$: Observable<any>;
+  isCampaignLoading$: Observable<boolean>;
+  isVotingLoading$: Observable<Object>;
   errorMessage$: Observable<string>;
+  starLimit$: Observable<number>;
+  votedStar$: Observable<number>;
+  currentUserId: number;
+
   model: NgbDateStruct;
   paging: Page;
   pageSizes = pageSizes;
@@ -51,17 +59,33 @@ export class CampaignDetailStaffComponent implements OnInit {
 
   constructor(
     private store: Store<State>,
-    private activeModal: NgbActiveModal // private route: ActivatedRoute // private utilService: UtilServiceService
+    public authService: AuthService,
+    private activeModal: NgbActiveModal // private router: Router, // private route: ActivatedRoute, // private utilService: UtilServiceService
   ) {}
 
   ngOnInit() {
     // this.tableQuery = this.defaultQuery;
-    this.store.dispatch(new GetCampaignListStaff(this.campaignId));
-    this.staffs$ = this.store.select(getCampaignListStaff);
-    this.totalItems$ = this.store.select(getTotalStaffs);
-    this.errorMessage$ = this.store.select(getErrorGtCmpLstStf);
-    this.isStaffLoading$ = this.store.select(getIsCmpLstStfLoading);
+    // this.totalItems$ = this.store.select(getTotalStaffs);
     // this.fetchTableData(this.tableQuery);
+    this.store.dispatch(
+      new GetCampaignDetailForVoting({ id: this.campaignId })
+    );
+    this.campaign$ = this.store.select(getCampaignDetailForVoting);
+    this.starLimit$ = this.store.select(getStarLimit);
+    this.votedStar$ = this.store.select(getVotedStar);
+    this.isCampaignLoading$ = this.store.select(getIsCmpDtlVtgLoading);
+    this.errorMessage$ = this.store.select(getErrorGtCmpDtlVtgMessage);
+    this.currentUserId = +localStorage.getItem('id');
+    this.isVotingLoading$ = this.store.select(getIsVtgLoading);
+  }
+
+  Vote(receiverId) {
+    this.store.dispatch(
+      new Vote({
+        id: this.campaignId,
+        voting: { receiverId: receiverId, numberOfStars: 1 }
+      })
+    );
   }
 
   // onSort(sort: SortEvent) {
@@ -93,7 +117,7 @@ export class CampaignDetailStaffComponent implements OnInit {
 
   // fetchTableData(query: TableQuery) {
   //   query = { ...query, offset: (query.offset - 1) * query.limit };
-  //   this.store.dispatch(new fromStaff.GetStaffs(query));
+  //   this.store.dispatch(new GetStaffs(query));
   // }
 
   public dismiss() {

@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, Effect, ofType } from '@ngrx/effects';
@@ -15,6 +16,7 @@ export class AuthEffects {
     private actions: Actions,
     private authService: AuthService,
     private router: Router,
+    private toastrService: ToastrService,
     private dialogService: DialogService
   ) {}
 
@@ -27,6 +29,7 @@ export class AuthEffects {
         map(user => {
           if (user.shouldUserChangePassword) {
             this.router.navigateByUrl('/dashboard');
+
             this.dialogService.changePassword(
               'Change Password Form',
               'Login successful, update your password now!'
@@ -34,9 +37,12 @@ export class AuthEffects {
           } else {
             this.router.navigateByUrl('/dashboard');
           }
+
+          this.toastrService.success('Login successfully', 'Success');
           return new AuthActions.LogInSuccess(user);
         }),
         catchError(res => {
+          this.toastrService.error(res.error.message, 'Failure');
           return of(new AuthActions.LogInFailure(res.error.message));
         })
       );
@@ -50,6 +56,7 @@ export class AuthEffects {
       localStorage.setItem('token', user.payload.token);
       localStorage.setItem('role', user.payload.scope);
       localStorage.setItem('id', user.payload.id);
+      localStorage.setItem('username', user.payload.username);
     })
   );
 
@@ -59,13 +66,16 @@ export class AuthEffects {
     map((action: AuthActions.ChangePassword) => action.payload),
     switchMap(payload => {
       return this.authService.changePassword(payload).pipe(
-        map(user => {
+        map(res => {
           this.dialogService.closeChangePassword();
-          return new AuthActions.ChangePasswordSuccess(user);
+          this.toastrService.success(res.message, 'Success');
+
+          return new AuthActions.ChangePasswordSuccess(res);
         }),
-        catchError(res =>
-          of(new AuthActions.ChangePasswordFailure(res.error.message))
-        )
+        catchError(res => {
+          this.toastrService.error(res.error.message, 'Failure');
+          return of(new AuthActions.ChangePasswordFailure(res.error.message));
+        })
       );
     })
   );
@@ -76,13 +86,15 @@ export class AuthEffects {
     map((action: AuthActions.ResetPassword) => action.payload),
     switchMap(payload => {
       return this.authService.resetPassword(payload).pipe(
-        map(user => {
+        map(res => {
           this.dialogService.closeConfirm();
-          return new AuthActions.ResetPasswordSuccess(user);
+          this.toastrService.success(res.message, 'Success');
+          return new AuthActions.ResetPasswordSuccess(res);
         }),
-        catchError(res =>
-          of(new AuthActions.ResetPasswordFailure(res.error.message))
-        )
+        catchError(res => {
+          this.toastrService.error(res.error.message, 'Failure');
+          return of(new AuthActions.ResetPasswordFailure(res.error.message));
+        })
       );
     })
   );

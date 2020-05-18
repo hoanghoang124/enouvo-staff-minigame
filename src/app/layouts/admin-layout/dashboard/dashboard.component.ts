@@ -1,12 +1,7 @@
-import {
-  Component,
-  OnInit,
-  ViewChildren,
-  QueryList,
-  OnDestroy
-} from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { AuthService } from './../../auth-layout/services/auth.service';
+import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
 import { Observable } from 'rxjs';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store, select } from '@ngrx/store';
 
 import { State } from '../store/reducers';
@@ -19,22 +14,26 @@ import { SortableDirective } from 'src/app/shared/directives';
 // import { SortEvent } from 'src/app/shared/sort.model';
 // import { UtilServiceService } from '../services/util-service.service';
 // import { Router, ActivatedRoute } from '@angular/router';
-import { GetCampaign, GetStaffs } from '../store/actions/staff.action';
+
+import * as _ from 'lodash';
+import { GetCampaign } from '../store/actions/campaign.action';
 import {
-  getIsGtAllCmpLoading,
-  getAllCampaigns,
   getErrorGtAllCmpMessage,
+  getAllCampaigns,
+  getIsGtAllCmpLoading
+} from '../store/selectors/campaign.selector';
+import { GetStaffs } from '../store/actions/staff.action';
+import {
   getIsGtAllStfLoading,
   getAllStaffs
 } from '../store/selectors/staff.selector';
-import * as _ from 'lodash';
-
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit, OnDestroy {
+export class DashboardComponent implements OnInit {
   @ViewChildren(SortableDirective) headers2: QueryList<SortableDirective>;
 
   getState: Observable<any>;
@@ -54,6 +53,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   constructor(
     private store: Store<State>,
     private dialogService: DialogService,
+    private toastrService: ToastrService,
+    private authService: AuthService,
     private modalService: NgbModal // private utilService: UtilServiceService, // private router: Router, // private route: ActivatedRoute
   ) {}
 
@@ -79,7 +80,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   openCampaignDetailStaff(campaignId) {
-    this.dialogService.viewCampaignStaffList(campaignId);
+    if (this.authService.isAdmin()) {
+      this.toastrService.info('Admin can not vote', 'Fact:');
+    } else {
+      this.dialogService.viewCampaignStaffList(campaignId);
+    }
   }
 
   // onSort(sort: SortEvent) {

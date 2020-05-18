@@ -4,8 +4,8 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
 
 import { State } from 'src/app/layouts/auth-layout/store';
-import { DeleteCampaign } from '../../store/actions/staff.action';
-import { getIsDltCmpLoading } from '../../store/selectors/staff.selector';
+import { getIsDltCmpLoading } from '../../store/selectors/campaign.selector';
+import { DeleteCampaign } from '../../store/actions/campaign.action';
 
 @Component({
   selector: 'app-confirm-delete-campaign-modal',

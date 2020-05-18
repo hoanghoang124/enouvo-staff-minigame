@@ -19,13 +19,11 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { SortableDirective } from 'src/app/shared/directives';
 import { SortEvent } from 'src/app/shared/sort.model';
 import {
-  getErrorGtAllCmpMessage,
   getAllCampaigns,
   getTotalCampaigns,
-  getIsCrtCmpLoading,
   getIsGtAllCmpLoading
-} from '../store/selectors/staff.selector';
-import { GetCampaign } from '../store/actions/staff.action';
+} from '../store/selectors/campaign.selector';
+import { GetCampaign } from '../store/actions/campaign.action';
 
 @Component({
   selector: 'app-campaign',
@@ -37,7 +35,6 @@ export class CampaignComponent implements OnInit, OnDestroy {
 
   campaigns$: Observable<Campaign[]>;
   isCampaginLoading$: Observable<boolean>;
-  isLoadingResults$: Observable<boolean>;
   errorMessage$: Observable<string>;
   totalCampaigns = 0;
   paging: Page;
@@ -48,7 +45,8 @@ export class CampaignComponent implements OnInit, OnDestroy {
   totalCampaigns$: Observable<number>;
   searchForm1 = new FormGroup({
     fromdate: new FormControl(''),
-    status: new FormControl('')
+    status: new FormControl(''),
+    title: new FormControl('')
   });
   constructor(
     private store: Store<State>,
@@ -62,8 +60,6 @@ export class CampaignComponent implements OnInit, OnDestroy {
     this.tableQuery = this.defaultQuery;
     this.campaigns$ = this.store.select(getAllCampaigns);
     this.totalCampaigns$ = this.store.select(getTotalCampaigns);
-    this.errorMessage$ = this.store.select(getErrorGtAllCmpMessage);
-    this.isLoadingResults$ = this.store.select(getIsCrtCmpLoading);
     this.isCampaginLoading$ = this.store.select(getIsGtAllCmpLoading);
     this.fetchTableData(this.tableQuery);
   }
@@ -121,6 +117,7 @@ export class CampaignComponent implements OnInit, OnDestroy {
   }
 
   search() {
+    console.log(this.searchForm1.value);
     if (this.searchForm1.get('fromdate').value !== '') {
       this.fetchTableData({
         ...this.tableQuery,
@@ -131,6 +128,12 @@ export class CampaignComponent implements OnInit, OnDestroy {
       this.fetchTableData({
         ...this.tableQuery,
         isCampaignActive: this.searchForm1.get('status').value
+      });
+    }
+    if (this.searchForm1.get('title').value !== '') {
+      this.fetchTableData({
+        ...this.tableQuery,
+        title: this.searchForm1.get('title').value
       });
     }
   }

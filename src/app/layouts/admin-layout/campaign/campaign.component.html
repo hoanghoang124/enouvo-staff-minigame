@@ -23,10 +23,6 @@
                 class="btn btn-sm  btn-primary"
               >
                 Create Campaign
-                <i
-                  class="fas fa-spinner fa-pulse spinner"
-                  *ngIf="isLoadingResults$ | async"
-                ></i>
               </button>
             </div>
           </div>
@@ -69,7 +65,7 @@
                 >
                   Status
                 </th>
-                <th class="action">Actions</th>
+                <th class="text-center">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -108,11 +104,7 @@
                   <div class="input-group ">
                     <div class="input-group-prepend">
                       <span class="input-group-text"
-                        ><i
-                          class="ni ni-zoom-split-in"
-                          style="cursor: pointer;"
-                          (click)="search()"
-                        ></i
+                        ><i class="ni ni-zoom-split-in" (click)="search()"></i
                       ></span>
                     </div>
                     <input
@@ -123,7 +115,25 @@
                     />
                   </div>
                 </td>
-                <td></td>
+                <td>
+                  <div class="input-group ">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"
+                        ><i
+                          class="ni ni-zoom-split-in"
+                          style="cursor: pointer;"
+                          (click)="search()"
+                        ></i
+                      ></span>
+                    </div>
+                    <input
+                      class="form-control"
+                      placeholder="Title ..."
+                      type="text"
+                      formControlName="title"
+                    />
+                  </div>
+                </td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -131,36 +141,46 @@
               </tr>
               <tr
                 *ngFor="let campaign of campaigns$ | async"
-                style="text-transform: capitalize;"
+                style="text-transform: capitalize"
               >
                 <td
                   class="text-center"
                   scope="row"
                   [routerLink]="[campaign.id]"
+                  style="cursor: pointer;"
                 >
                   {{ campaign.id }}
                 </td>
-                <td style="font-weight: bold;" [routerLink]="[campaign.id]">
+                <td style="font-weight: bold;">
                   {{ campaign.title || 'n/a' }}
                 </td>
-                <td [routerLink]="[campaign.id]">
+                <td>
                   {{ campaign.description || 'n/a' }}
                 </td>
-                <td class="text-center" [routerLink]="[campaign.id]">
+                <td class="text-center">
                   {{ campaign.startDate | date: 'dd/MM/yyyy' || 'n/a' }}
                 </td>
-                <td class="text-center" [routerLink]="[campaign.id]">
+                <td class="text-center">
                   {{ campaign.endDate | date: 'dd/MM/yyyy' || 'n/a' }}
                 </td>
-                <td class="text-center" [routerLink]="[campaign.id]">
+                <td class="text-center">
                   {{ campaign.starLimitation || 'n/a' }}
                 </td>
-                <td class="text-center" [routerLink]="[campaign.id]">
-                  {{ campaign.isCampaignActive }}
+                <td class="text-center">
+                  <span
+                    class="badge badge-info"
+                    *ngIf="campaign.isCampaignActive === true"
+                    >Active</span
+                  >
+                  <span
+                    class="badge badge-danger"
+                    *ngIf="campaign.isCampaignActive !== true"
+                    >Deactive</span
+                  >
                 </td>
-                <td class="action">
+                <td>
                   <button
-                    class="btn btn-sm btn-info"
+                    class="btn btn-sm btn-info modal-button"
                     (click)="
                       openUpdateCampaignDialog(
                         campaign.id,
@@ -175,7 +195,7 @@
                     Modify
                   </button>
                   <button
-                    class="btn btn-sm btn-danger"
+                    class="btn btn-sm btn-danger modal-button "
                     (click)="openConfirmDeleteCampaign(campaign.id)"
                   >
                     Delete

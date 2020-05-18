@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
+import { ToastrService } from 'ngx-toastr';
 
 import { State } from 'src/app/layouts/auth-layout/store';
 import {
@@ -32,7 +33,8 @@ export class ChangePasswordModalComponent implements OnInit {
   constructor(
     private store: Store<State>,
     private activeModal: NgbActiveModal,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private toastrService: ToastrService
   ) {}
 
   ngOnInit() {
@@ -80,6 +82,7 @@ export class ChangePasswordModalComponent implements OnInit {
 
   public accept() {
     if (this.changePasswordForm.invalid) {
+      this.toastrService.warning('Form invalid', 'Warning');
       return;
     } else {
       const changePasswordValue = {

@@ -18,7 +18,7 @@ export const AdminLayoutRoutes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'tables/:id',
+    path: 'table/:id',
     component: UserProfileComponent,
     canActivate: [AdminGuard]
   },
@@ -27,7 +27,7 @@ export const AdminLayoutRoutes: Routes = [
     component: UserProfileComponent,
     canActivate: [AuthGuard]
   },
-  { path: 'tables', component: TablesComponent, canActivate: [AdminGuard] },
+  { path: 'table', component: TablesComponent, canActivate: [AdminGuard] },
   { path: 'campaign', component: CampaignComponent, canActivate: [AdminGuard] },
   {
     path: 'campaign/:id',

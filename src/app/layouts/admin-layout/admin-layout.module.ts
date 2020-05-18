@@ -4,7 +4,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CountdownModule } from 'ngx-countdown';
 import { ClipboardModule } from 'ngx-clipboard';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { StoreModule } from '@ngrx/store';
@@ -31,7 +30,6 @@ import { HistoryOfVotingModalComponent } from './modal/history-of-voting-modal/h
 import { ConfirmDeleteCampaignModalComponent } from './modal/confirm-delete-campaign-modal/confirm-delete-campaign-modal.component';
 
 import { dialogs } from './modal';
-// import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   imports: [
@@ -42,7 +40,6 @@ import { dialogs } from './modal';
     NgbModule,
     ComponentsModule,
     ReactiveFormsModule,
-    CountdownModule,
     ClipboardModule,
     SharedModule,
     StoreModule.forFeature('page', reducers),
