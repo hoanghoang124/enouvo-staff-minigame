@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(8)]]
     });
     this.isLoadingResults$ = this.store.select(getIsLgnLoading);
+    // this.loginForm.valueChanges.subscribe(val => console.log(val)); do magical thing
   }
 
   onSubmit() {
