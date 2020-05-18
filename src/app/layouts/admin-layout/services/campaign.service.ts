@@ -31,9 +31,9 @@ export class CampaignService {
     return this.apiService.get(url, params);
   }
 
-  getCampaignDetail(id: number): Observable<any> {
+  getCampaignDetail(id: number, query: any): Observable<any> {
     const url = `${this.BASE_URL}/v1/campaigns/${id}`;
-    return this.apiService.get(url);
+    return this.apiService.get(url, query);
   }
 
   getCampaignDetailForVoting(id: number): Observable<any> {

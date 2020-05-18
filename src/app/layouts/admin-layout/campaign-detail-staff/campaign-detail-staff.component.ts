@@ -21,18 +21,15 @@ import * as _ from 'lodash';
 import { AuthService } from '../../auth-layout/services/auth.service';
 import {
   getStarLimit,
-  getStarLeft,
-  getVotedStar,
-  getCampaignListStaff,
   getCampaignDetailForVoting,
   getIsCmpDtlVtgLoading,
   getErrorGtCmpDtlVtgMessage,
-  getIsVtgLoading
+  getIsVtgLoading,
+  getVotedStar
 } from '../store/selectors/campaign.selector';
 import {
   Vote,
-  GetCampaignDetailForVoting,
-  GetCampaignListStaff
+  GetCampaignDetailForVoting
 } from '../store/actions/campaign.action';
 @Component({
   selector: 'app-campaign-detail-staff',
@@ -46,11 +43,10 @@ export class CampaignDetailStaffComponent implements OnInit {
   staffs$: Observable<any>;
   campaign$: Observable<any>;
   isCampaignLoading$: Observable<boolean>;
-  isVotingLoading$: Observable<boolean>;
+  isVotingLoading$: Observable<Object>;
   errorMessage$: Observable<string>;
   starLimit$: Observable<number>;
   votedStar$: Observable<number>;
-  starLeft$: Observable<number>;
   currentUserId: number;
 
   model: NgbDateStruct;
@@ -71,13 +67,12 @@ export class CampaignDetailStaffComponent implements OnInit {
     // this.tableQuery = this.defaultQuery;
     // this.totalItems$ = this.store.select(getTotalStaffs);
     // this.fetchTableData(this.tableQuery);
-    this.store.dispatch(new GetCampaignDetailForVoting(this.campaignId));
-    this.store.dispatch(new GetCampaignListStaff({ id: this.campaignId }));
+    this.store.dispatch(
+      new GetCampaignDetailForVoting({ id: this.campaignId })
+    );
     this.campaign$ = this.store.select(getCampaignDetailForVoting);
-    this.staffs$ = this.store.select(getCampaignListStaff);
     this.starLimit$ = this.store.select(getStarLimit);
     this.votedStar$ = this.store.select(getVotedStar);
-    this.starLeft$ = this.store.select(getStarLeft);
     this.isCampaignLoading$ = this.store.select(getIsCmpDtlVtgLoading);
     this.errorMessage$ = this.store.select(getErrorGtCmpDtlVtgMessage);
     this.currentUserId = +localStorage.getItem('id');

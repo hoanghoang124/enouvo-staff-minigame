@@ -10,7 +10,6 @@ export interface CampaignState {
   selectedStaff: Staff;
   starLimit: number;
   votedStar: number;
-  starLeft: number;
   totalCampaigns: number;
   isCrtCmpLoading: boolean;
   isGtAllCmpLoading: boolean;
@@ -20,7 +19,7 @@ export interface CampaignState {
   isGtVtgHsrLoading: boolean;
   isUpdCmpLoading: boolean;
   isDltCmpLoading: boolean;
-  isVtgLoading: boolean;
+  isVtgLoading: Object;
   errorGtAllCmpMessage: any;
   errorGtCmpDtlMessage: any;
   errorGtCmdDtlVtgMessage: any;
@@ -39,7 +38,6 @@ const initialState: CampaignState = {
   selectedCampaign: null,
   starLimit: 0,
   votedStar: 0,
-  starLeft: 0,
   totalCampaigns: 0,
   isCrtCmpLoading: false,
   isGtAllCmpLoading: false,
@@ -49,7 +47,7 @@ const initialState: CampaignState = {
   isGtVtgHsrLoading: false,
   isUpdCmpLoading: false,
   isDltCmpLoading: false,
-  isVtgLoading: false,
+  isVtgLoading: {},
   errorCrtCmpMessage: null,
   errorGtAllCmpMessage: null,
   errorGtCmpDtlMessage: null,
@@ -136,7 +134,7 @@ export function campaignReducer(
         ...state,
         selectedCampaign: action.payload,
         starLimit: action.payload.campaign.starLimitation,
-        starLeft: action.payload.campaign.starLimitation,
+        votedStar: action.payload.votingHistory.length, // rac roi :3
         isGtCmpDtlLoading: false
       };
     case campaignActions.CampaignActionsType
@@ -217,7 +215,7 @@ export function campaignReducer(
       };
     case campaignActions.CampaignActionsType.DELETE_CAMPAIGN_SUCCESS:
       const deleteCampaigns = _.remove(state.campaigns, item => {
-        return item.id !== action.payload;
+        return item.id !== action.payload.id;
       });
       return {
         ...state,
@@ -234,31 +232,21 @@ export function campaignReducer(
     case campaignActions.CampaignActionsType.VOTE:
       return {
         ...state,
-        isVtgLoading: true
+        isVtgLoading: {
+          ...state.isVtgLoading,
+          [action.payload.voting.receiverId]: true
+        }
       };
     case campaignActions.CampaignActionsType.VOTE_SUCCESS:
-      const updateVoting = _.map(state.staffs, item => {
-        if (item.id === action.payload.receiverId) {
-          return {
-            id: item.id,
-            firstName: item.firstName,
-            lastName: item.lastName,
-            scope: item.scope,
-            votedStar: action.payload.voting.numberOfStars
-          }; //get list staff nen tra ve votedStars cua tung staff nua
-        }
-        return item;
-      });
       return {
         ...state,
-        isVtgLoading: false,
-        staffs: updateVoting
-        // votedStar: votedStar,
-        // starLeft: state.starLimit - votedStar
+        isVtgLoading: _.omit(state.isVtgLoading, [action.payload.receiverId]),
+        votedStar: state.votedStar + 1
       };
     case campaignActions.CampaignActionsType.VOTE_FAILURE:
       return {
         ...state,
+        // isVtgLoading: _.omit(state.isVtgLoading, [action.payload.receiverId]),
         isVtgLoading: false,
         errorVtgMessage: action.payload
       };

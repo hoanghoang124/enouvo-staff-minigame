@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiBaseUrl: 'https://training-management-dev.herokuapp.com/api'
+  apiBaseUrl: 'https://training-management-staging.herokuapp.com/api'
 };

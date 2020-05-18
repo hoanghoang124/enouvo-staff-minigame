@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" *ngIf="campaign$ | async as campaign">
   <div class="col">
     <div class="modal-header border-0">
       <h3 class="modal-title">
@@ -14,15 +14,12 @@
       </button>
     </div>
     <div class="modal-header subheader">
-      <span class="badge badge-info" *ngIf="authService.isAdmin()"
-        >Admin can not vote</span
-      >
       <span class="badge badge-info" *ngIf="!authService.isAdmin()"
-        >Give stars to who deserve
+        >Give stars to whom deserve
       </span>
       <h4 class="modal-title " *ngIf="!authService.isAdmin()">
-        Star Limit: {{ starLimit$ | async }} | Star Left:
-        {{ starLeft$ | async }}
+        Star Limit: {{ starLimit$ | async }} | Voted:
+        {{ votedStar$ | async }}
       </h4>
     </div>
     <!-- <div class="input-group mx-5 my-4">
@@ -51,11 +48,10 @@
               Last Name
             </th>
             <th class="text-center">Position</th>
-            <th class="text-center">Voted Star</th>
             <th class="action text-center">Action</th>
           </tr>
         </thead>
-        <tbody *ngFor="let staff of staffs$ | async">
+        <tbody *ngFor="let staff of campaign.staffs">
           <tr *ngIf="staff.userId !== currentUserId">
             <td scope="row">
               <div class="media align-items-center">
@@ -90,20 +86,20 @@
             >
               {{ staff.scope || 'n/a' }}
             </td>
-            <td class="text-center" style="font-weight: bold">
-              {{ votedStar$ | async }}
-            </td>
             <td class="action  text-center">
               <button
                 class="btn btn-sm btn-success"
                 style="width: 70px;"
-                [disabled]="authService.isAdmin()"
+                [disabled]="
+                  authService.isAdmin() ||
+                  (isVotingLoading$ | async)[staff.userId]
+                "
                 (click)="Vote(staff.userId)"
               >
                 Vote
                 <i
                   class="fas fa-spinner fa-pulse spinner"
-                  *ngIf="isVotingLoading$ | async"
+                  *ngIf="(isVotingLoading$ | async)[staff.userId]"
                 ></i>
               </button>
             </td>

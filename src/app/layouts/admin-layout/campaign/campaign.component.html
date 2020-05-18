@@ -104,11 +104,7 @@
                   <div class="input-group ">
                     <div class="input-group-prepend">
                       <span class="input-group-text"
-                        ><i
-                          class="ni ni-zoom-split-in"
-                          style="cursor: pointer;"
-                          (click)="search()"
-                        ></i
+                        ><i class="ni ni-zoom-split-in" (click)="search()"></i
                       ></span>
                     </div>
                     <input
@@ -145,31 +141,32 @@
               </tr>
               <tr
                 *ngFor="let campaign of campaigns$ | async"
-                style="text-transform: capitalize; cursor: pointer;"
+                style="text-transform: capitalize"
               >
                 <td
                   class="text-center"
                   scope="row"
                   [routerLink]="[campaign.id]"
+                  style="cursor: pointer;"
                 >
                   {{ campaign.id }}
                 </td>
-                <td style="font-weight: bold;" [routerLink]="[campaign.id]">
+                <td style="font-weight: bold;">
                   {{ campaign.title || 'n/a' }}
                 </td>
-                <td [routerLink]="[campaign.id]">
+                <td>
                   {{ campaign.description || 'n/a' }}
                 </td>
-                <td class="text-center" [routerLink]="[campaign.id]">
+                <td class="text-center">
                   {{ campaign.startDate | date: 'dd/MM/yyyy' || 'n/a' }}
                 </td>
-                <td class="text-center" [routerLink]="[campaign.id]">
+                <td class="text-center">
                   {{ campaign.endDate | date: 'dd/MM/yyyy' || 'n/a' }}
                 </td>
-                <td class="text-center" [routerLink]="[campaign.id]">
+                <td class="text-center">
                   {{ campaign.starLimitation || 'n/a' }}
                 </td>
-                <td class="text-center" [routerLink]="[campaign.id]">
+                <td class="text-center">
                   <span
                     class="badge badge-info"
                     *ngIf="campaign.isCampaignActive === true"

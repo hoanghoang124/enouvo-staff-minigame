@@ -1,3 +1,5 @@
+import { ToastrService } from 'ngx-toastr';
+import { AuthService } from './../../auth-layout/services/auth.service';
 import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
@@ -51,6 +53,8 @@ export class DashboardComponent implements OnInit {
   constructor(
     private store: Store<State>,
     private dialogService: DialogService,
+    private toastrService: ToastrService,
+    private authService: AuthService,
     private modalService: NgbModal // private utilService: UtilServiceService, // private router: Router, // private route: ActivatedRoute
   ) {}
 
@@ -76,7 +80,11 @@ export class DashboardComponent implements OnInit {
   }
 
   openCampaignDetailStaff(campaignId) {
-    this.dialogService.viewCampaignStaffList(campaignId);
+    if (this.authService.isAdmin()) {
+      this.toastrService.info('Admin can not vote', 'Fact:');
+    } else {
+      this.dialogService.viewCampaignStaffList(campaignId);
+    }
   }
 
   // onSort(sort: SortEvent) {

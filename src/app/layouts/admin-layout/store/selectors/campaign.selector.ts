@@ -46,11 +46,6 @@ export const getVotedStar = createSelector(
   state => state.votedStar
 );
 
-export const getStarLeft = createSelector(
-  selectCampaignState,
-  state => state.starLeft
-);
-
 export const getIsCrtCmpLoading = createSelector(
   selectCampaignState,
   state => state.isCrtCmpLoading
